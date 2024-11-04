@@ -1,9 +1,10 @@
-var express = require('express');
-var router = express.Router();
+const userRouter = require('express').Router()
+const User = require('../models/user')
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+userRouter.get('/', async (request, response) => {
+  const user = await User.find({})
 
-module.exports = router;
+  response.json(user)
+})
+
+module.exports = userRouter
