@@ -11,16 +11,16 @@ const Header: React.FC = () => {
   };
 
   return (
-    <header className="bg-gradient-to-r from-blue-500 to-purple-600 shadow-lg fixed top-0 w-full z-50 text-white p-0">
-      <div className="container mx-auto px-4 py-2 flex justify-between items-center">
+    <header className="bg-gradient-to-r from-blue-500 to-purple-600 shadow-lg fixed top-0 w-full z-50 text-white">
+      <div className="container mx-auto px-4 py-3 flex justify-between items-center">
 
         {/* Logo */}
-        <Link to="/" className="text-xl font-bold text-gray-900 hover:text-gray-200 transition duration-300">
-          <img src={logo} alt="logo" className="h-12 w-12 md:h-14 md:w-14" />
+        <Link to="/" className="text-xl font-bold text-white hover:text-gray-200 transition duration-300">
+          <img src={logo} alt="logo" className="h-12 w-auto md:h-16" />
         </Link>
 
         {/* Navigation Menu */}
-        <nav className="hidden md:flex space-x-4 font-medium">
+        <nav className="hidden md:flex space-x-6 font-medium">
           {['Home', 'About Us', 'Services', 'Pricing', 'Blog', 'Contact Us'].map((item) => (
             <Link
               key={item}
@@ -51,7 +51,7 @@ const Header: React.FC = () => {
             className="hidden lg:flex items-center space-x-1 text-white hover:text-yellow-300 transition duration-300"
           >
             <FiPhone className="text-xl" />
-            <span>+254 7968 694 02</span>
+            <span>+2547 968 694 02</span>
           </a>
 
           {/* CTA Buttons */}
@@ -63,7 +63,7 @@ const Header: React.FC = () => {
           </Link>
           <Link
             to="/login"
-            className="bg-yellow-300 text-blue-900 px-3 md:px-4 py-1 rounded-full font-semibold hover:bg-yellow-400 transition duration-300 shadow-md"
+            className="bg-green-300 text-blue-900 px-3 md:px-4 py-1 rounded-full font-semibold hover:bg-green-400 transition duration-300 shadow-md"
           >
             Login
           </Link>
@@ -90,13 +90,14 @@ const Header: React.FC = () => {
 
       {/* Mobile Navigation Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-white shadow-lg">
+        <div className="md:hidden bg-white shadow-lg absolute top-full left-0 w-full transition-all duration-300">
           <nav className="flex flex-col space-y-2 p-4 text-gray-700">
             {['Home', 'About Us', 'Services', 'Pricing', 'Blog', 'Contact Us'].map((item) => (
               <Link
                 key={item}
                 to={`/${item.toLowerCase().replace(' ', '')}`}
                 className="hover:text-blue-600 transition duration-300"
+                onClick={() => setIsMobileMenuOpen(false)}
               >
                 {item}
               </Link>
