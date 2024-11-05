@@ -1,5 +1,7 @@
 const bookRouter = require('express').Router()
 const Booking = require('../models/booking')
+const User = require('../models/user')
+const authenticator = require('../utils/middleware')
 
 bookRouter.get('/', async (request,response) => {
     const bookings = await Booking.find({})
@@ -7,16 +9,22 @@ bookRouter.get('/', async (request,response) => {
     response.status(200).json(bookings)
 })
 
-bookRouter.post('/book', async (request, response) => {
-    const {userId,service, details, scheduledDate} = request.body
+bookRouter.post('/book', authenticator, async (request, response) => {
+    const {service, details, scheduledDate} = request.body
 
     try{
-        if (!userId || !service || !details || !scheduledDate) {
+        const userId = request.user.id
+        const user = await User.findById(userId)
+
+        if(!user) {
+            return response.status(400).json({msg: 'User not found'})
+        }
+        if (!service || !details || !scheduledDate) {
             return res.status(400).json({ message: 'All fields are required' });
         } 
 
         const newBooking = new Booking({
-            user : userId,
+            user : user.id,
             service,
             details,
             scheduledDate
