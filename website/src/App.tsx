@@ -1,11 +1,12 @@
 
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Header from './componets/Header';
-import HeroSection from './componets/HerosPage';
+import  { HeroSection } from './componets/HerosPage';
 import AboutUs from './componets/AboutUs';
 import Footer from './componets/Footer';
 import ServicesPage from './componets/ServicePage';
 import BookingPage from './componets/BookingPage';
+import Section from './componets/Section';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Router>
         <Header />
         <MainContent />
+        <Section />
         <Footer/>
       </Router>
     </div>

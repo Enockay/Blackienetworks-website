@@ -1,110 +1,99 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FiSearch, FiPhone } from 'react-icons/fi';
-import logo from "../assets/logo.png";
+import { Drawer, Button, Input } from 'antd';
+import { FiSearch, FiPhone, FiMenu } from 'react-icons/fi';
+import logo from '../assets/logo.png';
+
+const navLinks = ['Home', 'About Us', 'Services', 'Pricing', 'Blog', 'Contact Us'];
 
 const Header: React.FC = () => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen((prev) => !prev);
-  };
+  const [drawerVisible, setDrawerVisible] = useState(false);
 
   return (
-    <header className="bg-gradient-to-r from-blue-500 to-purple-600 shadow-lg fixed top-0 w-full z-50 text-white">
-      <div className="container mx-auto px-4 py-3 flex justify-between items-center">
+    <header className="fixed top-0 w-full z-50 bg-white shadow-xl">
+      <div className="container mx-auto px-4 py-3 flex items-center justify-between">
 
         {/* Logo */}
-        <Link to="/" className="text-xl font-bold text-white hover:text-gray-200 transition duration-300">
-          <img src={logo} alt="logo" className="h-12 w-auto md:h-16" />
+        <Link to="/" className="flex items-center space-x-2">
+          <img src={logo} alt="Logo" className="h-10 w-auto md:h-12" />
+          <span className=" md:inline font-semibold text-gray-800 text-xm tracking-wide">
+            BlackieNetworks
+          </span>
         </Link>
 
-        {/* Navigation Menu */}
-        <nav className="hidden md:flex space-x-6 font-medium">
-          {['Home', 'About Us', 'Services', 'Pricing', 'Blog', 'Contact Us'].map((item) => (
+        {/* Desktop Nav */}
+        <nav className="hidden md:flex space-x-6 font-medium text-gray-700">
+          {navLinks.map((item) => (
             <Link
               key={item}
               to={`/${item.toLowerCase().replace(' ', '')}`}
-              className="hover:text-yellow-300 transition duration-300"
+              className="hover:text-blue-600 transition duration-200"
             >
               {item}
             </Link>
           ))}
         </nav>
 
-        {/* Right Side */}
-        <div className="flex items-center space-x-4">
+        {/* Right Controls */}
+        <div className="flex items-center space-x-3">
 
-          {/* Search Bar */}
-          <div className="relative hidden lg:flex items-center bg-white text-gray-700 rounded-full shadow-inner px-3 py-1">
-            <FiSearch className="mr-2 text-gray-500" />
-            <input
-              type="text"
+          {/* Search */}
+          <div className="hidden lg:flex items-center bg-gray-100 px-3 py-1 rounded-full shadow-inner">
+            <FiSearch className="text-gray-500 mr-2" />
+            <Input
               placeholder="Search..."
-              className="bg-transparent outline-none text-sm placeholder-gray-500"
+              bordered={false}
+              className="bg-transparent text-sm w-32 lg:w-48"
             />
           </div>
 
-          {/* Contact Info */}
+          {/* Contact */}
           <a
-            href="tel:+1234567890"
-            className="hidden lg:flex items-center space-x-1 text-white hover:text-yellow-300 transition duration-300"
+            href="tel:+254796869402"
+            className="hidden lg:flex items-center space-x-1 text-gray-700 hover:text-blue-600 transition"
           >
-            <FiPhone className="text-xl" />
-            <span>+2547 968 694 02</span>
+            <FiPhone className="text-lg" />
+            <span className="text-sm">+2547 968 694 02</span>
           </a>
 
-          {/* CTA Buttons */}
-          <Link
-            to="/signup"
-            className="text-blue-600 bg-white px-3 md:px-4 py-1 rounded-full font-semibold hover:bg-blue-600 hover:text-white transition duration-300 shadow-md"
-          >
-            Sign Up
-          </Link>
-          <Link
-            to="/login"
-            className="bg-green-300 text-blue-900 px-3 md:px-4 py-1 rounded-full font-semibold hover:bg-green-400 transition duration-300 shadow-md"
-          >
-            Login
-          </Link>
-
-          {/* Mobile Menu Button */}
-          <button onClick={toggleMobileMenu} className="md:hidden text-white hover:text-yellow-300 transition duration-300">
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
-          </button>
+          {/* Mobile Drawer Trigger */}
+          <Button
+            className="md:hidden border-none bg-transparent text-gray-700 hover:text-blue-600"
+            icon={<FiMenu size={22} />}
+            onClick={() => setDrawerVisible(true)}
+          />
         </div>
       </div>
 
-      {/* Mobile Navigation Menu */}
-      {isMobileMenuOpen && (
-        <div className="md:hidden bg-white shadow-lg absolute top-full left-0 w-full transition-all duration-300">
-          <nav className="flex flex-col space-y-2 p-4 text-gray-700">
-            {['Home', 'About Us', 'Services', 'Pricing', 'Blog', 'Contact Us'].map((item) => (
-              <Link
-                key={item}
-                to={`/${item.toLowerCase().replace(' ', '')}`}
-                className="hover:text-blue-600 transition duration-300"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {item}
-              </Link>
-            ))}
-          </nav>
+      {/* Mobile Drawer */}
+      <Drawer
+        title={<span className="text-base font-semibold text-gray-800">Menu</span>}
+        placement="right"
+        onClose={() => setDrawerVisible(false)}
+        open={drawerVisible}
+        bodyStyle={{ padding: '1.5rem' }}
+      >
+        <nav className="flex flex-col space-y-4">
+          {navLinks.map((item) => (
+            <Link
+              key={item}
+              to={`/${item.toLowerCase().replace(' ', '')}`}
+              className="text-gray-800 hover:text-blue-600 transition text-base"
+              onClick={() => setDrawerVisible(false)}
+            >
+              {item}
+            </Link>
+          ))}
+        </nav>
+        <div className="mt-6 flex flex-col space-y-3">
+          <Button type="primary" block onClick={() => setDrawerVisible(false)}>
+            Sign Up
+          </Button>
+          <Button block className="bg-gray-100 text-gray-800 hover:bg-gray-200">
+            Login
+          </Button>
         </div>
-      )}
+      </Drawer>
     </header>
   );
 };
