@@ -27,7 +27,7 @@ export default function CompanySections() {
         transition={{ duration: 0.6 }}
         className="text-center max-w-4xl mx-auto"
       >
-        <h2 className="text-4xl font-bold mb-4 text-blue-600">About Blackie Networks</h2>
+        <h2 className="text-xl font-bold mb-4 text-blue-600">About Blackie Networks</h2>
         <p className="text-gray-700 text-lg">
           We are a Chuka-based tech company revolutionizing internet access and tech services for students and institutions. From blazing-fast Wi-Fi to reliable tech support and smart software, we’re your campus tech ally.
         </p>
@@ -40,7 +40,7 @@ export default function CompanySections() {
         whileInView={{ opacity: 1, y: 0 }} 
         transition={{ duration: 0.6 }}
       >
-        <h2 className="text-4xl font-bold text-center mb-10 text-blue-600">Our Services</h2>
+        <h2 className="text-xl font-bold text-center mb-10 text-blue-600">Our Services</h2>
         <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3">
           {services.map((service, idx) => (
             <motion.div 
@@ -62,7 +62,7 @@ export default function CompanySections() {
         whileInView={{ opacity: 1, y: 0 }} 
         transition={{ duration: 0.6 }}
       >
-        <h2 className="text-4xl font-bold text-center mb-10 text-blue-600">What Our Clients Say</h2>
+        <h2 className="text-xl font-bold text-center mb-10 text-blue-600">What Our Clients Say</h2>
         <div className="space-y-8 md:space-y-0 md:grid md:grid-cols-3 gap-6">
           {testimonials.map((t, idx) => (
             <motion.div 

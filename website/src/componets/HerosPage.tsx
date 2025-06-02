@@ -113,7 +113,7 @@ export const HeroSection = () => {
             ></div>
             <div style={{ position: 'relative', zIndex: 10, height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', background: 'rgba(255,255,255,0.75)' }}>
               <div style={{ maxWidth: 800, textAlign: 'center', padding: 20 }}>
-                <Title level={1} style={{ color: '#1f1f1f' }}>Welcome to Blackie-Networks</Title>
+                <Title level={3} style={{ color: '#1f1f1f' }}>Welcome to Blackie-Networks</Title>
                 <Paragraph style={{ fontSize: '18px', color: '#595959' }}>
                   Driving innovation in software development, network infrastructure, and IT consulting.
                 </Paragraph>
@@ -148,7 +148,7 @@ export const HeroSection = () => {
 const AchievementsAndSpecializations = () => (
   <div style={{ padding: '60px 30px', backgroundColor: '#ffffff' }}>
     <Typography style={{ textAlign: 'center' }}>
-      <Title level={2} style={{ color: '#1f1f1f' }}>Our Achievements & Specializations</Title>
+      <Title level={5} style={{ color: '#1f1f1f' }}>Our Achievements & Specializations</Title>
       <Paragraph style={{ color: '#595959', maxWidth: 700, margin: '0 auto' }}>
         Dedicated to delivering high-speed internet to students at an affordable price,
         empowering campus communities to stay connected and succeed.
@@ -186,7 +186,7 @@ const AchievementsAndSpecializations = () => (
 
 const LatestProjectsSection = () => (
   <div style={{ padding: '60px 30px', backgroundColor: '#f0f2f5' }}>
-    <Title level={4} style={{ textAlign: 'center', color: '#1f1f1f' }}>Our Latest Projects</Title>
+    <Title level={5} style={{ textAlign: 'center', color: '#1f1f1f' }}>Our Latest Projects</Title>
     <Row gutter={[24, 24]} justify="center">
       {projects.map((project, index) => (
         <Col xs={24} sm={12} lg={8} key={project.title}>
