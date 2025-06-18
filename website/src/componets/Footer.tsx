@@ -16,7 +16,7 @@ const { Title, Paragraph, Text } = Typography;
 
 const Footer: React.FC = () => {
   return (
-    <AntFooter style={{ backgroundColor: '#fff', color: '#333', padding: '60px 20px' }}>
+    <AntFooter style={{ backgroundColor: '#fff', color: '#333', padding: '40px 10px' }}>
       <Row gutter={[32, 32]} justify="center">
         {/* Company Overview */}
         <Col xs={24} sm={12} md={6}>
@@ -73,7 +73,7 @@ const Footer: React.FC = () => {
         </Col>
       </Row>
 
-      <Divider style={{ margin: '40px 0' }} />
+      <Divider style={{ margin: '30px 0' }} />
 
       <div style={{ textAlign: 'center', fontSize: 14, color: '#888' }}>
         <p>© {new Date().getFullYear()} Blackie Networks. All rights reserved.</p>

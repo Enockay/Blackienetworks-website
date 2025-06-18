@@ -1,5 +1,5 @@
-// Redesigned HeroSection with Ant Design + Dashboard Component
-import  { useEffect, useState } from 'react';
+// Enhanced HeroSection with Pro Styling, Animation & SVG Curve
+import { useEffect, useState } from 'react';
 import {
   Card,
   Row,
@@ -96,7 +96,7 @@ export const HeroSection = () => {
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <Layout>
-        <Header style={{ background: '#fff', padding: '0 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <Header style={{ background: '#fff', padding: '0 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}>
           <Title level={4} style={{ margin: 0 }}>Welcome</Title>
           <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
             <BellOutlined style={{ fontSize: 20 }} />
@@ -106,30 +106,53 @@ export const HeroSection = () => {
           </div>
         </Header>
         <Content>
-          <div style={{ position: 'relative', height: '500px', overflow: 'hidden' }}>
+          <div style={{ position: 'relative', height: '600px', overflow: 'hidden' }}>
             <div
               className={`absolute inset-0 transition-opacity duration-500 ${fadeClass}`}
               style={{ backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
             ></div>
-            <div style={{ position: 'relative', zIndex: 10, height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', background: 'rgba(255,255,255,0.75)' }}>
-              <div style={{ maxWidth: 800, textAlign: 'center', padding: 20 }}>
-                <Title level={3} style={{ color: '#1f1f1f' }}>Welcome to Blackie-Networks</Title>
-                <Paragraph style={{ fontSize: '18px', color: '#595959' }}>
+            <div style={{ position: 'relative', zIndex: 10, height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', background: 'rgba(0,0,0,0.55)' }}>
+              <motion.div initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.7 }} style={{ maxWidth: 800, textAlign: 'center', padding: 20, color: 'white' }}>
+                <Title level={2} style={{ color: 'white' }}>Welcome to Blackie-Networks</Title>
+                <Paragraph style={{ fontSize: '18px', color: '#f0f0f0' }}>
                   Driving innovation in software development, network infrastructure, and IT consulting.
                 </Paragraph>
-                <Paragraph style={{ fontSize: '16px', color: '#262626', marginTop: 20 }}>
+                <Paragraph style={{ fontSize: '16px', color: '#e0e0e0', marginTop: 20 }}>
                   We bring affordable, high-speed internet to campus students. No more buffering—just reliable, wallet-friendly Wi-Fi. Our 24/7 support team is always available.
                 </Paragraph>
                 <div style={{ marginTop: 30 }}>
-                  <Link to="/service">
+                  <Link to="/products">
                     <Button type="primary" size="large" style={{ marginRight: 16 }}>Explore Services</Button>
                   </Link>
-                  <Link to="/contact us">
+                  <Link to="/products">
                     <Button size="large">Book a Service</Button>
                   </Link>
                 </div>
-              </div>
+              </motion.div>
+
             </div>
+            {/* Bottom Curve Separator with Gradient */}
+            <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] rotate-180 z-10">
+              <svg
+                className="relative block w-[calc(150%+1.3px)] h-[100px]"
+                xmlns="http://www.w3.org/2000/svg"
+                preserveAspectRatio="none"
+                viewBox="0 0 1200 120"
+              >
+                <defs>
+                  <linearGradient id="curveGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#f9fafb" />
+                    <stop offset="100%" stopColor="#edf2f7" />
+                  </linearGradient>
+                </defs>
+                <path
+                  d="M985.66,65.54C914.12,91.09,836.77,104.77,756,105.52c-80.69.74-157.57-11.32-231.11-36.31C449,43.9,373.6,7.45,292,2.82,222.41-1.41,153.66,14.29,88.49,35.62,59.9,44.67,30.86,54.5,0,60V0H1200V27.35C1138.07,44.57,1061.86,39.5,985.66,65.54Z"
+                  fill="url(#curveGradient)"
+                />
+              </svg>
+            </div>
+
+
           </div>
 
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
@@ -140,42 +163,101 @@ export const HeroSection = () => {
             <LatestProjectsSection />
           </motion.div>
         </Content>
+
       </Layout>
+
     </Layout>
   );
 };
 
 const AchievementsAndSpecializations = () => (
-  <div style={{ padding: '60px 30px', backgroundColor: '#ffffff' }}>
+  <div
+    style={{
+      padding: '80px 30px',
+      background: 'linear-gradient(to bottom right, #f9fafb, #edf2f7)', // light gradient
+    }}
+  >
     <Typography style={{ textAlign: 'center' }}>
-      <Title level={5} style={{ color: '#1f1f1f' }}>Our Achievements & Specializations</Title>
-      <Paragraph style={{ color: '#595959', maxWidth: 700, margin: '0 auto' }}>
-        Dedicated to delivering high-speed internet to students at an affordable price,
-        empowering campus communities to stay connected and succeed.
+      <Title level={3} style={{ color: '#1f2937', fontWeight: 700 }}>
+        🏆 Our Achievements & Specializations
+      </Title>
+      <Paragraph style={{ color: '#4b5563', maxWidth: 720, margin: '0 auto', fontSize: 16 }}>
+        Dedicated to delivering high-speed internet to students at an affordable price — empowering campus communities to stay connected and succeed.
       </Paragraph>
     </Typography>
-    <Row gutter={[24, 24]} justify="center" style={{ marginTop: 40 }}>
-      {[{
-        icon: <LaptopOutlined style={{ fontSize: '36px', color: '#1890ff' }} />, title: 'High-Speed Network',
-        text: 'Fast, reliable network supporting students’ academic and personal needs at Chuka University.'
-      }, {
-        icon: <TeamOutlined style={{ fontSize: '36px', color: '#faad14' }} />, title: 'Affordable for Students',
-        text: 'Low-cost services ensure students stay connected without breaking the bank.'
-      }, {
-        icon: <TrophyOutlined style={{ fontSize: '36px', color: '#52c41a' }} />, title: 'Milestones Reached',
-        text: 'Over 1,000 student subscriptions with consistent positive feedback.'
-      }].map((item, index) => (
-        <Col xs={24} md={8} key={index}>
+
+    <Row gutter={[32, 32]} justify="center" style={{ marginTop: 60 }}>
+      {[
+        {
+          icon: (
+            <LaptopOutlined
+              style={{
+                fontSize: '40px',
+                color: '#1d4ed8',
+                background: '#e0f2fe',
+                borderRadius: '50%',
+                padding: 12,
+              }}
+            />
+          ),
+          title: 'High-Speed Network',
+          text: 'Fast, reliable network supporting students’ academic and personal needs at Chuka University.',
+        },
+        {
+          icon: (
+            <TeamOutlined
+              style={{
+                fontSize: '40px',
+                color: '#d97706',
+                background: '#fef3c7',
+                borderRadius: '50%',
+                padding: 12,
+              }}
+            />
+          ),
+          title: 'Affordable for Students',
+          text: 'Low-cost services ensure students stay connected without breaking the bank.',
+        },
+        {
+          icon: (
+            <TrophyOutlined
+              style={{
+                fontSize: '40px',
+                color: '#16a34a',
+                background: '#dcfce7',
+                borderRadius: '50%',
+                padding: 12,
+              }}
+            />
+          ),
+          title: 'Milestones Reached',
+          text: 'Over 1,000 student subscriptions with consistent positive feedback.',
+        },
+      ].map((item, index) => (
+        <Col xs={24} sm={12} md={8} key={index}>
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: index * 0.2 }}
+            transition={{ delay: index * 0.25, duration: 0.7 }}
+            whileHover={{ scale: 1.03 }}
           >
-            <Card hoverable style={{ textAlign: 'center' }}>
-              {item.icon}
-              <Title level={4}>{item.title}</Title>
-              <Paragraph>{item.text}</Paragraph>
+            <Card
+              hoverable
+              style={{
+                textAlign: 'center',
+                borderRadius: '16px',
+                boxShadow: '0 10px 25px rgba(0,0,0,0.06)',
+                padding: '30px 20px',
+                background: 'white',
+                border: '1px solid #f0f0f0',
+              }}
+            >
+              <div style={{ marginBottom: 20 }}>{item.icon}</div>
+              <Title level={4} style={{ color: '#111827', marginBottom: 10 }}>
+                {item.title}
+              </Title>
+              <Paragraph style={{ color: '#4b5563', fontSize: 15 }}>{item.text}</Paragraph>
             </Card>
           </motion.div>
         </Col>
@@ -184,24 +266,58 @@ const AchievementsAndSpecializations = () => (
   </div>
 );
 
+
 const LatestProjectsSection = () => (
-  <div style={{ padding: '60px 30px', backgroundColor: '#f0f2f5' }}>
-    <Title level={5} style={{ textAlign: 'center', color: '#1f1f1f' }}>Our Latest Projects</Title>
-    <Row gutter={[24, 24]} justify="center">
+  <div
+    style={{
+      padding: '80px 30px',
+      background: 'linear-gradient(to bottom, #f8fafc, #e2e8f0)', // subtle Tailwind gray-50 to gray-200
+    }}
+  >
+    <Typography style={{ textAlign: 'center' }}>
+      <Title level={3} style={{ color: '#1f2937', fontWeight: 700 }}>
+        🌟 Our Latest Projects
+      </Title>
+      <Paragraph style={{ color: '#4b5563', maxWidth: 700, margin: '0 auto', fontSize: '16px' }}>
+        Explore some of our most impactful client work — designed to deliver measurable results and superior user experiences.
+      </Paragraph>
+    </Typography>
+
+    <Row gutter={[32, 32]} justify="center" style={{ marginTop: 50 }}>
       {projects.map((project, index) => (
         <Col xs={24} sm={12} lg={8} key={project.title}>
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: index * 0.2, duration: 0.6 }}
+            transition={{ delay: index * 0.2, duration: 0.7 }}
             whileHover={{ scale: 1.02 }}
           >
-            <Card title={project.title} bordered={false} hoverable>
-              <Paragraph>{project.summary}</Paragraph>
+            <Card
+              hoverable
+              style={{
+                borderRadius: '16px',
+                overflow: 'hidden',
+                boxShadow: '0 10px 25px rgba(0,0,0,0.05)',
+                background: 'linear-gradient(to bottom right, #ffffff, #f9fafb)',
+                border: '1px solid #e5e7eb',
+                padding: '20px',
+              }}
+            >
+              <Title level={4} style={{ marginBottom: 10, color: '#111827' }}>
+                {project.title}
+              </Title>
+              <Paragraph style={{ color: '#374151', fontSize: '15px' }}>
+                {project.summary}
+              </Paragraph>
               <List
+                size="small"
                 dataSource={project.details}
-                renderItem={item => <List.Item style={{ padding: '4px 0' }}>• {item}</List.Item>}
+                renderItem={(item) => (
+                  <List.Item style={{ padding: '4px 0', border: 'none', color: '#4b5563' }}>
+                    <span>• {item}</span>
+                  </List.Item>
+                )}
               />
             </Card>
           </motion.div>
