@@ -143,7 +143,7 @@ const ContactUs: React.FC = () => {
                 <MailOutlined className="text-2xl mr-4 text-indigo-600" />
                 <div>
                   <p className="font-medium">Email</p>
-                  <p>support@blackienetworks.co.ke</p>
+                  <p>support@blackie-networks.com</p>
                 </div>
               </div>
 
