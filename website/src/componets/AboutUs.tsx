@@ -138,9 +138,10 @@ const AboutUs: React.FC = () => {
                     hoverable
                     cover={
                       <img
-                        alt={name}
+                        alt={`${name} - ${role} at Blackie Networks`}
                         src={teamImage}
                         className="object-cover h-48 w-full rounded-t-lg"
+                        loading="lazy"
                       />
                     }
                     className="rounded-lg shadow-md"

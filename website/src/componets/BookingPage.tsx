@@ -70,6 +70,8 @@ const BookingPage: React.FC = () => {
                         transition={{ duration: 5 }}
                         className="w-full  h-4/6 bg-cover bg-center rounded-lg shadow-lg"
                         style={{ backgroundImage: `url(${images[currentImage]})` }}
+                        role="img"
+                        aria-label="IT services and software development showcase"
                     ></motion.div>
                 </div>
 

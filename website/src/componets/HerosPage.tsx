@@ -110,6 +110,8 @@ export const HeroSection = () => {
             <div
               className={`absolute inset-0 transition-opacity duration-500 ${fadeClass}`}
               style={{ backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+              role="img"
+              aria-label="Network infrastructure and IT solutions background image"
             ></div>
             <div style={{ position: 'relative', zIndex: 10, height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', background: 'rgba(0,0,0,0.55)' }}>
               <motion.div initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.7 }} style={{ maxWidth: 800, textAlign: 'center', padding: 20, color: 'white' }}>
