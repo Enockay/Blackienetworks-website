@@ -71,6 +71,10 @@ function MainContent() {
                 description="Learn about Blackie Networks - a leading IT solutions provider in Kenya. Meet our certified team of professionals with 3+ years of experience delivering network infrastructure, software development, and IT consulting services."
                 keywords="about Blackie Networks, IT company Kenya, network infrastructure team, software development company, IT consultants Kenya"
                 url="/aboutus"
+                breadcrumbs={[
+                  { name: 'Home', url: '/' },
+                  { name: 'About Us', url: '/aboutus' },
+                ]}
               />
               <AboutUs />
             </>
@@ -85,6 +89,10 @@ function MainContent() {
                 description="Comprehensive IT services including network setup, MikroTik configuration, campus Wi-Fi solutions, custom software development, cloud services, VPN solutions, and IT consultancy. Professional services starting from $2,000."
                 keywords="network setup services, MikroTik configuration, Wi-Fi installation, software development services, cloud services, VPN setup, IT consulting Kenya"
                 url="/services"
+                breadcrumbs={[
+                  { name: 'Home', url: '/' },
+                  { name: 'Services', url: '/services' },
+                ]}
               />
               <ServicesPage />
             </>
@@ -112,6 +120,10 @@ function MainContent() {
                 description="Explore our range of IT products and services including campus Wi-Fi solutions, network infrastructure, billing systems, custom software development, cloud services, and mobile app integration."
                 keywords="campus Wi-Fi, network products, billing systems, software products, cloud services Kenya"
                 url="/Products"
+                breadcrumbs={[
+                  { name: 'Home', url: '/' },
+                  { name: 'Products', url: '/Products' },
+                ]}
               />
               <Section/>
             </>
@@ -123,9 +135,13 @@ function MainContent() {
             <>
               <SEO 
                 title="Contact Us - Get in Touch with Blackie Networks"
-                description="Contact Blackie Networks for IT solutions, network infrastructure, and software development services. Located at Chuka University, Kenya. Phone: +254 796 869 402, Email: support@blackienetworks.co.ke"
+                description="Contact Blackie Networks for IT solutions, network infrastructure, and software development services. Located at Chuka University, Kenya. Phone: +254 796 869 402, Email: support@blackie-networks.com"
                 keywords="contact Blackie Networks, IT support Kenya, network support, software development contact"
                 url="/contactus"
+                breadcrumbs={[
+                  { name: 'Home', url: '/' },
+                  { name: 'Contact Us', url: '/contactus' },
+                ]}
               />
               <ContactUs />
             </>
@@ -140,6 +156,11 @@ function MainContent() {
                 description="Read the latest articles, tips, and insights about network infrastructure, software development, IT best practices, and technology trends from Blackie Networks."
                 keywords="IT blog, network tips, software development blog, technology news Kenya"
                 url="/blog"
+                type="blog"
+                breadcrumbs={[
+                  { name: 'Home', url: '/' },
+                  { name: 'Blog', url: '/blog' },
+                ]}
               />
               <Blog />
             </>
