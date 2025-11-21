@@ -43,7 +43,7 @@ const Header: React.FC = () => {
         <Link to="/" className="flex items-center gap-2 group">
           <img
             src={logo}
-            alt="Logo"
+            alt="Blackie Networks Logo - IT Solutions and Network Infrastructure"
             className="h-10 w-auto md:h-12 transition-transform duration-300 group-hover:scale-105 drop-shadow-md"
           />
           <span className="text-xl font-extrabold text-gray-800 tracking-tight">
@@ -120,7 +120,7 @@ const Header: React.FC = () => {
         }}
         title={
           <div className="flex items-center gap-2">
-            <img src={logo} alt="Logo" className="h-8 w-auto rounded shadow-sm" />
+            <img src={logo} alt="Blackie Networks Logo" className="h-8 w-auto rounded shadow-sm" />
             <span className="text-base font-bold text-gray-800">BlackieNetworks</span>
           </div>
         }

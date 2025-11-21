@@ -123,8 +123,9 @@ export default function CompanySections() {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         className="text-center max-w-4xl mx-auto"
+        aria-labelledby="products-heading"
       >
-        <h2 className="text-2xl font-bold mb-2 text-indigo-700">Our Products</h2>
+        <h2 id="products-heading" className="text-2xl font-bold mb-2 text-indigo-700">Our Products</h2>
         <p className="text-gray-700 text-lg">
           We are a Chuka-based tech company revolutionizing internet access and digital systems. From blazing-fast Wi-Fi to smart software and VPNs, we’re your campus tech ally.
         </p>
@@ -135,10 +136,12 @@ export default function CompanySections() {
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
+        aria-labelledby="services-heading"
       >
+        <h2 id="services-heading" className="sr-only">Our Services</h2>
         <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3">
           {services.map((service, idx) => (
-            <motion.div
+            <motion.article
               key={idx}
               whileHover={{ scale: 1.05 }}
               className="p-6 bg-white hover:bg-blue-50 rounded-2xl shadow-xl border border-gray-100 hover:border-indigo-500 text-center space-y-4 transition-all duration-300"
@@ -152,10 +155,11 @@ export default function CompanySections() {
               <button
                 onClick={() => handleBook(service)}
                 className="bg-indigo-600 text-white px-4 py-2 rounded-full hover:bg-indigo-700 text-sm"
+                aria-label={`Book ${service.title} service`}
               >
                 Book Now
               </button>
-            </motion.div>
+            </motion.article>
           ))}
         </div>
       </motion.section>
@@ -207,22 +211,25 @@ export default function CompanySections() {
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
+        aria-labelledby="testimonials-heading"
       >
-        <h2 className="text-2xl font-bold text-center mb-10 text-indigo-700">
+        <h2 id="testimonials-heading" className="text-2xl font-bold text-center mb-10 text-indigo-700">
           What Our Clients Say
         </h2>
         <div className="space-y-8 md:space-y-0 md:grid md:grid-cols-3 gap-6">
           {testimonials.map((t, idx) => (
-            <motion.div
+            <motion.blockquote
               key={idx}
               whileHover={{ scale: 1.02 }}
               className="bg-gradient-to-br from-white via-purple-50 to-indigo-100 p-6 rounded-xl shadow-lg space-y-4 border border-indigo-100"
             >
               <FaQuoteLeft className="text-3xl text-purple-600" />
               <p className="text-gray-800 italic text-sm">“{t.quote}”</p>
-              <p className="text-sm text-indigo-700 font-bold text-right">— {t.name}</p>
-              <p className="text-xs text-gray-500 text-right">{t.role}</p>
-            </motion.div>
+              <footer className="text-right">
+                <cite className="text-sm text-indigo-700 font-bold not-italic">— {t.name}</cite>
+                <p className="text-xs text-gray-500">{t.role}</p>
+              </footer>
+            </motion.blockquote>
           ))}
         </div>
       </motion.section>

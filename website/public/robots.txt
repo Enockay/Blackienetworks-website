@@ -1,0 +1,27 @@
+# robots.txt for Blackie Networks
+# https://blackienetworks.co.ke/robots.txt
+
+User-agent: *
+Allow: /
+
+# Disallow admin and private areas (if any)
+Disallow: /admin/
+Disallow: /api/
+Disallow: /private/
+
+# Allow important pages
+Allow: /
+Allow: /home
+Allow: /aboutus
+Allow: /services
+Allow: /Products
+Allow: /booking
+Allow: /contactus
+Allow: /blog
+
+# Sitemap location
+Sitemap: https://blackienetworks.co.ke/sitemap.xml
+
+# Crawl-delay (optional, helps prevent server overload)
+Crawl-delay: 1
+
