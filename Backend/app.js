@@ -23,6 +23,23 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+// Add charset to Content-Type header for all responses
+app.use((req, res, next) => {
+  // Remove X-Powered-By header
+  res.removeHeader('X-Powered-By');
+  
+  // Set charset for text/html responses
+  const originalSend = res.send;
+  res.send = function(body) {
+    if (res.get('Content-Type') && res.get('Content-Type').includes('text/html') && !res.get('Content-Type').includes('charset')) {
+      res.set('Content-Type', res.get('Content-Type') + '; charset=utf-8');
+    }
+    return originalSend.call(this, body);
+  };
+  next();
+});
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 mongoose.connect(MONGODB)
