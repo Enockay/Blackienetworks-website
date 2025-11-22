@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: blackie-backend-dev
+    ports:
+      - "3010:3010"
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+      - MONGODB=${MONGODB:-mongodb://mongo:27017/blackienetworks}
+      - BREVO_API_KEY=${BREVO_API_KEY}
+      - BREVO_SENDER_EMAIL=${BREVO_SENDER_EMAIL}
+      - BREVO_SENDER_NAME=${BREVO_SENDER_NAME:-Blackie Networks}
+      - BREVO_REPLY_TO_EMAIL=${BREVO_REPLY_TO_EMAIL}
+      - BREVO_SMS_SENDER=${BREVO_SMS_SENDER:-BlackieNet}
+      - ADMIN_EMAIL=${ADMIN_EMAIL}
+      - ALLOWED_ORIGINS=${ALLOWED_ORIGINS}
+    env_file:
+      - .env
+    depends_on:
+      - mongo
+    restart: unless-stopped
+    networks:
+      - blackie-network
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: npm run dev
+
+  mongo:
+    image: mongo:7
+    container_name: blackie-mongo-dev
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_DATABASE=blackienetworks
+    volumes:
+      - mongo-data-dev:/data/db
+    restart: unless-stopped
+    networks:
+      - blackie-network
+
+volumes:
+  mongo-data-dev:
+    driver: local
+
+networks:
+  blackie-network:
+    driver: bridge
+

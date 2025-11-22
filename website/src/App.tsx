@@ -22,7 +22,7 @@ function App() {
   return (
     <Router>
       <Analytics />
-      <Layout className="min-h-screen">
+      <Layout className="min-h-screen" style={{ background: 'transparent' }}>
         <Header />
         <MainContent />
         <Footer />

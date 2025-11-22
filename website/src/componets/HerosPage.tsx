@@ -1,380 +1,577 @@
-// Enhanced HeroSection with Pro Styling, Animation & SVG Curve
 import { useEffect, useState } from 'react';
-import {
-  Card,
-  Row,
-  Col,
-  Typography,
-  List,
-  Button,
-  Layout,
-  Menu,
-  Avatar,
-  Dropdown,
-} from 'antd';
+import { Card, Row, Col, Typography, List, Button } from 'antd';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
   LaptopOutlined,
   TeamOutlined,
   TrophyOutlined,
-  UserOutlined,
-  SettingOutlined,
-  BellOutlined,
-  LogoutOutlined,
-  FacebookOutlined,
-  TwitterOutlined,
-  LinkedinOutlined,
-  WhatsAppOutlined,
+  RocketOutlined,
+  CloudOutlined,
+  ThunderboltOutlined,
 } from '@ant-design/icons';
 import heroImage1 from '../assets/networking1.jpg';
 import heroImage2 from '../assets/networking2.jpg';
 import heroImage3 from '../assets/networking3.jpg';
+import { FiZap, FiArrowRight } from 'react-icons/fi';
 
 const { Title, Paragraph } = Typography;
-const { Header, Content } = Layout;
 
 const projects = [
   {
-    title: 'Project Alpha',
-    summary: 'Revolutionizing user experience for a global client.',
+    title: 'Network Infrastructure',
+    summary: 'Enterprise-grade network solutions for seamless connectivity.',
     details: [
-      'Developed a scalable web and mobile platform to enhance user engagement.',
-      'Integrated advanced UX/UI design principles to boost usability and reduce user friction.',
-      'Implemented personalized content algorithms that increased user retention by 30%.',
-      'Enhanced performance with a modular architecture, supporting over 1 million monthly active users.',
-      'Provided training for the client’s in-house team to ensure smooth adoption and ongoing support.'
-    ]
+      'Scalable architecture supporting 1000+ concurrent users',
+      'Advanced firewall and security configurations',
+      'Optimized Wi-Fi coverage and bandwidth management',
+      '24/7 monitoring and proactive maintenance',
+    ],
+    icon: <ThunderboltOutlined style={{ fontSize: '32px', color: '#00f0ff' }} />,
   },
   {
-    title: 'Network Expansion',
-    summary: 'Advanced network setup for a corporate campus.',
+    title: 'Cloud Services',
+    summary: 'Scalable cloud infrastructure with 99.99% uptime.',
     details: [
-      'Designed a secure and high-speed network to support 500+ employees.',
-      'Implemented advanced firewall configurations.',
-      'Optimized Wi-Fi coverage for seamless communication.',
-      'Integrated VLANs and traffic segmentation.',
-      'Provided ongoing monitoring and maintenance.'
-    ]
+      'AWS and DigitalOcean deployment',
+      'Automated backups and disaster recovery',
+      'High-traffic system optimization',
+      'Comprehensive monitoring solutions',
+    ],
+    icon: <CloudOutlined style={{ fontSize: '32px', color: '#00ff88' }} />,
   },
   {
-    title: 'IT Transformation',
-    summary: 'Optimizing IT processes for enhanced productivity.',
+    title: 'Software Development',
+    summary: 'Custom solutions tailored to your business needs.',
     details: [
-      'Conducted an IT audit for inefficiencies.',
-      'Migrated core operations to the cloud.',
-      'Automated repetitive tasks.',
-      'Implemented a help desk system.',
-      'Delivered comprehensive documentation and training.'
-    ]
-  }
+      'Web and mobile application development',
+      'API integration and microservices',
+      'Modern UI/UX design principles',
+      'Agile development methodology',
+    ],
+    icon: <RocketOutlined style={{ fontSize: '32px', color: '#7c3aed' }} />,
+  },
 ];
 
-const userMenu = (
-  <Menu>
-    <Menu.Item key="1" icon={<UserOutlined />}>Profile</Menu.Item>
-    <Menu.Item key="2" icon={<SettingOutlined />}>Settings</Menu.Item>
-    <Menu.Divider />
-    <Menu.Item key="3" icon={<LogoutOutlined />} danger>Logout</Menu.Item>
-  </Menu>
-);
+// Animation variants shared across components
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: 'spring',
+      stiffness: 100,
+      damping: 15,
+    },
+  },
+};
 
 export const HeroSection = () => {
   const images = [heroImage1, heroImage2, heroImage3];
   const [backgroundImage, setBackgroundImage] = useState(images[0]);
   const [fadeClass, setFadeClass] = useState('opacity-100');
+  const [imagesLoaded, setImagesLoaded] = useState(false);
+  const [imageIndex, setImageIndex] = useState(0);
+
+  // Preload images to prevent empty pages
+  useEffect(() => {
+    const imagePromises = images.map((img) => {
+      return new Promise((resolve, reject) => {
+        const image = new Image();
+        image.src = img;
+        image.onload = resolve;
+        image.onerror = reject;
+      });
+    });
+
+    Promise.all(imagePromises)
+      .then(() => setImagesLoaded(true))
+      .catch(() => setImagesLoaded(true)); // Still show page even if some images fail
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
-    let index = 0;
+    if (!imagesLoaded) return;
+    
     const interval = setInterval(() => {
       setFadeClass('opacity-0');
       setTimeout(() => {
-        index = (index + 1) % images.length;
-        setBackgroundImage(images[index]);
+        setImageIndex((prev) => {
+          const nextIndex = (prev + 1) % images.length;
+          setBackgroundImage(images[nextIndex]);
+          return nextIndex;
+        });
         setFadeClass('opacity-100');
       }, 500);
     }, 5000);
     return () => clearInterval(interval);
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [imagesLoaded]);
+
+  if (!imagesLoaded) {
+    return (
+      <div style={{ 
+        position: 'relative', 
+        minHeight: '100vh', 
+        marginTop: '80px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: 'linear-gradient(135deg, rgba(5, 8, 16, 0.95) 0%, rgba(10, 14, 39, 0.95) 100%)',
+      }}>
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+          style={{
+            width: '50px',
+            height: '50px',
+            border: '4px solid rgba(0, 240, 255, 0.3)',
+            borderTopColor: '#00f0ff',
+            borderRadius: '50%',
+          }}
+        />
+      </div>
+    );
+  }
 
   return (
-    <Layout style={{ minHeight: '100vh' }}>
-      <Layout>
-        <Header style={{ background: '#fff', padding: '0 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}>
-          <Title level={4} style={{ margin: 0 }}>Welcome</Title>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-            <BellOutlined style={{ fontSize: 20 }} />
-            <Dropdown overlay={userMenu} placement="bottomRight">
-              <Avatar style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} />
-            </Dropdown>
+    <div style={{ position: 'relative', minHeight: '100vh', marginTop: '80px' }}>
+      {/* Animated Background */}
+      <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', zIndex: 0 }}>
+        {images.map((img, idx) => (
+          <motion.img
+            key={idx}
+            src={img}
+            alt="Network infrastructure background"
+            initial={{ opacity: 0 }}
+            animate={{ 
+              opacity: idx === imageIndex ? 1 : 0,
+            }}
+            transition={{ duration: 0.8 }}
+            style={{ 
+              position: 'absolute',
+              inset: 0,
+              width: '100%', 
+              height: '100%', 
+              objectFit: 'cover',
+              filter: 'brightness(0.3) contrast(1.2)',
+            }}
+            width="1920"
+            height="1080"
+            loading="eager"
+          />
+        ))}
+        <div style={{
+          position: 'absolute',
+          inset: 0,
+          background: 'linear-gradient(135deg, rgba(10, 14, 39, 0.9) 0%, rgba(5, 8, 16, 0.95) 100%)',
+        }} />
           </div>
-        </Header>
-        <Content>
-          <div style={{ position: 'relative', height: '600px', overflow: 'hidden' }}>
-            <img
-              src={backgroundImage}
-              alt="Network infrastructure and IT solutions background"
-              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${fadeClass}`}
-              style={{ 
-                width: '100%', 
-                height: '100%', 
-                objectFit: 'cover',
-                aspectRatio: '16/9'
+
+      {/* Hero Content */}
+      <div style={{ position: 'relative', zIndex: 10, minHeight: '90vh', display: 'flex', alignItems: 'center', padding: '80px 20px' }}>
+        <div className="max-w-7xl mx-auto w-full">
+          <motion.div
+            initial={{ y: 40, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.7 }}
+            style={{ maxWidth: 900, textAlign: 'center', margin: '0 auto' }}
+          >
+            <motion.div
+              initial={{ scale: 0, rotate: -180 }}
+              animate={{ scale: 1, rotate: 0 }}
+              transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
+              whileHover={{ scale: 1.05 }}
+              style={{
+                display: 'inline-block',
+                padding: '12px 24px',
+                background: 'rgba(0, 240, 255, 0.1)',
+                border: '1px solid rgba(0, 240, 255, 0.3)',
+                borderRadius: '50px',
+                marginBottom: '24px',
+                cursor: 'default',
               }}
-              width="1920"
-              height="600"
-              loading="eager"
-              fetchPriority="high"
-            />
-            <div style={{ position: 'relative', zIndex: 10, height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', background: 'rgba(0,0,0,0.55)' }}>
-              <motion.div initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.7 }} style={{ maxWidth: 800, textAlign: 'center', padding: 20, color: 'white' }}>
-                <h1 style={{ color: 'white', fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>Blackie Networks - IT Solutions & Network Infrastructure</h1>
-                <p style={{ fontSize: '18px', color: '#f0f0f0', marginBottom: '1rem' }}>
-                  Driving innovation in software development, network infrastructure, and IT consulting services across Kenya.
-                </p>
-                <p style={{ fontSize: '16px', color: '#e0e0e0', marginTop: 20, lineHeight: '1.6' }}>
-                  We bring affordable, high-speed internet to campus students. No more buffering—just reliable, wallet-friendly Wi-Fi. Our 24/7 support team is always available to help you stay connected. Whether you need network infrastructure setup, custom software development, or IT consulting services, Blackie Networks delivers professional solutions tailored to your needs. Explore our <Link to="/services" style={{ color: '#93c5fd', textDecoration: 'underline' }}>comprehensive services</Link>, learn <Link to="/aboutus" style={{ color: '#93c5fd', textDecoration: 'underline' }}>more about us</Link>, check out our <Link to="/Products" style={{ color: '#93c5fd', textDecoration: 'underline' }}>products</Link>, read our <Link to="/blog" style={{ color: '#93c5fd', textDecoration: 'underline' }}>blog</Link>, or <Link to="/contactus" style={{ color: '#93c5fd', textDecoration: 'underline' }}>get in touch</Link> today. For more information about our services, visit <a href="https://www.mikrotik.com" target="_blank" rel="noopener noreferrer" style={{ color: '#93c5fd', textDecoration: 'underline' }}>MikroTik</a> and <a href="https://aws.amazon.com" target="_blank" rel="noopener noreferrer" style={{ color: '#93c5fd', textDecoration: 'underline' }}>AWS</a> to learn about the technologies we use.
-                </p>
-                <div style={{ marginTop: 30 }}>
-                  <Link to="/services">
-                    <Button type="primary" size="large" style={{ marginRight: 16 }}>Explore Services</Button>
-                  </Link>
-                  <Link to="/booking">
-                    <Button size="large">Book a Service</Button>
-                  </Link>
-                  <Link to="/aboutus" style={{ marginLeft: 16, color: 'white', textDecoration: 'underline' }}>
-                    Learn More
-                  </Link>
-                </div>
-                {/* Social Sharing Buttons */}
-                <div style={{ marginTop: 30, display: 'flex', alignItems: 'center', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-                  <span style={{ color: '#f0f0f0', marginRight: 8 }}>Share:</span>
-                  <a
-                    href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : 'https://www.blackie-networks.com')}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{ color: 'white', fontSize: '20px', textDecoration: 'none' }}
-                    aria-label="Share on Facebook"
-                  >
-                    <FacebookOutlined style={{ fontSize: '24px', marginRight: 8 }} />
-                  </a>
-                  <a
-                    href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : 'https://www.blackie-networks.com')}&text=${encodeURIComponent('Blackie Networks - IT Solutions & Network Infrastructure')}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{ color: 'white', fontSize: '20px', textDecoration: 'none' }}
-                    aria-label="Share on Twitter"
-                  >
-                    <TwitterOutlined style={{ fontSize: '24px', marginRight: 8 }} />
-                  </a>
-                  <a
-                    href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : 'https://www.blackie-networks.com')}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{ color: 'white', fontSize: '20px', textDecoration: 'none' }}
-                    aria-label="Share on LinkedIn"
-                  >
-                    <LinkedinOutlined style={{ fontSize: '24px', marginRight: 8 }} />
-                  </a>
-                  <a
-                    href={`https://wa.me/?text=${encodeURIComponent('Check out Blackie Networks - IT Solutions & Network Infrastructure: ' + (typeof window !== 'undefined' ? window.location.href : 'https://www.blackie-networks.com'))}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{ color: 'white', fontSize: '20px', textDecoration: 'none' }}
-                    aria-label="Share on WhatsApp"
-                  >
-                    <WhatsAppOutlined style={{ fontSize: '24px' }} />
-                  </a>
-                </div>
-              </motion.div>
-
-            </div>
-            {/* Bottom Curve Separator with Gradient */}
-            <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] rotate-180 z-10">
-              <svg
-                className="relative block w-[calc(150%+1.3px)] h-[100px]"
-                xmlns="http://www.w3.org/2000/svg"
-                preserveAspectRatio="none"
-                viewBox="0 0 1200 120"
+            >
+              <motion.span
+                animate={{ 
+                  textShadow: [
+                    '0 0 10px rgba(0, 240, 255, 0.5)',
+                    '0 0 20px rgba(0, 240, 255, 0.8)',
+                    '0 0 10px rgba(0, 240, 255, 0.5)',
+                  ],
+                }}
+                transition={{ duration: 2, repeat: Infinity }}
+                style={{ color: '#00f0ff', fontSize: '14px', fontWeight: 600 }}
               >
-                <defs>
-                  <linearGradient id="curveGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#f9fafb" />
-                    <stop offset="100%" stopColor="#edf2f7" />
-                  </linearGradient>
-                </defs>
-                <path
-                  d="M985.66,65.54C914.12,91.09,836.77,104.77,756,105.52c-80.69.74-157.57-11.32-231.11-36.31C449,43.9,373.6,7.45,292,2.82,222.41-1.41,153.66,14.29,88.49,35.62,59.9,44.67,30.86,54.5,0,60V0H1200V27.35C1138.07,44.57,1061.86,39.5,985.66,65.54Z"
-                  fill="url(#curveGradient)"
-                />
-              </svg>
+                <FiZap style={{ display: 'inline', marginRight: 8 }} />
+                Next-Gen IT Solutions
+              </motion.span>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.8 }}
+            >
+              <Title
+                level={1}
+                style={{
+                  fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
+                  fontWeight: 900,
+                  marginBottom: '24px',
+                  background: 'linear-gradient(135deg, #00f0ff 0%, #0066ff 50%, #7c3aed 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                  lineHeight: 1.2,
+                  textShadow: '0 0 40px rgba(0, 240, 255, 0.3)',
+                }}
+              >
+                Empowering Digital
+                <br />
+                <motion.span
+                  animate={{
+                    background: [
+                      'linear-gradient(135deg, #00ff88 0%, #00f0ff 100%)',
+                      'linear-gradient(135deg, #00f0ff 0%, #0066ff 100%)',
+                      'linear-gradient(135deg, #00ff88 0%, #00f0ff 100%)',
+                    ],
+                  }}
+                  transition={{ duration: 3, repeat: Infinity }}
+                  style={{ 
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                  }}
+                >
+                  Transformation
+                </motion.span>
+              </Title>
+            </motion.div>
+
+            <Paragraph
+              style={{
+                fontSize: 'clamp(1rem, 2vw, 1.25rem)',
+                color: '#cbd5e1',
+                marginBottom: '40px',
+                maxWidth: '700px',
+                margin: '0 auto 40px',
+                lineHeight: 1.8,
+              }}
+            >
+              Delivering cutting-edge network infrastructure, custom software development, and IT consulting services. 
+              Connecting campuses and businesses across Kenya with reliable, high-speed solutions.
+            </Paragraph>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.6 }}
+              style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '60px' }}
+            >
+              <Link to="/services">
+                <motion.div
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Button
+                    className="tech-button"
+                    size="large"
+                    style={{
+                      background: 'linear-gradient(135deg, #00f0ff 0%, #0066ff 100%)',
+                      border: 'none',
+                      color: '#0a0e27',
+                      fontWeight: 700,
+                      height: '56px',
+                      padding: '0 40px',
+                      fontSize: '16px',
+                      boxShadow: '0 10px 30px rgba(0, 240, 255, 0.4)',
+                    }}
+                  >
+                    Explore Services <FiArrowRight style={{ marginLeft: 8 }} />
+                  </Button>
+                </motion.div>
+              </Link>
+              <Link to="/booking">
+                <motion.div
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Button
+                    size="large"
+                    style={{
+                      background: 'transparent',
+                      border: '2px solid rgba(0, 240, 255, 0.5)',
+                      color: '#00f0ff',
+                      fontWeight: 700,
+                      height: '56px',
+                      padding: '0 40px',
+                      fontSize: '16px',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.background = 'rgba(0, 240, 255, 0.1)';
+                      e.currentTarget.style.boxShadow = '0 0 20px rgba(0, 240, 255, 0.3)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = 'transparent';
+                      e.currentTarget.style.boxShadow = 'none';
+                    }}
+                  >
+                    Book Consultation
+                  </Button>
+                </motion.div>
+              </Link>
+            </motion.div>
+
+            {/* Stats */}
+            <div style={{ display: 'flex', gap: '40px', justifyContent: 'center', flexWrap: 'wrap', marginTop: '60px' }}>
+              {[
+                { value: '1000+', label: 'Active Users' },
+                { value: '99.99%', label: 'Uptime' },
+                { value: '24/7', label: 'Support' },
+                { value: '3+', label: 'Years Experience' },
+              ].map((stat, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 + idx * 0.1 }}
+                  style={{ textAlign: 'center' }}
+                >
+                  <div style={{ fontSize: '2.5rem', fontWeight: 900, color: '#00f0ff', marginBottom: '8px' }}>
+                    {stat.value}
+                </div>
+                  <div style={{ fontSize: '0.875rem', color: '#94a3b8' }}>{stat.label}</div>
+              </motion.div>
+              ))}
             </div>
-
-
-          </div>
-
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
-            <AchievementsAndSpecializations />
           </motion.div>
+        </div>
+      </div>
 
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.7 }}>
+      {/* Achievements Section */}
+      <AchievementsAndSpecializations />
+
+      {/* Projects Section */}
             <LatestProjectsSection />
-          </motion.div>
-        </Content>
-
-      </Layout>
-
-    </Layout>
+    </div>
   );
 };
 
-const AchievementsAndSpecializations = () => (
-  <div
+const AchievementsAndSpecializations = () => {
+  return (
+    <div style={{ position: 'relative', zIndex: 10, padding: '100px 30px', background: 'rgba(5, 8, 16, 0.8)' }}>
+    <div style={{ textAlign: 'center', marginBottom: '60px' }}>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+      >
+        <Title
+          level={2}
     style={{
-      padding: '80px 30px',
-      background: 'linear-gradient(to bottom right, #f9fafb, #edf2f7)', // light gradient
-    }}
-  >
-    <div style={{ textAlign: 'center' }}>
-      <h2 style={{ color: '#1f2937', fontWeight: 700, fontSize: '2rem', marginBottom: '1rem' }}>
-        🏆 Our Achievements & Specializations
-      </h2>
-      <p style={{ color: '#4b5563', maxWidth: 720, margin: '0 auto', fontSize: 16, lineHeight: '1.6' }}>
-        Dedicated to delivering high-speed internet to students at an affordable price — empowering campus communities to stay connected and succeed. Our comprehensive IT solutions include network infrastructure setup, custom software development, cloud services, and professional IT consulting. <Link to="/services" style={{ color: '#1d4ed8', textDecoration: 'underline' }}>Explore our services</Link> or <Link to="/contactus" style={{ color: '#1d4ed8', textDecoration: 'underline' }}>contact us</Link> to learn more about how we can help your organization.
-      </p>
+            fontSize: 'clamp(2rem, 4vw, 3rem)',
+            fontWeight: 800,
+            marginBottom: '16px',
+            background: 'linear-gradient(135deg, #00f0ff 0%, #0066ff 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+          }}
+        >
+          Why Choose Blackie Networks?
+        </Title>
+        <Paragraph style={{ color: '#cbd5e1', maxWidth: 720, margin: '0 auto', fontSize: '1.125rem' }}>
+          Delivering cutting-edge IT solutions with unmatched reliability and innovation
+        </Paragraph>
+      </motion.div>
     </div>
 
-    <Row gutter={[32, 32]} justify="center" style={{ marginTop: 60 }}>
-      {[
-        {
-          icon: (
-            <LaptopOutlined
-              style={{
-                fontSize: '40px',
-                color: '#1d4ed8',
-                background: '#e0f2fe',
-                borderRadius: '50%',
-                padding: 12,
-              }}
-            />
-          ),
-          title: 'High-Speed Network',
-          text: 'Fast, reliable network supporting students’ academic and personal needs at Chuka University.',
-        },
-        {
-          icon: (
-            <TeamOutlined
-              style={{
-                fontSize: '40px',
-                color: '#d97706',
-                background: '#fef3c7',
-                borderRadius: '50%',
-                padding: 12,
-              }}
-            />
-          ),
-          title: 'Affordable for Students',
-          text: 'Low-cost services ensure students stay connected without breaking the bank.',
-        },
-        {
-          icon: (
-            <TrophyOutlined
-              style={{
-                fontSize: '40px',
-                color: '#16a34a',
-                background: '#dcfce7',
-                borderRadius: '50%',
-                padding: 12,
-              }}
-            />
-          ),
-          title: 'Milestones Reached',
-          text: 'Over 1,000 student subscriptions with consistent positive feedback.',
-        },
-      ].map((item, index) => (
-        <Col xs={24} sm={12} md={8} key={index}>
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: index * 0.25, duration: 0.7 }}
-            whileHover={{ scale: 1.03 }}
-          >
+    <motion.div
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+    >
+      <Row gutter={[32, 32]} justify="center">
+        {[
+          {
+            icon: <LaptopOutlined style={{ fontSize: '48px', color: '#00f0ff' }} />,
+            title: 'High-Speed Network',
+            text: 'Lightning-fast connectivity supporting thousands of concurrent users with zero downtime.',
+            color: '#00f0ff',
+          },
+          {
+            icon: <TeamOutlined style={{ fontSize: '48px', color: '#00ff88' }} />,
+            title: 'Affordable Solutions',
+            text: 'Cost-effective packages starting from KES 10/hour, designed for student budgets.',
+            color: '#00ff88',
+          },
+          {
+            icon: <TrophyOutlined style={{ fontSize: '48px', color: '#7c3aed' }} />,
+            title: 'Proven Track Record',
+            text: 'Over 1,000 satisfied subscribers with consistent 5-star feedback and growing.',
+            color: '#7c3aed',
+          },
+        ].map((item, index) => (
+          <Col xs={24} sm={12} md={8} key={index}>
+            <motion.div
+              variants={itemVariants}
+              whileHover={{ scale: 1.05, y: -10, rotate: 1 }}
+              transition={{ type: 'spring', stiffness: 300 }}
+            >
             <Card
               hoverable
+              className="glass"
               style={{
                 textAlign: 'center',
-                borderRadius: '16px',
-                boxShadow: '0 10px 25px rgba(0,0,0,0.06)',
-                padding: '30px 20px',
-                background: 'white',
-                border: '1px solid #f0f0f0',
+                borderRadius: '20px',
+                padding: '40px 30px',
+                height: '100%',
+                border: `1px solid ${item.color}40`,
+                background: 'rgba(10, 14, 39, 0.6)',
               }}
             >
-              <div style={{ marginBottom: 20 }}>{item.icon}</div>
-              <h3 style={{ color: '#111827', marginBottom: 10, fontSize: '1.25rem', fontWeight: 600 }}>
+              <motion.div
+                whileHover={{ rotate: 360, scale: 1.1 }}
+                transition={{ duration: 0.6 }}
+                style={{ marginBottom: '24px', display: 'flex', justifyContent: 'center' }}
+              >
+                <motion.div
+                  animate={{
+                    boxShadow: [
+                      `0 0 20px ${item.color}40`,
+                      `0 0 40px ${item.color}60`,
+                      `0 0 20px ${item.color}40`,
+                    ],
+                  }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                  style={{
+                    padding: '20px',
+                    borderRadius: '50%',
+                    background: `${item.color}20`,
+                    border: `2px solid ${item.color}40`,
+                  }}
+                >
+                  {item.icon}
+                </motion.div>
+              </motion.div>
+              <Title level={4} style={{ color: item.color, marginBottom: '16px', fontSize: '1.5rem' }}>
                 {item.title}
-              </h3>
-              <Paragraph style={{ color: '#4b5563', fontSize: 15 }}>{item.text}</Paragraph>
+              </Title>
+              <Paragraph style={{ color: '#cbd5e1', fontSize: '1rem', lineHeight: 1.6 }}>
+                {item.text}
+              </Paragraph>
             </Card>
           </motion.div>
         </Col>
       ))}
     </Row>
-  </div>
-);
+    </motion.div>
+    </div>
+  );
+};
 
-
-const LatestProjectsSection = () => (
-  <div
+const LatestProjectsSection = () => {
+  return (
+  <div style={{ position: 'relative', zIndex: 10, padding: '100px 30px', background: 'rgba(10, 14, 39, 0.6)' }}>
+    <div style={{ textAlign: 'center', marginBottom: '60px' }}>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+      >
+        <Title
+          level={2}
     style={{
-      padding: '80px 30px',
-      background: 'linear-gradient(to bottom, #f8fafc, #e2e8f0)', // subtle Tailwind gray-50 to gray-200
-    }}
-  >
-    <div style={{ textAlign: 'center' }}>
-      <h2 style={{ color: '#1f2937', fontWeight: 700, fontSize: '2rem', marginBottom: '1rem' }}>
-        🌟 Our Latest Projects
-      </h2>
-      <p style={{ color: '#4b5563', maxWidth: 700, margin: '0 auto', fontSize: '16px', lineHeight: '1.6' }}>
-        Explore some of our most impactful client work — designed to deliver measurable results and superior user experiences. From <Link to="/services" style={{ color: '#1d4ed8', textDecoration: 'underline' }}>network infrastructure</Link> to <Link to="/Products" style={{ color: '#1d4ed8', textDecoration: 'underline' }}>custom software solutions</Link>, we deliver excellence.
-      </p>
+            fontSize: 'clamp(2rem, 4vw, 3rem)',
+            fontWeight: 800,
+            marginBottom: '16px',
+            background: 'linear-gradient(135deg, #00f0ff 0%, #7c3aed 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+          }}
+        >
+          Our Solutions
+        </Title>
+        <Paragraph style={{ color: '#cbd5e1', maxWidth: 700, margin: '0 auto', fontSize: '1.125rem' }}>
+          Comprehensive IT services designed to transform your digital infrastructure
+        </Paragraph>
+      </motion.div>
     </div>
 
-    <Row gutter={[32, 32]} justify="center" style={{ marginTop: 50 }}>
-      {projects.map((project, index) => (
-        <Col xs={24} sm={12} lg={8} key={project.title}>
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: index * 0.2, duration: 0.7 }}
-            whileHover={{ scale: 1.02 }}
-          >
+    <motion.div
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+    >
+      <Row gutter={[32, 32]} justify="center">
+        {projects.map((project, index) => (
+          <Col xs={24} sm={12} lg={8} key={project.title}>
+            <motion.div
+              variants={itemVariants}
+              whileHover={{ scale: 1.05, y: -10, rotate: 1 }}
+              transition={{ type: 'spring', stiffness: 300 }}
+            >
             <Card
               hoverable
+              className="glass"
               style={{
-                borderRadius: '16px',
-                overflow: 'hidden',
-                boxShadow: '0 10px 25px rgba(0,0,0,0.05)',
-                background: 'linear-gradient(to bottom right, #ffffff, #f9fafb)',
-                border: '1px solid #e5e7eb',
-                padding: '20px',
+                borderRadius: '20px',
+                padding: '30px',
+                height: '100%',
+                border: '1px solid rgba(0, 240, 255, 0.2)',
+                background: 'rgba(10, 14, 39, 0.6)',
               }}
             >
-              <h3 style={{ marginBottom: 10, color: '#111827', fontSize: '1.25rem', fontWeight: 600 }}>
+              <motion.div
+                whileHover={{ rotate: 360, scale: 1.2 }}
+                transition={{ duration: 0.6 }}
+                style={{ marginBottom: '20px' }}
+              >
+                {project.icon}
+              </motion.div>
+              <Title level={4} style={{ color: '#00f0ff', marginBottom: '12px', fontSize: '1.5rem' }}>
                 {project.title}
-              </h3>
-              <Paragraph style={{ color: '#374151', fontSize: '15px' }}>
+              </Title>
+              <Paragraph style={{ color: '#cbd5e1', marginBottom: '20px', fontSize: '1rem' }}>
                 {project.summary}
               </Paragraph>
               <List
                 size="small"
                 dataSource={project.details}
-                renderItem={(item) => (
-                  <List.Item style={{ padding: '4px 0', border: 'none', color: '#4b5563' }}>
-                    <span>• {item}</span>
-                  </List.Item>
+                renderItem={(item, idx) => (
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: idx * 0.1 }}
+                  >
+                    <List.Item style={{ padding: '8px 0', border: 'none', color: '#94a3b8' }}>
+                      <motion.span
+                        animate={{ rotate: [0, 10, -10, 0] }}
+                        transition={{ duration: 0.5, delay: idx * 0.1 }}
+                        style={{ color: '#00f0ff', marginRight: '8px', display: 'inline-block' }}
+                      >
+                        ▹
+                      </motion.span>
+                      {item}
+                    </List.Item>
+                  </motion.div>
                 )}
               />
             </Card>
@@ -382,5 +579,8 @@ const LatestProjectsSection = () => (
         </Col>
       ))}
     </Row>
-  </div>
-);
+    </motion.div>
+    </div>
+  );
+};
+
