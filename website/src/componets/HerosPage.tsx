@@ -115,19 +115,22 @@ export const HeroSection = () => {
             ></div>
             <div style={{ position: 'relative', zIndex: 10, height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', background: 'rgba(0,0,0,0.55)' }}>
               <motion.div initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.7 }} style={{ maxWidth: 800, textAlign: 'center', padding: 20, color: 'white' }}>
-                <Title level={2} style={{ color: 'white' }}>Welcome to Blackie-Networks</Title>
-                <Paragraph style={{ fontSize: '18px', color: '#f0f0f0' }}>
-                  Driving innovation in software development, network infrastructure, and IT consulting.
-                </Paragraph>
-                <Paragraph style={{ fontSize: '16px', color: '#e0e0e0', marginTop: 20 }}>
-                  We bring affordable, high-speed internet to campus students. No more buffering—just reliable, wallet-friendly Wi-Fi. Our 24/7 support team is always available.
-                </Paragraph>
+                <h1 style={{ color: 'white', fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>Welcome to Blackie Networks</h1>
+                <p style={{ fontSize: '18px', color: '#f0f0f0', marginBottom: '1rem' }}>
+                  Driving innovation in software development, network infrastructure, and IT consulting services across Kenya.
+                </p>
+                <p style={{ fontSize: '16px', color: '#e0e0e0', marginTop: 20, lineHeight: '1.6' }}>
+                  We bring affordable, high-speed internet to campus students. No more buffering—just reliable, wallet-friendly Wi-Fi. Our 24/7 support team is always available to help you stay connected. Whether you need network infrastructure setup, custom software development, or IT consulting services, Blackie Networks delivers professional solutions tailored to your needs. Explore our <Link to="/services" style={{ color: '#93c5fd', textDecoration: 'underline' }}>comprehensive services</Link>, learn <Link to="/aboutus" style={{ color: '#93c5fd', textDecoration: 'underline' }}>more about us</Link>, or <Link to="/contactus" style={{ color: '#93c5fd', textDecoration: 'underline' }}>get in touch</Link> today.
+                </p>
                 <div style={{ marginTop: 30 }}>
-                  <Link to="/products">
+                  <Link to="/services">
                     <Button type="primary" size="large" style={{ marginRight: 16 }}>Explore Services</Button>
                   </Link>
-                  <Link to="/products">
+                  <Link to="/booking">
                     <Button size="large">Book a Service</Button>
+                  </Link>
+                  <Link to="/aboutus" style={{ marginLeft: 16, color: 'white', textDecoration: 'underline' }}>
+                    Learn More
                   </Link>
                 </div>
               </motion.div>
@@ -179,14 +182,14 @@ const AchievementsAndSpecializations = () => (
       background: 'linear-gradient(to bottom right, #f9fafb, #edf2f7)', // light gradient
     }}
   >
-    <Typography style={{ textAlign: 'center' }}>
-      <Title level={3} style={{ color: '#1f2937', fontWeight: 700 }}>
+    <div style={{ textAlign: 'center' }}>
+      <h2 style={{ color: '#1f2937', fontWeight: 700, fontSize: '2rem', marginBottom: '1rem' }}>
         🏆 Our Achievements & Specializations
-      </Title>
-      <Paragraph style={{ color: '#4b5563', maxWidth: 720, margin: '0 auto', fontSize: 16 }}>
-        Dedicated to delivering high-speed internet to students at an affordable price — empowering campus communities to stay connected and succeed.
-      </Paragraph>
-    </Typography>
+      </h2>
+      <p style={{ color: '#4b5563', maxWidth: 720, margin: '0 auto', fontSize: 16, lineHeight: '1.6' }}>
+        Dedicated to delivering high-speed internet to students at an affordable price — empowering campus communities to stay connected and succeed. Our comprehensive IT solutions include network infrastructure setup, custom software development, cloud services, and professional IT consulting. <Link to="/services" style={{ color: '#1d4ed8', textDecoration: 'underline' }}>Explore our services</Link> or <Link to="/contactus" style={{ color: '#1d4ed8', textDecoration: 'underline' }}>contact us</Link> to learn more about how we can help your organization.
+      </p>
+    </div>
 
     <Row gutter={[32, 32]} justify="center" style={{ marginTop: 60 }}>
       {[
@@ -256,9 +259,9 @@ const AchievementsAndSpecializations = () => (
               }}
             >
               <div style={{ marginBottom: 20 }}>{item.icon}</div>
-              <Title level={4} style={{ color: '#111827', marginBottom: 10 }}>
+              <h3 style={{ color: '#111827', marginBottom: 10, fontSize: '1.25rem', fontWeight: 600 }}>
                 {item.title}
-              </Title>
+              </h3>
               <Paragraph style={{ color: '#4b5563', fontSize: 15 }}>{item.text}</Paragraph>
             </Card>
           </motion.div>
@@ -276,14 +279,14 @@ const LatestProjectsSection = () => (
       background: 'linear-gradient(to bottom, #f8fafc, #e2e8f0)', // subtle Tailwind gray-50 to gray-200
     }}
   >
-    <Typography style={{ textAlign: 'center' }}>
-      <Title level={3} style={{ color: '#1f2937', fontWeight: 700 }}>
+    <div style={{ textAlign: 'center' }}>
+      <h2 style={{ color: '#1f2937', fontWeight: 700, fontSize: '2rem', marginBottom: '1rem' }}>
         🌟 Our Latest Projects
-      </Title>
-      <Paragraph style={{ color: '#4b5563', maxWidth: 700, margin: '0 auto', fontSize: '16px' }}>
-        Explore some of our most impactful client work — designed to deliver measurable results and superior user experiences.
-      </Paragraph>
-    </Typography>
+      </h2>
+      <p style={{ color: '#4b5563', maxWidth: 700, margin: '0 auto', fontSize: '16px', lineHeight: '1.6' }}>
+        Explore some of our most impactful client work — designed to deliver measurable results and superior user experiences. From <Link to="/services" style={{ color: '#1d4ed8', textDecoration: 'underline' }}>network infrastructure</Link> to <Link to="/Products" style={{ color: '#1d4ed8', textDecoration: 'underline' }}>custom software solutions</Link>, we deliver excellence.
+      </p>
+    </div>
 
     <Row gutter={[32, 32]} justify="center" style={{ marginTop: 50 }}>
       {projects.map((project, index) => (
@@ -306,9 +309,9 @@ const LatestProjectsSection = () => (
                 padding: '20px',
               }}
             >
-              <Title level={4} style={{ marginBottom: 10, color: '#111827' }}>
+              <h3 style={{ marginBottom: 10, color: '#111827', fontSize: '1.25rem', fontWeight: 600 }}>
                 {project.title}
-              </Title>
+              </h3>
               <Paragraph style={{ color: '#374151', fontSize: '15px' }}>
                 {project.summary}
               </Paragraph>
