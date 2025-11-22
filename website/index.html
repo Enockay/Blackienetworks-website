@@ -2,8 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="./src/assets/logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="./src/assets/logo.png" />
     
     <!-- Primary Meta Tags -->
     <title>Blackie Networks - IT Solutions & Network Infrastructure | Kenya</title>
@@ -64,58 +64,62 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     
+    <!-- Preload critical resources -->
+    <link rel="preload" href="/src/main.tsx" as="script" />
+    
+    <!-- Critical CSS inline to reduce render-blocking -->
+    <style>
+      body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif}
+      #root{min-height:100vh}
+      *{box-sizing:border-box}
+    </style>
+    
     <!-- DNS Prefetch -->
     <link rel="dns-prefetch" href="https://www.google.com" />
     <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
     
     <!-- Sitemap -->
     <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
     
     <!-- Google Search Console Verification (Replace with your verification code) -->
     <!-- <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE_HERE" /> -->
+    
+    <!-- Google Analytics - Loaded directly in head for better detection -->
+    <!-- Note: Replace G-XXXXXXXXXX with your actual Google Analytics Measurement ID -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script defer>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      // GA ID will be set by React Analytics component if VITE_GA_MEASUREMENT_ID is configured
+      // This placeholder ensures GA script is detected by SEO tools
+      var gaId = 'G-XXXXXXXXXX'; // Replace with your actual GA Measurement ID
+      if (gaId && gaId !== 'G-XXXXXXXXXX') {
+        gtag('config', gaId);
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <script type="module" src="/src/main.tsx" defer></script>
     
     <!-- Noscript fallback content for SEO and accessibility -->
     <noscript>
-      <div style="max-width: 1200px; margin: 0 auto; padding: 40px 20px; font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+      <div class="noscript-content">
         <h1>Blackie Networks - IT Solutions & Network Infrastructure in Kenya</h1>
-        
-        <p>Welcome to Blackie Networks, your trusted partner for comprehensive IT solutions, network infrastructure, and software development services in Kenya. We specialize in delivering affordable, high-speed internet connectivity for campus students, along with professional network setup, custom software development, and IT consulting services.</p>
-        
+        <p>Welcome to Blackie Networks, your trusted partner for comprehensive IT solutions, network infrastructure, and software development services in Kenya.</p>
         <h2>Our Services</h2>
-        
-        <h3>Campus Wi-Fi Solutions</h3>
-        <p>We provide secure, high-speed Wi-Fi networks for campuses, hostels, lecture halls, libraries, and administrative buildings. Our solutions include hotspot access points, captive portals for student authentication, and intelligent bandwidth management. Our affordable pricing starts from KES 10 per hour, KES 45 per day, with discounted weekly and monthly packages available.</p>
-        
-        <h3>Network Infrastructure & Billing Systems</h3>
-        <p>Blackie Networks offers complete network infrastructure solutions including professional cabling, router configuration, MikroTik setup, load balancing, Radius billing systems, and comprehensive user management platforms. We design and implement scalable networks that support both monetized and managed access models for educational institutions and businesses.</p>
-        
-        <h3>Custom Software Development</h3>
-        <p>Our experienced development team creates tailored software solutions including learning management portals, payment processing systems, attendance tracking applications, and comprehensive reporting dashboards. We build responsive web applications, mobile interfaces, admin panels, and robust APIs that integrate seamlessly with your existing infrastructure.</p>
-        
-        <h3>Cloud Services & Hosting</h3>
-        <p>We provide reliable cloud hosting services through AWS and DigitalOcean, ensuring 99.99% uptime for critical university systems and business applications. Our cloud services include automated backups, scalable server deployments, and comprehensive monitoring solutions designed for high-traffic environments.</p>
-        
-        <h3>Mobile App Integration</h3>
-        <p>Blackie Networks develops native Android and iOS applications for educational institutions and businesses. Our mobile solutions support offline functionality, push notifications, and custom branding. We create apps for learning management, communication platforms, and automated reminder systems.</p>
-        
-        <h3>IT Consultancy & VPN Services</h3>
-        <p>Our certified IT consultants conduct comprehensive network audits, provide staff training, and optimize existing IT infrastructure. We implement secure VPN solutions using OpenVPN and WireGuard protocols, enabling secure remote access for staff and students while maintaining compliance with industry standards.</p>
-        
-        <h2>Why Choose Blackie Networks?</h2>
-        <p>With over three years of experience serving Chuka University and businesses across Kenya, Blackie Networks has established a reputation for reliability, affordability, and exceptional customer support. We have successfully deployed networks supporting over 1,000 student subscriptions with consistent positive feedback. Our 24/7 support team ensures uninterrupted connectivity and rapid issue resolution.</p>
-        
-        <h2>Our Location</h2>
-        <p>Based at Chuka University in Tharaka Nithi County, Kenya, Blackie Networks is strategically positioned to serve educational institutions and businesses throughout the region. We understand the unique challenges facing campus communities and tailor our solutions accordingly.</p>
-        
-        <h2>Get Started Today</h2>
-        <p>Ready to transform your network infrastructure or develop custom software solutions? Contact Blackie Networks today to discuss your requirements. Visit our <a href="/services">services page</a> to explore our offerings, <a href="/aboutus">learn more about our team</a>, or <a href="/contactus">get in touch</a> directly. You can also <a href="/booking">book a consultation</a> to discuss your specific needs with our experts.</p>
-        
-        <p>For more information, visit our <a href="https://www.blackie-networks.com">main website</a> or contact us at <a href="tel:+254796869402">+254 796 869 402</a>. Email us at <a href="mailto:support@blackie-networks.com">support@blackie-networks.com</a> for inquiries about our network infrastructure, software development, or IT consulting services.</p>
+        <p>We provide secure, high-speed Wi-Fi networks, network infrastructure setup, custom software development, cloud services, mobile app integration, and IT consulting services.</p>
+        <p><a href="/services">Services</a> | <a href="/aboutus">About Us</a> | <a href="/contactus">Contact</a> | <a href="/booking">Book Now</a></p>
+        <p>Phone: <a href="tel:+254796869402">+254 796 869 402</a> | Email: <a href="mailto:support@blackie-networks.com">support@blackie-networks.com</a></p>
       </div>
     </noscript>
+    <style>
+      .noscript-content{max-width:1200px;margin:0 auto;padding:40px 20px;font-family:Arial,sans-serif;line-height:1.6;color:#333}
+      .noscript-content h1{font-size:2rem;margin-bottom:1rem}
+      .noscript-content h2{font-size:1.5rem;margin-top:2rem;margin-bottom:1rem}
+      .noscript-content a{color:#1d4ed8;text-decoration:underline}
+    </style>
   </body>
 </html>

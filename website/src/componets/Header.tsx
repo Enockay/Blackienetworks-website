@@ -138,7 +138,7 @@ const Header: React.FC = () => {
           : '0 4px 20px rgba(99, 102, 241, 0.08)',
       }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className=" mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
 
           {/* Logo */}
@@ -170,6 +170,9 @@ const Header: React.FC = () => {
                 src={logo}
                 alt="Blackie Networks Logo - IT Solutions and Network Infrastructure"
                 className="h-10 w-auto sm:h-12 transition-all duration-500"
+                width="48"
+                height="48"
+                loading="eager"
                 style={{ 
                   filter: 'drop-shadow(0 4px 8px rgba(99, 102, 241, 0.3))',
                 }}
@@ -542,6 +545,9 @@ const Header: React.FC = () => {
                 src={logo}
                 alt="Blackie Networks Logo"
                 className="h-10 w-auto rounded-lg"
+                width="40"
+                height="40"
+                loading="eager"
                 style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.2))' }}
               />
               <div>

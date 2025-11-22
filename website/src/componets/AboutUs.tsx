@@ -141,7 +141,10 @@ const AboutUs: React.FC = () => {
                         alt={`${name} - ${role} at Blackie Networks`}
                         src={teamImage}
                         className="object-cover h-48 w-full rounded-t-lg"
+                        width="400"
+                        height="192"
                         loading="lazy"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       />
                     }
                     className="rounded-lg shadow-md"

@@ -311,7 +311,10 @@ const Blog: React.FC = () => {
                   src={post.thumbnail}
                   alt={post.title}
                   className="w-full h-48 object-cover"
+                  width="400"
+                  height="192"
                   loading="lazy"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />
                 <div className="p-6 flex flex-col flex-grow justify-between">
                   <div>
