@@ -44,7 +44,7 @@ function MainContent() {
                 title="Home - Affordable High-Speed Internet & IT Solutions"
                 description="Blackie Networks provides affordable high-speed internet for campus students, network infrastructure setup, software development, and IT consulting services. Serving Chuka University and businesses across Kenya."
                 url="/"
-                googleSiteVerification={process.env.REACT_APP_GOOGLE_SITE_VERIFICATION}
+                googleSiteVerification={import.meta.env.VITE_GOOGLE_SITE_VERIFICATION}
               />
               <HeroSection />
               <Section />
