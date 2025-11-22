@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Row, Col, Card, Typography, Space, Divider } from 'antd';
+import { Row, Col } from 'antd';
 import {
   FaMedal,
   FaHandshake,
@@ -27,7 +27,7 @@ import {
 import teamImage from '../assets/Team.jpeg';
 import { SEO } from './SEO';
 
-const { Title, Paragraph, Text } = Typography;
+// Typography components removed - not used
 
 const AboutUs: React.FC = () => {
   const teamMembers = [
@@ -625,7 +625,7 @@ const AboutUs: React.FC = () => {
               viewport={{ once: true, amount: 0.3 }}
             >
           <Row gutter={[32, 32]} justify="center">
-                {teamMembers.map(({ name, role, bio }, index) => (
+                {teamMembers.map(({ name, role, bio }) => (
               <Col xs={24} sm={12} md={8} key={name}>
                     <motion.div variants={itemVariants}>
                       <motion.div
@@ -1012,7 +1012,7 @@ const AboutUs: React.FC = () => {
                   { name: 'SMEs', description: 'Small and medium enterprises', icon: '💼' },
                   { name: 'NGOs', description: 'Non-profit organizations', icon: '🤝' },
                   { name: 'Government', description: 'Public sector institutions', icon: '🏛️' },
-                ].map(({ name, description, icon }, index) => (
+                ].map(({ name, description, icon }) => (
                   <Col xs={24} sm={12} md={8} lg={4} key={name}>
                     <motion.div variants={itemVariants}>
                       <motion.div

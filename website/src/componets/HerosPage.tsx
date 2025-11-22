@@ -80,8 +80,8 @@ const itemVariants = {
 
 export const HeroSection = () => {
   const images = [heroImage1, heroImage2, heroImage3];
-  const [backgroundImage, setBackgroundImage] = useState(images[0]);
-  const [fadeClass, setFadeClass] = useState('opacity-100');
+  const [_backgroundImage, setBackgroundImage] = useState(images[0]);
+  const [_fadeClass, setFadeClass] = useState('opacity-100');
   const [imagesLoaded, setImagesLoaded] = useState(false);
   const [imageIndex, setImageIndex] = useState(0);
 
@@ -520,7 +520,7 @@ const LatestProjectsSection = () => {
       viewport={{ once: true, amount: 0.2 }}
     >
       <Row gutter={[32, 32]} justify="center">
-        {projects.map((project, index) => (
+        {projects.map((project) => (
           <Col xs={24} sm={12} lg={8} key={project.title}>
             <motion.div
               variants={itemVariants}

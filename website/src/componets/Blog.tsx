@@ -15,7 +15,6 @@ import {
   SearchOutlined,
   HeartOutlined,
   HeartFilled,
-  ShareAltOutlined,
   CommentOutlined,
   FireOutlined,
 } from '@ant-design/icons';

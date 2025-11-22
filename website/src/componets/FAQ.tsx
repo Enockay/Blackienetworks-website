@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { Collapse, Typography } from 'antd';
+// Collapse and Typography removed - not used
 import { PlusOutlined, MinusOutlined, QuestionCircleOutlined } from '@ant-design/icons';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SEO } from './SEO';
 
-const { Panel } = Collapse;
-const { Title, Paragraph } = Typography;
+// Typography and Collapse destructuring removed - not used
 
 interface FAQItem {
   question: string;
@@ -84,9 +83,7 @@ const generateFAQSchema = (faqs: FAQItem[]) => {
 const FAQ: React.FC = () => {
   const [activeKeys, setActiveKeys] = useState<string[]>([]);
 
-  const handleChange = (keys: string | string[]) => {
-    setActiveKeys(Array.isArray(keys) ? keys : [keys]);
-  };
+  // handleChange removed - not used
 
   const faqSchema = generateFAQSchema(faqData);
 
