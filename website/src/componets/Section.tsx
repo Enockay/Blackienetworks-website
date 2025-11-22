@@ -222,16 +222,41 @@ export default function CompanySections() {
               key={idx}
               whileHover={{ scale: 1.02 }}
               className="bg-gradient-to-br from-white via-purple-50 to-indigo-100 p-6 rounded-xl shadow-lg space-y-4 border border-indigo-100"
+              itemScope
+              itemType="https://schema.org/Review"
             >
               <FaQuoteLeft className="text-3xl text-purple-600" />
-              <p className="text-gray-800 italic text-sm">“{t.quote}”</p>
-              <footer className="text-right">
-                <cite className="text-sm text-indigo-700 font-bold not-italic">— {t.name}</cite>
-                <p className="text-xs text-gray-500">{t.role}</p>
+              <p className="text-gray-800 italic text-sm" itemProp="reviewBody">"{t.quote}"</p>
+              <footer className="text-right" itemScope itemType="https://schema.org/Person">
+                <cite className="text-sm text-indigo-700 font-bold not-italic" itemProp="name">— {t.name}</cite>
+                <p className="text-xs text-gray-500" itemProp="jobTitle">{t.role}</p>
               </footer>
+              <div itemScope itemType="https://schema.org/Rating" style={{ display: 'none' }}>
+                <meta itemProp="ratingValue" content="5" />
+                <meta itemProp="bestRating" content="5" />
+              </div>
             </motion.blockquote>
           ))}
         </div>
+        
+        {/* Aggregate Rating Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Organization',
+              name: 'Blackie Networks',
+              aggregateRating: {
+                '@type': 'AggregateRating',
+                ratingValue: '4.9',
+                reviewCount: testimonials.length.toString(),
+                bestRating: '5',
+                worstRating: '1',
+              },
+            }),
+          }}
+        />
       </motion.section>
     </div>
   );

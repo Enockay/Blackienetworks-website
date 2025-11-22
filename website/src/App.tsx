@@ -12,13 +12,16 @@ import BookingPage from './componets/BookingPage';
 import Section from './componets/Section';
 import ContactUs from './componets/ContactUs';
 import Blog from './componets/Blog';
+import FAQ from './componets/FAQ';
 import { SEO } from './componets/SEO';
+import { Analytics } from './componets/Analytics';
 
 const { Content } = Layout;
 
 function App() {
   return (
     <Router>
+      <Analytics />
       <Layout className="min-h-screen">
         <Header />
         <MainContent />
@@ -41,6 +44,7 @@ function MainContent() {
                 title="Home - Affordable High-Speed Internet & IT Solutions"
                 description="Blackie Networks provides affordable high-speed internet for campus students, network infrastructure setup, software development, and IT consulting services. Serving Chuka University and businesses across Kenya."
                 url="/"
+                googleSiteVerification={process.env.REACT_APP_GOOGLE_SITE_VERIFICATION}
               />
               <HeroSection />
               <Section />
@@ -165,6 +169,10 @@ function MainContent() {
               <Blog />
             </>
           } 
+        />
+        <Route 
+          path="/faq" 
+          element={<FAQ />} 
         />
         {/* Catch-all route for 404 */}
         <Route 
