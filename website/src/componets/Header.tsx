@@ -68,6 +68,7 @@ const Header: React.FC = () => {
           </Dropdown>
 
           <Link to="/blog" className="hover:text-blue-600 transition">Blog</Link>
+          <Link to="/faq" className="hover:text-blue-600 transition">FAQ</Link>
           <Link to="/contactus" className="hover:text-blue-600 transition">Contact Us</Link>
         </nav>
 
@@ -144,6 +145,7 @@ const Header: React.FC = () => {
           </div>
 
           <Link to="/blog" onClick={() => setDrawerVisible(false)}>Blog</Link>
+          <Link to="/faq" onClick={() => setDrawerVisible(false)}>FAQ</Link>
           <Link to="/contactus" onClick={() => setDrawerVisible(false)}>Contact Us</Link>
         </nav>
 

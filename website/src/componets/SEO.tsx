@@ -16,6 +16,7 @@ interface SEOProps {
     section?: string;
     tags?: string[];
   };
+  googleSiteVerification?: string;
 }
 
 const defaultTitle = 'Blackie Networks - IT Solutions, Network Infrastructure & Software Development | Kenya';
@@ -34,6 +35,7 @@ export const SEO: React.FC<SEOProps> = ({
   noindex = false,
   breadcrumbs,
   article,
+  googleSiteVerification,
 }) => {
   const fullTitle = title.includes('Blackie Networks') ? title : `${title} | Blackie Networks`;
   const fullUrl = url.startsWith('http') ? url : `${siteUrl}${url}`;
@@ -271,6 +273,11 @@ export const SEO: React.FC<SEOProps> = ({
       <meta name="target" content="all" />
       <meta name="audience" content="all" />
       <meta name="revisit-after" content="7 days" />
+      
+      {/* Google Search Console Verification */}
+      {googleSiteVerification && (
+        <meta name="google-site-verification" content={googleSiteVerification} />
+      )}
       
       {/* Enhanced Open Graph */}
       <meta property="og:image:alt" content={fullTitle} />
