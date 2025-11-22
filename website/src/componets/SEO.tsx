@@ -19,8 +19,8 @@ interface SEOProps {
   googleSiteVerification?: string;
 }
 
-const defaultTitle = 'Blackie Networks - IT Solutions, Network Infrastructure & Software Development | Kenya';
-const defaultDescription = 'Blackie Networks provides affordable high-speed internet, network infrastructure, software development, and IT consulting services for campuses, businesses, and institutions in Kenya. Expert MikroTik configuration, Wi-Fi solutions, and custom software.';
+const defaultTitle = 'Blackie Networks - IT Solutions & Network Infrastructure | Kenya';
+const defaultDescription = 'Affordable high-speed internet, network infrastructure, software development, and IT consulting services for campuses and businesses in Kenya. Expert MikroTik configuration and Wi-Fi solutions.';
 const defaultKeywords = 'Blackie Networks, network infrastructure, software development, IT consulting, MikroTik, Wi-Fi solutions, campus internet, affordable internet Kenya, network setup, VPN services, cloud services, custom software development, Chuka University';
 const siteUrl = 'https://www.blackie-networks.com';
 const defaultImage = `${siteUrl}/src/assets/logo.png`;

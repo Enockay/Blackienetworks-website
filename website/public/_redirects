@@ -1,0 +1,6 @@
+# Netlify redirects file for www/non-www redirects
+# Redirect non-www to www
+http://blackie-networks.com/*
+https://blackie-networks.com/*
+  https://www.blackie-networks.com/:splat 301!
+

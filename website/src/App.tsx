@@ -41,8 +41,8 @@ function MainContent() {
           element={
             <>
               <SEO 
-                title="Home - Affordable High-Speed Internet & IT Solutions"
-                description="Blackie Networks provides affordable high-speed internet for campus students, network infrastructure setup, software development, and IT consulting services. Serving Chuka University and businesses across Kenya."
+                title="Blackie Networks - IT Solutions & Network Infrastructure"
+                description="Affordable high-speed internet, network infrastructure, software development, and IT consulting services for campuses and businesses in Kenya."
                 url="/"
                 googleSiteVerification={import.meta.env.VITE_GOOGLE_SITE_VERIFICATION}
               />
