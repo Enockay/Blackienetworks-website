@@ -22,6 +22,10 @@ import {
   SettingOutlined,
   BellOutlined,
   LogoutOutlined,
+  FacebookOutlined,
+  TwitterOutlined,
+  LinkedinOutlined,
+  WhatsAppOutlined,
 } from '@ant-design/icons';
 import heroImage1 from '../assets/networking1.jpg';
 import heroImage2 from '../assets/networking2.jpg';
@@ -115,12 +119,12 @@ export const HeroSection = () => {
             ></div>
             <div style={{ position: 'relative', zIndex: 10, height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', background: 'rgba(0,0,0,0.55)' }}>
               <motion.div initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.7 }} style={{ maxWidth: 800, textAlign: 'center', padding: 20, color: 'white' }}>
-                <h1 style={{ color: 'white', fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>Welcome to Blackie Networks</h1>
+                <h1 style={{ color: 'white', fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>Blackie Networks - IT Solutions & Network Infrastructure</h1>
                 <p style={{ fontSize: '18px', color: '#f0f0f0', marginBottom: '1rem' }}>
                   Driving innovation in software development, network infrastructure, and IT consulting services across Kenya.
                 </p>
                 <p style={{ fontSize: '16px', color: '#e0e0e0', marginTop: 20, lineHeight: '1.6' }}>
-                  We bring affordable, high-speed internet to campus students. No more buffering—just reliable, wallet-friendly Wi-Fi. Our 24/7 support team is always available to help you stay connected. Whether you need network infrastructure setup, custom software development, or IT consulting services, Blackie Networks delivers professional solutions tailored to your needs. Explore our <Link to="/services" style={{ color: '#93c5fd', textDecoration: 'underline' }}>comprehensive services</Link>, learn <Link to="/aboutus" style={{ color: '#93c5fd', textDecoration: 'underline' }}>more about us</Link>, or <Link to="/contactus" style={{ color: '#93c5fd', textDecoration: 'underline' }}>get in touch</Link> today.
+                  We bring affordable, high-speed internet to campus students. No more buffering—just reliable, wallet-friendly Wi-Fi. Our 24/7 support team is always available to help you stay connected. Whether you need network infrastructure setup, custom software development, or IT consulting services, Blackie Networks delivers professional solutions tailored to your needs. Explore our <Link to="/services" style={{ color: '#93c5fd', textDecoration: 'underline' }}>comprehensive services</Link>, learn <Link to="/aboutus" style={{ color: '#93c5fd', textDecoration: 'underline' }}>more about us</Link>, check out our <Link to="/Products" style={{ color: '#93c5fd', textDecoration: 'underline' }}>products</Link>, read our <Link to="/blog" style={{ color: '#93c5fd', textDecoration: 'underline' }}>blog</Link>, or <Link to="/contactus" style={{ color: '#93c5fd', textDecoration: 'underline' }}>get in touch</Link> today. For more information about our services, visit <a href="https://www.mikrotik.com" target="_blank" rel="noopener noreferrer" style={{ color: '#93c5fd', textDecoration: 'underline' }}>MikroTik</a> and <a href="https://aws.amazon.com" target="_blank" rel="noopener noreferrer" style={{ color: '#93c5fd', textDecoration: 'underline' }}>AWS</a> to learn about the technologies we use.
                 </p>
                 <div style={{ marginTop: 30 }}>
                   <Link to="/services">
@@ -132,6 +136,46 @@ export const HeroSection = () => {
                   <Link to="/aboutus" style={{ marginLeft: 16, color: 'white', textDecoration: 'underline' }}>
                     Learn More
                   </Link>
+                </div>
+                {/* Social Sharing Buttons */}
+                <div style={{ marginTop: 30, display: 'flex', alignItems: 'center', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
+                  <span style={{ color: '#f0f0f0', marginRight: 8 }}>Share:</span>
+                  <a
+                    href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : 'https://www.blackie-networks.com')}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ color: 'white', fontSize: '20px', textDecoration: 'none' }}
+                    aria-label="Share on Facebook"
+                  >
+                    <FacebookOutlined style={{ fontSize: '24px', marginRight: 8 }} />
+                  </a>
+                  <a
+                    href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : 'https://www.blackie-networks.com')}&text=${encodeURIComponent('Blackie Networks - IT Solutions & Network Infrastructure')}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ color: 'white', fontSize: '20px', textDecoration: 'none' }}
+                    aria-label="Share on Twitter"
+                  >
+                    <TwitterOutlined style={{ fontSize: '24px', marginRight: 8 }} />
+                  </a>
+                  <a
+                    href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : 'https://www.blackie-networks.com')}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ color: 'white', fontSize: '20px', textDecoration: 'none' }}
+                    aria-label="Share on LinkedIn"
+                  >
+                    <LinkedinOutlined style={{ fontSize: '24px', marginRight: 8 }} />
+                  </a>
+                  <a
+                    href={`https://wa.me/?text=${encodeURIComponent('Check out Blackie Networks - IT Solutions & Network Infrastructure: ' + (typeof window !== 'undefined' ? window.location.href : 'https://www.blackie-networks.com'))}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ color: 'white', fontSize: '20px', textDecoration: 'none' }}
+                    aria-label="Share on WhatsApp"
+                  >
+                    <WhatsAppOutlined style={{ fontSize: '24px' }} />
+                  </a>
                 </div>
               </motion.div>
 

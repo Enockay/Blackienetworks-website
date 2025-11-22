@@ -43,7 +43,7 @@ const initGoogleAnalytics = () => {
 // Initialize Facebook Pixel (internal function, not exported to avoid Fast Refresh issues)
 const initFacebookPixel = () => {
   if (FB_PIXEL_ID && typeof window !== 'undefined') {
-    !(function (f: any, b: any, e: any, v: any, n?: any, t?: any, s?: any) {
+    (function (f: any, b: any, e: any, v: any, n?: any, t?: any, s?: any) {
       if (f.fbq) return;
       n = f.fbq = function () {
         n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
