@@ -14,8 +14,5 @@ console.warn = (...args) => {
   originalWarn(...args);
 };
 
-// Mock uuid to avoid ES module issues in tests
-jest.mock('uuid', () => ({
-  v4: jest.fn(() => 'mock-uuid-v4-' + Math.random().toString(36).substr(2, 9))
-}));
+// uuid v9 supports CommonJS, no mocking needed
 
