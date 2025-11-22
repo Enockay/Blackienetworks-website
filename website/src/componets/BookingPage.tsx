@@ -68,11 +68,18 @@ const BookingPage: React.FC = () => {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 5 }}
-                        className="w-full  h-4/6 bg-cover bg-center rounded-lg shadow-lg"
-                        style={{ backgroundImage: `url(${images[currentImage]})` }}
-                        role="img"
-                        aria-label="IT services and software development showcase"
-                    ></motion.div>
+                        className="w-full h-4/6 rounded-lg shadow-lg overflow-hidden"
+                    >
+                        <img
+                            src={images[currentImage]}
+                            alt="IT services and software development showcase"
+                            className="w-full h-full object-cover"
+                            width="800"
+                            height="600"
+                            loading="lazy"
+                            sizes="(max-width: 768px) 0vw, 50vw"
+                        />
+                    </motion.div>
                 </div>
 
                 {/* Right section with booking form */}

@@ -111,12 +111,21 @@ export const HeroSection = () => {
         </Header>
         <Content>
           <div style={{ position: 'relative', height: '600px', overflow: 'hidden' }}>
-            <div
-              className={`absolute inset-0 transition-opacity duration-500 ${fadeClass}`}
-              style={{ backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
-              role="img"
-              aria-label="Network infrastructure and IT solutions background image"
-            ></div>
+            <img
+              src={backgroundImage}
+              alt="Network infrastructure and IT solutions background"
+              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${fadeClass}`}
+              style={{ 
+                width: '100%', 
+                height: '100%', 
+                objectFit: 'cover',
+                aspectRatio: '16/9'
+              }}
+              width="1920"
+              height="600"
+              loading="eager"
+              fetchPriority="high"
+            />
             <div style={{ position: 'relative', zIndex: 10, height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', background: 'rgba(0,0,0,0.55)' }}>
               <motion.div initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.7 }} style={{ maxWidth: 800, textAlign: 'center', padding: 20, color: 'white' }}>
                 <h1 style={{ color: 'white', fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>Blackie Networks - IT Solutions & Network Infrastructure</h1>
