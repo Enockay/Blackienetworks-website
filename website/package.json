@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "seo:check": "echo 'Open http://localhost:5174/seo-check.html to verify SEO'"
   },
   "dependencies": {
     "antd": "^5.25.4",

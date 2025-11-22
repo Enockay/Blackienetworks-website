@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEO Verification Tool - Blackie Networks</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+        button:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        .results {
+            margin-top: 30px;
+            display: none;
+        }
+        .check-item {
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+            border-left: 4px solid #e0e0e0;
+            background: #f9f9f9;
+        }
+        .check-item.pass {
+            border-left-color: #4caf50;
+            background: #e8f5e9;
+        }
+        .check-item.fail {
+            border-left-color: #f44336;
+            background: #ffebee;
+        }
+        .check-item.warning {
+            border-left-color: #ff9800;
+            background: #fff3e0;
+        }
+        .check-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        .check-details {
+            color: #666;
+            font-size: 14px;
+        }
+        .score {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .score-number {
+            font-size: 48px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .links {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+        }
+        .links a {
+            display: inline-block;
+            margin: 5px 10px 5px 0;
+            color: #667eea;
+            text-decoration: none;
+            padding: 8px 12px;
+            border: 1px solid #667eea;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .links a:hover {
+            background: #667eea;
+            color: white;
+        }
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 SEO Verification Tool</h1>
+        <p class="subtitle">Check if your website is properly optimized for search engines</p>
+        
+        <div class="input-group">
+            <label for="url">Enter Website URL:</label>
+            <input type="url" id="url" placeholder="https://www.blackie-networks.com" value="https://www.blackie-networks.com">
+        </div>
+        
+        <button onclick="checkSEO()">Check SEO</button>
+        
+        <div id="loading" class="loading" style="display: none;">
+            Checking SEO... Please wait
+        </div>
+        
+        <div id="results" class="results">
+            <div id="score" class="score">
+                <div>SEO Score</div>
+                <div class="score-number" id="scoreNumber">-</div>
+                <div id="scoreText">Run check to see score</div>
+            </div>
+            
+            <div id="checks"></div>
+            
+            <div class="links">
+                <strong>Additional Tools:</strong><br>
+                <a href="https://search.google.com/test/rich-results" target="_blank">Google Rich Results Test</a>
+                <a href="https://pagespeed.web.dev/" target="_blank">PageSpeed Insights</a>
+                <a href="https://search.google.com/test/mobile-friendly" target="_blank">Mobile-Friendly Test</a>
+                <a href="https://validator.schema.org/" target="_blank">Schema Validator</a>
+                <a href="https://search.google.com/search-console" target="_blank">Google Search Console</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function checkSEO() {
+            const url = document.getElementById('url').value;
+            if (!url) {
+                alert('Please enter a URL');
+                return;
+            }
+
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('results').style.display = 'none';
+
+            try {
+                // Fetch the page
+                const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`);
+                const data = await response.json();
+                const html = data.contents;
+                
+                // Parse HTML
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                
+                const checks = [];
+                let score = 0;
+                const totalChecks = 15;
+
+                // Check 1: Title tag
+                const title = doc.querySelector('title');
+                if (title && title.textContent.trim()) {
+                    checks.push({ name: 'Title Tag', status: 'pass', details: title.textContent.trim() });
+                    score++;
+                } else {
+                    checks.push({ name: 'Title Tag', status: 'fail', details: 'Missing or empty title tag' });
+                }
+
+                // Check 2: Meta description
+                const metaDesc = doc.querySelector('meta[name="description"]');
+                if (metaDesc && metaDesc.getAttribute('content')) {
+                    const desc = metaDesc.getAttribute('content');
+                    checks.push({ name: 'Meta Description', status: 'pass', details: desc.substring(0, 100) + '...' });
+                    score++;
+                } else {
+                    checks.push({ name: 'Meta Description', status: 'fail', details: 'Missing meta description' });
+                }
+
+                // Check 3: Meta keywords
+                const metaKeywords = doc.querySelector('meta[name="keywords"]');
+                if (metaKeywords && metaKeywords.getAttribute('content')) {
+                    checks.push({ name: 'Meta Keywords', status: 'pass', details: 'Keywords present' });
+                    score++;
+                } else {
+                    checks.push({ name: 'Meta Keywords', status: 'warning', details: 'Keywords not required but recommended' });
+                }
+
+                // Check 4: Canonical URL
+                const canonical = doc.querySelector('link[rel="canonical"]');
+                if (canonical && canonical.getAttribute('href')) {
+                    checks.push({ name: 'Canonical URL', status: 'pass', details: canonical.getAttribute('href') });
+                    score++;
+                } else {
+                    checks.push({ name: 'Canonical URL', status: 'fail', details: 'Missing canonical URL' });
+                }
+
+                // Check 5: Open Graph tags
+                const ogTitle = doc.querySelector('meta[property="og:title"]');
+                const ogDesc = doc.querySelector('meta[property="og:description"]');
+                const ogImage = doc.querySelector('meta[property="og:image"]');
+                if (ogTitle && ogDesc && ogImage) {
+                    checks.push({ name: 'Open Graph Tags', status: 'pass', details: 'All OG tags present' });
+                    score++;
+                } else {
+                    checks.push({ name: 'Open Graph Tags', status: 'fail', details: 'Missing some Open Graph tags' });
+                }
+
+                // Check 6: Twitter Cards
+                const twitterCard = doc.querySelector('meta[name="twitter:card"]');
+                if (twitterCard) {
+                    checks.push({ name: 'Twitter Cards', status: 'pass', details: 'Twitter card meta tags present' });
+                    score++;
+                } else {
+                    checks.push({ name: 'Twitter Cards', status: 'warning', details: 'Twitter cards not configured' });
+                }
+
+                // Check 7: Structured Data (JSON-LD)
+                const jsonLd = doc.querySelectorAll('script[type="application/ld+json"]');
+                if (jsonLd.length > 0) {
+                    checks.push({ name: 'Structured Data', status: 'pass', details: `${jsonLd.length} JSON-LD script(s) found` });
+                    score++;
+                } else {
+                    checks.push({ name: 'Structured Data', status: 'fail', details: 'No structured data found' });
+                }
+
+                // Check 8: H1 tag
+                const h1 = doc.querySelector('h1');
+                if (h1 && h1.textContent.trim()) {
+                    checks.push({ name: 'H1 Tag', status: 'pass', details: h1.textContent.trim() });
+                    score++;
+                } else {
+                    checks.push({ name: 'H1 Tag', status: 'fail', details: 'Missing H1 tag' });
+                }
+
+                // Check 9: Images with alt text
+                const images = doc.querySelectorAll('img');
+                const imagesWithAlt = Array.from(images).filter(img => img.getAttribute('alt'));
+                const altPercentage = images.length > 0 ? (imagesWithAlt.length / images.length * 100).toFixed(0) : 100;
+                if (altPercentage >= 90) {
+                    checks.push({ name: 'Image Alt Text', status: 'pass', details: `${altPercentage}% of images have alt text` });
+                    score++;
+                } else {
+                    checks.push({ name: 'Image Alt Text', status: 'warning', details: `Only ${altPercentage}% of images have alt text` });
+                }
+
+                // Check 10: Viewport meta tag
+                const viewport = doc.querySelector('meta[name="viewport"]');
+                if (viewport) {
+                    checks.push({ name: 'Viewport Meta Tag', status: 'pass', details: 'Mobile viewport configured' });
+                    score++;
+                } else {
+                    checks.push({ name: 'Viewport Meta Tag', status: 'fail', details: 'Missing viewport meta tag' });
+                }
+
+                // Check 11: Robots meta
+                const robots = doc.querySelector('meta[name="robots"]');
+                if (robots) {
+                    checks.push({ name: 'Robots Meta', status: 'pass', details: robots.getAttribute('content') });
+                    score++;
+                } else {
+                    checks.push({ name: 'Robots Meta', status: 'warning', details: 'No robots meta tag (using default)' });
+                }
+
+                // Check 12: Language attribute
+                const htmlLang = doc.documentElement.getAttribute('lang');
+                if (htmlLang) {
+                    checks.push({ name: 'HTML Language', status: 'pass', details: `Language: ${htmlLang}` });
+                    score++;
+                } else {
+                    checks.push({ name: 'HTML Language', status: 'warning', details: 'Missing lang attribute' });
+                }
+
+                // Check 13: Meta author
+                const author = doc.querySelector('meta[name="author"]');
+                if (author) {
+                    checks.push({ name: 'Meta Author', status: 'pass', details: 'Author meta tag present' });
+                    score++;
+                } else {
+                    checks.push({ name: 'Meta Author', status: 'warning', details: 'Author meta tag not required' });
+                }
+
+                // Check 14: Charset
+                const charset = doc.querySelector('meta[charset]');
+                if (charset) {
+                    checks.push({ name: 'Charset', status: 'pass', details: 'Charset declared' });
+                    score++;
+                } else {
+                    checks.push({ name: 'Charset', status: 'fail', details: 'Missing charset declaration' });
+                }
+
+                // Check 15: Favicon
+                const favicon = doc.querySelector('link[rel="icon"]') || doc.querySelector('link[rel="shortcut icon"]');
+                if (favicon) {
+                    checks.push({ name: 'Favicon', status: 'pass', details: 'Favicon configured' });
+                    score++;
+                } else {
+                    checks.push({ name: 'Favicon', status: 'warning', details: 'Favicon not found' });
+                }
+
+                // Display results
+                displayResults(checks, score, totalChecks);
+
+            } catch (error) {
+                document.getElementById('loading').style.display = 'none';
+                alert('Error checking SEO. This might be due to CORS restrictions. Please use browser extensions or check manually.');
+                console.error(error);
+            }
+        }
+
+        function displayResults(checks, score, total) {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('results').style.display = 'block';
+
+            const percentage = Math.round((score / total) * 100);
+            document.getElementById('scoreNumber').textContent = percentage + '%';
+            
+            let scoreText = '';
+            if (percentage >= 90) {
+                scoreText = 'Excellent! Your site is well optimized 🎉';
+            } else if (percentage >= 70) {
+                scoreText = 'Good, but there\'s room for improvement';
+            } else {
+                scoreText = 'Needs improvement. Review the checks below';
+            }
+            document.getElementById('scoreText').textContent = scoreText;
+
+            const checksDiv = document.getElementById('checks');
+            checksDiv.innerHTML = '';
+
+            checks.forEach(check => {
+                const div = document.createElement('div');
+                div.className = `check-item ${check.status}`;
+                div.innerHTML = `
+                    <div class="check-title">
+                        ${check.status === 'pass' ? '✅' : check.status === 'fail' ? '❌' : '⚠️'} 
+                        ${check.name}
+                    </div>
+                    <div class="check-details">${check.details}</div>
+                `;
+                checksDiv.appendChild(div);
+            });
+        }
+    </script>
+</body>
+</html>
+
