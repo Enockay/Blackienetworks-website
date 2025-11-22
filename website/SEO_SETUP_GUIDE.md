@@ -13,7 +13,8 @@ This guide will help you complete the final SEO setup steps for your website at 
 
 **Option A: Environment Variable (Recommended)**
 - Create a `.env` file in the `website` directory
-- Add: `REACT_APP_GOOGLE_SITE_VERIFICATION=your_verification_code_here`
+- Add: `VITE_GOOGLE_SITE_VERIFICATION=your_verification_code_here`
+- Note: Vite requires `VITE_` prefix (not `REACT_APP_`)
 - The code will automatically be added to the SEO component
 
 **Option B: Direct in index.html**
@@ -34,8 +35,9 @@ This guide will help you complete the final SEO setup steps for your website at 
 3. Get your Measurement ID (format: `G-XXXXXXXXXX`)
 4. Add it to your `.env` file:
 ```
-REACT_APP_GA_MEASUREMENT_ID=G-XXXXXXXXXX
+VITE_GA_MEASUREMENT_ID=G-XXXXXXXXXX
 ```
+**Note:** Vite requires `VITE_` prefix (not `REACT_APP_`)
 
 The Analytics component is already integrated and will automatically track page views and events.
 
@@ -55,8 +57,9 @@ trackEvent('click', 'Button', 'Book Service', 1);
 3. Get your Pixel ID (format: `1234567890123456`)
 4. Add it to your `.env` file:
 ```
-REACT_APP_FB_PIXEL_ID=1234567890123456
+VITE_FB_PIXEL_ID=1234567890123456
 ```
+**Note:** Vite requires `VITE_` prefix (not `REACT_APP_`)
 
 The Facebook Pixel is already integrated and will automatically track page views.
 
@@ -85,13 +88,14 @@ Create a `.env` file in the `website` directory with:
 
 ```env
 # Google Search Console Verification
-REACT_APP_GOOGLE_SITE_VERIFICATION=your_verification_code_here
+# Note: Vite requires VITE_ prefix for environment variables
+VITE_GOOGLE_SITE_VERIFICATION=your_verification_code_here
 
 # Google Analytics Measurement ID
-REACT_APP_GA_MEASUREMENT_ID=G-XXXXXXXXXX
+VITE_GA_MEASUREMENT_ID=G-XXXXXXXXXX
 
 # Facebook Pixel ID
-REACT_APP_FB_PIXEL_ID=1234567890123456
+VITE_FB_PIXEL_ID=1234567890123456
 ```
 
 **Important**: 

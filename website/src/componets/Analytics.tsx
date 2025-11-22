@@ -2,10 +2,11 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 // Google Analytics Configuration
-const GA_MEASUREMENT_ID = process.env.REACT_APP_GA_MEASUREMENT_ID || '';
+// Vite uses import.meta.env and requires VITE_ prefix
+const GA_MEASUREMENT_ID = import.meta.env.VITE_GA_MEASUREMENT_ID || '';
 
 // Facebook Pixel Configuration
-const FB_PIXEL_ID = process.env.REACT_APP_FB_PIXEL_ID || '';
+const FB_PIXEL_ID = import.meta.env.VITE_FB_PIXEL_ID || '';
 
 // Extend Window interface for TypeScript
 declare global {
@@ -16,8 +17,8 @@ declare global {
   }
 }
 
-// Initialize Google Analytics
-export const initGoogleAnalytics = () => {
+// Initialize Google Analytics (internal function, not exported to avoid Fast Refresh issues)
+const initGoogleAnalytics = () => {
   if (GA_MEASUREMENT_ID && typeof window !== 'undefined') {
     // Load gtag.js
     const script1 = document.createElement('script');
@@ -39,8 +40,8 @@ export const initGoogleAnalytics = () => {
   }
 };
 
-// Initialize Facebook Pixel
-export const initFacebookPixel = () => {
+// Initialize Facebook Pixel (internal function, not exported to avoid Fast Refresh issues)
+const initFacebookPixel = () => {
   if (FB_PIXEL_ID && typeof window !== 'undefined') {
     !(function (f: any, b: any, e: any, v: any, n?: any, t?: any, s?: any) {
       if (f.fbq) return;
