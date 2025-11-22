@@ -3,17 +3,9 @@ import { Drawer, Form, Input, Button as AntButton, message, Spin } from 'antd';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ThunderboltOutlined, 
-  CloudOutlined, 
-  RocketOutlined,
   CheckCircleOutlined,
   LoadingOutlined,
   GlobalOutlined,
-  SettingOutlined,
-  ToolOutlined,
-  DatabaseOutlined,
-  SearchOutlined,
-  WifiOutlined,
-  BuildOutlined,
 } from '@ant-design/icons';
 
 interface Service {
