@@ -6,19 +6,33 @@ const bookSchema = new mongoose.Schema({
     user : {
         type: mongoose.Schema.Types.ObjectId,
         ref : 'User',
-        required: true,
-    }, 
-    services : {
+        required: false, // Made optional for non-authenticated bookings
+    },
+    name: {
         type: String,
-        enum : [
-            'Software Development',
-            'Network Setup and Infrastructure',
-            'IT Consulting',
-            'Training and Support',
-        ],
         required: true
     },
-    details : {
+    email: {
+        type: String,
+        required: true
+    },
+    phone: {
+        type: String,
+        required: true
+    },
+    service : {
+        type: String,
+        required: true
+    },
+    description : {
+        type: String,
+        required: false
+    },
+    date: {
+        type: Date,
+        required: true
+    },
+    time: {
         type: String,
         required: true
     },

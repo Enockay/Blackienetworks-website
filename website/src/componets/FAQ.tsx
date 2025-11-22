@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Collapse, Typography } from 'antd';
-import { PlusOutlined, MinusOutlined } from '@ant-design/icons';
-import { motion } from 'framer-motion';
+import { PlusOutlined, MinusOutlined, QuestionCircleOutlined } from '@ant-design/icons';
+import { motion, AnimatePresence } from 'framer-motion';
 import { SEO } from './SEO';
 
 const { Panel } = Collapse;
@@ -90,6 +90,31 @@ const FAQ: React.FC = () => {
 
   const faqSchema = generateFAQSchema(faqData);
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20, scale: 0.95 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        type: 'spring',
+        stiffness: 100,
+        damping: 15,
+      },
+    },
+  };
+
   return (
     <>
       <SEO
@@ -102,58 +127,253 @@ const FAQ: React.FC = () => {
           { name: 'FAQ', url: '/faq' },
         ]}
       />
-      <div className="bg-gray-50 min-h-screen py-16 px-6 md:px-12 mt-5">
-        <div className="container mx-auto max-w-4xl">
+      <div
+        style={{
+          minHeight: '100vh',
+          padding: '100px 20px 80px',
+          background: 'linear-gradient(135deg, rgba(5, 8, 16, 0.95) 0%, rgba(10, 14, 39, 0.95) 100%)',
+          position: 'relative',
+          overflow: 'hidden',
+        }}
+      >
+        {/* Animated Background Elements */}
+        <div
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: `
+              radial-gradient(circle at 20% 50%, rgba(0, 240, 255, 0.1) 0%, transparent 50%),
+              radial-gradient(circle at 80% 80%, rgba(0, 102, 255, 0.1) 0%, transparent 50%),
+              radial-gradient(circle at 40% 20%, rgba(124, 58, 237, 0.05) 0%, transparent 50%)
+            `,
+            pointerEvents: 'none',
+          }}
+        />
+
+        <div className="container mx-auto max-w-5xl" style={{ position: 'relative', zIndex: 1 }}>
+          {/* Header Section */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-12"
+            transition={{ duration: 0.8, type: 'spring' }}
+            className="text-center mb-16"
           >
-            <Title level={2} className="text-3xl font-bold text-gray-900 mb-4">
-              Frequently Asked Questions
-            </Title>
-            <Paragraph className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
+              style={{
+                display: 'inline-block',
+                padding: '16px 32px',
+                background: 'rgba(0, 240, 255, 0.1)',
+                border: '1px solid rgba(0, 240, 255, 0.3)',
+                borderRadius: '50px',
+                marginBottom: '24px',
+              }}
+            >
+              <QuestionCircleOutlined
+                style={{
+                  fontSize: '24px',
+                  color: '#00f0ff',
+                  marginRight: '12px',
+                }}
+              />
+              <span style={{ color: '#00f0ff', fontSize: '14px', fontWeight: 600 }}>
+                Frequently Asked Questions
+              </span>
+            </motion.div>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.6 }}
+              style={{
+                fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+                fontWeight: 800,
+                marginBottom: '24px',
+                background: 'linear-gradient(135deg, #00f0ff 0%, #0066ff 50%, #7c3aed 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}
+            >
+              Got Questions?
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+              style={{
+                color: '#cbd5e1',
+                fontSize: '1.125rem',
+                maxWidth: '700px',
+                margin: '0 auto',
+                lineHeight: '1.8',
+              }}
+            >
               Find answers to common questions about our IT services, network solutions, and support.
               Can't find what you're looking for?{' '}
-              <a href="/contactus" className="text-indigo-600 hover:underline">
+              <a
+                href="/contactus"
+                style={{
+                  color: '#00f0ff',
+                  textDecoration: 'none',
+                  fontWeight: 600,
+                  borderBottom: '2px solid rgba(0, 240, 255, 0.3)',
+                  transition: 'all 0.3s ease',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = '#00ff88';
+                  e.currentTarget.style.borderBottomColor = '#00ff88';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = '#00f0ff';
+                  e.currentTarget.style.borderBottomColor = 'rgba(0, 240, 255, 0.3)';
+                }}
+              >
                 Contact us
               </a>
               .
-            </Paragraph>
+            </motion.p>
           </motion.div>
 
+          {/* FAQ Items */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}
           >
-            <Collapse
-              activeKey={activeKeys}
-              onChange={handleChange}
-              expandIcon={({ isActive }) =>
-                isActive ? (
-                  <MinusOutlined className="text-indigo-600" />
-                ) : (
-                  <PlusOutlined className="text-indigo-600" />
-                )
-              }
-              className="bg-white rounded-lg shadow-md"
-            >
-              {faqData.map((faq, index) => (
-                <Panel
-                  header={
-                    <span className="text-lg font-semibold text-gray-900">{faq.question}</span>
-                  }
-                  key={index.toString()}
-                  className="border-b border-gray-200"
+            {faqData.map((faq, index) => {
+              const isActive = activeKeys.includes(index.toString());
+              return (
+                <motion.div
+                  key={index}
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.02 }}
+                  style={{ position: 'relative' }}
                 >
-                  <Paragraph className="text-gray-700 text-base leading-relaxed">
-                    {faq.answer}
-                  </Paragraph>
-                </Panel>
-              ))}
-            </Collapse>
+                  <div
+                    className="glass"
+                    style={{
+                      borderRadius: '20px',
+                      overflow: 'hidden',
+                      border: isActive
+                        ? '2px solid rgba(0, 240, 255, 0.5)'
+                        : '1px solid rgba(0, 240, 255, 0.2)',
+                      background: isActive
+                        ? 'rgba(0, 240, 255, 0.15)'
+                        : 'rgba(10, 14, 39, 0.6)',
+                      backdropFilter: 'blur(20px)',
+                      transition: 'all 0.3s ease',
+                      boxShadow: isActive
+                        ? '0 10px 40px rgba(0, 240, 255, 0.3)'
+                        : '0 4px 20px rgba(0, 240, 255, 0.1)',
+                    }}
+                    onMouseEnter={(e) => {
+                      if (!isActive) {
+                        e.currentTarget.style.borderColor = 'rgba(0, 240, 255, 0.4)';
+                        e.currentTarget.style.background = 'rgba(0, 240, 255, 0.1)';
+                        e.currentTarget.style.boxShadow = '0 8px 30px rgba(0, 240, 255, 0.2)';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (!isActive) {
+                        e.currentTarget.style.borderColor = 'rgba(0, 240, 255, 0.2)';
+                        e.currentTarget.style.background = 'rgba(10, 14, 39, 0.6)';
+                        e.currentTarget.style.boxShadow = '0 4px 20px rgba(0, 240, 255, 0.1)';
+                      }
+                    }}
+                  >
+                    <div
+                      onClick={() => {
+                        const newKeys = isActive
+                          ? activeKeys.filter((key) => key !== index.toString())
+                          : [...activeKeys, index.toString()];
+                        setActiveKeys(newKeys);
+                      }}
+                      style={{
+                        padding: '24px 28px',
+                        cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        userSelect: 'none',
+                      }}
+                    >
+                      <h3
+                        style={{
+                          fontSize: '1.125rem',
+                          fontWeight: 700,
+                          color: '#e2e8f0',
+                          margin: 0,
+                          flex: 1,
+                          paddingRight: '20px',
+                          lineHeight: '1.6',
+                        }}
+                      >
+                        {faq.question}
+                      </h3>
+                      <motion.div
+                        animate={{
+                          rotate: isActive ? 180 : 0,
+                          scale: isActive ? 1.1 : 1,
+                        }}
+                        transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                        style={{
+                          width: '40px',
+                          height: '40px',
+                          borderRadius: '12px',
+                          background: isActive
+                            ? 'linear-gradient(135deg, rgba(0, 240, 255, 0.3) 0%, rgba(0, 102, 255, 0.3) 100%)'
+                            : 'rgba(0, 240, 255, 0.1)',
+                          border: '1px solid rgba(0, 240, 255, 0.3)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          flexShrink: 0,
+                        }}
+                      >
+                        {isActive ? (
+                          <MinusOutlined style={{ color: '#00f0ff', fontSize: '18px' }} />
+                        ) : (
+                          <PlusOutlined style={{ color: '#00f0ff', fontSize: '18px' }} />
+                        )}
+                      </motion.div>
+                    </div>
+
+                    <AnimatePresence>
+                      {isActive && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.3, ease: 'easeInOut' }}
+                          style={{ overflow: 'hidden' }}
+                        >
+                          <div
+                            style={{
+                              padding: '0 28px 24px 28px',
+                              color: '#cbd5e1',
+                              fontSize: '1rem',
+                              lineHeight: '1.8',
+                              borderTop: '1px solid rgba(0, 240, 255, 0.2)',
+                              paddingTop: '24px',
+                            }}
+                          >
+                            {faq.answer}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                </motion.div>
+              );
+            })}
           </motion.div>
 
           {/* FAQ Schema for SEO */}

@@ -1,27 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Drawer, Button, Divider, Dropdown, Menu } from 'antd';
-import { FiPhone, FiMenu, FiChevronDown, FiMail, FiX } from 'react-icons/fi';
+import { FiPhone, FiMenu, FiChevronDown, FiMail, FiX, FiZap } from 'react-icons/fi';
 import logo from '../assets/logo.png';
-
-// Add CSS for menu item hover effects
-if (typeof document !== 'undefined') {
-  const styleId = 'header-menu-styles';
-  if (!document.getElementById(styleId)) {
-    const styleSheet = document.createElement('style');
-    styleSheet.id = styleId;
-    styleSheet.innerHTML = `
-      .ant-menu-item.menu-item-hover:hover {
-        background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%) !important;
-        color: white !important;
-      }
-      .ant-menu-item.menu-item-hover:hover a {
-        color: white !important;
-      }
-    `;
-    document.head.appendChild(styleSheet);
-  }
-}
 
 const Header: React.FC = () => {
   const [drawerVisible, setDrawerVisible] = useState(false);
@@ -38,82 +19,46 @@ const Header: React.FC = () => {
 
   const productMenu = (
     <Menu
+      className="glass"
       style={{
         borderRadius: '12px',
-        boxShadow: '0 8px 32px rgba(99, 102, 241, 0.3), 0 4px 16px rgba(0, 0, 0, 0.1)',
-        border: '1px solid rgba(99, 102, 241, 0.2)',
+        border: '1px solid rgba(0, 240, 255, 0.3)',
         padding: '8px 0',
-        background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(249, 250, 251, 0.95) 100%)',
+        background: 'rgba(10, 14, 39, 0.95)',
         backdropFilter: 'blur(20px)',
       }}
     >
-      <Menu.Item 
-        key="services"
-        className="menu-item-hover"
-        style={{
-          transition: 'all 0.3s ease',
-        }}
-      >
-        <Link to="/services" style={{ fontWeight: 600 }}>Our Services</Link>
+      <Menu.Item key="services" style={{ color: '#e2e8f0' }}>
+        <Link to="/services" style={{ fontWeight: 600, color: '#e2e8f0' }}>Our Services</Link>
       </Menu.Item>
-      <Menu.Item 
-        key="products"
-        className="menu-item-hover"
-        style={{
-          transition: 'all 0.3s ease',
-        }}
-      >
-        <Link to="/Products" style={{ fontWeight: 600 }}>Products</Link>
+      <Menu.Item key="products" style={{ color: '#e2e8f0' }}>
+        <Link to="/Products" style={{ fontWeight: 600, color: '#e2e8f0' }}>Products</Link>
       </Menu.Item>
-      <Menu.Item 
-        key="booking"
-        className="menu-item-hover"
-        style={{
-          transition: 'all 0.3s ease',
-        }}
-      >
-        <Link to="/booking" style={{ fontWeight: 600 }}>Book a Service</Link>
+      <Menu.Item key="booking" style={{ color: '#e2e8f0' }}>
+        <Link to="/booking" style={{ fontWeight: 600, color: '#e2e8f0' }}>Book a Service</Link>
       </Menu.Item>
     </Menu>
   );
 
   const aboutMenu = (
     <Menu
+      className="glass"
       style={{
         borderRadius: '12px',
-        boxShadow: '0 8px 32px rgba(99, 102, 241, 0.3), 0 4px 16px rgba(0, 0, 0, 0.1)',
-        border: '1px solid rgba(99, 102, 241, 0.2)',
+        border: '1px solid rgba(0, 240, 255, 0.3)',
         padding: '8px 0',
-        background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(249, 250, 251, 0.95) 100%)',
+        background: 'rgba(10, 14, 39, 0.95)',
         backdropFilter: 'blur(20px)',
       }}
     >
-      <Menu.Item 
-        key="about"
-        className="menu-item-hover"
-        style={{
-          transition: 'all 0.3s ease',
-        }}
-      >
-        <Link to="/aboutus" style={{ fontWeight: 600 }}>About Us</Link>
+      <Menu.Item key="about" style={{ color: '#e2e8f0' }}>
+        <Link to="/aboutus" style={{ fontWeight: 600, color: '#e2e8f0' }}>About Us</Link>
       </Menu.Item>
-      <Menu.Item 
-        key="team"
-        className="menu-item-hover"
-        style={{
-          transition: 'all 0.3s ease',
-        }}
-      >
-        <Link to="/aboutus#team" style={{ fontWeight: 600 }}>Our Team</Link>
+      <Menu.Item key="team" style={{ color: '#e2e8f0' }}>
+        <Link to="/aboutus#team" style={{ fontWeight: 600, color: '#e2e8f0' }}>Our Team</Link>
       </Menu.Item>
-      <Menu.Item 
-        key="contact"
-        className="menu-item-hover"
-        style={{
-          transition: 'all 0.3s ease',
-        }}
-      >
-        <Link to="/contactus" style={{ fontWeight: 600 }}>Contact Us</Link>
+      <Menu.Item key="contact" style={{ color: '#e2e8f0' }}>
+        <Link to="/contactus" style={{ fontWeight: 600, color: '#e2e8f0' }}>Contact Us</Link>
       </Menu.Item>
     </Menu>
   );
@@ -123,24 +68,21 @@ const Header: React.FC = () => {
   return (
     <header
       className={`fixed top-0 w-full z-50 transition-all duration-500 ${
-        scrolled
-          ? 'bg-white/98 shadow-2xl'
-          : 'bg-gradient-to-r from-white/90 via-indigo-50/30 to-white/90 backdrop-blur-xl'
+        scrolled ? 'glass shadow-2xl' : 'bg-transparent'
       }`}
       style={{
         backdropFilter: 'blur(20px)',
         WebkitBackdropFilter: 'blur(20px)',
         borderBottom: scrolled 
-          ? '1px solid rgba(99, 102, 241, 0.2)' 
-          : '1px solid rgba(99, 102, 241, 0.1)',
+          ? '1px solid rgba(0, 240, 255, 0.3)' 
+          : '1px solid transparent',
         boxShadow: scrolled 
-          ? '0 10px 40px rgba(99, 102, 241, 0.15), 0 0 0 1px rgba(99, 102, 241, 0.05)' 
-          : '0 4px 20px rgba(99, 102, 241, 0.08)',
+          ? '0 10px 40px rgba(0, 240, 255, 0.1)' 
+          : 'none',
       }}
     >
-      <div className=" mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
-
           {/* Logo */}
           <Link
             to="/"
@@ -150,39 +92,28 @@ const Header: React.FC = () => {
             <div
               className="relative p-2.5 rounded-xl transition-all duration-500 group-hover:scale-105"
               style={{
-                background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%)',
-                border: '2px solid transparent',
-                backgroundImage: 'linear-gradient(white, white), linear-gradient(135deg, #6366f1, #8b5cf6, #ec4899)',
-                backgroundOrigin: 'border-box',
-                backgroundClip: 'padding-box, border-box',
-                boxShadow: '0 4px 20px rgba(99, 102, 241, 0.2)',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.boxShadow = '0 8px 30px rgba(99, 102, 241, 0.4), 0 0 0 4px rgba(99, 102, 241, 0.1)';
-                e.currentTarget.style.transform = 'scale(1.05)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.boxShadow = '0 4px 20px rgba(99, 102, 241, 0.2)';
-                e.currentTarget.style.transform = 'scale(1)';
+                background: 'linear-gradient(135deg, rgba(0, 240, 255, 0.1) 0%, rgba(0, 102, 255, 0.1) 100%)',
+                border: '2px solid rgba(0, 240, 255, 0.3)',
+                boxShadow: '0 4px 20px rgba(0, 240, 255, 0.2)',
               }}
             >
               <img
                 src={logo}
-                alt="Blackie Networks Logo - IT Solutions and Network Infrastructure"
+                alt="Blackie Networks Logo"
                 className="h-10 w-auto sm:h-12 transition-all duration-500"
                 width="48"
                 height="48"
                 loading="eager"
                 style={{ 
-                  filter: 'drop-shadow(0 4px 8px rgba(99, 102, 241, 0.3))',
+                  filter: 'drop-shadow(0 4px 8px rgba(0, 240, 255, 0.5))',
                 }}
               />
             </div>
             <div className="flex flex-col">
               <span
-                className="text-xl sm:text-2xl font-extrabold tracking-tight transition-all duration-300"
+                className="text-xl sm:text-2xl font-extrabold tracking-tight"
                 style={{
-                  background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%)',
+                  background: 'linear-gradient(135deg, #00f0ff 0%, #0066ff 50%, #7c3aed 100%)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   backgroundClip: 'text',
@@ -191,13 +122,13 @@ const Header: React.FC = () => {
                 }}
               >
                 Blackie<span style={{ 
-                  background: 'linear-gradient(135deg, #ec4899 0%, #f43f5e 100%)',
+                  background: 'linear-gradient(135deg, #00ff88 0%, #00f0ff 100%)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   backgroundClip: 'text',
                 }}>Networks</span>
               </span>
-              <span className="text-xs text-indigo-600 font-semibold hidden sm:block tracking-wide">
+              <span className="text-xs font-semibold hidden sm:block tracking-wide" style={{ color: '#00f0ff' }}>
                 IT Solutions & Infrastructure
               </span>
             </div>
@@ -205,315 +136,129 @@ const Header: React.FC = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-2">
+            {[
+              { path: '/', label: 'Home' },
+              { path: '/blog', label: 'Blog' },
+              { path: '/faq', label: 'FAQ' },
+              { path: '/contactus', label: 'Contact' },
+            ].map((item) => (
             <Link
-              to="/"
-              className={`px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-300 relative overflow-hidden ${
-                isActive('/')
-                  ? 'text-white'
-                  : 'text-gray-700 hover:text-white'
-              }`}
-              style={{ 
-                textDecoration: 'none',
-                background: isActive('/') 
-                  ? 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)'
-                  : 'transparent',
-                boxShadow: isActive('/') 
-                  ? '0 4px 20px rgba(99, 102, 241, 0.4)' 
-                  : 'none',
-              }}
-              onMouseEnter={(e) => {
-                if (!isActive('/')) {
-                  e.currentTarget.style.background = 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)';
-                  e.currentTarget.style.boxShadow = '0 4px 20px rgba(99, 102, 241, 0.4)';
-                  e.currentTarget.style.transform = 'translateY(-2px)';
-                }
-              }}
-              onMouseLeave={(e) => {
-                if (!isActive('/')) {
-                  e.currentTarget.style.background = 'transparent';
-                  e.currentTarget.style.boxShadow = 'none';
-                  e.currentTarget.style.transform = 'translateY(0)';
-                }
-              }}
-            >
-              Home
-            </Link>
-
-            <Dropdown
-              overlay={aboutMenu}
-              placement="bottom"
-              trigger={['hover']}
-              overlayStyle={{ marginTop: '12px' }}
-            >
-              <div
-                className={`cursor-pointer flex items-center gap-1.5 px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-300 ${
-                  location.pathname.includes('/about')
-                    ? 'text-white'
-                    : 'text-gray-700 hover:text-white'
+                key={item.path}
+                to={item.path}
+                className={`px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-300 ${
+                  isActive(item.path) ? 'text-cyan-400' : 'text-gray-300 hover:text-cyan-400'
                 }`}
                 style={{
+                  textDecoration: 'none',
+                  background: isActive(item.path) 
+                    ? 'linear-gradient(135deg, rgba(0, 240, 255, 0.2) 0%, rgba(0, 102, 255, 0.2) 100%)'
+                    : 'transparent',
+                  border: isActive(item.path) ? '1px solid rgba(0, 240, 255, 0.4)' : '1px solid transparent',
+                }}
+                onMouseEnter={(e) => {
+                  if (!isActive(item.path)) {
+                    e.currentTarget.style.background = 'linear-gradient(135deg, rgba(0, 240, 255, 0.1) 0%, rgba(0, 102, 255, 0.1) 100%)';
+                    e.currentTarget.style.borderColor = 'rgba(0, 240, 255, 0.3)';
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (!isActive(item.path)) {
+                    e.currentTarget.style.background = 'transparent';
+                    e.currentTarget.style.borderColor = 'transparent';
+                  }
+                }}
+              >
+                {item.label}
+              </Link>
+            ))}
+
+            <Dropdown overlay={aboutMenu} placement="bottom" trigger={['hover']}>
+              <div
+                className="cursor-pointer flex items-center gap-1.5 px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-300 text-gray-300 hover:text-cyan-400"
+                style={{
+                  border: location.pathname.includes('/about') 
+                    ? '1px solid rgba(0, 240, 255, 0.4)' 
+                    : '1px solid transparent',
                   background: location.pathname.includes('/about')
-                    ? 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)'
+                    ? 'linear-gradient(135deg, rgba(0, 240, 255, 0.2) 0%, rgba(0, 102, 255, 0.2) 100%)'
                     : 'transparent',
-                  boxShadow: location.pathname.includes('/about')
-                    ? '0 4px 20px rgba(99, 102, 241, 0.4)'
-                    : 'none',
-                }}
-                onMouseEnter={(e) => {
-                  if (!location.pathname.includes('/about')) {
-                    e.currentTarget.style.background = 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)';
-                    e.currentTarget.style.boxShadow = '0 4px 20px rgba(99, 102, 241, 0.4)';
-                    e.currentTarget.style.transform = 'translateY(-2px)';
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (!location.pathname.includes('/about')) {
-                    e.currentTarget.style.background = 'transparent';
-                    e.currentTarget.style.boxShadow = 'none';
-                    e.currentTarget.style.transform = 'translateY(0)';
-                  }
                 }}
               >
-                About <FiChevronDown size={14} style={{ transition: 'transform 0.3s' }} className="group-hover:rotate-180" />
+                About <FiChevronDown size={14} />
               </div>
             </Dropdown>
 
-            <Dropdown
-              overlay={productMenu}
-              placement="bottom"
-              trigger={['hover']}
-              overlayStyle={{ marginTop: '12px' }}
-            >
+            <Dropdown overlay={productMenu} placement="bottom" trigger={['hover']}>
               <div
-                className={`cursor-pointer flex items-center gap-1.5 px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-300 ${
-                  location.pathname.includes('/services') || location.pathname.includes('/Products')
-                    ? 'text-white'
-                    : 'text-gray-700 hover:text-white'
-                }`}
+                className="cursor-pointer flex items-center gap-1.5 px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-300 text-gray-300 hover:text-cyan-400"
                 style={{
-                  background: location.pathname.includes('/services') || location.pathname.includes('/Products')
-                    ? 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)'
+                  border: (location.pathname.includes('/services') || location.pathname.includes('/Products'))
+                    ? '1px solid rgba(0, 240, 255, 0.4)' 
+                    : '1px solid transparent',
+                  background: (location.pathname.includes('/services') || location.pathname.includes('/Products'))
+                    ? 'linear-gradient(135deg, rgba(0, 240, 255, 0.2) 0%, rgba(0, 102, 255, 0.2) 100%)'
                     : 'transparent',
-                  boxShadow: location.pathname.includes('/services') || location.pathname.includes('/Products')
-                    ? '0 4px 20px rgba(99, 102, 241, 0.4)'
-                    : 'none',
-                }}
-                onMouseEnter={(e) => {
-                  if (!location.pathname.includes('/services') && !location.pathname.includes('/Products')) {
-                    e.currentTarget.style.background = 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)';
-                    e.currentTarget.style.boxShadow = '0 4px 20px rgba(99, 102, 241, 0.4)';
-                    e.currentTarget.style.transform = 'translateY(-2px)';
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (!location.pathname.includes('/services') && !location.pathname.includes('/Products')) {
-                    e.currentTarget.style.background = 'transparent';
-                    e.currentTarget.style.boxShadow = 'none';
-                    e.currentTarget.style.transform = 'translateY(0)';
-                  }
                 }}
               >
-                Services <FiChevronDown size={14} style={{ transition: 'transform 0.3s' }} />
+                Services <FiChevronDown size={14} />
               </div>
             </Dropdown>
-
-            <Link
-              to="/blog"
-              className={`px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-300 ${
-                isActive('/blog')
-                  ? 'text-white'
-                  : 'text-gray-700 hover:text-white'
-              }`}
-              style={{ 
-                textDecoration: 'none',
-                background: isActive('/blog')
-                  ? 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)'
-                  : 'transparent',
-                boxShadow: isActive('/blog')
-                  ? '0 4px 20px rgba(99, 102, 241, 0.4)'
-                  : 'none',
-              }}
-              onMouseEnter={(e) => {
-                if (!isActive('/blog')) {
-                  e.currentTarget.style.background = 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)';
-                  e.currentTarget.style.boxShadow = '0 4px 20px rgba(99, 102, 241, 0.4)';
-                  e.currentTarget.style.transform = 'translateY(-2px)';
-                }
-              }}
-              onMouseLeave={(e) => {
-                if (!isActive('/blog')) {
-                  e.currentTarget.style.background = 'transparent';
-                  e.currentTarget.style.boxShadow = 'none';
-                  e.currentTarget.style.transform = 'translateY(0)';
-                }
-              }}
-            >
-              Blog
-            </Link>
-            <Link
-              to="/faq"
-              className={`px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-300 ${
-                isActive('/faq')
-                  ? 'text-white'
-                  : 'text-gray-700 hover:text-white'
-              }`}
-              style={{ 
-                textDecoration: 'none',
-                background: isActive('/faq')
-                  ? 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)'
-                  : 'transparent',
-                boxShadow: isActive('/faq')
-                  ? '0 4px 20px rgba(99, 102, 241, 0.4)'
-                  : 'none',
-              }}
-              onMouseEnter={(e) => {
-                if (!isActive('/faq')) {
-                  e.currentTarget.style.background = 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)';
-                  e.currentTarget.style.boxShadow = '0 4px 20px rgba(99, 102, 241, 0.4)';
-                  e.currentTarget.style.transform = 'translateY(-2px)';
-                }
-              }}
-              onMouseLeave={(e) => {
-                if (!isActive('/faq')) {
-                  e.currentTarget.style.background = 'transparent';
-                  e.currentTarget.style.boxShadow = 'none';
-                  e.currentTarget.style.transform = 'translateY(0)';
-                }
-              }}
-            >
-              FAQ
-            </Link>
-            <Link
-              to="/contactus"
-              className={`px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-300 ${
-                isActive('/contactus')
-                  ? 'text-white'
-                  : 'text-gray-700 hover:text-white'
-              }`}
-              style={{ 
-                textDecoration: 'none',
-                background: isActive('/contactus')
-                  ? 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)'
-                  : 'transparent',
-                boxShadow: isActive('/contactus')
-                  ? '0 4px 20px rgba(99, 102, 241, 0.4)'
-                  : 'none',
-              }}
-              onMouseEnter={(e) => {
-                if (!isActive('/contactus')) {
-                  e.currentTarget.style.background = 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)';
-                  e.currentTarget.style.boxShadow = '0 4px 20px rgba(99, 102, 241, 0.4)';
-                  e.currentTarget.style.transform = 'translateY(-2px)';
-                }
-              }}
-              onMouseLeave={(e) => {
-                if (!isActive('/contactus')) {
-                  e.currentTarget.style.background = 'transparent';
-                  e.currentTarget.style.boxShadow = 'none';
-                  e.currentTarget.style.transform = 'translateY(0)';
-                }
-              }}
-            >
-              Contact
-            </Link>
           </nav>
 
           {/* Right Controls */}
           <div className="flex items-center gap-3">
-
-            {/* CTA Button */}
             <Link to="/booking" className="hidden md:block">
               <Button
-                type="primary"
-                className="flex items-center relative overflow-hidden group"
+                className="tech-button"
                 style={{
-                  background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%)',
-                  backgroundSize: '200% 200%',
+                  background: 'linear-gradient(135deg, #00f0ff 0%, #0066ff 100%)',
                   border: 'none',
-                  borderRadius: '12px',
+                  color: '#0a0e27',
                   fontWeight: 700,
-                  boxShadow: '0 8px 30px rgba(99, 102, 241, 0.4), 0 0 0 0 rgba(99, 102, 241, 0.5)',
                   height: '44px',
                   padding: '0 28px',
                   fontSize: '14px',
                   letterSpacing: '0.5px',
-                  transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-3px) scale(1.02)';
-                  e.currentTarget.style.boxShadow = '0 12px 40px rgba(99, 102, 241, 0.5), 0 0 0 4px rgba(99, 102, 241, 0.2)';
-                  e.currentTarget.style.backgroundPosition = '100% 0';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                  e.currentTarget.style.boxShadow = '0 8px 30px rgba(99, 102, 241, 0.4), 0 0 0 0 rgba(99, 102, 241, 0.5)';
-                  e.currentTarget.style.backgroundPosition = '0% 0%';
                 }}
               >
-                <span className="relative z-10">Get Started</span>
+                <FiZap style={{ marginRight: 8 }} /> Get Started
               </Button>
             </Link>
 
-            {/* Contact Phone - Desktop */}
             <a
               href="tel:+254796869402"
-              className="hidden xl:flex items-center gap-2.5 px-5 py-2.5 rounded-xl font-semibold transition-all duration-300 relative group"
+              className="hidden xl:flex items-center gap-2.5 px-5 py-2.5 rounded-xl font-semibold transition-all duration-300"
               style={{
                 textDecoration: 'none',
-                background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%)',
-                border: '2px solid rgba(99, 102, 241, 0.2)',
-                color: '#6366f1',
+                background: 'rgba(0, 240, 255, 0.1)',
+                border: '1px solid rgba(0, 240, 255, 0.3)',
+                color: '#00f0ff',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)';
-                e.currentTarget.style.color = 'white';
-                e.currentTarget.style.borderColor = '#6366f1';
-                e.currentTarget.style.boxShadow = '0 4px 20px rgba(99, 102, 241, 0.3)';
-                e.currentTarget.style.transform = 'translateY(-2px)';
+                e.currentTarget.style.background = 'rgba(0, 240, 255, 0.2)';
+                e.currentTarget.style.boxShadow = '0 4px 20px rgba(0, 240, 255, 0.3)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%)';
-                e.currentTarget.style.color = '#6366f1';
-                e.currentTarget.style.borderColor = 'rgba(99, 102, 241, 0.2)';
+                e.currentTarget.style.background = 'rgba(0, 240, 255, 0.1)';
                 e.currentTarget.style.boxShadow = 'none';
-                e.currentTarget.style.transform = 'translateY(0)';
               }}
             >
               <FiPhone className="text-lg" />
               <span className="text-sm font-bold">+254 796 869 402</span>
             </a>
 
-            {/* Mobile Menu Button */}
             <Button
               type="text"
               icon={<FiMenu size={24} />}
               onClick={() => setDrawerVisible(true)}
-              className="lg:hidden"
+              className="lg:hidden flex items-center justify-center"
               style={{
-                background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%)',
-                border: '2px solid rgba(99, 102, 241, 0.3)',
+                background: 'rgba(0, 240, 255, 0.1)',
+                border: '1px solid rgba(0, 240, 255, 0.3)',
                 borderRadius: '12px',
                 height: '44px',
                 width: '44px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: '#6366f1',
-                transition: 'all 0.3s ease',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)';
-                e.currentTarget.style.color = 'white';
-                e.currentTarget.style.borderColor = '#6366f1';
-                e.currentTarget.style.boxShadow = '0 4px 20px rgba(99, 102, 241, 0.4)';
-                e.currentTarget.style.transform = 'scale(1.1)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%)';
-                e.currentTarget.style.color = '#6366f1';
-                e.currentTarget.style.borderColor = 'rgba(99, 102, 241, 0.3)';
-                e.currentTarget.style.boxShadow = 'none';
-                e.currentTarget.style.transform = 'scale(1)';
+                color: '#00f0ff',
               }}
             />
           </div>
@@ -528,15 +273,14 @@ const Header: React.FC = () => {
         width={320}
         closable={false}
         bodyStyle={{
-          background: '#ffffff',
+          background: 'linear-gradient(135deg, #0a0e27 0%, #050810 100%)',
           padding: 0,
         }}
         headerStyle={{
-          background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%)',
-          backgroundSize: '200% 200%',
+          background: 'linear-gradient(135deg, rgba(0, 240, 255, 0.2) 0%, rgba(0, 102, 255, 0.2) 100%)',
           border: 'none',
+          borderBottom: '1px solid rgba(0, 240, 255, 0.3)',
           padding: '20px',
-          boxShadow: '0 4px 20px rgba(99, 102, 241, 0.3)',
         }}
         title={
           <div className="flex items-center justify-between w-full">
@@ -548,409 +292,83 @@ const Header: React.FC = () => {
                 width="40"
                 height="40"
                 loading="eager"
-                style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.2))' }}
               />
               <div>
-                <span className="text-lg font-bold text-white block">Blackie Networks</span>
-                <span className="text-xs text-blue-100">IT Solutions</span>
+                <span className="text-lg font-bold block" style={{ color: '#00f0ff' }}>Blackie Networks</span>
+                <span className="text-xs" style={{ color: '#00f0ff' }}>IT Solutions</span>
               </div>
             </div>
             <Button
               type="text"
               icon={<FiX size={20} />}
               onClick={() => setDrawerVisible(false)}
-              style={{ color: 'white', border: 'none' }}
+              style={{ color: '#00f0ff', border: 'none' }}
             />
           </div>
         }
       >
         <div style={{ padding: '24px' }}>
-          <nav className="flex flex-col space-y-1">
-            <Link
-              to="/"
-              onClick={() => setDrawerVisible(false)}
-              className={`px-4 py-3 rounded-xl font-semibold transition-all ${
-                isActive('/')
-                  ? 'text-white'
-                  : 'text-gray-700 hover:text-white'
-              }`}
-              style={{ 
-                textDecoration: 'none', 
-                display: 'block',
-                background: isActive('/')
-                  ? 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)'
-                  : 'transparent',
-                boxShadow: isActive('/')
-                  ? '0 4px 15px rgba(99, 102, 241, 0.3)'
-                  : 'none',
-              }}
-              onMouseEnter={(e) => {
-                if (!isActive('/')) {
-                  e.currentTarget.style.background = 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)';
-                  e.currentTarget.style.boxShadow = '0 4px 15px rgba(99, 102, 241, 0.3)';
-                }
-              }}
-              onMouseLeave={(e) => {
-                if (!isActive('/')) {
-                  e.currentTarget.style.background = 'transparent';
-                  e.currentTarget.style.boxShadow = 'none';
-                }
-              }}
-            >
-              Home
-            </Link>
-
-            <div className="mt-2">
-              <p className="px-4 py-2 text-xs uppercase font-bold text-gray-400 tracking-wider">
-                About
-              </p>
+          <nav className="flex flex-col space-y-2">
+            {['/', '/aboutus', '/services', '/Products', '/blog', '/faq', '/contactus', '/booking'].map((path) => (
               <Link
-                to="/aboutus"
+                key={path}
+                to={path}
                 onClick={() => setDrawerVisible(false)}
-                className={`px-4 py-3 rounded-xl font-semibold transition-all block ${
-                  isActive('/aboutus')
-                    ? 'text-white'
-                    : 'text-gray-700 hover:text-white'
-                }`}
+                className="px-4 py-3 rounded-xl font-semibold transition-all block"
                 style={{ 
                   textDecoration: 'none',
-                  background: isActive('/aboutus')
-                    ? 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)'
+                  color: isActive(path) ? '#00f0ff' : '#e2e8f0',
+                  background: isActive(path)
+                    ? 'linear-gradient(135deg, rgba(0, 240, 255, 0.2) 0%, rgba(0, 102, 255, 0.2) 100%)'
                     : 'transparent',
-                  boxShadow: isActive('/aboutus')
-                    ? '0 4px 15px rgba(99, 102, 241, 0.3)'
-                    : 'none',
-                }}
-                onMouseEnter={(e) => {
-                  if (!isActive('/aboutus')) {
-                    e.currentTarget.style.background = 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)';
-                    e.currentTarget.style.boxShadow = '0 4px 15px rgba(99, 102, 241, 0.3)';
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (!isActive('/aboutus')) {
-                    e.currentTarget.style.background = 'transparent';
-                    e.currentTarget.style.boxShadow = 'none';
-                  }
+                  border: isActive(path) ? '1px solid rgba(0, 240, 255, 0.4)' : '1px solid transparent',
                 }}
               >
-                About Us
+                {path === '/' ? 'Home' : path.slice(1).charAt(0).toUpperCase() + path.slice(2)}
               </Link>
-              <Link
-                to="/contactus"
-                onClick={() => setDrawerVisible(false)}
-                className={`px-4 py-3 rounded-xl font-semibold transition-all block ${
-                  isActive('/contactus')
-                    ? 'text-white'
-                    : 'text-gray-700 hover:text-white'
-                }`}
-                style={{ 
-                  textDecoration: 'none',
-                  background: isActive('/contactus')
-                    ? 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)'
-                    : 'transparent',
-                  boxShadow: isActive('/contactus')
-                    ? '0 4px 15px rgba(99, 102, 241, 0.3)'
-                    : 'none',
-                }}
-                onMouseEnter={(e) => {
-                  if (!isActive('/contactus')) {
-                    e.currentTarget.style.background = 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)';
-                    e.currentTarget.style.boxShadow = '0 4px 15px rgba(99, 102, 241, 0.3)';
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (!isActive('/contactus')) {
-                    e.currentTarget.style.background = 'transparent';
-                    e.currentTarget.style.boxShadow = 'none';
-                  }
-                }}
-              >
-                Contact Us
-              </Link>
-            </div>
-
-            <div className="mt-2">
-              <p className="px-4 py-2 text-xs uppercase font-bold text-gray-400 tracking-wider">
-                Services
-              </p>
-              <Link
-                to="/services"
-                onClick={() => setDrawerVisible(false)}
-                className={`px-4 py-3 rounded-xl font-semibold transition-all block ${
-                  isActive('/services')
-                    ? 'text-white'
-                    : 'text-gray-700 hover:text-white'
-                }`}
-                style={{ 
-                  textDecoration: 'none',
-                  background: isActive('/services')
-                    ? 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)'
-                    : 'transparent',
-                  boxShadow: isActive('/services')
-                    ? '0 4px 15px rgba(99, 102, 241, 0.3)'
-                    : 'none',
-                }}
-                onMouseEnter={(e) => {
-                  if (!isActive('/services')) {
-                    e.currentTarget.style.background = 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)';
-                    e.currentTarget.style.boxShadow = '0 4px 15px rgba(99, 102, 241, 0.3)';
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (!isActive('/services')) {
-                    e.currentTarget.style.background = 'transparent';
-                    e.currentTarget.style.boxShadow = 'none';
-                  }
-                }}
-              >
-                Our Services
-              </Link>
-              <Link
-                to="/Products"
-                onClick={() => setDrawerVisible(false)}
-                className={`px-4 py-3 rounded-xl font-semibold transition-all block ${
-                  isActive('/Products')
-                    ? 'text-white'
-                    : 'text-gray-700 hover:text-white'
-                }`}
-                style={{ 
-                  textDecoration: 'none',
-                  background: isActive('/Products')
-                    ? 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)'
-                    : 'transparent',
-                  boxShadow: isActive('/Products')
-                    ? '0 4px 15px rgba(99, 102, 241, 0.3)'
-                    : 'none',
-                }}
-                onMouseEnter={(e) => {
-                  if (!isActive('/Products')) {
-                    e.currentTarget.style.background = 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)';
-                    e.currentTarget.style.boxShadow = '0 4px 15px rgba(99, 102, 241, 0.3)';
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (!isActive('/Products')) {
-                    e.currentTarget.style.background = 'transparent';
-                    e.currentTarget.style.boxShadow = 'none';
-                  }
-                }}
-              >
-                Products
-              </Link>
-              <Link
-                to="/booking"
-                onClick={() => setDrawerVisible(false)}
-                className={`px-4 py-3 rounded-xl font-semibold transition-all block ${
-                  isActive('/booking')
-                    ? 'text-white'
-                    : 'text-gray-700 hover:text-white'
-                }`}
-                style={{ 
-                  textDecoration: 'none',
-                  background: isActive('/booking')
-                    ? 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)'
-                    : 'transparent',
-                  boxShadow: isActive('/booking')
-                    ? '0 4px 15px rgba(99, 102, 241, 0.3)'
-                    : 'none',
-                }}
-                onMouseEnter={(e) => {
-                  if (!isActive('/booking')) {
-                    e.currentTarget.style.background = 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)';
-                    e.currentTarget.style.boxShadow = '0 4px 15px rgba(99, 102, 241, 0.3)';
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (!isActive('/booking')) {
-                    e.currentTarget.style.background = 'transparent';
-                    e.currentTarget.style.boxShadow = 'none';
-                  }
-                }}
-              >
-                Book a Service
-              </Link>
-            </div>
-
-            <Link
-              to="/blog"
-              onClick={() => setDrawerVisible(false)}
-              className={`px-4 py-3 rounded-xl font-semibold transition-all block ${
-                isActive('/blog')
-                  ? 'text-white'
-                  : 'text-gray-700 hover:text-white'
-              }`}
-              style={{ 
-                textDecoration: 'none',
-                background: isActive('/blog')
-                  ? 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)'
-                  : 'transparent',
-                boxShadow: isActive('/blog')
-                  ? '0 4px 15px rgba(99, 102, 241, 0.3)'
-                  : 'none',
-              }}
-              onMouseEnter={(e) => {
-                if (!isActive('/blog')) {
-                  e.currentTarget.style.background = 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)';
-                  e.currentTarget.style.boxShadow = '0 4px 15px rgba(99, 102, 241, 0.3)';
-                }
-              }}
-              onMouseLeave={(e) => {
-                if (!isActive('/blog')) {
-                  e.currentTarget.style.background = 'transparent';
-                  e.currentTarget.style.boxShadow = 'none';
-                }
-              }}
-            >
-              Blog
-            </Link>
-            <Link
-              to="/faq"
-              onClick={() => setDrawerVisible(false)}
-              className={`px-4 py-3 rounded-xl font-semibold transition-all block ${
-                isActive('/faq')
-                  ? 'text-white'
-                  : 'text-gray-700 hover:text-white'
-              }`}
-              style={{ 
-                textDecoration: 'none',
-                background: isActive('/faq')
-                  ? 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)'
-                  : 'transparent',
-                boxShadow: isActive('/faq')
-                  ? '0 4px 15px rgba(99, 102, 241, 0.3)'
-                  : 'none',
-              }}
-              onMouseEnter={(e) => {
-                if (!isActive('/faq')) {
-                  e.currentTarget.style.background = 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)';
-                  e.currentTarget.style.boxShadow = '0 4px 15px rgba(99, 102, 241, 0.3)';
-                }
-              }}
-              onMouseLeave={(e) => {
-                if (!isActive('/faq')) {
-                  e.currentTarget.style.background = 'transparent';
-                  e.currentTarget.style.boxShadow = 'none';
-                }
-              }}
-            >
-              FAQ
-            </Link>
+            ))}
           </nav>
 
-          <Divider style={{ margin: '24px 0', borderColor: '#e5e7eb' }} />
+          <Divider style={{ margin: '24px 0', borderColor: 'rgba(0, 240, 255, 0.2)' }} />
 
-          {/* CTA Section */}
-          <div className="flex flex-col space-y-3">
-            <Link to="/booking" onClick={() => setDrawerVisible(false)}>
-              <Button
-                type="primary"
-                block
-                style={{
-                  background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%)',
-                  backgroundSize: '200% 200%',
-                  border: 'none',
-                  borderRadius: '12px',
-                  fontWeight: 700,
-                  height: '48px',
-                  boxShadow: '0 8px 30px rgba(99, 102, 241, 0.4)',
-                  fontSize: '15px',
-                  letterSpacing: '0.5px',
-                  transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-2px) scale(1.02)';
-                  e.currentTarget.style.boxShadow = '0 12px 40px rgba(99, 102, 241, 0.5)';
-                  e.currentTarget.style.backgroundPosition = '100% 0';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                  e.currentTarget.style.boxShadow = '0 8px 30px rgba(99, 102, 241, 0.4)';
-                  e.currentTarget.style.backgroundPosition = '0% 0%';
-                }}
-              >
-                Get Started
-              </Button>
-            </Link>
-          </div>
-
-          <Divider style={{ margin: '24px 0', borderColor: '#e5e7eb' }} />
-
-          {/* Contact Section */}
           <div className="space-y-4">
-            <p className="px-4 text-xs uppercase font-bold text-gray-400 tracking-wider">
+            <p className="px-4 text-xs uppercase font-bold tracking-wider" style={{ color: '#00f0ff' }}>
               Contact
             </p>
             <a
               href="tel:+254796869402"
-              className="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-700 hover:text-white transition-all"
+              className="flex items-center gap-3 px-4 py-3 rounded-xl transition-all"
               style={{ 
                 textDecoration: 'none',
-                background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%)',
-                border: '2px solid rgba(99, 102, 241, 0.2)',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)';
-                e.currentTarget.style.borderColor = '#6366f1';
-                e.currentTarget.style.boxShadow = '0 4px 20px rgba(99, 102, 241, 0.3)';
-                e.currentTarget.style.transform = 'translateY(-2px)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%)';
-                e.currentTarget.style.borderColor = 'rgba(99, 102, 241, 0.2)';
-                e.currentTarget.style.boxShadow = 'none';
-                e.currentTarget.style.transform = 'translateY(0)';
+                background: 'rgba(0, 240, 255, 0.1)',
+                border: '1px solid rgba(0, 240, 255, 0.3)',
+                color: '#e2e8f0',
               }}
             >
-              <div
-                className="p-2.5 rounded-xl transition-all"
-                style={{ 
-                  background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)',
-                  color: 'white',
-                  boxShadow: '0 4px 15px rgba(99, 102, 241, 0.3)',
-                }}
-              >
+              <div className="p-2.5 rounded-xl" style={{ background: 'rgba(0, 240, 255, 0.2)', color: '#00f0ff' }}>
                 <FiPhone size={18} />
               </div>
               <div>
-                <p className="text-xs text-gray-500 font-semibold">Phone</p>
-                <p className="text-sm font-bold text-gray-800 group-hover:text-white">+254 796 869 402</p>
+                <p className="text-xs font-semibold" style={{ color: '#00f0ff' }}>Phone</p>
+                <p className="text-sm font-bold">+254 796 869 402</p>
               </div>
             </a>
             <a
               href="mailto:support@blackie-networks.com"
-              className="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-700 hover:text-white transition-all"
+              className="flex items-center gap-3 px-4 py-3 rounded-xl transition-all"
               style={{ 
                 textDecoration: 'none',
-                background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%)',
-                border: '2px solid rgba(99, 102, 241, 0.2)',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)';
-                e.currentTarget.style.borderColor = '#6366f1';
-                e.currentTarget.style.boxShadow = '0 4px 20px rgba(99, 102, 241, 0.3)';
-                e.currentTarget.style.transform = 'translateY(-2px)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%)';
-                e.currentTarget.style.borderColor = 'rgba(99, 102, 241, 0.2)';
-                e.currentTarget.style.boxShadow = 'none';
-                e.currentTarget.style.transform = 'translateY(0)';
+                background: 'rgba(0, 240, 255, 0.1)',
+                border: '1px solid rgba(0, 240, 255, 0.3)',
+                color: '#e2e8f0',
               }}
             >
-              <div
-                className="p-2.5 rounded-xl transition-all"
-                style={{ 
-                  background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)',
-                  color: 'white',
-                  boxShadow: '0 4px 15px rgba(99, 102, 241, 0.3)',
-                }}
-              >
+              <div className="p-2.5 rounded-xl" style={{ background: 'rgba(0, 240, 255, 0.2)', color: '#00f0ff' }}>
                 <FiMail size={18} />
               </div>
               <div>
-                <p className="text-xs text-gray-500 font-semibold">Email</p>
-                <p className="text-sm font-bold text-gray-800">support@blackie-networks.com</p>
+                <p className="text-xs font-semibold" style={{ color: '#00f0ff' }}>Email</p>
+                <p className="text-sm font-bold">support@blackie-networks.com</p>
               </div>
             </a>
           </div>

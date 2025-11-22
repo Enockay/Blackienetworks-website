@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blackie Networks - Notification API Documentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #00f0ff;
+            --primary-dark: #0066ff;
+            --secondary: #7c3aed;
+            --bg-dark: #0a0e27;
+            --bg-darker: #050810;
+            --text-light: #e2e8f0;
+            --text-muted: #94a3b8;
+            --border: rgba(0, 240, 255, 0.2);
+            --success: #00ff88;
+            --error: #ef4444;
+            --warning: #f59e0b;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, var(--bg-darker) 0%, var(--bg-dark) 100%);
+            color: var(--text-light);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: rgba(10, 14, 39, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 30px 0;
+            margin-bottom: 40px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1 {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 50%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .badge-success {
+            background: rgba(0, 255, 136, 0.2);
+            color: var(--success);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+        }
+
+        .nav {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+        }
+
+        .nav a:hover {
+            background: rgba(0, 240, 255, 0.1);
+            border-color: var(--border);
+            color: var(--primary);
+        }
+
+        .section {
+            background: rgba(10, 14, 39, 0.6);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(20px);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 24px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border-radius: 2px;
+        }
+
+        .endpoint {
+            background: rgba(5, 8, 16, 0.6);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        .endpoint-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .method {
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+
+        .method-get { background: rgba(59, 130, 246, 0.2); color: #3b82f6; border: 1px solid rgba(59, 130, 246, 0.3); }
+        .method-post { background: rgba(34, 197, 94, 0.2); color: #22c55e; border: 1px solid rgba(34, 197, 94, 0.3); }
+        .method-put { background: rgba(251, 191, 36, 0.2); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.3); }
+        .method-delete { background: rgba(239, 68, 68, 0.2); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); }
+
+        .path {
+            font-family: 'Monaco', 'Courier New', monospace;
+            color: var(--primary);
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .description {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .code-block {
+            background: var(--bg-darker);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+
+        .code-block code {
+            color: var(--text-light);
+        }
+
+        .param-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .param-table th,
+        .param-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .param-table th {
+            background: rgba(0, 240, 255, 0.1);
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .param-table td {
+            color: var(--text-light);
+        }
+
+        .required {
+            color: var(--error);
+            font-weight: 600;
+        }
+
+        .optional {
+            color: var(--text-muted);
+        }
+
+        .response-example {
+            background: rgba(0, 255, 136, 0.05);
+            border-left: 3px solid var(--success);
+        }
+
+        .error-example {
+            background: rgba(239, 68, 68, 0.05);
+            border-left: 3px solid var(--error);
+        }
+
+        .info-box {
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        .info-box strong {
+            color: var(--primary);
+        }
+
+        .auth-box {
+            background: rgba(251, 191, 36, 0.1);
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        .auth-box strong {
+            color: var(--warning);
+        }
+
+        .toc {
+            background: rgba(10, 14, 39, 0.6);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .toc h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .toc ul {
+            list-style: none;
+        }
+
+        .toc li {
+            margin: 8px 0;
+        }
+
+        .toc a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .toc a:hover {
+            color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .endpoint-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>Blackie Networks Notification API <span class="badge badge-success">v1.0</span></h1>
+            <p class="subtitle">Comprehensive notification service for the entire Blackie Networks ecosystem</p>
+            <div class="nav">
+                <a href="#authentication">Authentication</a>
+                <a href="#notifications">Notifications</a>
+                <a href="#templates">Templates</a>
+                <a href="#tokens">Access Tokens</a>
+                <a href="#examples">Examples</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="section">
+            <h2 class="section-title">Overview</h2>
+            <p class="description">
+                The Blackie Networks Notification API provides a unified interface for sending notifications across 
+                multiple channels (Email, SMS) to any system within the Blackie Networks ecosystem. All requests 
+                require authentication via access tokens.
+            </p>
+            <div class="info-box">
+                <strong>Base URL:</strong> <code>http://localhost:3010/api</code><br>
+                <strong>API Version:</strong> v1.0<br>
+                <strong>Supported Channels:</strong> Email, SMS<br>
+                <strong>Response Format:</strong> JSON
+            </div>
+        </div>
+
+        <div id="authentication" class="section">
+            <h2 class="section-title">Authentication</h2>
+            <p class="description">
+                All API requests require an access token in the Authorization header. Access tokens are managed 
+                through the Token Management API and can be scoped to specific notification channels.
+            </p>
+            
+            <div class="auth-box">
+                <strong>⚠️ Required Header:</strong><br>
+                <code>Authorization: Bearer &lt;your-access-token&gt;</code>
+            </div>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="method method-post">POST</span>
+                    <span class="path">/api/tokens</span>
+                </div>
+                <p class="description">Create a new access token for API authentication.</p>
+                
+                <h4 style="color: var(--primary); margin: 15px 0 10px 0;">Request Body</h4>
+                <table class="param-table">
+                    <thead>
+                        <tr>
+                            <th>Field</th>
+                            <th>Type</th>
+                            <th>Required</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>name</td>
+                            <td>string</td>
+                            <td><span class="required">Yes</span></td>
+                            <td>Token name/identifier</td>
+                        </tr>
+                        <tr>
+                            <td>description</td>
+                            <td>string</td>
+                            <td><span class="optional">No</span></td>
+                            <td>Token description</td>
+                        </tr>
+                        <tr>
+                            <td>allowedChannels</td>
+                            <td>array</td>
+                            <td><span class="optional">No</span></td>
+                            <td>Channels this token can use (default: ["email", "sms"])</td>
+                        </tr>
+                        <tr>
+                            <td>rateLimit</td>
+                            <td>number</td>
+                            <td><span class="optional">No</span></td>
+                            <td>Requests per hour (default: 1000)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4 style="color: var(--primary); margin: 15px 0 10px 0;">Example Request</h4>
+                <div class="code-block">
+                    <code>POST /api/tokens
+Content-Type: application/json
+
+{
+  "name": "booking-service",
+  "description": "Token for booking service notifications",
+  "allowedChannels": ["email", "sms"],
+  "rateLimit": 500
+}</code>
+                </div>
+
+                <h4 style="color: var(--primary); margin: 15px 0 10px 0;">Example Response</h4>
+                <div class="code-block response-example">
+                    <code>{
+  "success": true,
+  "message": "Access token created successfully",
+  "data": {
+    "token": "12345678-1234-1234-1234-123456789abc",
+    "id": "507f1f77bcf86cd799439011",
+    "name": "booking-service",
+    "allowedChannels": ["email", "sms"],
+    "rateLimit": 500,
+    "warning": "⚠️ Save this token now. You will not be able to see it again!"
+  }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div id="notifications" class="section">
+            <h2 class="section-title">Notifications</h2>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="method method-post">POST</span>
+                    <span class="path">/api/notifications/send</span>
+                </div>
+                <p class="description">Send a single notification via email or SMS.</p>
+                
+                <h4 style="color: var(--primary); margin: 15px 0 10px 0;">Request Body</h4>
+                <table class="param-table">
+                    <thead>
+                        <tr>
+                            <th>Field</th>
+                            <th>Type</th>
+                            <th>Required</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>channel</td>
+                            <td>string</td>
+                            <td><span class="required">Yes</span></td>
+                            <td>"email" or "sms"</td>
+                        </tr>
+                        <tr>
+                            <td>recipient</td>
+                            <td>string</td>
+                            <td><span class="required">Yes</span></td>
+                            <td>Email address or phone number (E.164 format)</td>
+                        </tr>
+                        <tr>
+                            <td>message</td>
+                            <td>string</td>
+                            <td><span class="required">Yes</span></td>
+                            <td>Message content (HTML for email, plain text for SMS)</td>
+                        </tr>
+                        <tr>
+                            <td>subject</td>
+                            <td>string</td>
+                            <td><span class="optional">No</span></td>
+                            <td>Email subject (required for email channel)</td>
+                        </tr>
+                        <tr>
+                            <td>recipientName</td>
+                            <td>string</td>
+                            <td><span class="optional">No</span></td>
+                            <td>Recipient's name</td>
+                        </tr>
+                        <tr>
+                            <td>templateId</td>
+                            <td>string</td>
+                            <td><span class="optional">No</span></td>
+                            <td>Template ID to use</td>
+                        </tr>
+                        <tr>
+                            <td>templateData</td>
+                            <td>object</td>
+                            <td><span class="optional">No</span></td>
+                            <td>Data for template variables</td>
+                        </tr>
+                        <tr>
+                            <td>scheduledFor</td>
+                            <td>string</td>
+                            <td><span class="optional">No</span></td>
+                            <td>ISO 8601 date for scheduled delivery</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4 style="color: var(--primary); margin: 15px 0 10px 0;">Example: Send Email</h4>
+                <div class="code-block">
+                    <code>POST /api/notifications/send
+Authorization: Bearer your-access-token
+Content-Type: application/json
+
+{
+  "channel": "email",
+  "recipient": "user@example.com",
+  "recipientName": "John Doe",
+  "subject": "Booking Confirmation",
+  "message": "&lt;h1&gt;Your booking is confirmed!&lt;/h1&gt;&lt;p&gt;Thank you for booking with us.&lt;/p&gt;"
+}</code>
+                </div>
+
+                <h4 style="color: var(--primary); margin: 15px 0 10px 0;">Example: Send SMS</h4>
+                <div class="code-block">
+                    <code>POST /api/notifications/send
+Authorization: Bearer your-access-token
+Content-Type: application/json
+
+{
+  "channel": "sms",
+  "recipient": "+254712345678",
+  "message": "Your booking is confirmed! Thank you for choosing Blackie Networks."
+}</code>
+                </div>
+
+                <h4 style="color: var(--primary); margin: 15px 0 10px 0;">Success Response</h4>
+                <div class="code-block response-example">
+                    <code>{
+  "success": true,
+  "message": "Notification sent successfully",
+  "data": {
+    "notificationId": "507f1f77bcf86cd799439011",
+    "messageId": "&lt;202511221250.10672980506@smtp-relay.mailin.fr&gt;",
+    "status": "sent",
+    "channel": "email"
+  }
+}</code>
+                </div>
+
+                <h4 style="color: var(--primary); margin: 15px 0 10px 0;">Error Response</h4>
+                <div class="code-block error-example">
+                    <code>{
+  "success": false,
+  "error": "UNAUTHORIZED",
+  "message": "Access token is required. Please provide token in Authorization header.",
+  "details": {
+    "header": "Authorization: Bearer &lt;your-token&gt;"
+  }
+}</code>
+                </div>
+            </div>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="method method-post">POST</span>
+                    <span class="path">/api/notifications/bulk</span>
+                </div>
+                <p class="description">Send multiple notifications in a single request (max 100).</p>
+                
+                <h4 style="color: var(--primary); margin: 15px 0 10px 0;">Example Request</h4>
+                <div class="code-block">
+                    <code>POST /api/notifications/bulk
+Authorization: Bearer your-access-token
+Content-Type: application/json
+
+{
+  "notifications": [
+    {
+      "channel": "email",
+      "recipient": "user1@example.com",
+      "subject": "Welcome",
+      "message": "Welcome to Blackie Networks!"
+    },
+    {
+      "channel": "sms",
+      "recipient": "+254712345678",
+      "message": "Your order has been processed."
+    }
+  ]
+}</code>
+                </div>
+            </div>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="method method-get">GET</span>
+                    <span class="path">/api/notifications</span>
+                </div>
+                <p class="description">List all notifications sent by your access token.</p>
+                
+                <h4 style="color: var(--primary); margin: 15px 0 10px 0;">Query Parameters</h4>
+                <table class="param-table">
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>page</td>
+                            <td>number</td>
+                            <td>Page number (default: 1)</td>
+                        </tr>
+                        <tr>
+                            <td>limit</td>
+                            <td>number</td>
+                            <td>Items per page (default: 20)</td>
+                        </tr>
+                        <tr>
+                            <td>status</td>
+                            <td>string</td>
+                            <td>Filter by status (pending, sent, failed, delivered)</td>
+                        </tr>
+                        <tr>
+                            <td>channel</td>
+                            <td>string</td>
+                            <td>Filter by channel (email, sms)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="method method-get">GET</span>
+                    <span class="path">/api/notifications/stats/summary</span>
+                </div>
+                <p class="description">Get notification statistics and analytics.</p>
+            </div>
+        </div>
+
+        <div id="templates" class="section">
+            <h2 class="section-title">Templates</h2>
+            <p class="description">
+                Create reusable notification templates with variable substitution using <code>{{variableName}}</code> syntax.
+            </p>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="method method-post">POST</span>
+                    <span class="path">/api/templates</span>
+                </div>
+                <p class="description">Create a new notification template.</p>
+                
+                <h4 style="color: var(--primary); margin: 15px 0 10px 0;">Example Request</h4>
+                <div class="code-block">
+                    <code>POST /api/templates
+Content-Type: application/json
+
+{
+  "name": "booking-confirmation",
+  "description": "Booking confirmation email template",
+  "channel": "email",
+  "subject": "Booking Confirmed - {{serviceName}}",
+  "body": "&lt;h1&gt;Hello {{customerName}}&lt;/h1&gt;&lt;p&gt;Your booking for {{serviceName}} on {{bookingDate}} is confirmed.&lt;/p&gt;",
+  "variables": ["customerName", "serviceName", "bookingDate"]
+}</code>
+                </div>
+            </div>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="method method-get">GET</span>
+                    <span class="path">/api/templates</span>
+                </div>
+                <p class="description">List all available templates.</p>
+            </div>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="method method-get">GET</span>
+                    <span class="path">/api/templates/:id/preview</span>
+                </div>
+                <p class="description">Preview a template with sample data.</p>
+            </div>
+        </div>
+
+        <div id="tokens" class="section">
+            <h2 class="section-title">Access Token Management</h2>
+            <p class="description">
+                Manage access tokens for API authentication. Tokens can be created, updated, and revoked.
+            </p>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="method method-get">GET</span>
+                    <span class="path">/api/tokens</span>
+                </div>
+                <p class="description">List all access tokens.</p>
+            </div>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="method method-put">PUT</span>
+                    <span class="path">/api/tokens/:id</span>
+                </div>
+                <p class="description">Update an access token (name, channels, rate limit, etc.).</p>
+            </div>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="method method-delete">DELETE</span>
+                    <span class="path">/api/tokens/:id</span>
+                </div>
+                <p class="description">Delete/revoke an access token.</p>
+            </div>
+        </div>
+
+        <div id="examples" class="section">
+            <h2 class="section-title">Code Examples</h2>
+
+            <h3 style="color: var(--primary); margin: 20px 0 10px 0;">cURL Example</h3>
+            <div class="code-block">
+                <code>curl -X POST http://localhost:3010/api/notifications/send \\
+  -H "Authorization: Bearer your-access-token" \\
+  -H "Content-Type: application/json" \\
+  -d '{
+    "channel": "email",
+    "recipient": "user@example.com",
+    "subject": "Test Notification",
+    "message": "This is a test notification from Blackie Networks API"
+  }'</code>
+            </div>
+
+            <h3 style="color: var(--primary); margin: 20px 0 10px 0;">JavaScript/Node.js Example</h3>
+            <div class="code-block">
+                <code>const response = await fetch('http://localhost:3010/api/notifications/send', {
+  method: 'POST',
+  headers: {
+    'Authorization': 'Bearer your-access-token',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    channel: 'email',
+    recipient: 'user@example.com',
+    subject: 'Test Notification',
+    message: 'This is a test notification'
+  })
+});
+
+const data = await response.json();
+console.log(data);</code>
+            </div>
+
+            <h3 style="color: var(--primary); margin: 20px 0 10px 0;">Python Example</h3>
+            <div class="code-block">
+                <code>import requests
+
+url = "http://localhost:3010/api/notifications/send"
+headers = {
+    "Authorization": "Bearer your-access-token",
+    "Content-Type": "application/json"
+}
+data = {
+    "channel": "email",
+    "recipient": "user@example.com",
+    "subject": "Test Notification",
+    "message": "This is a test notification"
+}
+
+response = requests.post(url, headers=headers, json=data)
+print(response.json())</code>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Error Codes</h2>
+            <table class="param-table">
+                <thead>
+                    <tr>
+                        <th>Error Code</th>
+                        <th>HTTP Status</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>UNAUTHORIZED</td>
+                        <td>401</td>
+                        <td>Access token missing or invalid</td>
+                    </tr>
+                    <tr>
+                        <td>CHANNEL_NOT_ALLOWED</td>
+                        <td>403</td>
+                        <td>Token doesn't have permission for requested channel</td>
+                    </tr>
+                    <tr>
+                        <td>VALIDATION_ERROR</td>
+                        <td>400</td>
+                        <td>Request validation failed</td>
+                    </tr>
+                    <tr>
+                        <td>RATE_LIMIT_EXCEEDED</td>
+                        <td>429</td>
+                        <td>Too many requests</td>
+                    </tr>
+                    <tr>
+                        <td>NOT_FOUND</td>
+                        <td>404</td>
+                        <td>Resource not found</td>
+                    </tr>
+                    <tr>
+                        <td>INTERNAL_ERROR</td>
+                        <td>500</td>
+                        <td>Server error</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
+

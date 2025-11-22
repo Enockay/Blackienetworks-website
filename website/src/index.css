@@ -1,3 +1,136 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Tech Network Theme - Modern Cyberpunk/Network Colors */
+:root {
+  --tech-cyan: #00f0ff;
+  --tech-blue: #0066ff;
+  --tech-purple: #7c3aed;
+  --tech-pink: #ff006e;
+  --tech-green: #00ff88;
+  --tech-dark: #0a0e27;
+  --tech-darker: #050810;
+  --tech-card: rgba(10, 14, 39, 0.8);
+  --tech-glass: rgba(255, 255, 255, 0.05);
+  --tech-border: rgba(0, 240, 255, 0.2);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(135deg, var(--tech-darker) 0%, var(--tech-dark) 50%, #0f172a 100%);
+  color: #e2e8f0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Animated background grid effect */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Glowing text effect */
+@keyframes glow {
+  0%, 100% {
+    text-shadow: 0 0 10px var(--tech-cyan), 0 0 20px var(--tech-cyan), 0 0 30px var(--tech-cyan);
+  }
+  50% {
+    text-shadow: 0 0 20px var(--tech-cyan), 0 0 30px var(--tech-cyan), 0 0 40px var(--tech-cyan), 0 0 50px var(--tech-blue);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.3), 0 0 40px rgba(0, 102, 255, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(0, 240, 255, 0.5), 0 0 60px rgba(0, 102, 255, 0.4);
+  }
+}
+
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Glassmorphism effect */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+/* Tech button styles */
+.tech-button {
+  background: linear-gradient(135deg, var(--tech-cyan) 0%, var(--tech-blue) 100%);
+  border: none;
+  color: var(--tech-darker);
+  font-weight: 700;
+  padding: 12px 32px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.tech-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.tech-button:hover::before {
+  left: 100%;
+}
+
+.tech-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 240, 255, 0.4);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--tech-darker);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--tech-cyan), var(--tech-blue));
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--tech-blue), var(--tech-purple));
+}

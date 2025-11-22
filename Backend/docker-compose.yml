@@ -1,0 +1,71 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: blackie-backend
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - MONGODB=${MONGODB:-mongodb://mongo:27017/blackienetworks}
+      - BREVO_API_KEY=${BREVO_API_KEY}
+      - BREVO_SENDER_EMAIL=${BREVO_SENDER_EMAIL}
+      - BREVO_SENDER_NAME=${BREVO_SENDER_NAME:-Blackie Networks}
+      - BREVO_REPLY_TO_EMAIL=${BREVO_REPLY_TO_EMAIL}
+      - BREVO_SMS_SENDER=${BREVO_SMS_SENDER:-BlackieNet}
+      - ADMIN_EMAIL=${ADMIN_EMAIL}
+      - ALLOWED_ORIGINS=${ALLOWED_ORIGINS}
+    env_file:
+      - .env
+    depends_on:
+      - mongo
+    restart: unless-stopped
+    networks:
+      - blackie-network
+    volumes:
+      - ./logs:/app/logs
+
+  mongo:
+    image: mongo:7
+    container_name: blackie-mongo
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_DATABASE=blackienetworks
+    volumes:
+      - mongo-data:/data/db
+      - ./mongo-init:/docker-entrypoint-initdb.d
+    restart: unless-stopped
+    networks:
+      - blackie-network
+    command: mongod --auth
+
+  mongo-express:
+    image: mongo-express:latest
+    container_name: blackie-mongo-express
+    ports:
+      - "8081:8081"
+    environment:
+      - ME_CONFIG_MONGODB_URL=mongodb://mongo:27017/
+      - ME_CONFIG_BASICAUTH_USERNAME=${MONGO_EXPRESS_USERNAME:-admin}
+      - ME_CONFIG_BASICAUTH_PASSWORD=${MONGO_EXPRESS_PASSWORD:-admin}
+    depends_on:
+      - mongo
+    restart: unless-stopped
+    networks:
+      - blackie-network
+    profiles:
+      - tools
+
+volumes:
+  mongo-data:
+    driver: local
+
+networks:
+  blackie-network:
+    driver: bridge
+

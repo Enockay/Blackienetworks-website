@@ -9,7 +9,11 @@ import {
   FaCloud,
   FaMobileAlt,
 } from "react-icons/fa";
-import { Drawer, Button, Form, Input, message } from "antd";
+
+import { Drawer, Button, Form, Input, message, Card, Typography } from "antd";
+import { FiZap, FiArrowRight } from "react-icons/fi";
+
+const { Title, Paragraph } = Typography;
 
 // Define service structure
 interface Service {
@@ -17,51 +21,58 @@ interface Service {
   title: string;
   description: string;
   price: number;
+  color: string;
 }
 
-// Service Data
+// Service Data with tech colors
 const services: Service[] = [
   {
-    icon: <FaWifi />,
+    icon: <FaWifi size={32} />,
     title: "Campus Wi-Fi Solutions",
     description:
       "We install and maintain secure high-speed Wi-Fi networks across hostels, lecture halls, libraries, and admin blocks. Our packages include setup of hotspot access points, captive portals for student login, and bandwidth control. Users can access internet at affordable rates starting from KES 10/hour, KES 45/day, and discounted weekly/monthly bundles.",
     price: 700,
+    color: "#00f0ff",
   },
   {
-    icon: <FaServer />,
+    icon: <FaServer size={32} />,
     title: "Network Infrastructure & Billing Systems",
     description:
       "We provide full-scale infrastructure: cabling, routers, MikroTik configs, load balancing, Radius billing, and user management systems for monetized or managed access.",
     price: 5000,
+    color: "#0066ff",
   },
   {
-    icon: <FaCode />,
+    icon: <FaCode size={32} />,
     title: "Custom Software Development",
     description:
       "Tailored portals for learning, payments, attendance, and reporting. Includes responsive web/mobile UIs, admin dashboards, and APIs.",
     price: 10000,
+    color: "#7c3aed",
   },
   {
-    icon: <FaCloud />,
+    icon: <FaCloud size={32} />,
     title: "Cloud Services",
     description:
       "Hosting, backups, server deployment via AWS/DigitalOcean with 99.99% uptime. Ideal for high-traffic university systems.",
     price: 3000,
+    color: "#00ff88",
   },
   {
-    icon: <FaMobileAlt />,
+    icon: <FaMobileAlt size={32} />,
     title: "Mobile App Integration",
     description:
       "Android/iOS apps for learning, communication, and reminders. Supports offline mode, push notifications, and brand styling.",
     price: 4500,
+    color: "#ff006e",
   },
   {
-    icon: <FaUserShield />,
+    icon: <FaUserShield size={32} />,
     title: "IT Consultancy & VPN Services",
     description:
       "We audit, train, and optimize networks. Secure VPN (OpenVPN, WireGuard) for staff/student remote access and compliance.",
     price: 2000,
+    color: "#00f0ff",
   },
 ];
 
@@ -116,148 +127,400 @@ export default function CompanySections() {
   };
 
   return (
-    <div className="p-6 md:p-12 space-y-28 mt-7 bg-gradient-to-b from-slate-100 via-white to-slate-200">
-      {/* About Us */}
-      <motion.section
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="text-center max-w-4xl mx-auto"
-        aria-labelledby="products-heading"
-      >
-        <h2 id="products-heading" className="text-2xl font-bold mb-2 text-indigo-700">Our Products</h2>
-        <p className="text-gray-700 text-lg">
-          We are a Chuka-based tech company revolutionizing internet access and digital systems. From blazing-fast Wi-Fi to smart software and VPNs, we’re your campus tech ally.
-        </p>
-      </motion.section>
-
-      {/* Services */}
-      <motion.section
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        aria-labelledby="services-heading"
-      >
-        <h2 id="services-heading" className="sr-only">Our Services</h2>
-        <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3">
-          {services.map((service, idx) => (
-            <motion.article
-              key={idx}
-              whileHover={{ scale: 1.05 }}
-              className="p-6 bg-white hover:bg-blue-50 rounded-2xl shadow-xl border border-gray-100 hover:border-indigo-500 text-center space-y-4 transition-all duration-300"
-            >
-              <div className="text-5xl text-indigo-600 mx-auto">{service.icon}</div>
-              <h3 className="text-xl font-bold text-gray-800">{service.title}</h3>
-              <p className="text-gray-600 text-sm line-clamp-5">{service.description}</p>
-              <p className="text-green-600 font-semibold text-sm">
-                Starting from KES {service.price.toLocaleString()}
-              </p>
-              <button
-                onClick={() => handleBook(service)}
-                className="bg-indigo-600 text-white px-4 py-2 rounded-full hover:bg-indigo-700 text-sm"
-                aria-label={`Book ${service.title} service`}
-              >
-                Book Now
-              </button>
-            </motion.article>
-          ))}
-        </div>
-      </motion.section>
-
-      {/* Drawer Booking */}
-      <Drawer
-        title={
-          <div className="flex flex-col space-y-1">
-            <span className="text-lg font-semibold text-indigo-700">
-              {selectedService?.title}
-            </span>
-            <span className="text-sm text-gray-500">
-              Starting from KES {selectedService?.price.toLocaleString()}
-            </span>
-          </div>
-        }
-        open={drawerOpen}
-        onClose={() => setDrawerOpen(false)}
-        width={500}
-        bodyStyle={{ background: "linear-gradient(to bottom right, #f9fafb, #eef2ff)" }}
-      >
-        <p className="text-sm text-gray-700 mb-4">{selectedService?.description}</p>
-        <Form
-          layout="vertical"
-          form={form}
-          onFinish={handleFinish}
-          className="space-y-2"
+    <div style={{ 
+      padding: '80px 20px', 
+      marginTop: '80px',
+      minHeight: '100vh',
+      background: 'linear-gradient(135deg, rgba(5, 8, 16, 0.95) 0%, rgba(10, 14, 39, 0.95) 100%)',
+      position: 'relative',
+    }}>
+      <div className="max-w-7xl mx-auto" style={{ position: 'relative', zIndex: 1 }}>
+        {/* Header Section */}
+        <motion.section
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center max-w-4xl mx-auto mb-20"
+          aria-labelledby="products-heading"
         >
-          <Form.Item name="name" label="Full Name" rules={[{ required: true }]}>
-            <Input placeholder="John Doe" />
-          </Form.Item>
-          <Form.Item name="email" label="Email" rules={[{ required: true, type: "email" }]}>
-            <Input placeholder="john@example.com" />
-          </Form.Item>
-          <Form.Item name="phone" label="Phone Number" rules={[{ required: true }]}>
-            <Input placeholder="+2547..." />
-          </Form.Item>
-          <Form.Item name="note" label="Describe your request">
-            <Input.TextArea rows={3} placeholder="e.g., We need setup in 2 lecture halls..." />
-          </Form.Item>
-          <Button htmlType="submit" type="primary" className="w-full">
-            Submit Booking
-          </Button>
-        </Form>
-      </Drawer>
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            viewport={{ once: true }}
+            style={{
+              display: 'inline-block',
+              padding: '12px 24px',
+              background: 'rgba(0, 240, 255, 0.1)',
+              border: '1px solid rgba(0, 240, 255, 0.3)',
+              borderRadius: '50px',
+              marginBottom: '24px',
+            }}
+          >
+            <span style={{ color: '#00f0ff', fontSize: '14px', fontWeight: 600 }}>
+              <FiZap style={{ display: 'inline', marginRight: 8 }} />
+              Our Products & Services
+            </span>
+          </motion.div>
 
-      {/* Testimonials */}
-      <motion.section
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        aria-labelledby="testimonials-heading"
-      >
-        <h2 id="testimonials-heading" className="text-2xl font-bold text-center mb-10 text-indigo-700">
-          What Our Clients Say
-        </h2>
-        <div className="space-y-8 md:space-y-0 md:grid md:grid-cols-3 gap-6">
-          {testimonials.map((t, idx) => (
-            <motion.blockquote
-              key={idx}
-              whileHover={{ scale: 1.02 }}
-              className="bg-gradient-to-br from-white via-purple-50 to-indigo-100 p-6 rounded-xl shadow-lg space-y-4 border border-indigo-100"
-              itemScope
-              itemType="https://schema.org/Review"
-            >
-              <FaQuoteLeft className="text-3xl text-purple-600" />
-              <p className="text-gray-800 italic text-sm" itemProp="reviewBody">"{t.quote}"</p>
-              <footer className="text-right" itemScope itemType="https://schema.org/Person">
-                <cite className="text-sm text-indigo-700 font-bold not-italic" itemProp="name">— {t.name}</cite>
-                <p className="text-xs text-gray-500" itemProp="jobTitle">{t.role}</p>
-              </footer>
-              <div itemScope itemType="https://schema.org/Rating" style={{ display: 'none' }}>
-                <meta itemProp="ratingValue" content="5" />
-                <meta itemProp="bestRating" content="5" />
-              </div>
-            </motion.blockquote>
-          ))}
-        </div>
-        
-        {/* Aggregate Rating Schema */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'Organization',
-              name: 'Blackie Networks',
-              aggregateRating: {
-                '@type': 'AggregateRating',
-                ratingValue: '4.9',
-                reviewCount: testimonials.length.toString(),
-                bestRating: '5',
-                worstRating: '1',
-              },
-            }),
+          <Title
+            id="products-heading"
+            level={1}
+            style={{
+              fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+              fontWeight: 900,
+              marginBottom: '24px',
+              background: 'linear-gradient(135deg, #00f0ff 0%, #0066ff 50%, #7c3aed 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}
+          >
+            Revolutionary IT Solutions
+          </Title>
+          <Paragraph style={{ 
+            color: '#cbd5e1', 
+            fontSize: '1.125rem',
+            lineHeight: 1.8,
+            maxWidth: '700px',
+            margin: '0 auto',
+          }}>
+            We are a Chuka-based tech company revolutionizing internet access and digital systems. 
+            From blazing-fast Wi-Fi to smart software and VPNs, we're your campus tech ally.
+          </Paragraph>
+        </motion.section>
+
+        {/* Services Grid */}
+        <motion.section
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          aria-labelledby="services-heading"
+          style={{ marginBottom: '100px' }}
+        >
+          <h2 id="services-heading" className="sr-only">Our Services</h2>
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {services.map((service, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1, duration: 0.6 }}
+                whileHover={{ scale: 1.05, y: -10 }}
+              >
+                <Card
+                  hoverable
+                  className="glass"
+                  style={{
+                    height: '100%',
+                    borderRadius: '20px',
+                    padding: '30px',
+                    border: `1px solid ${service.color}40`,
+                    background: 'rgba(10, 14, 39, 0.6)',
+                    textAlign: 'center',
+                  }}
+                >
+                  <div style={{
+                    width: '80px',
+                    height: '80px',
+                    margin: '0 auto 24px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    background: `${service.color}20`,
+                    border: `2px solid ${service.color}40`,
+                    borderRadius: '50%',
+                    color: service.color,
+                  }}>
+                    {service.icon}
+                  </div>
+                  
+                  <Title level={4} style={{ 
+                    color: service.color, 
+                    marginBottom: '16px',
+                    fontSize: '1.5rem',
+                    fontWeight: 700,
+                  }}>
+                    {service.title}
+                  </Title>
+                  
+                  <Paragraph style={{ 
+                    color: '#cbd5e1', 
+                    fontSize: '0.95rem',
+                    lineHeight: 1.7,
+                    marginBottom: '20px',
+                    minHeight: '120px',
+                  }}>
+                    {service.description}
+                  </Paragraph>
+                  
+                  <div style={{
+                    padding: '16px',
+                    background: `${service.color}10`,
+                    border: `1px solid ${service.color}30`,
+                    borderRadius: '12px',
+                    marginBottom: '20px',
+                  }}>
+                    <p style={{ 
+                      color: service.color, 
+                      fontSize: '1.25rem',
+                      fontWeight: 700,
+                      margin: 0,
+                    }}>
+                      Starting from KES {service.price.toLocaleString()}
+                    </p>
+                  </div>
+                  
+                  <Button
+                    onClick={() => handleBook(service)}
+                    className="tech-button"
+                    style={{
+                      width: '100%',
+                      background: `linear-gradient(135deg, ${service.color} 0%, ${service.color}dd 100%)`,
+                      border: 'none',
+                      color: '#0a0e27',
+                      fontWeight: 700,
+                      height: '44px',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.boxShadow = `0 8px 30px ${service.color}40`;
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.boxShadow = 'none';
+                    }}
+                  >
+                    Book Now <FiArrowRight style={{ marginLeft: 8 }} />
+                  </Button>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </motion.section>
+
+        {/* Drawer Booking */}
+        <Drawer
+          title={
+            <div className="flex flex-col space-y-1">
+              <span style={{ 
+                fontSize: '1.25rem', 
+                fontWeight: 700,
+                color: selectedService?.color || '#00f0ff',
+              }}>
+                {selectedService?.title}
+              </span>
+              <span style={{ fontSize: '0.95rem', color: '#94a3b8' }}>
+                Starting from KES {selectedService?.price.toLocaleString()}
+              </span>
+            </div>
+          }
+          open={drawerOpen}
+          onClose={() => setDrawerOpen(false)}
+          width={500}
+          bodyStyle={{ 
+            background: 'linear-gradient(135deg, rgba(5, 8, 16, 0.95) 0%, rgba(10, 14, 39, 0.95) 100%)',
+            color: '#e2e8f0',
           }}
-        />
-      </motion.section>
+          headerStyle={{
+            background: 'rgba(10, 14, 39, 0.8)',
+            borderBottom: `1px solid ${selectedService?.color || '#00f0ff'}40`,
+          }}
+        >
+          <Paragraph style={{ color: '#cbd5e1', marginBottom: '24px' }}>
+            {selectedService?.description}
+          </Paragraph>
+          <Form
+            layout="vertical"
+            form={form}
+            onFinish={handleFinish}
+            className="space-y-2"
+          >
+            <Form.Item 
+              name="name" 
+              label={<span style={{ color: '#00f0ff' }}>Full Name</span>} 
+              rules={[{ required: true }]}
+            >
+              <Input 
+                placeholder="John Doe"
+                style={{
+                  background: 'rgba(0, 240, 255, 0.1)',
+                  border: '1px solid rgba(0, 240, 255, 0.3)',
+                  color: '#e2e8f0',
+                }}
+              />
+            </Form.Item>
+            <Form.Item 
+              name="email" 
+              label={<span style={{ color: '#00f0ff' }}>Email</span>} 
+              rules={[{ required: true, type: "email" }]}
+            >
+              <Input 
+                placeholder="john@example.com"
+                style={{
+                  background: 'rgba(0, 240, 255, 0.1)',
+                  border: '1px solid rgba(0, 240, 255, 0.3)',
+                  color: '#e2e8f0',
+                }}
+              />
+            </Form.Item>
+            <Form.Item 
+              name="phone" 
+              label={<span style={{ color: '#00f0ff' }}>Phone Number</span>} 
+              rules={[{ required: true }]}
+            >
+              <Input 
+                placeholder="+2547..."
+                style={{
+                  background: 'rgba(0, 240, 255, 0.1)',
+                  border: '1px solid rgba(0, 240, 255, 0.3)',
+                  color: '#e2e8f0',
+                }}
+              />
+            </Form.Item>
+            <Form.Item 
+              name="note" 
+              label={<span style={{ color: '#00f0ff' }}>Describe your request</span>}
+            >
+              <Input.TextArea 
+                rows={3} 
+                placeholder="e.g., We need setup in 2 lecture halls..."
+                style={{
+                  background: 'rgba(0, 240, 255, 0.1)',
+                  border: '1px solid rgba(0, 240, 255, 0.3)',
+                  color: '#e2e8f0',
+                }}
+              />
+            </Form.Item>
+            <Button 
+              htmlType="submit" 
+              className="tech-button"
+              style={{
+                width: '100%',
+                background: `linear-gradient(135deg, ${selectedService?.color || '#00f0ff'} 0%, ${selectedService?.color || '#0066ff'}dd 100%)`,
+                border: 'none',
+                color: '#0a0e27',
+                fontWeight: 700,
+                height: '48px',
+              }}
+            >
+              Submit Booking
+            </Button>
+          </Form>
+        </Drawer>
+
+        {/* Testimonials */}
+        <motion.section
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          aria-labelledby="testimonials-heading"
+        >
+          <div style={{ textAlign: 'center', marginBottom: '60px' }}>
+            <Title
+              id="testimonials-heading"
+              level={2}
+              style={{
+                fontSize: 'clamp(2rem, 4vw, 3rem)',
+                fontWeight: 800,
+                marginBottom: '16px',
+                background: 'linear-gradient(135deg, #00f0ff 0%, #7c3aed 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}
+            >
+              What Our Clients Say
+            </Title>
+            <Paragraph style={{ color: '#cbd5e1', fontSize: '1.125rem' }}>
+              Trusted by students, faculty, and businesses across Kenya
+            </Paragraph>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {testimonials.map((t, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1, duration: 0.6 }}
+                whileHover={{ scale: 1.02, y: -5 }}
+              >
+                <Card
+                  className="glass"
+                  style={{
+                    height: '100%',
+                    borderRadius: '20px',
+                    padding: '24px',
+                    border: '1px solid rgba(0, 240, 255, 0.2)',
+                    background: 'rgba(10, 14, 39, 0.6)',
+                  }}
+                  itemScope
+                  itemType="https://schema.org/Review"
+                >
+                  <FaQuoteLeft style={{ fontSize: '32px', color: '#00f0ff', marginBottom: '16px' }} />
+                  <Paragraph 
+                    style={{ 
+                      color: '#cbd5e1', 
+                      fontSize: '0.95rem',
+                      lineHeight: 1.7,
+                      fontStyle: 'italic',
+                      marginBottom: '20px',
+                    }}
+                    itemProp="reviewBody"
+                  >
+                    "{t.quote}"
+                  </Paragraph>
+                  <footer style={{ textAlign: 'right' }} itemScope itemType="https://schema.org/Person">
+                    <cite style={{ 
+                      fontSize: '0.95rem', 
+                      color: '#00f0ff', 
+                      fontWeight: 700, 
+                      fontStyle: 'normal',
+                      display: 'block',
+                      marginBottom: '4px',
+                    }} itemProp="name">
+                      — {t.name}
+                    </cite>
+                    <p style={{ 
+                      fontSize: '0.8rem', 
+                      color: '#94a3b8',
+                      margin: 0,
+                    }} itemProp="jobTitle">
+                      {t.role}
+                    </p>
+                  </footer>
+                  <div itemScope itemType="https://schema.org/Rating" style={{ display: 'none' }}>
+                    <meta itemProp="ratingValue" content="5" />
+                    <meta itemProp="bestRating" content="5" />
+                  </div>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+          
+          {/* Aggregate Rating Schema */}
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                '@context': 'https://schema.org',
+                '@type': 'Organization',
+                name: 'Blackie Networks',
+                aggregateRating: {
+                  '@type': 'AggregateRating',
+                  ratingValue: '4.9',
+                  reviewCount: testimonials.length.toString(),
+                  bestRating: '5',
+                  worstRating: '1',
+                },
+              }),
+            }}
+          />
+        </motion.section>
+      </div>
     </div>
   );
 }
