@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Drawer, Form, Input, Button as AntButton, message, Spin } from 'antd';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
+import { Spin } from 'antd';
 import { 
   ThunderboltOutlined, 
   CheckCircleOutlined,
@@ -12,7 +13,6 @@ interface Service {
   title: string;
   description: string;
   details: string[];
-  price: string;
   mikrotikAddons?: string[];
   siteLink?: string;
 }
@@ -29,7 +29,6 @@ const services: Service[] = [
       "24/7 uptime guarantee",
       "Easy setup and configuration"
     ],
-    price: "Contact for pricing",
     siteLink: "#" // You can add the actual site link here
   },
   {
@@ -43,7 +42,6 @@ const services: Service[] = [
       "Package and plan management",
       "Multi-payment gateway support"
     ],
-    price: "KES 50,000 - KES 200,000",
   },
   {
     title: "Mikrotik Configuration",
@@ -57,7 +55,6 @@ const services: Service[] = [
       "Quality of Service (QoS) optimization",
       "Wireless access point configuration"
     ],
-    price: "KES 5,000 - KES 50,000",
   },
   {
     title: "Software Maintenance",
@@ -71,7 +68,6 @@ const services: Service[] = [
       "Backup and recovery solutions",
       "Technical support and consultation"
     ],
-    price: "KES 15,000 - KES 100,000/month",
   },
   {
     title: "Cloud Hosting",
@@ -85,7 +81,6 @@ const services: Service[] = [
       "24/7 monitoring and support",
       "Multiple cloud provider options"
     ],
-    price: "KES 2,000 - KES 50,000/month",
   },
   {
     title: "SEO Optimization",
@@ -99,7 +94,6 @@ const services: Service[] = [
       "Link building strategies",
       "Performance and analytics reporting"
     ],
-    price: "KES 10,000 - KES 80,000/month",
   },
   {
     title: "IoT Device Remote Access (WireGuard)",
@@ -113,7 +107,6 @@ const services: Service[] = [
       "Cross-platform compatibility",
       "24/7 monitoring and support"
     ],
-    price: "KES 5,000 - KES 30,000",
   },
   {
     title: "Internet Installation (Kitui & Chuka)",
@@ -127,7 +120,6 @@ const services: Service[] = [
       "Maintenance and troubleshooting",
       "Affordable packages for homes and businesses"
     ],
-    price: "KES 2,000 - KES 15,000",
   },
   {
     title: "Internet Infrastructure Setup",
@@ -141,7 +133,6 @@ const services: Service[] = [
       "Network monitoring and support",
       "Scalable architecture for growth"
     ],
-    price: "KES 50,000 - KES 500,000",
   },
   {
     title: "Network Setup and Infrastructure",
@@ -154,7 +145,6 @@ const services: Service[] = [
       "Network monitoring and support",
       "Cloud infrastructure setup"
     ],
-    price: "KES 100,000 - KES 2,000,000",
     mikrotikAddons: [
       "Mikrotik router configuration",
       "Load balancing setup",
@@ -168,11 +158,9 @@ const services: Service[] = [
 const ServicesPage: React.FC = () => {
   const [expandedService, setExpandedService] = useState<number | null>(null);
   const [expandedMikrotik, setExpandedMikrotik] = useState<number | null>(null);
-  const [drawerVisible, setDrawerVisible] = useState(false);
-  const [selectedService, setSelectedService] = useState<Service | null>(null);
-  const [form] = Form.useForm();
   const [loading, setLoading] = useState(true);
   const detailsRef = useRef<HTMLDivElement | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Simulate loading to prevent empty pages
@@ -215,25 +203,9 @@ const ServicesPage: React.FC = () => {
     }
   };
 
-  const handleDrawerOpen = (service: Service) => {
-    setSelectedService(service);
-    setDrawerVisible(true);
-  };
-
-  const handleDrawerClose = () => {
-    setDrawerVisible(false);
-    form.resetFields();
-  };
-
-  const handleFinish = (values: any) => {
-    const payload = {
-      ...values,
-      service: selectedService?.title,
-      price: selectedService?.price,
-    };
-    console.log('Order Submitted:', payload);
-    message.success("Order submitted successfully!");
-    handleDrawerClose();
+  const handleBookNow = (service: Service) => {
+    // Navigate to booking page with service pre-selected
+    navigate('/booking', { state: { selectedService: service.title } });
   };
 
   if (loading) {
@@ -501,20 +473,6 @@ const ServicesPage: React.FC = () => {
                         </motion.div>
                       )}
 
-                      <motion.p
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 0.5 }}
-                        style={{
-                          fontSize: '1.25rem',
-                          fontWeight: 700,
-                          color: '#00f0ff',
-                          marginBottom: '24px',
-                        }}
-                      >
-                        Starting at {service.price}
-                      </motion.p>
-
                       {service.siteLink && (
                         <motion.a
                           href={service.siteLink}
@@ -582,7 +540,7 @@ const ServicesPage: React.FC = () => {
                 <motion.button
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
-                  onClick={() => handleDrawerOpen(service)}
+                  onClick={() => handleBookNow(service)}
                   style={{
                     background: 'linear-gradient(135deg, #00f0ff 0%, #0066ff 100%)',
                     border: 'none',
@@ -603,127 +561,6 @@ const ServicesPage: React.FC = () => {
           ))}
         </motion.div>
       </div>
-
-      {/* Drawer for Booking */}
-      <Drawer
-        title={
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            style={{
-              fontSize: '1.5rem',
-              fontWeight: 700,
-              background: 'linear-gradient(135deg, #00f0ff 0%, #0066ff 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}
-          >
-            📦 Order: {selectedService?.title}
-          </motion.div>
-        }
-        placement="right"
-        width={420}
-        onClose={handleDrawerClose}
-        open={drawerVisible}
-        bodyStyle={{
-          background: 'linear-gradient(135deg, rgba(5, 8, 16, 0.95) 0%, rgba(10, 14, 39, 0.95) 100%)',
-          color: '#e2e8f0',
-        }}
-      >
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
-          style={{ color: '#cbd5e1', marginBottom: '24px', fontSize: '1rem' }}
-        >
-          Fill out your information below to proceed with your order. We'll get in touch shortly.
-        </motion.p>
-        <Form layout="vertical" form={form} onFinish={handleFinish}>
-          <Form.Item
-            name="fullName"
-            label={<span style={{ color: '#cbd5e1', fontWeight: 600 }}>Full Name</span>}
-            rules={[{ required: true, message: 'Please enter your full name' }]}
-          >
-            <Input
-              placeholder="John Doe"
-              style={{
-                background: 'rgba(0, 240, 255, 0.1)',
-                border: '1px solid rgba(0, 240, 255, 0.3)',
-                borderRadius: '8px',
-                color: '#e2e8f0',
-                padding: '10px 16px',
-              }}
-            />
-          </Form.Item>
-          <Form.Item
-            name="email"
-            label={<span style={{ color: '#cbd5e1', fontWeight: 600 }}>Email Address</span>}
-            rules={[{ required: true, type: 'email', message: 'Enter a valid email address' }]}
-          >
-            <Input
-              placeholder="you@example.com"
-              style={{
-                background: 'rgba(0, 240, 255, 0.1)',
-                border: '1px solid rgba(0, 240, 255, 0.3)',
-                borderRadius: '8px',
-                color: '#e2e8f0',
-                padding: '10px 16px',
-              }}
-            />
-          </Form.Item>
-          <Form.Item
-            name="phone"
-            label={<span style={{ color: '#cbd5e1', fontWeight: 600 }}>Phone Number</span>}
-            rules={[{ required: true, message: 'Please enter your phone number' }]}
-          >
-            <Input
-              placeholder="+254..."
-              style={{
-                background: 'rgba(0, 240, 255, 0.1)',
-                border: '1px solid rgba(0, 240, 255, 0.3)',
-                borderRadius: '8px',
-                color: '#e2e8f0',
-                padding: '10px 16px',
-              }}
-            />
-          </Form.Item>
-          <Form.Item
-            name="notes"
-            label={<span style={{ color: '#cbd5e1', fontWeight: 600 }}>Additional Notes (Optional)</span>}
-          >
-            <Input.TextArea
-              placeholder="Any extra requirements or questions..."
-              rows={4}
-              style={{
-                background: 'rgba(0, 240, 255, 0.1)',
-                border: '1px solid rgba(0, 240, 255, 0.3)',
-                borderRadius: '8px',
-                color: '#e2e8f0',
-                padding: '10px 16px',
-              }}
-            />
-          </Form.Item>
-          <Form.Item>
-            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-              <AntButton
-                type="primary"
-                htmlType="submit"
-                style={{
-                  width: '100%',
-                  background: 'linear-gradient(135deg, #00f0ff 0%, #0066ff 100%)',
-                  border: 'none',
-                  height: '48px',
-                  fontWeight: 700,
-                  fontSize: '1rem',
-                }}
-              >
-                Submit Order
-              </AntButton>
-            </motion.div>
-          </Form.Item>
-        </Form>
-      </Drawer>
     </div>
   );
 };

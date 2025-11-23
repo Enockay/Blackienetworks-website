@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Drawer, Button, Divider, Dropdown, Menu } from 'antd';
-import { FiPhone, FiMenu, FiChevronDown, FiMail, FiX, FiZap } from 'react-icons/fi';
+import { FiPhone, FiMenu, FiChevronDown, FiMail, FiX, FiZap, FiHome, FiInfo, FiSettings, FiPackage, FiBook, FiHelpCircle, FiMessageCircle, FiCalendar } from 'react-icons/fi';
 import logo from '../assets/logo.png';
 
 const Header: React.FC = () => {
@@ -93,7 +93,6 @@ const Header: React.FC = () => {
               className="relative p-2.5 rounded-xl transition-all duration-500 group-hover:scale-105"
               style={{
                 background: 'linear-gradient(135deg, rgba(0, 240, 255, 0.1) 0%, rgba(0, 102, 255, 0.1) 100%)',
-                border: '2px solid rgba(0, 240, 255, 0.3)',
                 boxShadow: '0 4px 20px rgba(0, 240, 255, 0.2)',
               }}
             >
@@ -277,10 +276,11 @@ const Header: React.FC = () => {
           padding: 0,
         }}
         headerStyle={{
-          background: 'linear-gradient(135deg, rgba(0, 240, 255, 0.2) 0%, rgba(0, 102, 255, 0.2) 100%)',
+          background: 'linear-gradient(135deg, #0a1a3a 0%, #051428 100%)',
           border: 'none',
-          borderBottom: '1px solid rgba(0, 240, 255, 0.3)',
+          borderBottom: '2px solid rgba(0, 102, 255, 0.5)',
           padding: '20px',
+          boxShadow: '0 4px 12px rgba(0, 102, 255, 0.3)',
         }}
         title={
           <div className="flex items-center justify-between w-full">
@@ -294,27 +294,36 @@ const Header: React.FC = () => {
                 loading="eager"
               />
               <div>
-                <span className="text-lg font-bold block" style={{ color: '#00f0ff' }}>Blackie Networks</span>
-                <span className="text-xs" style={{ color: '#00f0ff' }}>IT Solutions</span>
+                <span className="text-lg font-bold block" style={{ color: '#0066ff', textShadow: '0 2px 8px rgba(0, 102, 255, 0.5)' }}>Blackie Networks</span>
+                <span className="text-xs" style={{ color: '#4a90e2' }}>IT Solutions</span>
               </div>
             </div>
             <Button
               type="text"
               icon={<FiX size={20} />}
               onClick={() => setDrawerVisible(false)}
-              style={{ color: '#00f0ff', border: 'none' }}
+              style={{ color: '#0066ff', border: 'none' }}
             />
           </div>
         }
       >
         <div style={{ padding: '24px' }}>
           <nav className="flex flex-col space-y-2">
-            {['/', '/aboutus', '/services', '/Products', '/blog', '/faq', '/contactus', '/booking'].map((path) => (
+            {[
+              { path: '/', label: 'Home', icon: FiHome },
+              { path: '/aboutus', label: 'About Us', icon: FiInfo },
+              { path: '/services', label: 'Services', icon: FiSettings },
+              { path: '/Products', label: 'Products', icon: FiPackage },
+              { path: '/blog', label: 'Blog', icon: FiBook },
+              { path: '/faq', label: 'FAQ', icon: FiHelpCircle },
+              { path: '/contactus', label: 'Contact', icon: FiMessageCircle },
+              { path: '/booking', label: 'Booking', icon: FiCalendar },
+            ].map(({ path, label, icon: Icon }) => (
               <Link
                 key={path}
                 to={path}
                 onClick={() => setDrawerVisible(false)}
-                className="px-4 py-3 rounded-xl font-semibold transition-all block"
+                className="px-4 py-3 rounded-xl font-semibold transition-all flex items-center gap-3"
                 style={{ 
                   textDecoration: 'none',
                   color: isActive(path) ? '#00f0ff' : '#e2e8f0',
@@ -324,51 +333,52 @@ const Header: React.FC = () => {
                   border: isActive(path) ? '1px solid rgba(0, 240, 255, 0.4)' : '1px solid transparent',
                 }}
               >
-                {path === '/' ? 'Home' : path.slice(1).charAt(0).toUpperCase() + path.slice(2)}
+                <Icon size={18} style={{ flexShrink: 0 }} />
+                <span>{label}</span>
               </Link>
             ))}
           </nav>
 
-          <Divider style={{ margin: '24px 0', borderColor: 'rgba(0, 240, 255, 0.2)' }} />
+          <Divider style={{ margin: '16px 0', borderColor: 'rgba(0, 102, 255, 0.2)' }} />
 
-          <div className="space-y-4">
-            <p className="px-4 text-xs uppercase font-bold tracking-wider" style={{ color: '#00f0ff' }}>
-              Contact
+          <div className="space-y-2">
+            <p className="px-2 text-[10px] uppercase font-semibold tracking-wider" style={{ color: '#4a90e2' }}>
+              Support
             </p>
             <a
               href="tel:+254796869402"
-              className="flex items-center gap-3 px-4 py-3 rounded-xl transition-all"
+              className="flex items-center gap-2 px-3 py-2 rounded-lg transition-all"
               style={{ 
                 textDecoration: 'none',
-                background: 'rgba(0, 240, 255, 0.1)',
-                border: '1px solid rgba(0, 240, 255, 0.3)',
-                color: '#e2e8f0',
+                background: 'rgba(0, 102, 255, 0.08)',
+                border: '1px solid rgba(0, 102, 255, 0.2)',
+                color: '#cbd5e1',
               }}
             >
-              <div className="p-2.5 rounded-xl" style={{ background: 'rgba(0, 240, 255, 0.2)', color: '#00f0ff' }}>
-                <FiPhone size={18} />
+              <div className="p-1.5 rounded-lg" style={{ background: 'rgba(0, 102, 255, 0.15)', color: '#0066ff' }}>
+                <FiPhone size={14} />
               </div>
               <div>
-                <p className="text-xs font-semibold" style={{ color: '#00f0ff' }}>Phone</p>
-                <p className="text-sm font-bold">+254 796 869 402</p>
+                <p className="text-[10px] font-medium" style={{ color: '#4a90e2' }}>Phone</p>
+                <p className="text-xs font-semibold">+254 796 869 402</p>
               </div>
             </a>
             <a
               href="mailto:support@blackie-networks.com"
-              className="flex items-center gap-3 px-4 py-3 rounded-xl transition-all"
+              className="flex items-center gap-2 px-3 py-2 rounded-lg transition-all"
               style={{ 
                 textDecoration: 'none',
-                background: 'rgba(0, 240, 255, 0.1)',
-                border: '1px solid rgba(0, 240, 255, 0.3)',
-                color: '#e2e8f0',
+                background: 'rgba(0, 102, 255, 0.08)',
+                border: '1px solid rgba(0, 102, 255, 0.2)',
+                color: '#cbd5e1',
               }}
             >
-              <div className="p-2.5 rounded-xl" style={{ background: 'rgba(0, 240, 255, 0.2)', color: '#00f0ff' }}>
-                <FiMail size={18} />
+              <div className="p-1.5 rounded-lg" style={{ background: 'rgba(0, 102, 255, 0.15)', color: '#0066ff' }}>
+                <FiMail size={14} />
               </div>
               <div>
-                <p className="text-xs font-semibold" style={{ color: '#00f0ff' }}>Email</p>
-                <p className="text-sm font-bold">support@blackie-networks.com</p>
+                <p className="text-[10px] font-medium" style={{ color: '#4a90e2' }}>Email</p>
+                <p className="text-xs font-semibold">support@blackie-networks.com</p>
               </div>
             </a>
           </div>

@@ -1,5 +1,5 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import {
   FaWifi,
   FaServer,
@@ -10,7 +10,7 @@ import {
   FaMobileAlt,
 } from "react-icons/fa";
 
-import { Drawer, Button, Form, Input, message, Card, Typography } from "antd";
+import { Button, Card, Typography } from "antd";
 import { FiZap, FiArrowRight } from "react-icons/fi";
 
 const { Title, Paragraph } = Typography;
@@ -20,7 +20,6 @@ interface Service {
   icon: JSX.Element;
   title: string;
   description: string;
-  price: number;
   color: string;
 }
 
@@ -31,7 +30,6 @@ const services: Service[] = [
     title: "Campus Wi-Fi Solutions",
     description:
       "We install and maintain secure high-speed Wi-Fi networks across hostels, lecture halls, libraries, and admin blocks. Our packages include setup of hotspot access points, captive portals for student login, and bandwidth control. Users can access internet at affordable rates starting from KES 10/hour, KES 45/day, and discounted weekly/monthly bundles.",
-    price: 700,
     color: "#00f0ff",
   },
   {
@@ -39,7 +37,6 @@ const services: Service[] = [
     title: "Network Infrastructure & Billing Systems",
     description:
       "We provide full-scale infrastructure: cabling, routers, MikroTik configs, load balancing, Radius billing, and user management systems for monetized or managed access.",
-    price: 5000,
     color: "#0066ff",
   },
   {
@@ -47,7 +44,6 @@ const services: Service[] = [
     title: "Custom Software Development",
     description:
       "Tailored portals for learning, payments, attendance, and reporting. Includes responsive web/mobile UIs, admin dashboards, and APIs.",
-    price: 10000,
     color: "#7c3aed",
   },
   {
@@ -55,7 +51,6 @@ const services: Service[] = [
     title: "Cloud Services",
     description:
       "Hosting, backups, server deployment via AWS/DigitalOcean with 99.99% uptime. Ideal for high-traffic university systems.",
-    price: 3000,
     color: "#00ff88",
   },
   {
@@ -63,7 +58,6 @@ const services: Service[] = [
     title: "Mobile App Integration",
     description:
       "Android/iOS apps for learning, communication, and reminders. Supports offline mode, push notifications, and brand styling.",
-    price: 4500,
     color: "#ff006e",
   },
   {
@@ -71,7 +65,6 @@ const services: Service[] = [
     title: "IT Consultancy & VPN Services",
     description:
       "We audit, train, and optimize networks. Secure VPN (OpenVPN, WireGuard) for staff/student remote access and compliance.",
-    price: 2000,
     color: "#00f0ff",
   },
 ];
@@ -110,20 +103,11 @@ const testimonials = [
 ];
 
 export default function CompanySections() {
-  const [selectedService, setSelectedService] = useState<Service | null>(null);
-  const [drawerOpen, setDrawerOpen] = useState(false);
-  const [form] = Form.useForm();
+  const navigate = useNavigate();
 
   const handleBook = (service: Service) => {
-    setSelectedService(service);
-    setDrawerOpen(true);
-  };
-
-  const handleFinish = (values: any) => {
-    message.success("Booking submitted successfully!");
-    form.resetFields();
-    setDrawerOpen(false);
-    console.log("Booking Info:", values, selectedService?.title);
+    // Navigate to booking page with service pre-selected
+    navigate('/booking', { state: { selectedService: service.title } });
   };
 
   return (
@@ -256,23 +240,6 @@ export default function CompanySections() {
                     {service.description}
                   </Paragraph>
                   
-                  <div style={{
-                    padding: '16px',
-                    background: `${service.color}10`,
-                    border: `1px solid ${service.color}30`,
-                    borderRadius: '12px',
-                    marginBottom: '20px',
-                  }}>
-                    <p style={{ 
-                      color: service.color, 
-                      fontSize: '1.25rem',
-                      fontWeight: 700,
-                      margin: 0,
-                    }}>
-                      Starting from KES {service.price.toLocaleString()}
-                    </p>
-                  </div>
-                  
                   <Button
                     onClick={() => handleBook(service)}
                     className="tech-button"
@@ -298,116 +265,6 @@ export default function CompanySections() {
             ))}
           </div>
         </motion.section>
-
-        {/* Drawer Booking */}
-        <Drawer
-          title={
-            <div className="flex flex-col space-y-1">
-              <span style={{ 
-                fontSize: '1.25rem', 
-                fontWeight: 700,
-                color: selectedService?.color || '#00f0ff',
-              }}>
-                {selectedService?.title}
-              </span>
-              <span style={{ fontSize: '0.95rem', color: '#94a3b8' }}>
-                Starting from KES {selectedService?.price.toLocaleString()}
-              </span>
-            </div>
-          }
-          open={drawerOpen}
-          onClose={() => setDrawerOpen(false)}
-          width={500}
-          bodyStyle={{ 
-            background: 'linear-gradient(135deg, rgba(5, 8, 16, 0.95) 0%, rgba(10, 14, 39, 0.95) 100%)',
-            color: '#e2e8f0',
-          }}
-          headerStyle={{
-            background: 'rgba(10, 14, 39, 0.8)',
-            borderBottom: `1px solid ${selectedService?.color || '#00f0ff'}40`,
-          }}
-        >
-          <Paragraph style={{ color: '#cbd5e1', marginBottom: '24px' }}>
-            {selectedService?.description}
-          </Paragraph>
-          <Form
-            layout="vertical"
-            form={form}
-            onFinish={handleFinish}
-            className="space-y-2"
-          >
-            <Form.Item 
-              name="name" 
-              label={<span style={{ color: '#00f0ff' }}>Full Name</span>} 
-              rules={[{ required: true }]}
-            >
-              <Input 
-                placeholder="John Doe"
-                style={{
-                  background: 'rgba(0, 240, 255, 0.1)',
-                  border: '1px solid rgba(0, 240, 255, 0.3)',
-                  color: '#e2e8f0',
-                }}
-              />
-            </Form.Item>
-            <Form.Item 
-              name="email" 
-              label={<span style={{ color: '#00f0ff' }}>Email</span>} 
-              rules={[{ required: true, type: "email" }]}
-            >
-              <Input 
-                placeholder="john@example.com"
-                style={{
-                  background: 'rgba(0, 240, 255, 0.1)',
-                  border: '1px solid rgba(0, 240, 255, 0.3)',
-                  color: '#e2e8f0',
-                }}
-              />
-            </Form.Item>
-            <Form.Item 
-              name="phone" 
-              label={<span style={{ color: '#00f0ff' }}>Phone Number</span>} 
-              rules={[{ required: true }]}
-            >
-              <Input 
-                placeholder="+2547..."
-                style={{
-                  background: 'rgba(0, 240, 255, 0.1)',
-                  border: '1px solid rgba(0, 240, 255, 0.3)',
-                  color: '#e2e8f0',
-                }}
-              />
-            </Form.Item>
-            <Form.Item 
-              name="note" 
-              label={<span style={{ color: '#00f0ff' }}>Describe your request</span>}
-            >
-              <Input.TextArea 
-                rows={3} 
-                placeholder="e.g., We need setup in 2 lecture halls..."
-                style={{
-                  background: 'rgba(0, 240, 255, 0.1)',
-                  border: '1px solid rgba(0, 240, 255, 0.3)',
-                  color: '#e2e8f0',
-                }}
-              />
-            </Form.Item>
-            <Button 
-              htmlType="submit" 
-              className="tech-button"
-              style={{
-                width: '100%',
-                background: `linear-gradient(135deg, ${selectedService?.color || '#00f0ff'} 0%, ${selectedService?.color || '#0066ff'}dd 100%)`,
-                border: 'none',
-                color: '#0a0e27',
-                fontWeight: 700,
-                height: '48px',
-              }}
-            >
-              Submit Booking
-            </Button>
-          </Form>
-        </Drawer>
 
         {/* Testimonials */}
         <motion.section

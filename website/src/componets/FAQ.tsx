@@ -127,7 +127,7 @@ const FAQ: React.FC = () => {
       <div
         style={{
           minHeight: '100vh',
-          padding: '100px 20px 80px',
+          padding: '80px 20px 60px',
           background: 'linear-gradient(135deg, rgba(5, 8, 16, 0.95) 0%, rgba(10, 14, 39, 0.95) 100%)',
           position: 'relative',
           overflow: 'hidden',
@@ -156,7 +156,7 @@ const FAQ: React.FC = () => {
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, type: 'spring' }}
-            className="text-center mb-16"
+            className="text-center mb-10"
           >
             <motion.div
               initial={{ scale: 0 }}
@@ -164,21 +164,21 @@ const FAQ: React.FC = () => {
               transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
               style={{
                 display: 'inline-block',
-                padding: '16px 32px',
+                padding: '10px 20px',
                 background: 'rgba(0, 240, 255, 0.1)',
                 border: '1px solid rgba(0, 240, 255, 0.3)',
                 borderRadius: '50px',
-                marginBottom: '24px',
+                marginBottom: '16px',
               }}
             >
               <QuestionCircleOutlined
                 style={{
-                  fontSize: '24px',
+                  fontSize: '18px',
                   color: '#00f0ff',
-                  marginRight: '12px',
+                  marginRight: '8px',
                 }}
               />
-              <span style={{ color: '#00f0ff', fontSize: '14px', fontWeight: 600 }}>
+              <span style={{ color: '#00f0ff', fontSize: '12px', fontWeight: 600 }}>
                 Frequently Asked Questions
               </span>
             </motion.div>
@@ -188,9 +188,9 @@ const FAQ: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.6 }}
               style={{
-                fontSize: 'clamp(2.5rem, 5vw, 4rem)',
-                fontWeight: 800,
-                marginBottom: '24px',
+                fontSize: 'clamp(1.875rem, 4vw, 2.5rem)',
+                fontWeight: 700,
+                marginBottom: '16px',
                 background: 'linear-gradient(135deg, #00f0ff 0%, #0066ff 50%, #7c3aed 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
@@ -206,10 +206,10 @@ const FAQ: React.FC = () => {
               transition={{ delay: 0.4, duration: 0.6 }}
               style={{
                 color: '#cbd5e1',
-                fontSize: '1.125rem',
+                fontSize: '0.95rem',
                 maxWidth: '700px',
                 margin: '0 auto',
-                lineHeight: '1.8',
+                lineHeight: '1.6',
               }}
             >
               Find answers to common questions about our IT services, network solutions, and support.
@@ -243,7 +243,7 @@ const FAQ: React.FC = () => {
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}
+            style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}
           >
             {faqData.map((faq, index) => {
               const isActive = activeKeys.includes(index.toString());
@@ -294,7 +294,7 @@ const FAQ: React.FC = () => {
                         setActiveKeys(newKeys);
                       }}
                       style={{
-                        padding: '24px 28px',
+                        padding: '16px 20px',
                         cursor: 'pointer',
                         display: 'flex',
                         alignItems: 'center',
@@ -304,13 +304,13 @@ const FAQ: React.FC = () => {
                     >
                       <h3
                         style={{
-                          fontSize: '1.125rem',
-                          fontWeight: 700,
+                          fontSize: '0.95rem',
+                          fontWeight: 600,
                           color: '#e2e8f0',
                           margin: 0,
                           flex: 1,
-                          paddingRight: '20px',
-                          lineHeight: '1.6',
+                          paddingRight: '16px',
+                          lineHeight: '1.5',
                         }}
                       >
                         {faq.question}
@@ -322,9 +322,9 @@ const FAQ: React.FC = () => {
                         }}
                         transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                         style={{
-                          width: '40px',
-                          height: '40px',
-                          borderRadius: '12px',
+                          width: '32px',
+                          height: '32px',
+                          borderRadius: '8px',
                           background: isActive
                             ? 'linear-gradient(135deg, rgba(0, 240, 255, 0.3) 0%, rgba(0, 102, 255, 0.3) 100%)'
                             : 'rgba(0, 240, 255, 0.1)',
@@ -336,9 +336,9 @@ const FAQ: React.FC = () => {
                         }}
                       >
                         {isActive ? (
-                          <MinusOutlined style={{ color: '#00f0ff', fontSize: '18px' }} />
+                          <MinusOutlined style={{ color: '#00f0ff', fontSize: '14px' }} />
                         ) : (
-                          <PlusOutlined style={{ color: '#00f0ff', fontSize: '18px' }} />
+                          <PlusOutlined style={{ color: '#00f0ff', fontSize: '14px' }} />
                         )}
                       </motion.div>
                     </div>
@@ -354,12 +354,12 @@ const FAQ: React.FC = () => {
                         >
                           <div
                             style={{
-                              padding: '0 28px 24px 28px',
+                              padding: '0 20px 16px 20px',
                               color: '#cbd5e1',
-                              fontSize: '1rem',
-                              lineHeight: '1.8',
+                              fontSize: '0.875rem',
+                              lineHeight: '1.6',
                               borderTop: '1px solid rgba(0, 240, 255, 0.2)',
-                              paddingTop: '24px',
+                              paddingTop: '16px',
                             }}
                           >
                             {faq.answer}

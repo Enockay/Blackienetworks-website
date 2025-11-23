@@ -15,12 +15,14 @@ import Blog from './componets/Blog';
 import FAQ from './componets/FAQ';
 import { SEO } from './componets/SEO';
 import { Analytics } from './componets/Analytics';
+import ScrollToTop from './componets/ScrollToTop';
 
 const { Content } = Layout;
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <Analytics />
       <Layout className="min-h-screen" style={{ background: 'transparent' }}>
         <Header />

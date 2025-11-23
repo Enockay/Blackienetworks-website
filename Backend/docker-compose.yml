@@ -7,10 +7,10 @@ services:
       dockerfile: Dockerfile
     container_name: blackie-backend
     ports:
-      - "3000:3000"
+      - "3010ß:3010"
     environment:
       - NODE_ENV=production
-      - PORT=3000
+      - PORT=3010
       - MONGODB=${MONGODB:-mongodb://mongo:27017/blackienetworks}
       - BREVO_API_KEY=${BREVO_API_KEY}
       - BREVO_SENDER_EMAIL=${BREVO_SENDER_EMAIL}

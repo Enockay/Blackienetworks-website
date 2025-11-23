@@ -29,6 +29,8 @@ const app = express();
 
 // Security middleware - configure CSP to allow Swagger UI
 // Note: upgradeInsecureRequests is NOT set to avoid forcing HTTPS (which causes SSL errors on HTTP)
+// In development, allow all HTTP connections for local network access
+const isDevelopment = process.env.NODE_ENV !== 'production';
 app.use(helmet({
   contentSecurityPolicy: {
     directives: {
@@ -37,7 +39,11 @@ app.use(helmet({
       scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "data:"], // Allow inline scripts, eval, and data URIs for Swagger UI
       imgSrc: ["'self'", "data:", "https:", "blob:"],
       fontSrc: ["'self'", "data:", "https:"], // Allow fonts for Swagger UI
-      connectSrc: ["'self'", "http://localhost:*", "https:"], // Allow API calls from Swagger UI
+      // In development, allow all HTTP connections for local network access
+      // In production, restrict to specific origins
+      connectSrc: isDevelopment 
+        ? ["'self'", "http:", "https:", "ws:", "wss:"] 
+        : ["'self'", "http://localhost:*", "https:"],
       frameSrc: ["'self'"],
       objectSrc: ["'none'"],
       baseUri: ["'self'"],
@@ -57,10 +63,18 @@ const corsOptions = {
     if (!origin) return callback(null, true);
     
     const allowedOrigins = process.env.ALLOWED_ORIGINS 
-      ? process.env.ALLOWED_ORIGINS.split(',')
+      ? process.env.ALLOWED_ORIGINS.split(',').map(o => o.trim())
       : ['http://localhost:3000', 'http://localhost:5173', 'http://localhost:5174'];
     
-    if (allowedOrigins.indexOf(origin) !== -1 || process.env.NODE_ENV !== 'production') {
+    // In development, allow local network IPs (192.168.x.x, 10.x.x.x, 172.16-31.x.x)
+    if (process.env.NODE_ENV !== 'production') {
+      const localNetworkPattern = /^https?:\/\/(localhost|127\.0\.0\.1|192\.168\.\d+\.\d+|10\.\d+\.\d+\.\d+|172\.(1[6-9]|2[0-9]|3[0-1])\.\d+\.\d+)(:\d+)?$/;
+      if (localNetworkPattern.test(origin)) {
+        return callback(null, true);
+      }
+    }
+    
+    if (allowedOrigins.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS'));
