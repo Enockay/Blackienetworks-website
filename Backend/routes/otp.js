@@ -5,6 +5,7 @@ const { authenticateToken } = require('../utils/tokenAuth');
 const {
   sendOTPViaEmail,
   sendOTPViaSMS,
+  sendOTPViaWhatsApp,
   sendOTPViaBoth,
   verifyOTP
 } = require('../utils/otpService');
@@ -263,6 +264,124 @@ router.post('/send/sms',
         details: {
           hint: error.message
         }
+      });
+    }
+  }
+);
+
+/**
+ * @swagger
+ * /api/otp/send/whatsapp:
+ *   post:
+ *     summary: Send OTP via WhatsApp
+ *     tags: [OTP]
+ *     security:
+ *       - bearerAuth: []
+ *     description: Generate and send a one-time password (OTP) to the specified phone number via WhatsApp. Uses Brevo WhatsApp API.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - phoneNumber
+ *             properties:
+ *               phoneNumber:
+ *                 type: string
+ *                 pattern: '^\+?[1-9]\d{1,14}$'
+ *                 description: Phone number in E.164 format (e.g., +254796869402)
+ *                 example: +254796869402
+ *               otpLength:
+ *                 type: number
+ *                 minimum: 4
+ *                 maximum: 8
+ *                 default: 6
+ *                 example: 6
+ *               expiresInMinutes:
+ *                 type: number
+ *                 minimum: 1
+ *                 maximum: 60
+ *                 default: 10
+ *                 example: 10
+ *     responses:
+ *       200:
+ *         description: OTP sent successfully via WhatsApp
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/OTP'
+ *       400:
+ *         description: Validation error
+ *       401:
+ *         description: Unauthorized
+ *       403:
+ *         description: Token doesn't have WhatsApp channel permission
+ */
+router.post('/send/whatsapp',
+  authenticateToken,
+  [
+    body('phoneNumber')
+      .notEmpty()
+      .withMessage('Phone number is required')
+      .matches(/^\+?[1-9]\d{1,14}$/)
+      .withMessage('Phone number must be in E.164 format (e.g., +1234567890)'),
+    body('otpLength')
+      .optional()
+      .isInt({ min: 4, max: 8 })
+      .withMessage('OTP length must be between 4 and 8'),
+    body('expiresInMinutes')
+      .optional()
+      .isInt({ min: 1, max: 60 })
+      .withMessage('Expiration time must be between 1 and 60 minutes')
+  ],
+  async (req, res) => {
+    try {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.status(400).json({
+          success: false,
+          error: 'VALIDATION_ERROR',
+          message: 'Validation failed',
+          details: errors.array()
+        });
+      }
+
+      // Check channel permission
+      if (!req.accessToken.allowedChannels.includes('whatsapp')) {
+        return res.status(403).json({
+          success: false,
+          error: 'CHANNEL_NOT_ALLOWED',
+          message: 'Your access token does not have permission to send WhatsApp notifications.'
+        });
+      }
+
+      const { phoneNumber, otpLength, expiresInMinutes } = req.body;
+
+      const result = await sendOTPViaWhatsApp(
+        req.tokenId,
+        phoneNumber,
+        { otpLength, expiresInMinutes }
+      );
+
+      return res.status(200).json({
+        success: true,
+        message: 'OTP sent successfully via WhatsApp',
+        data: {
+          phoneNumber,
+          expiresInMinutes: result.expiresInMinutes,
+          notificationId: result.notificationId,
+          messageId: result.messageId,
+          ...(process.env.NODE_ENV !== 'production' && { otp: result.otp })
+        }
+      });
+    } catch (error) {
+      console.error('Error sending OTP via WhatsApp:', error);
+      return res.status(500).json({
+        success: false,
+        error: 'INTERNAL_ERROR',
+        message: 'Failed to send OTP via WhatsApp',
+        details: process.env.NODE_ENV === 'development' ? { error: error.message } : {}
       });
     }
   }

@@ -286,6 +286,53 @@ const sendOTPViaSMS = async (accessTokenId, phoneNumber, options = {}) => {
 };
 
 /**
+ * Send OTP via WhatsApp
+ * @param {string} accessTokenId - Access token ID
+ * @param {string} phoneNumber - Recipient phone number (E.164 format)
+ * @param {Object} options - Additional options
+ * @returns {Promise<Object>} - Result with OTP code and notification details
+ */
+const sendOTPViaWhatsApp = async (accessTokenId, phoneNumber, options = {}) => {
+  try {
+    const otp = generateOTP(options.otpLength || 6);
+    const expiresInMinutes = options.expiresInMinutes || 10;
+    
+    // Store OTP
+    storeOTP(phoneNumber, otp, expiresInMinutes);
+    
+    // Create WhatsApp message
+    const message = options.message || 
+      `🔐 Your Blackie Networks OTP code is: *${otp}*\n\nValid for ${expiresInMinutes} minutes.\n\n⚠️ Do not share this code with anyone.\n\nIf you didn't request this code, please ignore this message.`;
+    
+    // Send via notification service
+    const result = await sendNotification(accessTokenId, 'whatsapp', phoneNumber, {
+      message,
+      metadata: {
+        type: 'otp',
+        expiresInMinutes
+      }
+    });
+    
+    // Check if notification actually succeeded
+    if (!result.success) {
+      throw new Error(`WhatsApp notification failed: ${result.error || 'Unknown error'}`);
+    }
+    
+    return {
+      success: true,
+      otp: otp, // Only return in development/testing
+      expiresInMinutes,
+      notificationId: result.notificationId,
+      messageId: result.messageId
+    };
+  } catch (error) {
+    console.error('❌ Error sending OTP via WhatsApp:', error.message);
+    console.error('❌ Full error:', error);
+    throw error;
+  }
+};
+
+/**
  * Send OTP via both email and SMS
  * @param {string} accessTokenId - Access token ID
  * @param {string} email - Recipient email
@@ -493,6 +540,7 @@ module.exports = {
   verifyOTP,
   sendOTPViaEmail,
   sendOTPViaSMS,
+  sendOTPViaWhatsApp,
   sendOTPViaBoth,
   clearOTP,
   getOTPInfo,

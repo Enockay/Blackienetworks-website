@@ -5,11 +5,13 @@ const NotificationTemplate = require('../models/notificationTemplate');
 // Initialize Brevo API clients
 const emailApiInstance = new brevo.TransactionalEmailsApi();
 const smsApiInstance = new brevo.TransactionalSMSApi();
+const whatsappApiInstance = new brevo.TransactionalWhatsAppApi();
 
 // Set API key if available
 if (process.env.BREVO_API_KEY) {
   emailApiInstance.setApiKey(brevo.TransactionalEmailsApiApiKeys.apiKey, process.env.BREVO_API_KEY);
   smsApiInstance.setApiKey(brevo.TransactionalSMSApiApiKeys.apiKey, process.env.BREVO_API_KEY);
+  whatsappApiInstance.setApiKey(brevo.TransactionalWhatsAppApiApiKeys.apiKey, process.env.BREVO_API_KEY);
 }
 
 /**
@@ -133,6 +135,126 @@ const sendSMS = async (notification, templateData = {}) => {
 };
 
 /**
+ * Send WhatsApp notification via Brevo
+ */
+const sendWhatsApp = async (notification, templateData = {}) => {
+  try {
+    let message = notification.message;
+
+    // If template is provided, render it
+    if (notification.templateId) {
+      const template = await NotificationTemplate.findById(notification.templateId);
+      if (template && template.isActive) {
+        const rendered = template.render(templateData);
+        message = rendered.body;
+      }
+    }
+
+    // Brevo WhatsApp API
+    const sendWhatsappMessage = new brevo.SendWhatsappMessage();
+    
+    // WhatsApp recipient (phone number in E.164 format)
+    sendWhatsappMessage.recipient = notification.recipient;
+    
+    // For WhatsApp, we can send either:
+    // 1. Template-based message (requires templateId)
+    // 2. Free-form message (content only, for conversations already started)
+    
+    if (notification.templateId) {
+      // Template-based message
+      sendWhatsappMessage.templateId = parseInt(notification.templateId);
+      // Template parameters can be passed via metadata
+      if (notification.metadata?.templateParams) {
+        sendWhatsappMessage.templateParams = notification.metadata.templateParams;
+      }
+    } else {
+      // Free-form message (content only)
+      sendWhatsappMessage.content = message;
+    }
+    
+    // Optional webhook configuration
+    if (process.env.BREVO_WHATSAPP_WEBHOOK_URL) {
+      sendWhatsappMessage.webhookUrl = process.env.BREVO_WHATSAPP_WEBHOOK_URL;
+    }
+    if (notification.metadata && Object.keys(notification.metadata).length > 0) {
+      sendWhatsappMessage.webhookData = notification.metadata;
+    }
+
+    console.log('📤 Sending WhatsApp message to:', notification.recipient);
+    console.log('📤 WhatsApp message content:', message.substring(0, 100) + '...');
+    
+    const result = await whatsappApiInstance.sendWhatsappMessage(sendWhatsappMessage);
+
+    console.log('✅ WhatsApp API response:', JSON.stringify({
+      messageId: result.body?.messageId,
+      statusCode: result.response?.statusCode,
+      body: result.body
+    }));
+
+    // Update notification
+    notification.status = 'sent';
+    notification.messageId = result.body?.messageId?.toString();
+    notification.sentAt = new Date();
+    notification.providerResponse = {
+      messageId: result.body?.messageId,
+      statusCode: result.response?.statusCode,
+      fullResponse: result.body
+    };
+    await notification.save();
+
+    return {
+      success: true,
+      messageId: result.body?.messageId,
+      channel: 'whatsapp'
+    };
+  } catch (error) {
+    // Extract detailed error information from Brevo API
+    let errorDetails = {
+      message: error.message,
+      statusCode: error.statusCode || error.response?.statusCode || error.code,
+      responseBody: null,
+      responseText: null,
+      responseData: null,
+      fullError: error.toString()
+    };
+    
+    // Try to extract response body from different error formats
+    if (error.response) {
+      errorDetails.responseBody = error.response.body;
+      errorDetails.responseText = error.response.text;
+      errorDetails.responseData = error.response.data;
+      errorDetails.statusCode = error.response.status || error.response.statusCode;
+    } else if (error.body) {
+      errorDetails.responseBody = error.body;
+    }
+    
+    // Log detailed error
+    console.error('❌ WhatsApp API Error Details:', JSON.stringify(errorDetails, null, 2));
+    console.error('❌ Error object keys:', Object.keys(error));
+    if (error.response) {
+      console.error('❌ Response object keys:', Object.keys(error.response));
+    }
+    
+    notification.status = 'failed';
+    notification.errorMessage = error.message || error.toString();
+    notification.providerResponse = errorDetails;
+    await notification.save();
+
+    // Create a more informative error message
+    const errorMessage = errorDetails.responseBody?.message || 
+                        errorDetails.responseData?.message || 
+                        errorDetails.responseText || 
+                        error.message || 
+                        'Unknown WhatsApp API error';
+    
+    const enhancedError = new Error(`WhatsApp API Error (${errorDetails.statusCode}): ${errorMessage}`);
+    enhancedError.statusCode = errorDetails.statusCode;
+    enhancedError.responseBody = errorDetails.responseBody || errorDetails.responseData;
+    throw enhancedError;
+  }
+};
+
+/**
  * Main notification sending function
  */
 const sendNotification = async (accessTokenId, channel, recipient, options = {}) => {
@@ -181,6 +303,9 @@ const sendNotification = async (accessTokenId, channel, recipient, options = {})
         break;
       case 'sms':
         result = await sendSMS(notification, templateData);
+        break;
+      case 'whatsapp':
+        result = await sendWhatsApp(notification, templateData);
         break;
       default:
         throw new Error(`Unsupported channel: ${channel}`);
@@ -263,6 +388,7 @@ module.exports = {
   sendNotification,
   sendBulkNotifications,
   sendEmail,
-  sendSMS
+  sendSMS,
+  sendWhatsApp
 };
 
