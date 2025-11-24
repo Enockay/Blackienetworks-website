@@ -33,7 +33,7 @@ const BookingPage: React.FC = () => {
     const [error, setError] = useState<string | null>(null);
     
     // API base URL - use environment variable or default to localhost
-    const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3010';
+    const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3002';
     
     const services = [
         "Blackie Proxy",

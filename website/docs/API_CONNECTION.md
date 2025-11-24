@@ -6,7 +6,7 @@ The `BookingPage.tsx` component is now fully connected to the backend API.
 
 ### API Endpoint
 - **URL**: `POST /api/bookings/book/public`
-- **Base URL**: Configured via environment variable `VITE_API_URL` or defaults to `http://localhost:3010`
+- **Base URL**: Configured via environment variable `VITE_API_URL` or defaults to `http://localhost:3002`
 
 ### Features Implemented
 
@@ -32,7 +32,7 @@ Create a `.env` file in the `website` directory:
 
 ```env
 # Backend API URL
-VITE_API_URL=http://localhost:3010
+VITE_API_URL=http://localhost:3002
 ```
 
 For production, set:
@@ -58,7 +58,7 @@ The component sends the following data to the backend:
 
 ### Testing
 
-1. Make sure backend is running on port 3010
+1. Make sure backend is running on port 3002
 2. Fill out the booking form
 3. Submit the form
 4. Check:
@@ -74,7 +74,7 @@ The component sends the following data to the backend:
 - Check `ALLOWED_ORIGINS` in backend `.env` includes your frontend URL
 
 **Connection Errors:**
-- Verify backend is running: `curl http://localhost:3010/health`
+- Verify backend is running: `curl http://localhost:3002/health`
 - Check API URL in browser console
 - Verify network tab for request/response details
 
