@@ -35,5 +35,4 @@ server = app.listen(PORT, HOST, () => {
   console.log(`🚀 Server running on port ${PORT}`);
   console.log(`📦 Environment: ${NODE_ENV}`);
   console.log(`\n🔍 Health check: http://localhost:${PORT}/health`);
-  console.log(`📚 API docs: http://localhost:${PORT}/api-docs`);
 });
