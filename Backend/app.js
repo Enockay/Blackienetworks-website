@@ -154,8 +154,6 @@ const connectWithRetry = async (retries = 5, delay = 5000) => {
     // For Atlas SRV connections, add these options
     srvMaxHosts: 3,
     srvServiceName: 'mongodb',
-    // DNS resolution options
-    family: 4, // Force IPv4
   };
 
   for (let i = 0; i < retries; i++) {
