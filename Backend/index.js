@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 const PORT = process.env.PORT || 3002;
 const NODE_ENV = process.env.NODE_ENV || 'development';
-const HOST = process.env.HOST || 'localhost';
+const HOST = process.env.HOST || '0.0.0.0';
 
 // Handle unhandled promise rejections
 process.on('unhandledRejection', (err) => {
@@ -34,5 +34,6 @@ process.on('SIGTERM', () => {
 server = app.listen(PORT, HOST, () => {
   console.log(`🚀 Server running on port ${PORT}`);
   console.log(`📦 Environment: ${NODE_ENV}`);
+  console.log(`🌐 Listening on: ${HOST}:${PORT}`);
   console.log(`\n🔍 Health check: http://localhost:${PORT}/health`);
 });
