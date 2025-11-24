@@ -23,12 +23,12 @@ RUN chown -R nodejs:nodejs /app
 # Switch to non-root user
 USER nodejs
 
-# Expose port (app uses PORT env variable, defaulting to 3010)
-EXPOSE 3010
+# Expose port (app uses PORT env variable, defaulting to 3002)
+EXPOSE 3002
 
 # Health check - use localhost inside container
 HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
-  CMD node -e "require('http').get('http://localhost:' + (process.env.PORT || 3010) + '/health', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})"
+  CMD node -e "require('http').get('http://localhost:' + (process.env.PORT || 3002) + '/health', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})"
 
 # Start application
 CMD ["node", "index.js"]

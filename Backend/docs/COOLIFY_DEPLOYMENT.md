@@ -4,16 +4,16 @@ This guide explains how to deploy the Blackie Networks backend to Coolify after 
 
 ## 🔧 Changes Made for Coolify
 
-After updating the server to listen on `0.0.0.0:3010`, the following configurations are needed for Coolify:
+After updating the server to listen on `0.0.0.0:3002`, the following configurations are needed for Coolify:
 
 ### 1. Server Configuration ✅
 - Server now listens on `0.0.0.0` (all interfaces) - **Already done**
 - Port is configurable via `PORT` environment variable
-- Default port is `3010`
+- Default port is `3002`
 
 ### 2. Docker Configuration ✅
 - Dockerfile updated with proper health check
-- Port 3010 exposed
+- Port 3002 exposed
 - Health check uses `0.0.0.0` for Docker compatibility
 
 ---
@@ -41,7 +41,7 @@ Add these environment variables in Coolify:
 
 ```env
 # Server Configuration
-PORT=3010
+PORT=3002
 NODE_ENV=production
 HOST=0.0.0.0
 
@@ -74,12 +74,12 @@ ALLOWED_ORIGINS=https://blackie-networks.com,https://www.blackie-networks.com,ht
 In Coolify settings:
 
 1. **Port Configuration**:
-   - **Internal Port**: `3010` (the port your app listens on)
+   - **Internal Port**: `3002` (the port your app listens on)
    - **External Port**: Leave as default (Coolify handles this)
 
 2. **Health Check**:
    - **Path**: `/health`
-   - **Port**: `3010`
+   - **Port**: `3002`
    - **Interval**: `30` seconds
 
 ### Step 5: Build Settings
@@ -106,20 +106,20 @@ This error usually means Coolify can't reach your application. Here's how to fix
 
 1. **Check Internal Port**:
    - In Coolify, go to your application settings
-   - Verify **Internal Port** is set to `3010`
+   - Verify **Internal Port** is set to `3002`
    - This must match the `PORT` environment variable
 
 2. **Check Environment Variables**:
    ```bash
    # In Coolify, verify these are set:
-   PORT=3010
+   PORT=3002
    HOST=0.0.0.0
    ```
 
 ### Solution 2: Check Health Check
 
 1. **Health Check Path**: Should be `/health`
-2. **Health Check Port**: Should be `3010`
+2. **Health Check Port**: Should be `3002`
 3. **Test manually**:
    ```bash
    # After deployment, test the health endpoint
@@ -130,26 +130,26 @@ This error usually means Coolify can't reach your application. Here's how to fix
 
 1. **In Coolify**, go to **Logs** tab
 2. **Look for**:
-   - `🚀 Server running on port 3010`
-   - `🌐 Listening on: 0.0.0.0:3010`
+   - `🚀 Server running on port 3002`
+   - `🌐 Listening on: 0.0.0.0:3002`
    - `✅ Mongoose connected successfully`
 
 3. **If you see errors**:
    - MongoDB connection issues → Check `MONGODB` env variable
-   - Port already in use → Check if another service is using port 3010
+   - Port already in use → Check if another service is using port 3002
    - Missing env variables → Check all required variables are set
 
 ### Solution 4: Verify Docker Configuration
 
 1. **Check Dockerfile**:
    ```dockerfile
-   EXPOSE 3010
+   EXPOSE 3002
    ```
 
 2. **Check Health Check**:
    ```dockerfile
    HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
-     CMD node -e "require('http').get('http://0.0.0.0:' + (process.env.PORT || 3010) + '/health', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})"
+     CMD node -e "require('http').get('http://0.0.0.0:' + (process.env.PORT || 3002) + '/health', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})"
    ```
 
 ### Solution 5: Rebuild and Redeploy
@@ -237,8 +237,8 @@ VITE_API_URL=https://notify.api.blackie-networks.com
 **Success**:
 ```
 ✅ Environment variables validated
-🚀 Server running on port 3010
-🌐 Listening on: 0.0.0.0:3010
+🚀 Server running on port 3002
+🌐 Listening on: 0.0.0.0:3002
 ✅ Mongoose connected successfully
 ```
 
@@ -277,7 +277,7 @@ If you continue to have issues:
 
 ### Required Environment Variables
 ```env
-PORT=3010
+PORT=3002
 HOST=0.0.0.0
 NODE_ENV=production
 MONGODB=your_connection_string
@@ -287,12 +287,12 @@ ALLOWED_ORIGINS=your_domains
 ```
 
 ### Port Configuration
-- **Internal Port**: `3010`
+- **Internal Port**: `3002`
 - **External Port**: Auto (Coolify handles)
 
 ### Health Check
 - **Path**: `/health`
-- **Port**: `3010`
+- **Port**: `3002`
 - **Expected**: `200 OK` with JSON response
 
 ---
