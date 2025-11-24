@@ -125,96 +125,28 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-// Database connection with retry logic
+// Database connection - single attempt
 const MONGODB = process.env.MONGODB;
 
-let isConnecting = false;
-let connectionRetries = 0;
 
-const connectWithRetry = async (retries = 5, delay = 5000) => {
-  // Prevent multiple simultaneous connection attempts
-  if (isConnecting) {
-    console.log('⏳ MongoDB connection already in progress...');
-    return;
-  }
+// Connect once
+mongoose.connect(MONGODB)
+  .then(() => {
+    console.log('✅ Mongoose connected successfully');
+  })
+  .catch((error) => {
+    console.error('❌ MongoDB connection failed:', error.message)
+    console.error('Full error:', error);
+    process.exit(1);
+  });
 
-  // Check if already connected
-  if (mongoose.connection.readyState === 1) {
-    console.log('✅ MongoDB already connected');
-    return;
-  }
-
-  isConnecting = true;
-  const options = {
-    serverSelectionTimeoutMS: 30000, // Increased from 5000 to 30000 (30 seconds)
-    socketTimeoutMS: 45000,
-    connectTimeoutMS: 30000, // Connection timeout
-    retryWrites: true,
-    retryReads: true,
-    // For Atlas SRV connections, add these options
-    srvMaxHosts: 3,
-    srvServiceName: 'mongodb',
-  };
-
-  for (let i = 0; i < retries; i++) {
-    try {
-      connectionRetries++;
-      console.log(`🔄 Attempting MongoDB connection (${i + 1}/${retries})...`);
-      
-      // If already connected, don't reconnect
-      if (mongoose.connection.readyState === 1) {
-        console.log('✅ MongoDB already connected');
-        isConnecting = false;
-        return;
-      }
-      
-      await mongoose.connect(MONGODB, options);
-      console.log('✅ Mongoose connected successfully');
-      connectionRetries = 0; // Reset retry counter on success
-      isConnecting = false;
-      return;
-    } catch (error) {
-      console.error(`❌ MongoDB connection attempt ${i + 1} failed:`, error.message);
-      
-      if (i < retries - 1) {
-        console.log(`⏳ Retrying in ${delay / 1000} seconds...`);
-        await new Promise(resolve => setTimeout(resolve, delay));
-        delay *= 1.5; // Exponential backoff
-      } else {
-        console.error('❌ MongoDB connection failed after all retries');
-        console.error('Full error:', error);
-        // Don't exit immediately - allow the app to start and retry later
-        // Mongoose will automatically retry on the next operation
-        console.warn('⚠️  Application will continue. MongoDB will retry connection automatically.');
-        isConnecting = false;
-      }
-    }
-  }
-};
-
-// Start connection with retry
-connectWithRetry();
-
-// Handle connection events
+// Handle connection events (no auto-reconnect)
 mongoose.connection.on('error', (err) => {
   console.error('❌ MongoDB connection error:', err);
-  isConnecting = false;
 });
 
 mongoose.connection.on('disconnected', () => {
-  console.warn('⚠️  MongoDB disconnected. Will attempt to reconnect on next operation...');
-  isConnecting = false;
-  // Mongoose will automatically reconnect, but we can trigger it manually after a delay
-  setTimeout(() => {
-    if (mongoose.connection.readyState === 0) {
-      connectWithRetry(3, 10000); // Quick retry on disconnect
-    }
-  }, 5000);
-});
-
-mongoose.connection.on('reconnected', () => {
-  console.log('✅ MongoDB reconnected successfully');
-  connectionRetries = 0;
+  console.warn('⚠️  MongoDB disconnected');
 });
 
 /**
