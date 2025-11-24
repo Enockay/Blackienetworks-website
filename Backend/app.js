@@ -27,7 +27,7 @@ try {
 
 const app = express();
 
-// Security middleware - configure CSP to allow Swagger UI
+// Security middleware
 // Note: upgradeInsecureRequests is NOT set to avoid forcing HTTPS (which causes SSL errors on HTTP)
 // In development, allow all HTTP connections for local network access
 const isDevelopment = process.env.NODE_ENV !== 'production';
@@ -35,10 +35,10 @@ app.use(helmet({
   contentSecurityPolicy: {
     directives: {
       defaultSrc: ["'self'"],
-      styleSrc: ["'self'", "'unsafe-inline'", "data:"], // Allow inline styles and data URIs for Swagger UI
-      scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "data:"], // Allow inline scripts, eval, and data URIs for Swagger UI
-      imgSrc: ["'self'", "data:", "https:", "blob:"],
-      fontSrc: ["'self'", "data:", "https:"], // Allow fonts for Swagger UI
+      styleSrc: ["'self'", "'unsafe-inline'"],
+      scriptSrc: ["'self'", "'unsafe-inline'"],
+      imgSrc: ["'self'", "data:", "https:"],
+      fontSrc: ["'self'", "data:", "https:"],
       // In development, allow all HTTP connections for local network access
       // In production, restrict to specific origins
       connectSrc: isDevelopment 
@@ -53,7 +53,7 @@ app.use(helmet({
     },
   },
   crossOriginEmbedderPolicy: false,
-  crossOriginResourcePolicy: { policy: "cross-origin" }, // Allow Swagger UI assets
+  crossOriginResourcePolicy: { policy: "cross-origin" },
 }));
 
 // CORS configuration
@@ -149,37 +149,21 @@ mongoose.connection.on('disconnected', () => {
   console.warn('⚠️  MongoDB disconnected');
 });
 
-/**
- * @swagger
- * /health:
- *   get:
- *     summary: Health check endpoint
- *     tags: [Health]
- *     description: Check if the API is running and healthy
- *     responses:
- *       200:
- *         description: API is healthy
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 success:
- *                   type: boolean
- *                   example: true
- *                 status:
- *                   type: string
- *                   example: OK
- *                 timestamp:
- *                   type: string
- *                   format: date-time
- *                 uptime:
- *                   type: number
- *                   description: Server uptime in seconds
- *                 environment:
- *                   type: string
- *                   example: development
- */
+// Root endpoint
+app.get('/', (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: 'Blackie Notification Server Running',
+    version: process.env.npm_package_version || '1.0.0',
+    timestamp: new Date().toISOString(),
+    uptime: process.uptime(),
+    environment: process.env.NODE_ENV || 'development',
+    endpoints: {
+      health: '/health'
+    }
+  });
+});
+
 // Health check endpoint
 app.get('/health', (req, res) => {
   res.status(200).json({
@@ -190,16 +174,6 @@ app.get('/health', (req, res) => {
     environment: process.env.NODE_ENV || 'development'
   });
 });
-
-// Swagger API Documentation
-// Disable CSP for Swagger UI to avoid blocking assets
-app.use('/api-docs', (req, res, next) => {
-  helmet({
-    contentSecurityPolicy: false, // Disable CSP for Swagger UI
-  })(req, res, next);
-});
-const { swaggerSetup } = require('./utils/swagger');
-swaggerSetup(app);
 
 // API routes
 app.use('/', indexRouter);
