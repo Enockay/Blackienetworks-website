@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     container_name: blackie-backend
     ports:
-      - "3010ß:3010"
+      - "3010:3010"
     environment:
       - NODE_ENV=production
       - PORT=3010
