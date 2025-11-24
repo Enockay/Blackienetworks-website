@@ -19,7 +19,7 @@ const options = {
     },
     servers: [
       {
-        url: process.env.API_URL || `http://localhost:${process.env.PORT || 3010}`,
+        url: process.env.API_URL || `http://localhost:${process.env.PORT || 3002}`,
         description: 'Development server'
       },
       {
