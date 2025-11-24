@@ -2,7 +2,7 @@ const app = require('./app');
 const mongoose = require('mongoose');
 const os = require('os');
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3010;
 const NODE_ENV = process.env.NODE_ENV || 'development';
 const HOST = process.env.HOST || '0.0.0.0'; // Bind to all network interfaces
 
