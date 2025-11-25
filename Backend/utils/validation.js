@@ -7,7 +7,7 @@ const validateBooking = [
   body('name')
     .trim()
     .notEmpty().withMessage('Name is required')
-    .isLength({ min: 2, max: 100 }).withMessage('Name must be between 2 and 100 characters')
+    .isLength({ min: 2, max: 100 }).withMessage('Name must be between 2 and 100 characters'),
     // Removed character restriction to support international names with accents, special characters, etc.
   
   body('email')

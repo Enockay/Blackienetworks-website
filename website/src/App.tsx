@@ -16,6 +16,9 @@ import FAQ from './componets/FAQ';
 import { SEO } from './componets/SEO';
 import { Analytics } from './componets/Analytics';
 import ScrollToTop from './componets/ScrollToTop';
+import LoginPage from './componets/LoginPage';
+import AdminDashboard from './componets/AdminDashboard';
+import ProtectedRoute from './componets/ProtectedRoute';
 
 const { Content } = Layout;
 
@@ -175,6 +178,18 @@ function MainContent() {
         <Route 
           path="/faq" 
           element={<FAQ />} 
+        />
+        <Route 
+          path="/login" 
+          element={<LoginPage />} 
+        />
+        <Route 
+          path="/admin/dashboard" 
+          element={
+            <ProtectedRoute>
+              <AdminDashboard />
+            </ProtectedRoute>
+          } 
         />
         {/* Catch-all route for 404 */}
         <Route 
