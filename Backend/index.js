@@ -20,16 +20,26 @@ process.on('uncaughtException', (err) => {
 
 // Graceful shutdown
 let server;
-process.on('SIGTERM', () => {
-  console.log('SIGTERM signal received: closing HTTP server');
-  server.close(() => {
+
+const gracefulShutdown = async (signal) => {
+  console.log(`${signal} signal received: closing HTTP server`);
+  
+  server.close(async () => {
     console.log('HTTP server closed');
-    mongoose.connection.close(false, () => {
+    
+    try {
+      await mongoose.connection.close();
       console.log('MongoDB connection closed');
       process.exit(0);
-    });
+    } catch (error) {
+      console.error('Error closing MongoDB connection:', error);
+      process.exit(1);
+    }
   });
-});
+};
+
+process.on('SIGTERM', () => gracefulShutdown('SIGTERM'));
+process.on('SIGINT', () => gracefulShutdown('SIGINT'));
 
 server = app.listen(PORT, HOST, () => {
   console.log(`🚀 Server running on port ${PORT}`);
