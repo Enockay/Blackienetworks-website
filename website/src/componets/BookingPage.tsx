@@ -75,6 +75,90 @@ const BookingPage: React.FC = () => {
     const handleDateChange = (date: Date | null) => {
         setFormData({ ...formData, date });
     };
+
+    // Validation functions
+    const validateName = (name: string): string | null => {
+        const trimmedName = name.trim();
+        
+        if (!trimmedName) {
+            return 'Name is required. Please enter your full name.';
+        }
+        
+        if (trimmedName.length < 2) {
+            return 'Name must be at least 2 characters long. Please enter your full name.';
+        }
+        
+        if (trimmedName.length > 100) {
+            return 'Name is too long. Please enter a name with less than 100 characters.';
+        }
+        
+        // Allow letters, spaces, hyphens, apostrophes, and common name characters
+        // Reject names with numbers or special characters that don't belong in names
+        const nameRegex = /^[a-zA-Z\s'-]+$/;
+        if (!nameRegex.test(trimmedName)) {
+            return 'Name contains invalid characters. Please use only letters, spaces, hyphens (-), and apostrophes (\'). Numbers and special characters are not allowed.';
+        }
+        
+        // Check for consecutive special characters
+        if (/[-']{2,}/.test(trimmedName) || /^[-']|[-']$/.test(trimmedName)) {
+            return 'Name format is invalid. Please ensure hyphens and apostrophes are used correctly (e.g., "Mary-Jane O\'Connor").';
+        }
+        
+        return null;
+    };
+
+    const validateEmail = (email: string): string | null => {
+        const trimmedEmail = email.trim();
+        
+        if (!trimmedEmail) {
+            return 'Email is required. Please enter your email address.';
+        }
+        
+        // Basic email format validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(trimmedEmail)) {
+            return 'Invalid email format. Please enter a valid email address (e.g., yourname@example.com).';
+        }
+        
+        // Check for valid email structure
+        const parts = trimmedEmail.split('@');
+        if (parts.length !== 2) {
+            return 'Invalid email format. Email must contain exactly one @ symbol (e.g., yourname@example.com).';
+        }
+        
+        const [localPart, domain] = parts;
+        
+        // Validate local part (before @)
+        if (localPart.length === 0 || localPart.length > 64) {
+            return 'Invalid email format. The part before @ must be between 1 and 64 characters.';
+        }
+        
+        if (localPart.startsWith('.') || localPart.endsWith('.') || localPart.includes('..')) {
+            return 'Invalid email format. The part before @ cannot start/end with a dot or have consecutive dots.';
+        }
+        
+        // Validate domain (after @)
+        if (domain.length === 0 || domain.length > 255) {
+            return 'Invalid email format. The domain part is invalid.';
+        }
+        
+        if (!domain.includes('.')) {
+            return 'Invalid email format. The domain must contain a dot (e.g., example.com).';
+        }
+        
+        const domainParts = domain.split('.');
+        if (domainParts.length < 2 || domainParts.some(part => part.length === 0)) {
+            return 'Invalid email format. The domain must have a valid structure (e.g., example.com).';
+        }
+        
+        // Check for valid TLD (top-level domain)
+        const tld = domainParts[domainParts.length - 1];
+        if (tld.length < 2 || !/^[a-zA-Z]+$/.test(tld)) {
+            return 'Invalid email format. The domain extension (e.g., .com, .org) must be at least 2 letters.';
+        }
+        
+        return null;
+    };
     
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -84,6 +168,22 @@ const BookingPage: React.FC = () => {
         // Validate required fields
         if (!formData.name || !formData.email || !formData.phone || !formData.service || !formData.date || !formData.time) {
             setError('Please fill in all required fields');
+            setIsLoading(false);
+            return;
+        }
+
+        // Validate name format
+        const nameError = validateName(formData.name);
+        if (nameError) {
+            setError(nameError);
+            setIsLoading(false);
+            return;
+        }
+
+        // Validate email format
+        const emailError = validateEmail(formData.email);
+        if (emailError) {
+            setError(emailError);
             setIsLoading(false);
             return;
         }

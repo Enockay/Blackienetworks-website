@@ -97,71 +97,14 @@ bookRouter.post('/book', authenticator, async (request, response) => {
 // Route for non-authenticated bookings (public booking form)
 const { validateBooking, handleValidationErrors } = require('../utils/validation');
 
-/**
- * @swagger
- * /api/bookings/book/public:
- *   post:
- *     summary: Create a public booking (no authentication required)
- *     tags: [Bookings]
- *     description: Create a booking without authentication. Sends confirmation emails automatically.
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - name
- *               - email
- *               - phone
- *               - service
- *               - date
- *               - time
- *             properties:
- *               name:
- *                 type: string
- *                 example: John Doe
- *               email:
- *                 type: string
- *                 format: email
- *                 example: john@example.com
- *               phone:
- *                 type: string
- *                 example: +1234567890
- *               service:
- *                 type: string
- *                 example: Web Development
- *               date:
- *                 type: string
- *                 format: date
- *                 example: "2024-12-25"
- *               time:
- *                 type: string
- *                 example: "10:00"
- *               description:
- *                 type: string
- *                 example: Need a new website
- *     responses:
- *       201:
- *         description: Booking created successfully
- *         content:
- *           application/json:
- *             schema:
- *               allOf:
- *                 - $ref: '#/components/schemas/Success'
- *                 - type: object
- *                   properties:
- *                     booking:
- *                       $ref: '#/components/schemas/Booking'
- *       400:
- *         description: Validation error or invalid date
- */
+// Public booking endpoint - no authentication required
 bookRouter.post('/book/public', validateBooking, handleValidationErrors, async (request, response) => {
     const { service, description, date, time, name, email, phone } = request.body
 
     try {
         if (!service || !date || !time || !name || !email || !phone) {
             return response.status(400).json({ 
+                success: false,
                 message: 'All required fields are missing',
                 required: ['service', 'date', 'time', 'name', 'email', 'phone']
             })
@@ -172,7 +115,10 @@ bookRouter.post('/book/public', validateBooking, handleValidationErrors, async (
 
         // Validate date is in the future
         if (scheduledDate < new Date()) {
-            return response.status(400).json({ message: 'Booking date must be in the future' })
+            return response.status(400).json({ 
+                success: false,
+                message: 'Booking date must be in the future' 
+            })
         }
 
         const newBooking = new Booking({
