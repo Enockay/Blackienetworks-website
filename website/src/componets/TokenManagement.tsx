@@ -136,6 +136,8 @@ const TokenManagement: React.FC = () => {
           allowedChannels: ['email', 'sms'],
           rateLimit: 1000,
           expiresAt: '',
+          maxServers: 5,
+          assignedServers: [],
         });
         fetchTokens();
       }

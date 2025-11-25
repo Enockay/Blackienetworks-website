@@ -263,7 +263,7 @@ const APIDocs: React.FC = () => {
                       {endpoint.description}
                     </p>
 
-                    {endpoint.body && (
+                    {'body' in endpoint && endpoint.body && (
                       <div style={{ marginBottom: '12px' }}>
                         <div style={{ color: '#cbd5e1', fontSize: '0.875rem', fontWeight: 600, marginBottom: '8px' }}>
                           Request Body:
