@@ -1,4 +1,5 @@
 const AccessToken = require('../models/accessToken');
+const IPBlacklist = require('../models/ipBlacklist');
 
 /**
  * Middleware to authenticate requests using access tokens
@@ -64,6 +65,90 @@ const authenticateToken = async (req, res, next) => {
       });
     }
 
+    // Get server identifier from request headers or IP
+    const serverId = req.headers['x-server-id'] || req.headers['x-server-name'] || null;
+    const serverName = req.headers['x-server-name'] || req.headers['x-server-id'] || 'Unknown Server';
+    const clientIP = req.ip || req.connection.remoteAddress || req.headers['x-forwarded-for']?.split(',')[0]?.trim();
+
+    // If server assignment is required (token has assigned servers)
+    if (accessToken.assignedServers && accessToken.assignedServers.length > 0) {
+      if (!serverId) {
+        return res.status(400).json({
+          success: false,
+          error: 'SERVER_ID_REQUIRED',
+          message: 'Server identification is required. Please provide X-Server-Id or X-Server-Name header.',
+          details: {
+            hint: 'Add header: X-Server-Id: your-server-identifier or X-Server-Name: your-server-name'
+          }
+        });
+      }
+
+      // Check if server is assigned to this token
+      const isAssigned = accessToken.isServerAssigned(serverId);
+      if (!isAssigned) {
+        return res.status(403).json({
+          success: false,
+          error: 'SERVER_NOT_ASSIGNED',
+          message: `Server "${serverId}" is not assigned to this access token.`,
+          details: {
+            hint: 'Please contact administrator to assign your server to this token.',
+            assignedServers: accessToken.assignedServers.map(s => ({
+              serverId: s.serverId,
+              serverName: s.serverName
+            }))
+          }
+        });
+      }
+
+      // Update server's last used time
+      const server = accessToken.assignedServers.find(s => s.serverId === serverId);
+      if (server) {
+        server.lastUsed = new Date();
+        server.usageCount = (server.usageCount || 0) + 1;
+        // Update IP if provided and different
+        if (clientIP && server.serverIP !== clientIP) {
+          server.serverIP = clientIP;
+        }
+      }
+    } else {
+      // If no servers assigned yet, allow first server to auto-register (optional)
+      // Or require explicit assignment via admin panel
+      // For now, we'll require explicit assignment
+      if (serverId) {
+        // Auto-assign first server if token has no assignments (optional feature)
+        // Uncomment below if you want auto-assignment for first server
+        /*
+        if (accessToken.assignedServers.length === 0) {
+          await accessToken.assignServer({
+            serverId: serverId,
+            serverName: serverName,
+            serverIP: clientIP
+          });
+        }
+        */
+      }
+    }
+
+    // Check IP blacklist
+    if (clientIP) {
+      const isBlacklisted = await IPBlacklist.findOne({
+        ip: clientIP,
+        tokenId: accessToken._id,
+        isActive: true
+      });
+
+      if (isBlacklisted) {
+        return res.status(403).json({
+          success: false,
+          error: 'IP_BLACKLISTED',
+          message: 'Your IP address has been blacklisted from using this access token.',
+          details: {
+            hint: 'Please contact administrator if you believe this is an error.'
+          }
+        });
+      }
+    }
+
     // Check rate limit (simple implementation)
     // You can enhance this with Redis for distributed systems
     const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000);
@@ -86,8 +171,13 @@ const authenticateToken = async (req, res, next) => {
     }
 
     // Record usage (async, don't wait)
-    accessToken.recordUsage().catch(err => {
+    accessToken.recordUsage(serverId || null).catch(err => {
       console.error('Error recording token usage:', err);
+    });
+    
+    // Save token with updated server info
+    accessToken.save().catch(err => {
+      console.error('Error saving token:', err);
     });
 
     // Attach token info to request

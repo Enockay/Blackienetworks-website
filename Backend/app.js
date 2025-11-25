@@ -183,6 +183,7 @@ app.use('/api/notifications', require('./routes/notifications'));
 app.use('/api/templates', require('./routes/templates'));
 app.use('/api/tokens', require('./routes/tokens'));
 app.use('/api/otp', require('./routes/otp'));
+app.use('/api/admin', require('./routes/admin'));
 
 // 404 handler
 app.use(function(req, res, next) {
