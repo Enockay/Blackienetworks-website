@@ -16,6 +16,7 @@ const bookRouter = require('./routes/bookings');
 
 // Import utilities
 const { validateEnv } = require('./utils/envValidator');
+const { swaggerSetup } = require('./utils/swagger');
 
 // Validate environment variables
 try {
@@ -120,6 +121,14 @@ app.use((req, res, next) => {
 
 // Static files
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Initialize Swagger API documentation
+swaggerSetup(app);
+
+// Serve static API docs HTML file
+app.get('/api-docs.html', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'api-docs.html'));
+});
 
 // View engine setup (for error pages)
 app.set('views', path.join(__dirname, 'views'));

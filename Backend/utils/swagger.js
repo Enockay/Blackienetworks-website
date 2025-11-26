@@ -260,6 +260,10 @@ const options = {
       {
         name: 'OTP',
         description: 'OTP (One-Time Password) service for email and SMS'
+      },
+      {
+        name: 'Users',
+        description: 'User management endpoints (authentication required for some endpoints)'
       }
     ]
   },

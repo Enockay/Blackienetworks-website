@@ -385,7 +385,8 @@ const sendTokenCredentials = async (tokenData) => {
 
     // Get API base URL for docs link
     const apiBaseUrl = process.env.API_URL || `http://localhost:${process.env.PORT || 3002}`;
-    const apiDocsUrl = `${apiBaseUrl}/api-docs`;
+    // Try Swagger first, fallback to static HTML
+    const apiDocsUrl = `${apiBaseUrl}/api-docs.html`;
 
     // Create email content
     const emailContent = `
