@@ -5,12 +5,94 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const configs = require('../utils/configs')
 
+/**
+ * @swagger
+ * /api/users:
+ *   get:
+ *     summary: Get all users
+ *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
+ *     description: Retrieve all users. **Requires authentication via Bearer token in Authorization header.**
+ *     responses:
+ *       200:
+ *         description: List of users
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   _id:
+ *                     type: string
+ *                   email:
+ *                     type: string
+ *                   role:
+ *                     type: string
+ *       401:
+ *         description: Unauthorized - Missing or invalid Bearer token
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Authentication required
+ */
 userRouter.get('/', async (request, response) => {
   const user = await User.find({})
 
   response.json(user)
 })
 
+/**
+ * @swagger
+ * /api/users/register:
+ *   post:
+ *     summary: Register a new user
+ *     tags: [Users]
+ *     description: Create a new user account. No authentication required.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - email
+ *               - password
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 format: email
+ *                 example: user@example.com
+ *               password:
+ *                 type: string
+ *                 minLength: 6
+ *                 example: password123
+ *     responses:
+ *       200:
+ *         description: User registered successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: string
+ *               description: JWT token
+ *       400:
+ *         description: Validation error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 msg:
+ *                   type: string
+ *                   example: User already exist
+ *       500:
+ *         description: Server error
+ */
 userRouter.post('/register', async (request, response) => {
   const {email,password} = request.body
 
@@ -45,6 +127,51 @@ userRouter.post('/register', async (request, response) => {
   }
 })
 
+/**
+ * @swagger
+ * /api/users/login:
+ *   post:
+ *     summary: Login user
+ *     tags: [Users]
+ *     description: Authenticate user and receive JWT token. No authentication required.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - email
+ *               - password
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 format: email
+ *                 example: user@example.com
+ *               password:
+ *                 type: string
+ *                 example: password123
+ *     responses:
+ *       200:
+ *         description: Login successful
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: string
+ *               description: JWT token (use this in Authorization header as "Bearer <token>")
+ *       400:
+ *         description: Invalid credentials
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 msg:
+ *                   type: string
+ *                   example: Email not found
+ *       500:
+ *         description: Server error
+ */
 userRouter.post('/login', async (request, response) => {
   const {email, password} = request.body
 
@@ -72,6 +199,42 @@ userRouter.post('/login', async (request, response) => {
   }
 })
 
+/**
+ * @swagger
+ * /api/users/forgot-password:
+ *   post:
+ *     summary: Request password reset
+ *     tags: [Users]
+ *     description: Send password reset email to user. No authentication required.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - email
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 format: email
+ *                 example: user@example.com
+ *     responses:
+ *       200:
+ *         description: Password reset email sent
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 msg:
+ *                   type: string
+ *                   example: Password reset email send
+ *       400:
+ *         description: User not found
+ *       500:
+ *         description: Server error
+ */
 userRouter.post('/forgot-password', async (request,response) => {
   const {email} = request.body
 
@@ -101,6 +264,49 @@ userRouter.post('/forgot-password', async (request,response) => {
   }
 })
 
+/**
+ * @swagger
+ * /api/users/reset-password/{token}:
+ *   post:
+ *     summary: Reset password with token
+ *     tags: [Users]
+ *     description: Reset user password using the token from the reset email. No Bearer token authentication required (uses URL token).
+ *     parameters:
+ *       - in: path
+ *         name: token
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Password reset token from email
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - password
+ *             properties:
+ *               password:
+ *                 type: string
+ *                 minLength: 6
+ *                 example: newpassword123
+ *     responses:
+ *       200:
+ *         description: Password reset successful
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 msg:
+ *                   type: string
+ *                   example: Password reset successfull
+ *       400:
+ *         description: Invalid token or validation error
+ *       500:
+ *         description: Server error
+ */
 userRouter.post('/reset-password/:token', async (request,response) => {
   const {password} = request.body
   const token = request.params
