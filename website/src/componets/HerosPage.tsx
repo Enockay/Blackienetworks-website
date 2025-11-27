@@ -379,12 +379,35 @@ const AchievementsAndSpecializations = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
       >
+        <motion.div
+          initial={{ scale: 0.9, opacity: 0 }}
+          whileInView={{ scale: 1, opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 8,
+            padding: '8px 18px',
+            borderRadius: 999,
+            border: '1px solid rgba(0, 240, 255, 0.4)',
+            background: 'rgba(0, 240, 255, 0.08)',
+            marginBottom: 18,
+            fontSize: 12,
+            textTransform: 'uppercase',
+            letterSpacing: '0.18em',
+            color: '#00f0ff',
+            fontWeight: 600,
+          }}
+        >
+          Trusted by campuses, ISPs & SMEs
+        </motion.div>
         <Title
           level={2}
-    style={{
+          style={{
             fontSize: 'clamp(2rem, 4vw, 3rem)',
             fontWeight: 800,
-            marginBottom: '16px',
+            marginBottom: '12px',
             background: 'linear-gradient(135deg, #00f0ff 0%, #0066ff 100%)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
@@ -393,9 +416,50 @@ const AchievementsAndSpecializations = () => {
         >
           Why Choose Blackie Networks?
         </Title>
-        <Paragraph style={{ color: '#cbd5e1', maxWidth: 720, margin: '0 auto', fontSize: '1.125rem' }}>
-          Delivering cutting-edge IT solutions with unmatched reliability and innovation
+        <Paragraph
+          style={{
+            color: '#cbd5e1',
+            maxWidth: 720,
+            margin: '0 auto',
+            fontSize: '1.05rem',
+            lineHeight: 1.8,
+          }}
+        >
+          We build and run real networks for Kenyan campuses and businesses, so our
+          products and services are tested in the same demanding environments you
+          operate in every day.
         </Paragraph>
+        <div
+          style={{
+            marginTop: 18,
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            gap: 10,
+          }}
+        >
+          {[
+            'Campus‑first internet & Wi‑Fi',
+            'ISP‑ready billing & automation',
+            'Software, cloud & VPN under one roof',
+          ].map((pill) => (
+            <span
+              key={pill}
+              style={{
+                padding: '6px 14px',
+                borderRadius: 999,
+                border: '1px solid rgba(148, 163, 184, 0.7)',
+                background: 'rgba(15, 23, 42, 0.9)',
+                fontSize: '0.8rem',
+                color: '#e5e7eb',
+                letterSpacing: '0.06em',
+                textTransform: 'uppercase',
+              }}
+            >
+              {pill}
+            </span>
+          ))}
+        </div>
       </motion.div>
     </div>
 
@@ -409,20 +473,20 @@ const AchievementsAndSpecializations = () => {
         {[
           {
             icon: <LaptopOutlined style={{ fontSize: '48px', color: '#00f0ff' }} />,
-            title: 'High-Speed Network',
-            text: 'Lightning-fast connectivity supporting thousands of concurrent users with zero downtime.',
+            title: 'End-to-end expertise',
+            text: 'From last‑mile internet and MikroTik routers to billing, cloud and VPNs, we design everything to work together with fewer vendors and less headache.',
             color: '#00f0ff',
           },
           {
             icon: <TeamOutlined style={{ fontSize: '48px', color: '#00ff88' }} />,
-            title: 'Affordable Solutions',
-            text: 'Cost-effective packages starting from KES 10/hour, designed for student budgets.',
+            title: 'Local, responsive support',
+            text: 'You talk directly to engineers who understand Kenyan ISPs, campuses and SMEs – we troubleshoot fast and in your context, not from a generic script.',
             color: '#00ff88',
           },
           {
             icon: <TrophyOutlined style={{ fontSize: '48px', color: '#7c3aed' }} />,
-            title: 'Proven Track Record',
-            text: 'Over 1,000 satisfied subscribers with consistent 5-star feedback and growing.',
+            title: 'Built to scale with you',
+            text: 'Start with one hostel or branch and scale to multiple sites, more users and new services without ripping out your entire stack.',
             color: '#7c3aed',
           },
         ].map((item, index) => (
@@ -479,6 +543,59 @@ const AchievementsAndSpecializations = () => {
         </Col>
       ))}
     </Row>
+    </motion.div>
+
+    {/* CTA under Why Choose section */}
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: 0.1 }}
+      style={{
+        marginTop: 40,
+        display: 'flex',
+        justifyContent: 'center',
+        gap: 16,
+        flexWrap: 'wrap',
+      }}
+    >
+      <Link to="/Products">
+        <motion.div whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.95 }}>
+          <Button
+            size="large"
+            style={{
+              background: 'linear-gradient(135deg, #00f0ff 0%, #0066ff 100%)',
+              border: 'none',
+              color: '#0a0e27',
+              fontWeight: 700,
+              height: '48px',
+              padding: '0 32px',
+              fontSize: '14px',
+              boxShadow: '0 10px 30px rgba(0, 240, 255, 0.4)',
+            }}
+          >
+            View Products <FiArrowRight style={{ marginLeft: 8 }} />
+          </Button>
+        </motion.div>
+      </Link>
+      <Link to="/booking">
+        <motion.div whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.95 }}>
+          <Button
+            size="large"
+            style={{
+              background: 'transparent',
+              border: '2px solid rgba(0, 240, 255, 0.5)',
+              color: '#00f0ff',
+              fontWeight: 700,
+              height: '48px',
+              padding: '0 32px',
+              fontSize: '14px',
+            }}
+          >
+            Ask for Quote
+          </Button>
+        </motion.div>
+      </Link>
     </motion.div>
     </div>
   );

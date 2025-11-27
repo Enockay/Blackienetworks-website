@@ -20,130 +20,130 @@ interface Service {
 const services: Service[] = [
   {
     title: "Blackie Proxy",
-    description: "High-performance proxy services for secure and anonymous browsing. Access geo-restricted content with our reliable proxy solutions.",
+    description: "High‑performance proxy built for Kenyan ISPs, campuses and power users who need fast, reliable and flexible access to the internet.",
     details: [
-      "Fast and secure proxy connections",
-      "Multiple server locations",
-      "Anonymous browsing protection",
-      "High-speed bandwidth",
-      "24/7 uptime guarantee",
-      "Easy setup and configuration"
+      "Multiple points of presence tuned for low‑latency streaming, research and remote work",
+      "Encrypted traffic paths to keep your browsing private and your data protected",
+      "Traffic policies that balance speed, fairness and cost for your users",
+      "Simple onboarding for ISPs and campus IT teams with clear documentation",
+      "Designed to plug into existing MikroTik, billing and hotspot setups",
+      "24/7 monitored infrastructure with proactive incident response"
     ],
     siteLink: "#" // You can add the actual site link here
   },
   {
     title: "ISP Billing System",
-    description: "Comprehensive billing and customer management system designed specifically for Internet Service Providers to streamline operations.",
+    description: "End‑to‑end billing and customer management tailored for ISPs, WISPs and campus Wi‑Fi providers.",
     details: [
-      "Automated billing and invoicing",
-      "Customer management portal",
-      "Payment processing integration",
-      "Usage tracking and reporting",
-      "Package and plan management",
-      "Multi-payment gateway support"
+      "Automated invoicing, renewals and payment reminders to reduce manual work",
+      "Customer self‑service portal for viewing usage, invoices and support tickets",
+      "Integration‑ready design for mobile money, card payments and bank transfers",
+      "Flexible package, bundle and promotion management for student‑friendly pricing",
+      "Real‑time usage tracking and analytics dashboards for capacity planning",
+      "Role‑based admin access to keep operations secure and auditable"
     ],
   },
   {
     title: "Mikrotik Configuration",
-    description: "Expert Mikrotik router configuration services to optimize your network performance, security, and reliability.",
+    description: "Expert MikroTik router configuration so your network stays fast, secure and stable, even at campus scale.",
     details: [
-      "Router initial setup and configuration",
-      "Load balancing and failover setup",
-      "VPN and VLAN configuration",
-      "Bandwidth management and traffic shaping",
-      "Firewall and security hardening",
-      "Quality of Service (QoS) optimization",
-      "Wireless access point configuration"
+      "Router initial setup, hardening and best‑practice baseline configuration",
+      "Load‑balancing and failover so users stay online even when links drop",
+      "VPN and VLAN design for separating student, staff and admin networks",
+      "Bandwidth management and traffic shaping to prevent single‑user abuse",
+      "Firewall, hotspot and walled‑garden rules tuned for your policies",
+      "QoS optimization for calls, classes and business‑critical traffic",
+      "Wireless access point tuning for dense hostel and lecture environments"
     ],
   },
   {
     title: "Software Maintenance",
-    description: "Ongoing software maintenance and support services to keep your applications running smoothly and securely.",
+    description: "Long‑term care for your existing systems so they stay fast, secure and easy to use as your needs grow.",
     details: [
-      "Regular software updates and patches",
-      "Bug fixes and troubleshooting",
-      "Performance optimization",
-      "Security monitoring and updates",
-      "Database maintenance",
-      "Backup and recovery solutions",
-      "Technical support and consultation"
+      "Scheduled updates, patches and dependency upgrades without breaking production",
+      "Bug fixing and troubleshooting backed by real monitoring and error tracking",
+      "Performance tuning to keep pages, APIs and reports feeling snappy",
+      "Security monitoring and hardening to reduce your attack surface over time",
+      "Database health checks, indexing and clean‑up for reliable data",
+      "Backup and recovery strategies tested for real incidents",
+      "Ongoing technical advisory so your roadmap and systems stay aligned"
     ],
   },
   {
     title: "Cloud Hosting",
-    description: "Scalable cloud hosting solutions with high availability, security, and performance for your applications and websites.",
+    description: "Modern cloud infrastructure on AWS, DigitalOcean and other providers, designed for uptime and growth.",
     details: [
-      "Scalable cloud infrastructure",
-      "High availability and uptime",
-      "Automated backups and disaster recovery",
-      "Load balancing and auto-scaling",
-      "Security and DDoS protection",
-      "24/7 monitoring and support",
-      "Multiple cloud provider options"
+      "Scalable cloud architectures that handle traffic spikes without surprises",
+      "High‑availability setups with redundancy across regions and zones",
+      "Automated backups and disaster‑recovery playbooks you can actually follow",
+      "Load‑balancers, auto‑scaling and CDNs tuned for your apps and users",
+      "Security best‑practices, from firewalls to secrets management",
+      "24/7 monitoring, alerting and on‑call workflows for your team",
+      "Ability to mix providers (AWS, DigitalOcean, others) when it makes sense"
     ],
   },
   {
     title: "SEO Optimization",
-    description: "Search Engine Optimization services to improve your website's visibility, rankings, and organic traffic.",
+    description: "Search Engine Optimization focused on practical wins: more relevant traffic, better leads and clearer reporting.",
     details: [
-      "Website SEO audit and analysis",
-      "Keyword research and optimization",
-      "On-page and off-page SEO",
-      "Content optimization",
-      "Technical SEO improvements",
-      "Link building strategies",
-      "Performance and analytics reporting"
+      "Full SEO audit covering speed, structure, content and technical issues",
+      "Keyword and intent research tailored to your niche and geography",
+      "On‑page improvements that make pages clearer for users and search engines",
+      "Content recommendations or production support for high‑value topics",
+      "Technical fixes for sitemaps, meta tags, indexing issues and more",
+      "Clean link‑building strategies focused on long‑term authority",
+      "Monthly performance reports in plain language, not just charts"
     ],
   },
   {
     title: "IoT Device Remote Access (WireGuard)",
-    description: "Secure remote access to your IoT devices using WireGuard VPN technology for reliable and encrypted connections.",
+    description: "WireGuard‑based VPN access to cameras, sensors and other IoT devices without exposing them to the open internet.",
     details: [
-      "WireGuard VPN setup and configuration",
-      "Secure remote device access",
-      "Multi-device management",
-      "Encrypted data transmission",
-      "Low latency connections",
-      "Cross-platform compatibility",
-      "24/7 monitoring and support"
+      "WireGuard server and client configuration tuned for low overhead and speed",
+      "Secure remote access patterns that avoid unsafe port‑forwarding",
+      "Multi‑device and multi‑site design for fleets of IoT hardware",
+      "End‑to‑end encrypted tunnels for telemetry, control and video streams",
+      "Low‑latency routes so real‑time control and monitoring stay responsive",
+      "Support for laptops, phones, embedded devices and remote technicians",
+      "Monitoring and support for your critical IoT fleet connectivity"
     ],
   },
   {
     title: "Internet Installation (Kitui & Chuka)",
-    description: "Professional internet installation services in Kitui and Chuka regions with reliable connectivity solutions.",
+    description: "On‑the‑ground internet installation and last‑mile connectivity in Kitui, Chuka and surrounding areas.",
     details: [
-      "Site survey and assessment",
-      "Fiber optic and wireless installation",
-      "Router and equipment setup",
-      "Network configuration and testing",
-      "Post-installation support",
-      "Maintenance and troubleshooting",
-      "Affordable packages for homes and businesses"
+      "Site survey and signal assessment for hostels, homes, schools and businesses",
+      "Fiber, wireless and hybrid installation options depending on your location",
+      "Router, access point and cabling setup that is tidy and maintainable",
+      "Network configuration and testing before we hand over to your team",
+      "Post‑installation support so you are not left alone after day one",
+      "Maintenance and troubleshooting plans for long‑term stability",
+      "Affordable packages that balance performance with real‑world budgets"
     ],
   },
   {
     title: "Internet Infrastructure Setup",
-    description: "Complete internet infrastructure design and implementation for businesses, campuses, and communities.",
+    description: "Full internet infrastructure design for campuses, estates, Saccos and growing ISPs.",
     details: [
-      "Network design and planning",
-      "Cabling and hardware installation",
-      "Server setup and management",
-      "Security protocols and firewall configuration",
-      "Wireless network deployment",
-      "Network monitoring and support",
-      "Scalable architecture for growth"
+      "End‑to‑end network design from core to access layer, documented and diagrammed",
+      "Cabling, racks and hardware installation that meet safety and uptime standards",
+      "Core, edge and authentication servers sized and configured for your growth",
+      "Security policies and firewall rules crafted around your risk profile",
+      "Campus‑wide or multi‑building Wi‑Fi deployments with roaming in mind",
+      "Monitoring, logging and alerting so issues are found before users complain",
+      "Architectures that make it easy to add new buildings, towers or services"
     ],
   },
   {
     title: "Network Setup and Infrastructure",
-    description: "Enterprise-grade network and IT infrastructure services, designed to create secure, robust, and scalable systems.",
+    description: "Secure, robust IT and network foundations for organizations that are ready to modernize or expand.",
     details: [
-      "Cabling and hardware installation",
-      "Server setup and management",
-      "Security protocols",
-      "Wireless network configuration",
-      "Network monitoring and support",
-      "Cloud infrastructure setup"
+      "Structured cabling, switching and routing that follow industry standards",
+      "Server setup, virtualization and storage tailored to your workloads",
+      "Security protocols for guest, staff and admin segments that actually get enforced",
+      "Office, branch and warehouse Wi‑Fi designs that minimize dead zones",
+      "Network monitoring, alerting and documentation handed over to your team",
+      "Hybrid on‑prem and cloud infrastructure setups where each part fits a clear role"
     ],
     mikrotikAddons: [
       "Mikrotik router configuration",
@@ -303,7 +303,9 @@ const ServicesPage: React.FC = () => {
               margin: '0 auto',
             }}
           >
-            Comprehensive IT solutions tailored to transform your digital infrastructure
+            This is the practical side of Blackie Networks: from campus internet and ISP
+            billing to cloud, VPN and SEO, each service fits together to power your
+            entire digital stack.
           </motion.p>
         </motion.div>
 

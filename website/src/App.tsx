@@ -19,6 +19,8 @@ import ScrollToTop from './componets/ScrollToTop';
 import LoginPage from './componets/LoginPage';
 import AdminDashboard from './componets/AdminDashboard';
 import ProtectedRoute from './componets/ProtectedRoute';
+import ProductsPage from './componets/ProductsPage';
+import ProductDetail from './componets/ProductDetail';
 
 const { Content } = Layout;
 
@@ -125,18 +127,22 @@ function MainContent() {
           element={
             <>
               <SEO 
-                title="Our Products & Services - Campus Wi-Fi, Network Infrastructure & More"
-                description="Explore our range of IT products and services including campus Wi-Fi solutions, network infrastructure, billing systems, custom software development, cloud services, and mobile app integration."
-                keywords="campus Wi-Fi, network products, billing systems, software products, cloud services Kenya"
+                title="Our Products - Blackie Proxy, ISP Billing, MikroTik & Cloud Solutions"
+                description="Dive into Blackie Networks products including Blackie Proxy, ISP Billing System, MikroTik configuration bundles, cloud hosting and long-term software maintenance."
+                keywords="Blackie Proxy, ISP billing system, Mikrotik configuration, cloud hosting, software maintenance"
                 url="/Products"
                 breadcrumbs={[
                   { name: 'Home', url: '/' },
                   { name: 'Products', url: '/Products' },
                 ]}
               />
-              <Section/>
+              <ProductsPage />
             </>
           } 
+        />
+        <Route 
+          path="/Products/:slug" 
+          element={<ProductDetail />} 
         />
         <Route 
           path="/contactus" 
