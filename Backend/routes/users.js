@@ -1,6 +1,7 @@
 require('dotenv').config()
 const userRouter = require('express').Router()
 const User = require('../models/user')
+const Booking = require('../models/booking')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const configs = require('../utils/configs')
@@ -261,6 +262,82 @@ userRouter.post('/forgot-password', async (request,response) => {
   } catch(err) {
     console.log(err)
     response.status(500).json({ msg: 'password reset email failed to send'})
+  }
+})
+
+/**
+ * @swagger
+ * /api/users/delete-data-public:
+ *   post:
+ *     summary: Request deletion of personal data (public endpoint)
+ *     tags: [Users]
+ *     description: >
+ *       Public endpoint that allows a user to request deletion of their personal data associated with a given email address.
+ *       This will attempt to remove matching user accounts and bookings. No authentication is required.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - email
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 format: email
+ *                 example: user@example.com
+ *     responses:
+ *       200:
+ *         description: Data deleted (or no data found) response
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: Data deleted successfully
+ *       400:
+ *         description: Missing or invalid input
+ *       500:
+ *         description: Server error
+ */
+userRouter.post('/delete-data-public', async (request, response) => {
+  const { email } = request.body || {}
+
+  if (!email || typeof email !== 'string') {
+    return response.status(400).json({
+      success: false,
+      message: 'A valid email is required to delete data'
+    })
+  }
+
+  try {
+    // Delete user account(s) with this email
+    const user = await User.findOne({ email })
+    if (user) {
+      await User.deleteOne({ _id: user._id })
+      // Also delete bookings linked via user reference
+      await Booking.deleteMany({ user: user._id })
+    }
+
+    // Delete any public bookings made with this email (even if not linked to a User)
+    await Booking.deleteMany({ email })
+
+    return response.status(200).json({
+      success: true,
+      message: 'Data deleted successfully'
+    })
+  } catch (error) {
+    console.error('Error handling public data deletion request:', error)
+    return response.status(500).json({
+      success: false,
+      message: 'Failed to delete data. Please try again later.'
+    })
   }
 })
 
