@@ -21,6 +21,8 @@ import AdminDashboard from './componets/AdminDashboard';
 import ProtectedRoute from './componets/ProtectedRoute';
 import ProductsPage from './componets/ProductsPage';
 import ProductDetail from './componets/ProductDetail';
+import PrivacyPolicy from './componets/PrivacyPolicy';
+import TermsOfService from './componets/TermsOfService';
 
 const { Content } = Layout;
 
@@ -184,6 +186,34 @@ function MainContent() {
         <Route 
           path="/faq" 
           element={<FAQ />} 
+        />
+        <Route 
+          path="/terms" 
+          element={
+            <>
+              <SEO 
+                title="Terms of Service - Blackie Networks"
+                description="Read the Terms of Service that govern your use of Blackie Networks' website, internet services, network infrastructure, software, cloud and related solutions."
+                url="/terms"
+                noindex={false}
+              />
+              <TermsOfService />
+            </>
+          } 
+        />
+        <Route 
+          path="/privacy" 
+          element={
+            <>
+              <SEO 
+                title="Privacy Policy - Blackie Networks"
+                description="Learn how Blackie Networks collects, uses, and protects your personal data when you use our website, internet services, network infrastructure, cloud and software solutions."
+                url="/privacy"
+                noindex={false}
+              />
+              <PrivacyPolicy />
+            </>
+          } 
         />
         <Route 
           path="/login" 
