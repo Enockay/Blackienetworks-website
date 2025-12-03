@@ -2,7 +2,7 @@ import React from 'react';
 import { Typography } from 'antd';
 import { motion } from 'framer-motion';
 
-const { Title, Paragraph, Text } = Typography;
+const { Title, Paragraph } = Typography;
 
 const TermsOfService: React.FC = () => {
   return (
