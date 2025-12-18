@@ -1,11 +1,32 @@
-version: '3.8'
+version: "3.8"
 
 services:
+  wireguard:
+    image: linuxserver/wireguard:latest
+    container_name: wireguard
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=UTC
+    volumes:
+      - ./config:/config
+      - /lib/modules:/lib/modules
+    sysctls:
+      net.ipv6.conf.all.disable_ipv6: 0
+      net.ipv6.conf.all.forwarding: 1
+    restart: unless-stopped
+
   backend:
+    container_name: blackie-backend
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: blackie-backend
+    network_mode: service:wireguard
+    depends_on:
+      - wireguard
     ports:
       - "3002:3002"
     environment:
@@ -20,13 +41,6 @@ services:
       - ALLOWED_ORIGINS=${ALLOWED_ORIGINS}
     env_file:
       - .env
-    restart: unless-stopped
-    networks:
-      - blackie-network
     volumes:
       - ./logs:/app/logs
-
-networks:
-  blackie-network:
-    driver: bridge
-
+    restart: unless-stopped
