@@ -1,46 +1,30 @@
-version: "3.8"
+version: "3.9"
 
 services:
-  wireguard:
-    image: linuxserver/wireguard:latest
-    container_name: wireguard
-    cap_add:
-      - NET_ADMIN
-      - SYS_MODULE
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=UTC
-    volumes:
-      - ./config:/config
-      - /lib/modules:/lib/modules
-    sysctls:
-      net.ipv6.conf.all.disable_ipv6: 0
-      net.ipv6.conf.all.forwarding: 1
-    restart: unless-stopped
-
   backend:
-    container_name: blackie-backend
     build:
       context: .
       dockerfile: Dockerfile
-    network_mode: service:wireguard
-    depends_on:
-      - wireguard
+    container_name: blackie-notify
+    restart: unless-stopped
+
+    # Expose backend HTTP/WebSocket port
     ports:
       - "3002:3002"
-    environment:
-      - NODE_ENV=production
-      - PORT=3002
-      - BREVO_API_KEY=${BREVO_API_KEY}
-      - BREVO_SENDER_EMAIL=${BREVO_SENDER_EMAIL}
-      - BREVO_SENDER_NAME=${BREVO_SENDER_NAME:-Blackie Networks}
-      - BREVO_REPLY_TO_EMAIL=${BREVO_REPLY_TO_EMAIL}
-      - BREVO_SMS_SENDER=${BREVO_SMS_SENDER:-BlackieNet}
-      - ADMIN_EMAIL=${ADMIN_EMAIL}
-      - ALLOWED_ORIGINS=${ALLOWED_ORIGINS}
+
+    # Load all environment variables from .env in this directory
     env_file:
       - .env
-    volumes:
-      - ./logs:/app/logs
-    restart: unless-stopped
+
+    # Allow WireGuard to create network interfaces inside the container
+    privileged: true
+    # If you prefer a narrower permission instead of privileged, you can use:
+    # cap_add:
+    #   - NET_ADMIN
+
+    networks:
+      - backend-net
+
+networks:
+  backend-net:
+    driver: bridge
