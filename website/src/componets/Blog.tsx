@@ -350,7 +350,7 @@ const Blog: React.FC = () => {
         minHeight: '100vh',
         marginTop: '80px',
         padding: '80px 20px',
-        background: 'linear-gradient(135deg, rgba(5, 8, 16, 0.95) 0%, rgba(10, 14, 39, 0.95) 100%)',
+        background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.95) 100%)',
         position: 'relative',
         width: '100%',
       }}
@@ -397,7 +397,7 @@ const Blog: React.FC = () => {
           >
             Blackie Networks Blog
           </Title>
-          <Paragraph style={{ color: '#cbd5e1', fontSize: '1.125rem', maxWidth: '700px', margin: '0 auto' }}>
+          <Paragraph style={{ color: '#475569', fontSize: '1.125rem', maxWidth: '700px', margin: '0 auto' }}>
             Stay updated with the latest in network infrastructure, IT solutions, and technology trends
           </Paragraph>
         </motion.div>
@@ -433,7 +433,7 @@ const Blog: React.FC = () => {
                 background: 'rgba(0, 240, 255, 0.1)',
                 border: '1px solid rgba(0, 240, 255, 0.3)',
                 borderRadius: '12px',
-                color: '#e2e8f0',
+                          color: '#1e293b',
               }}
               className="glass"
             />
@@ -448,7 +448,7 @@ const Blog: React.FC = () => {
                 background: 'rgba(0, 240, 255, 0.1)',
                 border: '1px solid rgba(0, 240, 255, 0.3)',
                 borderRadius: '12px',
-                color: '#e2e8f0',
+                          color: '#1e293b',
               }}
             >
               {sortOptions.map((option) => (
@@ -478,7 +478,7 @@ const Blog: React.FC = () => {
                   background: selectedCategory === cat
                     ? 'rgba(0, 240, 255, 0.2)'
                     : 'rgba(0, 240, 255, 0.1)',
-                  color: selectedCategory === cat ? '#00f0ff' : '#cbd5e1',
+                  color: selectedCategory === cat ? '#00f0ff' : '#475569',
                   transition: 'all 0.3s ease',
                 }}
                 onMouseEnter={(e) => {
@@ -595,7 +595,7 @@ const Blog: React.FC = () => {
                       </Title>
                       <Paragraph
                         style={{
-                          color: '#cbd5e1',
+                          color: '#475569',
                           fontSize: '0.95rem',
                           lineHeight: 1.6,
                           marginBottom: '16px',
@@ -637,7 +637,7 @@ const Blog: React.FC = () => {
           </div>
         ) : currentPosts.length === 0 ? (
           <Empty
-            description={<span style={{ color: '#cbd5e1' }}>No blog posts found.</span>}
+            description={<span style={{ color: '#475569' }}>No blog posts found.</span>}
             style={{ padding: '80px 20px' }}
           />
         ) : (
@@ -669,7 +669,7 @@ const Blog: React.FC = () => {
                         borderRadius: '20px',
                         overflow: 'hidden',
                         border: '1px solid rgba(0, 240, 255, 0.2)',
-                        background: 'rgba(10, 14, 39, 0.6)',
+                        background: 'rgba(255, 255, 255, 0.9)',
                         display: 'flex',
                         flexDirection: 'column',
                       }}
@@ -734,7 +734,7 @@ const Blog: React.FC = () => {
                         </Title>
                         <Paragraph
                           style={{
-                            color: '#cbd5e1',
+                            color: '#475569',
                             fontSize: '0.95rem',
                             lineHeight: 1.6,
                             marginBottom: '20px',
@@ -770,7 +770,7 @@ const Blog: React.FC = () => {
                               <div style={{ color: '#00f0ff', fontSize: '0.875rem', fontWeight: 600 }}>
                                 {post.author.name}
                               </div>
-                              <div style={{ color: '#94a3b8', fontSize: '0.75rem' }}>
+                              <div style={{ color: '#475569', fontSize: '0.75rem' }}>
                                 {new Date(post.date).toLocaleDateString()} • {post.readingTime} min
                               </div>
                             </div>
@@ -784,7 +784,7 @@ const Blog: React.FC = () => {
                                   background: 'transparent',
                                   border: 'none',
                                   cursor: 'pointer',
-                                  color: isLiked ? '#ff006e' : '#94a3b8',
+                                  color: isLiked ? '#ff006e' : '#475569',
                                   fontSize: '18px',
                                   transition: 'all 0.3s ease',
                                 }}
@@ -795,18 +795,18 @@ const Blog: React.FC = () => {
                                 }}
                                 onMouseLeave={(e) => {
                                   if (!isLiked) {
-                                    e.currentTarget.style.color = '#94a3b8';
+                                    e.currentTarget.style.color = '#475569';
                                   }
                                 }}
                               >
                                 {isLiked ? <HeartFilled /> : <HeartOutlined />}
                               </button>
                             </Tooltip>
-                            <span style={{ color: '#94a3b8', fontSize: '0.875rem' }}>
+                            <span style={{ color: '#475569', fontSize: '0.875rem' }}>
                               {post.likes}
                             </span>
                             <Tooltip title="Comments">
-                              <span style={{ color: '#94a3b8', fontSize: '0.875rem', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                              <span style={{ color: '#475569', fontSize: '0.875rem', display: 'flex', alignItems: 'center', gap: '4px' }}>
                                 <CommentOutlined /> {post.comments}
                               </span>
                             </Tooltip>
@@ -856,14 +856,14 @@ const Blog: React.FC = () => {
               responsive
               showQuickJumper
               style={{
-                color: '#e2e8f0',
+                          color: '#1e293b',
               }}
               itemRender={(page, type, originalElement) => {
                 if (type === 'page') {
                   return (
                     <span
                       style={{
-                        color: page === currentPage ? '#00f0ff' : '#cbd5e1',
+                        color: page === currentPage ? '#00f0ff' : '#475569',
                         background: page === currentPage ? 'rgba(0, 240, 255, 0.2)' : 'transparent',
                         border: page === currentPage ? '1px solid rgba(0, 240, 255, 0.4)' : '1px solid rgba(0, 240, 255, 0.2)',
                         borderRadius: '8px',

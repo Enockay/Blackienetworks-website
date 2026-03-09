@@ -293,7 +293,7 @@ const TokenManagement: React.FC = () => {
     <div>
       {/* Header with Generate Button */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', flexWrap: 'wrap', gap: '16px' }}>
-        <h2 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#e2e8f0' }}>
+        <h2 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#1e293b' }}>
           Access Token Management
         </h2>
         <motion.button
@@ -358,7 +358,7 @@ const TokenManagement: React.FC = () => {
             animate={{ scale: 1, opacity: 1 }}
             onClick={(e) => e.stopPropagation()}
             style={{
-              background: 'rgba(10, 14, 39, 0.95)',
+              background: 'rgba(255, 255, 255, 0.95)',
               borderRadius: '16px',
               padding: '32px',
               maxWidth: '600px',
@@ -382,7 +382,7 @@ const TokenManagement: React.FC = () => {
                     borderRadius: '8px',
                     marginBottom: '16px',
                     wordBreak: 'break-all',
-                    color: '#e2e8f0',
+                    color: '#1e293b',
                     fontSize: '0.875rem',
                     fontFamily: 'monospace',
                   }}
@@ -444,13 +444,13 @@ const TokenManagement: React.FC = () => {
               </div>
             ) : (
               <form onSubmit={handleGenerateToken}>
-                <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '24px', color: '#e2e8f0' }}>
+                <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '24px', color: '#1e293b' }}>
                   Generate New Access Token
                 </h3>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                   <div>
-                    <label style={{ display: 'block', marginBottom: '6px', color: '#cbd5e1', fontSize: '0.875rem', fontWeight: 500 }}>
+                    <label style={{ display: 'block', marginBottom: '6px', color: '#475569', fontSize: '0.875rem', fontWeight: 500 }}>
                       Token Name *
                     </label>
                     <input
@@ -465,7 +465,7 @@ const TokenManagement: React.FC = () => {
                         borderRadius: '8px',
                         border: '1px solid rgba(0, 240, 255, 0.3)',
                         background: 'rgba(0, 240, 255, 0.08)',
-                        color: '#e2e8f0',
+                        color: '#1e293b',
                         fontSize: '0.875rem',
                         outline: 'none',
                       }}
@@ -473,7 +473,7 @@ const TokenManagement: React.FC = () => {
                   </div>
 
                   <div>
-                    <label style={{ display: 'block', marginBottom: '6px', color: '#cbd5e1', fontSize: '0.875rem', fontWeight: 500 }}>
+                    <label style={{ display: 'block', marginBottom: '6px', color: '#475569', fontSize: '0.875rem', fontWeight: 500 }}>
                       Description
                     </label>
                     <textarea
@@ -487,7 +487,7 @@ const TokenManagement: React.FC = () => {
                         borderRadius: '8px',
                         border: '1px solid rgba(0, 240, 255, 0.3)',
                         background: 'rgba(0, 240, 255, 0.08)',
-                        color: '#e2e8f0',
+                        color: '#1e293b',
                         fontSize: '0.875rem',
                         outline: 'none',
                         resize: 'vertical',
@@ -497,7 +497,7 @@ const TokenManagement: React.FC = () => {
                   </div>
 
                   <div>
-                    <label style={{ display: 'block', marginBottom: '6px', color: '#cbd5e1', fontSize: '0.875rem', fontWeight: 500 }}>
+                    <label style={{ display: 'block', marginBottom: '6px', color: '#475569', fontSize: '0.875rem', fontWeight: 500 }}>
                       User Email (Optional)
                     </label>
                     <input
@@ -511,7 +511,7 @@ const TokenManagement: React.FC = () => {
                         borderRadius: '8px',
                         border: '1px solid rgba(0, 240, 255, 0.3)',
                         background: 'rgba(0, 240, 255, 0.08)',
-                        color: '#e2e8f0',
+                        color: '#1e293b',
                         fontSize: '0.875rem',
                         outline: 'none',
                       }}
@@ -519,7 +519,7 @@ const TokenManagement: React.FC = () => {
                   </div>
 
                   <div>
-                    <label style={{ display: 'block', marginBottom: '6px', color: '#cbd5e1', fontSize: '0.875rem', fontWeight: 500 }}>
+                    <label style={{ display: 'block', marginBottom: '6px', color: '#475569', fontSize: '0.875rem', fontWeight: 500 }}>
                       Allowed Channels
                     </label>
                     <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
@@ -537,7 +537,7 @@ const TokenManagement: React.FC = () => {
                               : 'rgba(0, 240, 255, 0.05)',
                             border: `1px solid ${formData.allowedChannels.includes(channel) ? 'rgba(0, 240, 255, 0.4)' : 'rgba(0, 240, 255, 0.2)'}`,
                             borderRadius: '8px',
-                            color: formData.allowedChannels.includes(channel) ? '#00f0ff' : '#94a3b8',
+                            color: formData.allowedChannels.includes(channel) ? '#00f0ff' : '#475569',
                           }}
                         >
                           <input
@@ -565,7 +565,7 @@ const TokenManagement: React.FC = () => {
                   </div>
 
                   <div>
-                    <label style={{ display: 'block', marginBottom: '6px', color: '#cbd5e1', fontSize: '0.875rem', fontWeight: 500 }}>
+                    <label style={{ display: 'block', marginBottom: '6px', color: '#475569', fontSize: '0.875rem', fontWeight: 500 }}>
                       Rate Limit
                     </label>
                     <input
@@ -580,7 +580,7 @@ const TokenManagement: React.FC = () => {
                         borderRadius: '8px',
                         border: '1px solid rgba(0, 240, 255, 0.3)',
                         background: 'rgba(0, 240, 255, 0.08)',
-                        color: '#e2e8f0',
+                        color: '#1e293b',
                         fontSize: '0.875rem',
                         outline: 'none',
                       }}
@@ -588,7 +588,7 @@ const TokenManagement: React.FC = () => {
                   </div>
 
                   <div>
-                    <label style={{ display: 'block', marginBottom: '6px', color: '#cbd5e1', fontSize: '0.875rem', fontWeight: 500 }}>
+                    <label style={{ display: 'block', marginBottom: '6px', color: '#475569', fontSize: '0.875rem', fontWeight: 500 }}>
                       Expires At (Optional)
                     </label>
                     <input
@@ -601,7 +601,7 @@ const TokenManagement: React.FC = () => {
                         borderRadius: '8px',
                         border: '1px solid rgba(0, 240, 255, 0.3)',
                         background: 'rgba(0, 240, 255, 0.08)',
-                        color: '#e2e8f0',
+                        color: '#1e293b',
                         fontSize: '0.875rem',
                         outline: 'none',
                       }}
@@ -621,7 +621,7 @@ const TokenManagement: React.FC = () => {
                       background: 'rgba(148, 163, 184, 0.1)',
                       border: '1px solid rgba(148, 163, 184, 0.3)',
                       borderRadius: '8px',
-                      color: '#94a3b8',
+                      color: '#475569',
                       cursor: 'pointer',
                       fontWeight: 600,
                     }}
@@ -654,7 +654,7 @@ const TokenManagement: React.FC = () => {
 
       {/* Tokens List */}
       {loading ? (
-        <div style={{ textAlign: 'center', padding: '60px 20px', color: '#94a3b8' }}>
+        <div style={{ textAlign: 'center', padding: '60px 20px', color: '#475569' }}>
           <motion.div
             animate={{ rotate: 360 }}
             transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
@@ -669,10 +669,10 @@ const TokenManagement: React.FC = () => {
           style={{
             padding: '60px 20px',
             textAlign: 'center',
-            background: 'rgba(10, 14, 39, 0.6)',
+            background: 'rgba(255, 255, 255, 0.9)',
             border: '1px solid rgba(0, 240, 255, 0.2)',
             borderRadius: '12px',
-            color: '#94a3b8',
+            color: '#475569',
           }}
         >
           <div style={{ fontSize: '48px', marginBottom: '16px' }}>🔑</div>
@@ -686,7 +686,7 @@ const TokenManagement: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               style={{
-                background: 'rgba(10, 14, 39, 0.6)',
+                background: 'rgba(255, 255, 255, 0.9)',
                 border: '1px solid rgba(0, 240, 255, 0.2)',
                 borderRadius: '12px',
                 padding: '24px',
@@ -696,7 +696,7 @@ const TokenManagement: React.FC = () => {
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '16px' }}>
                 <div style={{ flex: 1, minWidth: '200px' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
-                    <h3 style={{ fontSize: '1.125rem', fontWeight: 600, color: '#e2e8f0' }}>
+                    <h3 style={{ fontSize: '1.125rem', fontWeight: 600, color: '#1e293b' }}>
                       {token.name}
                     </h3>
                     <span
@@ -716,7 +716,7 @@ const TokenManagement: React.FC = () => {
                     </span>
                   </div>
                   {token.description && (
-                    <p style={{ color: '#94a3b8', fontSize: '0.875rem', marginBottom: '12px' }}>
+                    <p style={{ color: '#475569', fontSize: '0.875rem', marginBottom: '12px' }}>
                       {token.description}
                     </p>
                   )}
@@ -729,39 +729,39 @@ const TokenManagement: React.FC = () => {
                       marginBottom: '12px',
                     }}
                   >
-                    <div style={{ fontSize: '0.75rem', color: '#94a3b8', marginBottom: '4px' }}>Token</div>
+                    <div style={{ fontSize: '0.75rem', color: '#475569', marginBottom: '4px' }}>Token</div>
                     <div
                       style={{
                         fontFamily: 'monospace',
                         fontSize: '0.875rem',
-                        color: '#e2e8f0',
+                        color: '#1e293b',
                         wordBreak: 'break-all',
                       }}
                     >
                       {token.token}
                     </div>
                   </div>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', fontSize: '0.875rem', color: '#94a3b8' }}>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', fontSize: '0.875rem', color: '#475569' }}>
                     <div>
-                      <span style={{ color: '#cbd5e1' }}>Channels:</span>{' '}
+                      <span style={{ color: '#475569' }}>Channels:</span>{' '}
                       {token.allowedChannels.join(', ')}
                     </div>
                     <div>
-                      <span style={{ color: '#cbd5e1' }}>Rate Limit:</span> {token.rateLimit}/min
+                      <span style={{ color: '#475569' }}>Rate Limit:</span> {token.rateLimit}/min
                     </div>
                     <div>
-                      <span style={{ color: '#cbd5e1' }}>Usage:</span> {token.usageCount} times
+                      <span style={{ color: '#475569' }}>Usage:</span> {token.usageCount} times
                     </div>
                     <div>
-                      <span style={{ color: '#cbd5e1' }}>Last Used:</span> {formatDate(token.lastUsed)}
+                      <span style={{ color: '#475569' }}>Last Used:</span> {formatDate(token.lastUsed)}
                     </div>
                     {token.expiresAt && (
                       <div>
-                        <span style={{ color: '#cbd5e1' }}>Expires:</span> {formatDate(token.expiresAt)}
+                        <span style={{ color: '#475569' }}>Expires:</span> {formatDate(token.expiresAt)}
                       </div>
                     )}
                     <div>
-                      <span style={{ color: '#cbd5e1' }}>Servers:</span>{' '}
+                      <span style={{ color: '#475569' }}>Servers:</span>{' '}
                       {token.serverCount || 0}/{token.maxServers || 5}
                     </div>
                   </div>
@@ -769,7 +769,7 @@ const TokenManagement: React.FC = () => {
                   {/* Assigned Servers Section */}
                   <div style={{ marginTop: '16px', paddingTop: '16px', borderTop: '1px solid rgba(0, 240, 255, 0.2)' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-                      <h4 style={{ fontSize: '0.875rem', fontWeight: 600, color: '#e2e8f0' }}>
+                      <h4 style={{ fontSize: '0.875rem', fontWeight: 600, color: '#1e293b' }}>
                         Assigned Servers ({token.serverCount || 0}/{token.maxServers || 5})
                       </h4>
                       {(token.serverCount || 0) < (token.maxServers || 5) && (
@@ -808,19 +808,19 @@ const TokenManagement: React.FC = () => {
                             }}
                           >
                             <div>
-                              <div style={{ fontWeight: 600, color: '#e2e8f0', fontSize: '0.875rem' }}>
+                              <div style={{ fontWeight: 600, color: '#1e293b', fontSize: '0.875rem' }}>
                                 {server.serverName}
                               </div>
-                              <div style={{ fontSize: '0.75rem', color: '#94a3b8', fontFamily: 'monospace' }}>
+                              <div style={{ fontSize: '0.75rem', color: '#475569', fontFamily: 'monospace' }}>
                                 ID: {server.serverId}
                               </div>
                               {server.serverIP && (
-                                <div style={{ fontSize: '0.75rem', color: '#94a3b8' }}>
+                                <div style={{ fontSize: '0.75rem', color: '#475569' }}>
                                   IP: {server.serverIP}
                                 </div>
                               )}
                               {server.usageCount > 0 && (
-                                <div style={{ fontSize: '0.75rem', color: '#94a3b8' }}>
+                                <div style={{ fontSize: '0.75rem', color: '#475569' }}>
                                   Used {server.usageCount} times
                                 </div>
                               )}
@@ -845,7 +845,7 @@ const TokenManagement: React.FC = () => {
                         ))}
                       </div>
                     ) : (
-                      <div style={{ color: '#94a3b8', fontSize: '0.875rem', fontStyle: 'italic' }}>
+                      <div style={{ color: '#475569', fontSize: '0.875rem', fontStyle: 'italic' }}>
                         No servers assigned. Click "Add Server" to assign one.
                       </div>
                     )}
@@ -939,7 +939,7 @@ const TokenManagement: React.FC = () => {
             animate={{ scale: 1, opacity: 1 }}
             onClick={(e) => e.stopPropagation()}
             style={{
-              background: 'rgba(10, 14, 39, 0.95)',
+              background: 'rgba(255, 255, 255, 0.95)',
               borderRadius: '16px',
               padding: '32px',
               maxWidth: '500px',
@@ -948,14 +948,14 @@ const TokenManagement: React.FC = () => {
               boxShadow: '0 20px 60px rgba(0, 240, 255, 0.3)',
             }}
           >
-            <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '24px', color: '#e2e8f0' }}>
+            <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '24px', color: '#1e293b' }}>
               Assign Server to Token
             </h3>
 
             <form onSubmit={handleSubmitServer}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                 <div>
-                  <label style={{ display: 'block', marginBottom: '6px', color: '#cbd5e1', fontSize: '0.875rem', fontWeight: 500 }}>
+                  <label style={{ display: 'block', marginBottom: '6px', color: '#475569', fontSize: '0.875rem', fontWeight: 500 }}>
                     Server ID *
                   </label>
                   <input
@@ -970,7 +970,7 @@ const TokenManagement: React.FC = () => {
                       borderRadius: '8px',
                       border: '1px solid rgba(0, 240, 255, 0.3)',
                       background: 'rgba(0, 240, 255, 0.08)',
-                      color: '#e2e8f0',
+                      color: '#1e293b',
                       fontSize: '0.875rem',
                       outline: 'none',
                     }}
@@ -978,7 +978,7 @@ const TokenManagement: React.FC = () => {
                 </div>
 
                 <div>
-                  <label style={{ display: 'block', marginBottom: '6px', color: '#cbd5e1', fontSize: '0.875rem', fontWeight: 500 }}>
+                  <label style={{ display: 'block', marginBottom: '6px', color: '#475569', fontSize: '0.875rem', fontWeight: 500 }}>
                     Server Name *
                   </label>
                   <input
@@ -993,7 +993,7 @@ const TokenManagement: React.FC = () => {
                       borderRadius: '8px',
                       border: '1px solid rgba(0, 240, 255, 0.3)',
                       background: 'rgba(0, 240, 255, 0.08)',
-                      color: '#e2e8f0',
+                      color: '#1e293b',
                       fontSize: '0.875rem',
                       outline: 'none',
                     }}
@@ -1001,7 +1001,7 @@ const TokenManagement: React.FC = () => {
                 </div>
 
                 <div>
-                  <label style={{ display: 'block', marginBottom: '6px', color: '#cbd5e1', fontSize: '0.875rem', fontWeight: 500 }}>
+                  <label style={{ display: 'block', marginBottom: '6px', color: '#475569', fontSize: '0.875rem', fontWeight: 500 }}>
                     Server IP (Optional)
                   </label>
                   <input
@@ -1015,7 +1015,7 @@ const TokenManagement: React.FC = () => {
                       borderRadius: '8px',
                       border: '1px solid rgba(0, 240, 255, 0.3)',
                       background: 'rgba(0, 240, 255, 0.08)',
-                      color: '#e2e8f0',
+                      color: '#1e293b',
                       fontSize: '0.875rem',
                       outline: 'none',
                     }}
@@ -1023,7 +1023,7 @@ const TokenManagement: React.FC = () => {
                 </div>
 
                 <div>
-                  <label style={{ display: 'block', marginBottom: '6px', color: '#cbd5e1', fontSize: '0.875rem', fontWeight: 500 }}>
+                  <label style={{ display: 'block', marginBottom: '6px', color: '#475569', fontSize: '0.875rem', fontWeight: 500 }}>
                     Description (Optional)
                   </label>
                   <textarea
@@ -1037,7 +1037,7 @@ const TokenManagement: React.FC = () => {
                       borderRadius: '8px',
                       border: '1px solid rgba(0, 240, 255, 0.3)',
                       background: 'rgba(0, 240, 255, 0.08)',
-                      color: '#e2e8f0',
+                      color: '#1e293b',
                       fontSize: '0.875rem',
                       outline: 'none',
                       resize: 'vertical',
@@ -1062,7 +1062,7 @@ const TokenManagement: React.FC = () => {
                     background: 'rgba(148, 163, 184, 0.1)',
                     border: '1px solid rgba(148, 163, 184, 0.3)',
                     borderRadius: '8px',
-                    color: '#94a3b8',
+                    color: '#475569',
                     cursor: 'pointer',
                     fontWeight: 600,
                   }}

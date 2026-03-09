@@ -18,15 +18,15 @@ const ProductDetail: React.FC = () => {
           minHeight: '100vh',
           padding: '120px 20px 80px',
           background:
-            'linear-gradient(135deg, rgba(5, 8, 16, 0.96) 0%, rgba(10, 14, 39, 0.96) 100%)',
+            'linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(248, 249, 250, 0.96) 100%)',
         }}
       >
         <div
           className="max-w-4xl mx-auto"
-          style={{ textAlign: 'center', color: '#e5e7eb' }}
+          style={{ textAlign: 'center', color: '#1e293b' }}
         >
           <h1 style={{ fontSize: '2rem', marginBottom: 12 }}>Product not found</h1>
-          <p style={{ marginBottom: 24, color: '#9ca3af' }}>
+          <p style={{ marginBottom: 24, color: '#475569' }}>
             The product you are looking for may have moved or no longer exists.
           </p>
           <Link
@@ -61,7 +61,7 @@ const ProductDetail: React.FC = () => {
           minHeight: '100vh',
           padding: '110px 20px 80px',
           background:
-            'linear-gradient(135deg, rgba(5, 8, 16, 0.96) 0%, rgba(10, 14, 39, 0.96) 100%)',
+            'linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(248, 249, 250, 0.96) 100%)',
         }}
       >
         <div
@@ -153,7 +153,7 @@ const ProductDetail: React.FC = () => {
               </p>
               <p
                 style={{
-                  color: '#cbd5e1',
+                  color: '#475569',
                   fontSize: '0.98rem',
                   lineHeight: 1.8,
                   marginBottom: 22,

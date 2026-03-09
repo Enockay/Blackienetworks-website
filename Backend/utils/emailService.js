@@ -676,9 +676,273 @@ const sendTokenCredentials = async (tokenData) => {
   }
 };
 
+/**
+ * Send acknowledgement email to user after they submit the contact form
+ * @param {Object} contactData
+ * @param {string} contactData.fullName
+ * @param {string} contactData.email
+ * @param {string} [contactData.service]
+ * @returns {Promise<void>}
+ */
+const sendContactAcknowledgement = async (contactData) => {
+  let recipientEmail;
+  try {
+    const { fullName, email, service } = contactData;
+    recipientEmail = email;
+
+    if (!recipientEmail) {
+      console.warn('Contact email not provided. Skipping contact acknowledgement email.');
+      return;
+    }
+
+    const safeName = fullName || 'Customer';
+
+    const emailContent = `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <meta charset="UTF-8" />
+        <style>
+          body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #0f172a;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9fafb;
+          }
+          .container {
+            background-color: #ffffff;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+            border: 1px solid #e5e7eb;
+          }
+          .header {
+            border-radius: 10px 10px 0 0;
+            padding-bottom: 12px;
+            margin-bottom: 16px;
+          }
+          .title {
+            font-size: 20px;
+            font-weight: 700;
+            margin: 0 0 4px 0;
+            color: #0f172a;
+          }
+          .subtitle {
+            margin: 0;
+            font-size: 14px;
+            color: #6b7280;
+          }
+          .footer {
+            margin-top: 24px;
+            font-size: 12px;
+            color: #6b7280;
+            border-top: 1px solid #e5e7eb;
+            padding-top: 12px;
+          }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="header">
+            <h1 class="title">We’ve received your message ✅</h1>
+            <p class="subtitle">Thank you for reaching out to Blackie Networks.</p>
+          </div>
+          <p>Hi ${safeName},</p>
+          <p>
+            Thank you for contacting <strong>Blackie Networks</strong>${
+              service ? ` about <strong>${service}</strong>` : ''
+            }. Our team has received your message and we’ll get back to you
+            within <strong>2 working hours</strong>.
+          </p>
+          <p>
+            If your request is urgent, you can also reach us on:
+          </p>
+          <ul>
+            <li><strong>Phone:</strong> +254 796 869 402</li>
+            <li><strong>Email:</strong> support@blackie-networks.com</li>
+          </ul>
+          <p>We look forward to speaking with you.</p>
+          <p>Best regards,<br /><strong>Blackie Networks Team</strong></p>
+          <div class="footer">
+            <p>This is an automated message confirming we received your enquiry.</p>
+          </div>
+        </div>
+      </body>
+      </html>
+    `;
+
+    const sendSmtpEmail = new brevo.SendSmtpEmail();
+    sendSmtpEmail.subject = 'We’ve received your message - Blackie Networks';
+    sendSmtpEmail.htmlContent = emailContent;
+    sendSmtpEmail.sender = {
+      name: 'Blackie Networks',
+      email: process.env.BREVO_SENDER_EMAIL || 'noreply@blackienetworks.com',
+    };
+    sendSmtpEmail.to = [{ email: recipientEmail, name: safeName }];
+
+    if (process.env.BREVO_REPLY_TO_EMAIL) {
+      sendSmtpEmail.replyTo = {
+        email: process.env.BREVO_REPLY_TO_EMAIL,
+        name: 'Blackie Networks Support',
+      };
+    }
+
+    const result = await apiInstance.sendTransacEmail(sendSmtpEmail);
+    console.log(
+      `✅ Contact acknowledgement email sent to ${recipientEmail} (Message ID: ${
+        result.body?.messageId || 'N/A'
+      })`
+    );
+    return result;
+  } catch (error) {
+    console.error(
+      `❌ Error sending contact acknowledgement to ${recipientEmail}:`,
+      error.message || error
+    );
+    throw error;
+  }
+};
+
+/**
+ * Send contact form notification email to admin
+ * @param {Object} contactData
+ * @param {string} contactData.fullName
+ * @param {string} [contactData.company]
+ * @param {string} contactData.email
+ * @param {string} contactData.phone
+ * @param {string} contactData.service
+ * @param {string} [contactData.budget]
+ * @param {string} contactData.message
+ * @returns {Promise<void>}
+ */
+const sendContactNotificationToAdmin = async (contactData) => {
+  let adminEmail;
+  try {
+    const { fullName, company, email, phone, service, budget, message } = contactData;
+
+    // Primary recipient for contact notifications (support inbox)
+    adminEmail = process.env.CONTACT_ADMIN_EMAIL || 'support@blackie-networks.com';
+
+    // Second recipient (actual admin inbox)
+    const ccEmail = process.env.CONTACT_ADMIN_CC_EMAIL || 'enockaymwema@gmail.com';
+
+    if (!adminEmail) {
+      console.warn('Admin email not configured. Skipping contact notification.');
+      return;
+    }
+
+    const emailContent = `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <meta charset="UTF-8" />
+        <style>
+          body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #111827;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9fafb;
+          }
+          .container {
+            background-color: #ffffff;
+            padding: 24px;
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+          }
+          .header {
+            padding-bottom: 12px;
+            margin-bottom: 16px;
+            border-bottom: 1px solid #e5e7eb;
+          }
+          .header h1 {
+            margin: 0 0 4px 0;
+            font-size: 20px;
+          }
+          .meta {
+            font-size: 13px;
+            color: #6b7280;
+          }
+          .label {
+            font-weight: 600;
+            color: #374151;
+          }
+          .value {
+            margin: 2px 0 8px 0;
+          }
+          .message-box {
+            margin-top: 12px;
+            padding: 12px;
+            border-radius: 8px;
+            background-color: #f3f4f6;
+            border: 1px solid #e5e7eb;
+            white-space: pre-wrap;
+          }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="header">
+            <h1>New Contact Form Submission</h1>
+            <div class="meta">${new Date().toLocaleString()}</div>
+          </div>
+          <p><span class="label">Name:</span> ${fullName}</p>
+          ${company ? `<p><span class="label">Company:</span> ${company}</p>` : ''}
+          <p><span class="label">Email:</span> ${email}</p>
+          <p><span class="label">Phone:</span> ${phone}</p>
+          <p><span class="label">Service Interested In:</span> ${service}</p>
+          ${budget ? `<p><span class="label">Budget Range:</span> ${budget}</p>` : ''}
+          <div class="message-box">
+            <div class="label">Message / Project Description:</div>
+            <div class="value">${message}</div>
+          </div>
+        </div>
+      </body>
+      </html>
+    `;
+
+    // Single transactional email sent to both support and admin inboxes
+    const notifyEmail = new brevo.SendSmtpEmail();
+    notifyEmail.subject = `New Contact Form: ${fullName} - ${service}`;
+    notifyEmail.htmlContent = emailContent;
+    notifyEmail.sender = {
+      name: 'Blackie Networks Website',
+      email: process.env.BREVO_SENDER_EMAIL || 'noreply@blackienetworks.com',
+    };
+
+    // Both recipients get the same email
+    const recipients = [{ email: adminEmail }];
+    if (ccEmail) {
+      recipients.push({ email: ccEmail });
+    }
+    notifyEmail.to = recipients;
+
+    const result = await apiInstance.sendTransacEmail(notifyEmail);
+    console.log(
+      `✅ Contact notification sent to ${recipients.map((r) => r.email).join(
+        ', '
+      )} (Message ID: ${result.body?.messageId || 'N/A'})`
+    );
+    return result;
+  } catch (error) {
+    console.error(
+      `❌ Error sending contact notification to admin ${adminEmail}:`,
+      error.message || error
+    );
+    throw error;
+  }
+};
+
 module.exports = {
   sendBookingConfirmation,
   sendAdminNotification,
-  sendTokenCredentials
+  sendTokenCredentials,
+  sendContactAcknowledgement,
+  sendContactNotificationToAdmin
 };
 

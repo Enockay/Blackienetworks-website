@@ -42,7 +42,7 @@ const TermsOfService: React.FC = () => {
           </Title>
           <Paragraph
             style={{
-              color: '#cbd5e1',
+              color: '#475569',
               maxWidth: 640,
               margin: '0 auto',
               fontSize: '1rem',
@@ -52,7 +52,7 @@ const TermsOfService: React.FC = () => {
             website, products and services provided by Blackie Networks
             (&quot;we&quot;, &quot;our&quot;, &quot;us&quot;).
           </Paragraph>
-          <Paragraph style={{ color: '#64748b', fontSize: '0.85rem' }}>
+          <Paragraph style={{ color: '#475569', fontSize: '0.85rem' }}>
             Last updated: {new Date().toLocaleDateString()}
           </Paragraph>
         </motion.div>
@@ -69,7 +69,7 @@ const TermsOfService: React.FC = () => {
           <Title level={3} style={{ color: '#e5e7eb', marginTop: 0 }}>
             1. Acceptance of terms
           </Title>
-          <Paragraph style={{ color: '#cbd5e1' }}>
+          <Paragraph style={{ color: '#475569' }}>
             By accessing or using our website, booking a service, connecting to
             our internet or network, or using any of our products (including
             Blackie Proxy, ISP Billing, cloud and software services), you agree
@@ -80,10 +80,10 @@ const TermsOfService: React.FC = () => {
           <Title level={3} style={{ color: '#e5e7eb', marginTop: 24 }}>
             2. Services we provide
           </Title>
-          <Paragraph style={{ color: '#cbd5e1' }}>
+          <Paragraph style={{ color: '#475569' }}>
             Blackie Networks provides, among others:
           </Paragraph>
-          <ul style={{ color: '#cbd5e1', paddingLeft: 20 }}>
+          <ul style={{ color: '#475569', paddingLeft: 20 }}>
             <li>Internet connectivity and campus Wi‑Fi solutions</li>
             <li>Network infrastructure design and implementation</li>
             <li>MikroTik configuration and management</li>
@@ -91,7 +91,7 @@ const TermsOfService: React.FC = () => {
             <li>Custom software, cloud hosting and VPN solutions</li>
             <li>IT consulting, maintenance and related services</li>
           </ul>
-          <Paragraph style={{ color: '#cbd5e1' }}>
+          <Paragraph style={{ color: '#475569' }}>
             Specific service descriptions, prices and service levels may be
             documented in separate proposals, quotes or contracts. In case of a
             conflict, those specific agreements prevail over these general
@@ -101,7 +101,7 @@ const TermsOfService: React.FC = () => {
           <Title level={3} style={{ color: '#e5e7eb', marginTop: 24 }}>
             3. Eligibility
           </Title>
-          <Paragraph style={{ color: '#cbd5e1' }}>
+          <Paragraph style={{ color: '#475569' }}>
             You must be at least 18 years old, or the age of majority in your
             jurisdiction, to enter into a binding agreement with Blackie
             Networks. If you are using our services on behalf of an
@@ -112,12 +112,12 @@ const TermsOfService: React.FC = () => {
           <Title level={3} style={{ color: '#e5e7eb', marginTop: 24 }}>
             4. User responsibilities & acceptable use
           </Title>
-          <Paragraph style={{ color: '#cbd5e1' }}>
+          <Paragraph style={{ color: '#475569' }}>
             You agree to use our services in compliance with applicable law and
             to avoid activities that could harm our network, other users or
             third parties. You agree not to:
           </Paragraph>
-          <ul style={{ color: '#cbd5e1', paddingLeft: 20 }}>
+          <ul style={{ color: '#475569', paddingLeft: 20 }}>
             <li>
               Use our network or services for illegal content, fraud or abuse
             </li>
@@ -135,7 +135,7 @@ const TermsOfService: React.FC = () => {
               Share accounts or credentials in a way that breaches our policies
             </li>
           </ul>
-          <Paragraph style={{ color: '#cbd5e1' }}>
+          <Paragraph style={{ color: '#475569' }}>
             We reserve the right to suspend or terminate access where we detect
             serious or repeated violations, or where required by law or our
             upstream providers.
@@ -144,11 +144,11 @@ const TermsOfService: React.FC = () => {
           <Title level={3} style={{ color: '#e5e7eb', marginTop: 24 }}>
             5. Accounts, security and passwords
           </Title>
-          <Paragraph style={{ color: '#cbd5e1' }}>
+          <Paragraph style={{ color: '#475569' }}>
             Where a service requires an account or login, you are responsible
             for:
           </Paragraph>
-          <ul style={{ color: '#cbd5e1', paddingLeft: 20 }}>
+          <ul style={{ color: '#475569', paddingLeft: 20 }}>
             <li>Providing accurate and up‑to‑date information</li>
             <li>Keeping your credentials confidential and secure</li>
             <li>
@@ -156,7 +156,7 @@ const TermsOfService: React.FC = () => {
               account
             </li>
           </ul>
-          <Paragraph style={{ color: '#cbd5e1' }}>
+          <Paragraph style={{ color: '#475569' }}>
             We are not liable for losses arising from unauthorized use of your
             credentials where you failed to keep them safe.
           </Paragraph>
@@ -164,12 +164,12 @@ const TermsOfService: React.FC = () => {
           <Title level={3} style={{ color: '#e5e7eb', marginTop: 24 }}>
             6. Service availability & maintenance
           </Title>
-          <Paragraph style={{ color: '#cbd5e1' }}>
+          <Paragraph style={{ color: '#475569' }}>
             We aim to provide stable and reliable services, but availability may
             be affected by maintenance, upgrades, power issues, upstream
             providers or events beyond our control. Where possible, we will:
           </Paragraph>
-          <ul style={{ color: '#cbd5e1', paddingLeft: 20 }}>
+          <ul style={{ color: '#475569', paddingLeft: 20 }}>
             <li>Schedule maintenance during off‑peak hours</li>
             <li>Provide notice of planned outages where practicable</li>
             <li>
@@ -181,12 +181,12 @@ const TermsOfService: React.FC = () => {
           <Title level={3} style={{ color: '#e5e7eb', marginTop: 24 }}>
             7. Fees, billing and refunds
           </Title>
-          <Paragraph style={{ color: '#cbd5e1' }}>
+          <Paragraph style={{ color: '#475569' }}>
             Pricing, billing cycles and payment terms for each service are
             specified in the relevant offer, bundle, invoice or contract. Unless
             stated otherwise:
           </Paragraph>
-          <ul style={{ color: '#cbd5e1', paddingLeft: 20 }}>
+          <ul style={{ color: '#475569', paddingLeft: 20 }}>
             <li>Fees are payable in advance for the agreed period</li>
             <li>
               Late or missing payments may lead to suspension or termination of
@@ -197,7 +197,7 @@ const TermsOfService: React.FC = () => {
               once consumed or activated
             </li>
           </ul>
-          <Paragraph style={{ color: '#cbd5e1' }}>
+          <Paragraph style={{ color: '#475569' }}>
             Any agreed credits or refunds will be handled on a case‑by‑case
             basis and documented in writing.
           </Paragraph>
@@ -205,14 +205,14 @@ const TermsOfService: React.FC = () => {
           <Title level={3} style={{ color: '#e5e7eb', marginTop: 24 }}>
             8. Intellectual property
           </Title>
-          <Paragraph style={{ color: '#cbd5e1' }}>
+          <Paragraph style={{ color: '#475569' }}>
             All content, software, branding and documentation provided by
             Blackie Networks remain our property or that of our licensors. You
             are granted a limited, non‑exclusive, non‑transferable license to
             use our services for your internal purposes, subject to these Terms
             and any specific agreements.
           </Paragraph>
-          <Paragraph style={{ color: '#cbd5e1' }}>
+          <Paragraph style={{ color: '#475569' }}>
             You may not copy, modify, resell, reverse engineer or create
             derivative works from our software or systems except where
             explicitly permitted by law or written agreement.
@@ -221,11 +221,11 @@ const TermsOfService: React.FC = () => {
           <Title level={3} style={{ color: '#e5e7eb', marginTop: 24 }}>
             9. Limitation of liability
           </Title>
-          <Paragraph style={{ color: '#cbd5e1' }}>
+          <Paragraph style={{ color: '#475569' }}>
             To the maximum extent permitted by law, Blackie Networks is not
             liable for:
           </Paragraph>
-          <ul style={{ color: '#cbd5e1', paddingLeft: 20 }}>
+          <ul style={{ color: '#475569', paddingLeft: 20 }}>
             <li>
               Indirect, incidental, special or consequential damages (including
               loss of profits, data or business opportunities)
@@ -239,7 +239,7 @@ const TermsOfService: React.FC = () => {
               networks
             </li>
           </ul>
-          <Paragraph style={{ color: '#cbd5e1' }}>
+          <Paragraph style={{ color: '#475569' }}>
             Where liability cannot be excluded, our total aggregate liability in
             connection with a specific service is limited to the fees paid for
             that service in the three (3) months immediately before the event
@@ -249,11 +249,11 @@ const TermsOfService: React.FC = () => {
           <Title level={3} style={{ color: '#e5e7eb', marginTop: 24 }}>
             10. Indemnity
           </Title>
-          <Paragraph style={{ color: '#cbd5e1' }}>
+          <Paragraph style={{ color: '#475569' }}>
             You agree to indemnify and hold Blackie Networks and its team
             harmless from any claims, losses or damages arising from:
           </Paragraph>
-          <ul style={{ color: '#cbd5e1', paddingLeft: 20 }}>
+          <ul style={{ color: '#475569', paddingLeft: 20 }}>
             <li>Your breach of these Terms</li>
             <li>Your misuse of our services</li>
             <li>
@@ -265,12 +265,12 @@ const TermsOfService: React.FC = () => {
           <Title level={3} style={{ color: '#e5e7eb', marginTop: 24 }}>
             11. Termination
           </Title>
-          <Paragraph style={{ color: '#cbd5e1' }}>
+          <Paragraph style={{ color: '#475569' }}>
             Either party may terminate a service or contract in accordance with
             its specific terms. We may also suspend or terminate access
             immediately if:
           </Paragraph>
-          <ul style={{ color: '#cbd5e1', paddingLeft: 20 }}>
+          <ul style={{ color: '#475569', paddingLeft: 20 }}>
             <li>There is non‑payment of fees after reasonable notice</li>
             <li>
               We detect serious security, abuse or legal issues related to your
@@ -282,7 +282,7 @@ const TermsOfService: React.FC = () => {
           <Title level={3} style={{ color: '#e5e7eb', marginTop: 24 }}>
             12. Changes to these Terms
           </Title>
-          <Paragraph style={{ color: '#cbd5e1' }}>
+          <Paragraph style={{ color: '#475569' }}>
             We may update these Terms from time to time. When we do, we will
             revise the &quot;Last updated&quot; date at the top, and in the
             case of material changes, we may provide additional notice on our
@@ -293,7 +293,7 @@ const TermsOfService: React.FC = () => {
           <Title level={3} style={{ color: '#e5e7eb', marginTop: 24 }}>
             13. Governing law
           </Title>
-          <Paragraph style={{ color: '#cbd5e1' }}>
+          <Paragraph style={{ color: '#475569' }}>
             These Terms are governed by the laws of Kenya, without regard to its
             conflict of law rules. Any disputes will be handled by the
             competent courts in Kenya, unless otherwise agreed in writing.
@@ -302,11 +302,11 @@ const TermsOfService: React.FC = () => {
           <Title level={3} style={{ color: '#e5e7eb', marginTop: 24 }}>
             14. Contact
           </Title>
-          <Paragraph style={{ color: '#cbd5e1' }}>
+          <Paragraph style={{ color: '#475569' }}>
             If you have questions about these Terms or need clarification about
             how they apply to a specific project or service, please contact us:
           </Paragraph>
-          <ul style={{ color: '#cbd5e1', paddingLeft: 20 }}>
+          <ul style={{ color: '#475569', paddingLeft: 20 }}>
             <li>
               Email:{' '}
               <a

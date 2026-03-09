@@ -88,7 +88,7 @@ const AdminDashboard: React.FC = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       style={{
-        background: 'rgba(10, 14, 39, 0.6)',
+        background: 'rgba(255, 255, 255, 0.9)',
         border: '1px solid rgba(0, 240, 255, 0.2)',
         borderRadius: '12px',
         padding: '24px',
@@ -99,7 +99,7 @@ const AdminDashboard: React.FC = () => {
         <span style={{ fontSize: '32px' }}>{icon}</span>
         <div style={{ fontSize: '32px', fontWeight: 700, color }}>{value}</div>
       </div>
-      <div style={{ color: '#94a3b8', fontSize: '0.875rem', fontWeight: 500 }}>{title}</div>
+      <div style={{ color: '#475569', fontSize: '0.875rem', fontWeight: 500 }}>{title}</div>
     </motion.div>
   );
 
@@ -107,7 +107,7 @@ const AdminDashboard: React.FC = () => {
     <div
       style={{
         minHeight: '100vh',
-        background: 'linear-gradient(135deg, rgba(5, 8, 16, 0.95) 0%, rgba(10, 14, 39, 0.95) 100%)',
+        background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.95) 100%)',
         padding: '100px 20px 40px',
         marginTop: '80px',
       }}
@@ -140,7 +140,7 @@ const AdminDashboard: React.FC = () => {
             >
               Admin Dashboard
             </h1>
-            <p style={{ color: '#94a3b8', fontSize: '0.875rem' }}>
+            <p style={{ color: '#475569', fontSize: '0.875rem' }}>
               Welcome back, {adminUser.email || 'Admin'}
             </p>
           </div>
@@ -195,7 +195,7 @@ const AdminDashboard: React.FC = () => {
                   : 'rgba(0, 240, 255, 0.05)',
                 border: `1px solid ${activeTab === tab.id ? 'rgba(0, 240, 255, 0.4)' : 'rgba(0, 240, 255, 0.2)'}`,
                 borderRadius: '8px',
-                color: activeTab === tab.id ? '#00f0ff' : '#94a3b8',
+                color: activeTab === tab.id ? '#00f0ff' : '#475569',
                 cursor: 'pointer',
                 fontWeight: activeTab === tab.id ? 600 : 500,
                 fontSize: '0.875rem',
@@ -216,7 +216,7 @@ const AdminDashboard: React.FC = () => {
             key="dashboard"
           >
             {loading ? (
-              <div style={{ textAlign: 'center', padding: '60px 20px', color: '#94a3b8' }}>
+              <div style={{ textAlign: 'center', padding: '60px 20px', color: '#475569' }}>
                 <motion.div
                   animate={{ rotate: 360 }}
                   transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
@@ -264,14 +264,14 @@ const AdminDashboard: React.FC = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3 }}
                     style={{
-                      background: 'rgba(10, 14, 39, 0.6)',
+                      background: 'rgba(255, 255, 255, 0.9)',
                       border: '1px solid rgba(0, 240, 255, 0.2)',
                       borderRadius: '12px',
                       padding: '24px',
                       backdropFilter: 'blur(20px)',
                     }}
                   >
-                    <h2 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '20px', color: '#e2e8f0' }}>
+                    <h2 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '20px', color: '#1e293b' }}>
                       Recent Tokens
                     </h2>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
@@ -291,11 +291,11 @@ const AdminDashboard: React.FC = () => {
                           }}
                         >
                           <div>
-                            <div style={{ fontWeight: 600, color: '#e2e8f0', marginBottom: '4px' }}>
+                            <div style={{ fontWeight: 600, color: '#1e293b', marginBottom: '4px' }}>
                               {token.name}
                             </div>
                             {token.description && (
-                              <div style={{ fontSize: '0.875rem', color: '#94a3b8' }}>
+                              <div style={{ fontSize: '0.875rem', color: '#475569' }}>
                                 {token.description}
                               </div>
                             )}
@@ -316,7 +316,7 @@ const AdminDashboard: React.FC = () => {
                             >
                               {token.isActive ? 'Active' : 'Inactive'}
                             </span>
-                            <span style={{ fontSize: '0.875rem', color: '#94a3b8' }}>
+                            <span style={{ fontSize: '0.875rem', color: '#475569' }}>
                               Used {token.usageCount} times
                             </span>
                           </div>

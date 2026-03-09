@@ -23,6 +23,11 @@ import ProductsPage from './componets/ProductsPage';
 import ProductDetail from './componets/ProductDetail';
 import PrivacyPolicy from './componets/PrivacyPolicy';
 import TermsOfService from './componets/TermsOfService';
+import NetworkBillingPage from './componets/NetworkBillingPage';
+import WebDevelopmentPage from './componets/WebDevelopmentPage';
+import CloudInfrastructurePage from './componets/CloudInfrastructurePage';
+import AISystemsPage from './componets/AISystemsPage';
+import ITConsultingPage from './componets/ITConsultingPage';
 
 const { Content } = Layout;
 
@@ -56,7 +61,6 @@ function MainContent() {
                 googleSiteVerification={import.meta.env.VITE_GOOGLE_SITE_VERIFICATION}
               />
               <HeroSection />
-              <Section />
             </>
           }
         />
@@ -70,7 +74,6 @@ function MainContent() {
                 url="/home"
               />
               <HeroSection />
-              <Section />
             </>
           }
         />
@@ -110,6 +113,71 @@ function MainContent() {
               <ServicesPage />
             </>
           } 
+        />
+        <Route
+          path="/services/network-billing"
+          element={
+            <>
+              <SEO
+                title="Network Setup & Billing Systems - Blackie Networks"
+                description="Design and implementation of reliable networks, MikroTik configuration, and ISP/campus billing systems for Wi‑Fi providers, ISPs, Saccos, and campuses."
+                url="/services/network-billing"
+              />
+              <NetworkBillingPage />
+            </>
+          }
+        />
+        <Route
+          path="/services/web-development"
+          element={
+            <>
+              <SEO
+                title="Web & Application Development - Blackie Networks"
+                description="Custom websites, portals, and internal systems built around your workflows, integrated with billing, SMS, and existing tools."
+                url="/services/web-development"
+              />
+              <WebDevelopmentPage />
+            </>
+          }
+        />
+        <Route
+          path="/services/cloud-hosting"
+          element={
+            <>
+              <SEO
+                title="Cloud Infrastructure Management & Hosting - Blackie Networks"
+                description="Cloud architecture, deployment, monitoring, and backup strategies on AWS, DigitalOcean and similar providers."
+                url="/services/cloud-hosting"
+              />
+              <CloudInfrastructurePage />
+            </>
+          }
+        />
+        <Route
+          path="/services/ai-systems"
+          element={
+            <>
+              <SEO
+                title="AI Systems & Automation - Blackie Networks"
+                description="AI assistants, automation, and data‑driven tools that streamline support, reporting, and decision‑making."
+                url="/services/ai-systems"
+              />
+              <AISystemsPage />
+            </>
+          }
+        />
+        <Route
+          path="/services/it-consulting"
+          element={
+            <>
+              <SEO
+                title="IT Consulting & Managed Support - Blackie Networks"
+                description="Strategic IT audits, roadmaps, vendor selection, and managed support so your technology keeps up with your growth."
+                url="/services/it-consulting"
+              />
+              <ITConsultingPage />
+            </>
+          }
         />
         <Route 
           path="/booking" 

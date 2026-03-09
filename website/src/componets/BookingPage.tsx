@@ -265,7 +265,7 @@ const BookingPage: React.FC = () => {
                 position: 'relative',
                 minHeight: '100vh',
                 padding: '100px 20px 80px',
-                background: 'linear-gradient(135deg, rgba(5, 8, 16, 0.95) 0%, rgba(10, 14, 39, 0.95) 100%)',
+                background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.95) 100%)',
                 marginTop: '80px',
             }}
         >
@@ -336,7 +336,7 @@ const BookingPage: React.FC = () => {
                         animate={{ opacity: 1 }}
                         transition={{ delay: 0.4, duration: 0.6 }}
                         style={{
-                            color: '#94a3b8',
+                            color: '#475569',
                             fontSize: '1.125rem',
                             maxWidth: '600px',
                             margin: '0 auto',
@@ -408,7 +408,7 @@ const BookingPage: React.FC = () => {
                                     borderRadius: '16px',
                                     padding: '28px',
                                     border: '1px solid rgba(0, 240, 255, 0.2)',
-                                    background: 'rgba(10, 14, 39, 0.6)',
+                                    background: 'rgba(255, 255, 255, 0.9)',
                                     backdropFilter: 'blur(20px)',
                                     boxShadow: '0 20px 60px rgba(0, 240, 255, 0.1)',
                                     position: 'relative',
@@ -461,7 +461,7 @@ const BookingPage: React.FC = () => {
                                             animate={{ opacity: 1, x: 0 }}
                                             transition={{ delay: 0.5 }}
                                         >
-                                            <label htmlFor="service" style={{ display: 'block', marginBottom: '6px', color: '#cbd5e1', fontWeight: 500, fontSize: '0.813rem', letterSpacing: '0.01em' }}>
+                                            <label htmlFor="service" style={{ display: 'block', marginBottom: '6px', color: '#475569', fontWeight: 500, fontSize: '0.813rem', letterSpacing: '0.01em' }}>
                                                 Select Service
                                             </label>
                                 <select
@@ -475,7 +475,7 @@ const BookingPage: React.FC = () => {
                                                     borderRadius: '8px',
                                                     border: '1px solid rgba(0, 240, 255, 0.3)',
                                                     background: 'rgba(0, 240, 255, 0.08)',
-                                                    color: '#e2e8f0',
+                                                    color: '#1e293b',
                                                     fontSize: '0.875rem',
                                                     outline: 'none',
                                                     transition: 'all 0.2s ease',
@@ -489,9 +489,9 @@ const BookingPage: React.FC = () => {
                                                     e.currentTarget.style.boxShadow = 'none';
                                                 }}
                                             >
-                                                <option value="" disabled style={{ background: '#0a0e27', color: '#e2e8f0' }}>Select a service</option>
+                                                <option value="" disabled style={{ background: '#ffffff', color: '#1e293b' }}>Select a service</option>
                                     {services.map((service) => (
-                                                    <option key={service} value={service} style={{ background: '#0a0e27', color: '#e2e8f0' }}>
+                                                    <option key={service} value={service} style={{ background: '#ffffff', color: '#1e293b' }}>
                                                         {service}
                                                     </option>
                                     ))}
@@ -504,7 +504,7 @@ const BookingPage: React.FC = () => {
                                                 animate={{ opacity: 1, x: 0 }}
                                                 transition={{ delay: 0.6 }}
                                             >
-                                                <label htmlFor="date" style={{ display: 'block', marginBottom: '6px', color: '#cbd5e1', fontWeight: 500, fontSize: '0.813rem', letterSpacing: '0.01em' }}>
+                                                <label htmlFor="date" style={{ display: 'block', marginBottom: '6px', color: '#475569', fontWeight: 500, fontSize: '0.813rem', letterSpacing: '0.01em' }}>
                                                     Select Date
                                                 </label>
                                 <div style={{ width: '100%' }}>
@@ -525,7 +525,7 @@ const BookingPage: React.FC = () => {
                                                 animate={{ opacity: 1, x: 0 }}
                                                 transition={{ delay: 0.6 }}
                                             >
-                                                <label htmlFor="time" style={{ display: 'block', marginBottom: '6px', color: '#cbd5e1', fontWeight: 500, fontSize: '0.813rem', letterSpacing: '0.01em' }}>
+                                                <label htmlFor="time" style={{ display: 'block', marginBottom: '6px', color: '#475569', fontWeight: 500, fontSize: '0.813rem', letterSpacing: '0.01em' }}>
                                                     Preferred Time
                                                 </label>
                                 <input
@@ -540,7 +540,7 @@ const BookingPage: React.FC = () => {
                                                         borderRadius: '8px',
                                                         border: '1px solid rgba(0, 240, 255, 0.3)',
                                                         background: 'rgba(0, 240, 255, 0.08)',
-                                                        color: '#e2e8f0',
+                                                        color: '#1e293b',
                                                         fontSize: '0.875rem',
                                                         outline: 'none',
                                                         transition: 'all 0.2s ease',
@@ -562,7 +562,7 @@ const BookingPage: React.FC = () => {
                                             animate={{ opacity: 1, x: 0 }}
                                             transition={{ delay: 0.7 }}
                                         >
-                                            <label htmlFor="name" style={{ display: 'block', marginBottom: '6px', color: '#cbd5e1', fontWeight: 500, fontSize: '0.813rem', letterSpacing: '0.01em' }}>
+                                            <label htmlFor="name" style={{ display: 'block', marginBottom: '6px', color: '#475569', fontWeight: 500, fontSize: '0.813rem', letterSpacing: '0.01em' }}>
                                                 Full Name
                                             </label>
                                 <input
@@ -578,7 +578,7 @@ const BookingPage: React.FC = () => {
                                                     borderRadius: '8px',
                                                     border: '1px solid rgba(0, 240, 255, 0.3)',
                                                     background: 'rgba(0, 240, 255, 0.08)',
-                                                    color: '#e2e8f0',
+                                                    color: '#1e293b',
                                                     fontSize: '0.875rem',
                                                     outline: 'none',
                                                     transition: 'all 0.2s ease',
@@ -599,7 +599,7 @@ const BookingPage: React.FC = () => {
                                             animate={{ opacity: 1, x: 0 }}
                                             transition={{ delay: 0.8 }}
                                         >
-                                            <label htmlFor="email" style={{ display: 'block', marginBottom: '6px', color: '#cbd5e1', fontWeight: 500, fontSize: '0.813rem', letterSpacing: '0.01em' }}>
+                                            <label htmlFor="email" style={{ display: 'block', marginBottom: '6px', color: '#475569', fontWeight: 500, fontSize: '0.813rem', letterSpacing: '0.01em' }}>
                                                 Email Address
                                             </label>
                                 <input
@@ -615,7 +615,7 @@ const BookingPage: React.FC = () => {
                                                     borderRadius: '8px',
                                                     border: '1px solid rgba(0, 240, 255, 0.3)',
                                                     background: 'rgba(0, 240, 255, 0.08)',
-                                                    color: '#e2e8f0',
+                                                    color: '#1e293b',
                                                     fontSize: '0.875rem',
                                                     outline: 'none',
                                                     transition: 'all 0.2s ease',
@@ -636,7 +636,7 @@ const BookingPage: React.FC = () => {
                                             animate={{ opacity: 1, x: 0 }}
                                             transition={{ delay: 0.9 }}
                                         >
-                                            <label htmlFor="phone" style={{ display: 'block', marginBottom: '6px', color: '#cbd5e1', fontWeight: 500, fontSize: '0.813rem', letterSpacing: '0.01em' }}>
+                                            <label htmlFor="phone" style={{ display: 'block', marginBottom: '6px', color: '#475569', fontWeight: 500, fontSize: '0.813rem', letterSpacing: '0.01em' }}>
                                                 Phone Number
                                             </label>
                                 <input
@@ -652,7 +652,7 @@ const BookingPage: React.FC = () => {
                                                     borderRadius: '8px',
                                                     border: '1px solid rgba(0, 240, 255, 0.3)',
                                                     background: 'rgba(0, 240, 255, 0.08)',
-                                                    color: '#e2e8f0',
+                                                    color: '#1e293b',
                                                     fontSize: '0.875rem',
                                                     outline: 'none',
                                                     transition: 'all 0.2s ease',
@@ -673,7 +673,7 @@ const BookingPage: React.FC = () => {
                                             animate={{ opacity: 1, x: 0 }}
                                             transition={{ delay: 1.0 }}
                                         >
-                                            <label htmlFor="description" style={{ display: 'block', marginBottom: '6px', color: '#cbd5e1', fontWeight: 500, fontSize: '0.813rem', letterSpacing: '0.01em' }}>
+                                            <label htmlFor="description" style={{ display: 'block', marginBottom: '6px', color: '#475569', fontWeight: 500, fontSize: '0.813rem', letterSpacing: '0.01em' }}>
                                                 Describe Your Requirements
                             </label>
                             <textarea
@@ -690,7 +690,7 @@ const BookingPage: React.FC = () => {
                                                     borderRadius: '8px',
                                                     border: '1px solid rgba(0, 240, 255, 0.3)',
                                                     background: 'rgba(0, 240, 255, 0.08)',
-                                                    color: '#e2e8f0',
+                                                    color: '#1e293b',
                                                     fontSize: '0.875rem',
                                                     outline: 'none',
                                                     resize: 'vertical',
@@ -830,10 +830,10 @@ const BookingPage: React.FC = () => {
                         }}>
                             Booking Confirmed!
                         </h2>
-                        <p style={{ color: '#94a3b8', marginBottom: '6px', fontSize: '0.875rem', lineHeight: 1.6 }}>
+                        <p style={{ color: '#475569', marginBottom: '6px', fontSize: '0.875rem', lineHeight: 1.6 }}>
                             Thank you, <strong style={{ color: '#00f0ff' }}>{formData.name}</strong>.
                         </p>
-                        <p style={{ color: '#94a3b8', marginBottom: '20px', fontSize: '0.875rem', lineHeight: 1.6 }}>
+                        <p style={{ color: '#475569', marginBottom: '20px', fontSize: '0.875rem', lineHeight: 1.6 }}>
                             Your booking for <strong style={{ color: '#00f0ff' }}>{formData.service}</strong> is confirmed.
                             We've sent a confirmation email to <strong style={{ color: '#00f0ff' }}>{formData.email}</strong>.
                         </p>
@@ -871,7 +871,7 @@ const BookingPage: React.FC = () => {
                     border-radius: 8px;
                     border: 1px solid rgba(0, 240, 255, 0.3);
                     background: rgba(0, 240, 255, 0.08);
-                    color: #e2e8f0;
+                    color: #1e293b;
                     font-size: 0.875rem;
                     outline: none;
                 }
@@ -895,10 +895,10 @@ const BookingPage: React.FC = () => {
                     font-weight: 600;
                 }
                 .react-datepicker__day-name {
-                    color: #cbd5e1;
+                    color: #475569;
                 }
                 .react-datepicker__day {
-                    color: #e2e8f0;
+                    color: #1e293b;
                 }
                 .react-datepicker__day:hover {
                     background: rgba(0, 240, 255, 0.2);

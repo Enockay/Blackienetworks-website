@@ -2,18 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Tech Network Theme - Modern Cyberpunk/Network Colors */
+/* Tech Network Theme - Light Mode Colors */
 :root {
-  --tech-cyan: #00f0ff;
+  --tech-cyan: #2563eb; /* updated from bright cyan to deep blue */
   --tech-blue: #0066ff;
   --tech-purple: #7c3aed;
   --tech-pink: #ff006e;
   --tech-green: #00ff88;
-  --tech-dark: #0a0e27;
-  --tech-darker: #050810;
-  --tech-card: rgba(10, 14, 39, 0.8);
-  --tech-glass: rgba(255, 255, 255, 0.05);
-  --tech-border: rgba(0, 240, 255, 0.2);
+  --tech-dark: #ffffff;
+  --tech-darker: #f8f9fa;
+  --tech-card: rgba(255, 255, 255, 0.95);
+  --tech-glass: rgba(255, 255, 255, 0.9);
+  --tech-border: rgba(37, 99, 235, 0.3);
+  --tech-text: #1e293b;
+  --tech-text-light: #475569;
+  --tech-text-lighter: #64748b;
 }
 
 * {
@@ -23,11 +26,13 @@
 }
 
 body {
-  background: linear-gradient(135deg, var(--tech-darker) 0%, var(--tech-dark) 50%, #0f172a 100%);
-  color: #e2e8f0;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #f1f5f9 100%);
+  color: var(--tech-text);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
   min-height: 100vh;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Animated background grid effect */
@@ -39,11 +44,12 @@ body::before {
   width: 100%;
   height: 100%;
   background-image: 
-    linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+    linear-gradient(rgba(0, 240, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.08) 1px, transparent 1px);
   background-size: 50px 50px;
   pointer-events: none;
   z-index: 0;
+  opacity: 0.3;
 }
 
 /* Glowing text effect */
@@ -74,13 +80,13 @@ body::before {
   }
 }
 
-/* Glassmorphism effect */
+/* Glassmorphism effect - Light Mode */
 .glass {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(0, 240, 255, 0.2);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
 }
 
 /* Tech button styles */
@@ -117,13 +123,13 @@ body::before {
   box-shadow: 0 10px 30px rgba(0, 240, 255, 0.4);
 }
 
-/* Scrollbar styling */
+/* Scrollbar styling - Light Mode */
 ::-webkit-scrollbar {
   width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--tech-darker);
+  background: #f1f3f5;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -133,4 +139,20 @@ body::before {
 
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(180deg, var(--tech-blue), var(--tech-purple));
+}
+
+/* Better text rendering for light mode - only apply to body text, not all elements */
+body p:not([style*="color"]), 
+body span:not([style*="color"]), 
+body li:not([style*="color"]) {
+  color: var(--tech-text-light);
+}
+
+body h1:not([style*="color"]), 
+body h2:not([style*="color"]), 
+body h3:not([style*="color"]), 
+body h4:not([style*="color"]), 
+body h5:not([style*="color"]), 
+body h6:not([style*="color"]) {
+  color: var(--tech-text);
 }

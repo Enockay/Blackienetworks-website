@@ -188,6 +188,7 @@ app.get('/health', (req, res) => {
 app.use('/', indexRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/bookings', bookRouter);
+app.use('/api/contact', require('./routes/contact'));
 app.use('/api/notifications', require('./routes/notifications'));
 app.use('/api/templates', require('./routes/templates'));
 app.use('/api/tokens', require('./routes/tokens'));

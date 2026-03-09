@@ -128,7 +128,7 @@ const FAQ: React.FC = () => {
         style={{
           minHeight: '100vh',
           padding: '80px 20px 60px',
-          background: 'linear-gradient(135deg, rgba(5, 8, 16, 0.95) 0%, rgba(10, 14, 39, 0.95) 100%)',
+          background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.95) 100%)',
           position: 'relative',
           overflow: 'hidden',
         }}
@@ -205,7 +205,7 @@ const FAQ: React.FC = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4, duration: 0.6 }}
               style={{
-                color: '#cbd5e1',
+                color: '#475569',
                 fontSize: '0.95rem',
                 maxWidth: '700px',
                 margin: '0 auto',
@@ -306,7 +306,7 @@ const FAQ: React.FC = () => {
                         style={{
                           fontSize: '0.95rem',
                           fontWeight: 600,
-                          color: '#e2e8f0',
+                          color: '#1e293b',
                           margin: 0,
                           flex: 1,
                           paddingRight: '16px',
@@ -355,7 +355,7 @@ const FAQ: React.FC = () => {
                           <div
                             style={{
                               padding: '0 20px 16px 20px',
-                              color: '#cbd5e1',
+                              color: '#475569',
                               fontSize: '0.875rem',
                               lineHeight: '1.6',
                               borderTop: '1px solid rgba(0, 240, 255, 0.2)',

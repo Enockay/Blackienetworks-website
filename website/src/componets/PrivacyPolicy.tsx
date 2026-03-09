@@ -42,7 +42,7 @@ const PrivacyPolicy: React.FC = () => {
           </Title>
           <Paragraph
             style={{
-              color: '#cbd5e1',
+              color: '#475569',
               maxWidth: 640,
               margin: '0 auto',
               fontSize: '1rem',
@@ -52,7 +52,7 @@ const PrivacyPolicy: React.FC = () => {
             &quot;our&quot;, &quot;us&quot;) collects, uses and protects your
             information when you use our website, products and services.
           </Paragraph>
-          <Paragraph style={{ color: '#64748b', fontSize: '0.85rem' }}>
+          <Paragraph style={{ color: '#475569', fontSize: '0.85rem' }}>
             Last updated: {new Date().toLocaleDateString()}
           </Paragraph>
         </motion.div>
@@ -69,7 +69,7 @@ const PrivacyPolicy: React.FC = () => {
           <Title level={3} style={{ color: '#e5e7eb', marginTop: 0 }}>
             1. Who we are
           </Title>
-          <Paragraph style={{ color: '#cbd5e1' }}>
+          <Paragraph style={{ color: '#475569' }}>
             Blackie Networks is a technology company based in Kenya providing
             internet connectivity, network infrastructure, cloud and software
             solutions to campuses, ISPs, SMEs and individuals. We are the data
@@ -84,20 +84,20 @@ const PrivacyPolicy: React.FC = () => {
           <Title level={4} style={{ color: '#e5e7eb' }}>
             2.1 Information you provide directly
           </Title>
-          <Paragraph style={{ color: '#cbd5e1' }}>
+          <Paragraph style={{ color: '#475569' }}>
             We collect personal information when you interact with us, for
             example when you:
           </Paragraph>
-          <ul style={{ color: '#cbd5e1', paddingLeft: 20 }}>
+          <ul style={{ color: '#475569', paddingLeft: 20 }}>
             <li>Submit a booking or consultation request form</li>
             <li>Contact us by phone, email or social media</li>
             <li>Request a quote for our products or services</li>
             <li>Create or manage an account with us (where applicable)</li>
           </ul>
-          <Paragraph style={{ color: '#cbd5e1' }}>
+          <Paragraph style={{ color: '#475569' }}>
             This may include your:
           </Paragraph>
-          <ul style={{ color: '#cbd5e1', paddingLeft: 20 }}>
+          <ul style={{ color: '#475569', paddingLeft: 20 }}>
             <li>Full name</li>
             <li>Phone number and email address</li>
             <li>Organization name and role</li>
@@ -111,11 +111,11 @@ const PrivacyPolicy: React.FC = () => {
           <Title level={4} style={{ color: '#e5e7eb', marginTop: 16 }}>
             2.2 Information collected automatically
           </Title>
-          <Paragraph style={{ color: '#cbd5e1' }}>
+          <Paragraph style={{ color: '#475569' }}>
             When you browse our website or use our online services, we
             automatically collect some technical information such as:
           </Paragraph>
-          <ul style={{ color: '#cbd5e1', paddingLeft: 20 }}>
+          <ul style={{ color: '#475569', paddingLeft: 20 }}>
             <li>IP address and approximate location</li>
             <li>Browser type, device type and operating system</li>
             <li>
@@ -123,7 +123,7 @@ const PrivacyPolicy: React.FC = () => {
             </li>
             <li>Referring website or campaign links</li>
           </ul>
-          <Paragraph style={{ color: '#cbd5e1' }}>
+          <Paragraph style={{ color: '#475569' }}>
             We may use cookies and similar technologies (such as analytics
             scripts) to help us understand how visitors use the site and to
             improve performance and security.
@@ -132,11 +132,11 @@ const PrivacyPolicy: React.FC = () => {
           <Title level={4} style={{ color: '#e5e7eb', marginTop: 16 }}>
             2.3 Network & service usage data
           </Title>
-          <Paragraph style={{ color: '#cbd5e1' }}>
+          <Paragraph style={{ color: '#475569' }}>
             For connectivity and network services (for example campus Wi‑Fi,
             proxy and ISP billing), we may process:
           </Paragraph>
-          <ul style={{ color: '#cbd5e1', paddingLeft: 20 }}>
+          <ul style={{ color: '#475569', paddingLeft: 20 }}>
             <li>Account identifiers and login events</li>
             <li>Session times, bandwidth and general usage volumes</li>
             <li>
@@ -144,7 +144,7 @@ const PrivacyPolicy: React.FC = () => {
               network access control
             </li>
           </ul>
-          <Paragraph style={{ color: '#64748b', fontSize: '0.9rem' }}>
+          <Paragraph style={{ color: '#475569', fontSize: '0.9rem' }}>
             We do <Text strong>not</Text> inspect the content of your personal
             communications (such as message text or email bodies), except where
             required by law or for security investigations.
@@ -153,10 +153,10 @@ const PrivacyPolicy: React.FC = () => {
           <Title level={3} style={{ color: '#e5e7eb', marginTop: 24 }}>
             3. How we use your information
           </Title>
-          <Paragraph style={{ color: '#cbd5e1' }}>
+          <Paragraph style={{ color: '#475569' }}>
             We use the information we collect for the following purposes:
           </Paragraph>
-          <ul style={{ color: '#cbd5e1', paddingLeft: 20 }}>
+          <ul style={{ color: '#475569', paddingLeft: 20 }}>
             <li>
               To provide, operate and maintain our internet, network, software
               and cloud services
@@ -183,11 +183,11 @@ const PrivacyPolicy: React.FC = () => {
           <Title level={3} style={{ color: '#e5e7eb', marginTop: 24 }}>
             4. Legal bases for processing
           </Title>
-          <Paragraph style={{ color: '#cbd5e1' }}>
+          <Paragraph style={{ color: '#475569' }}>
             Depending on your location, we rely on one or more of the following
             legal bases to process your personal data:
           </Paragraph>
-          <ul style={{ color: '#cbd5e1', paddingLeft: 20 }}>
+          <ul style={{ color: '#475569', paddingLeft: 20 }}>
             <li>
               <Text strong>Contract</Text> – where processing is necessary to
               deliver a service you have requested or agreed to.
@@ -211,10 +211,10 @@ const PrivacyPolicy: React.FC = () => {
           <Title level={3} style={{ color: '#e5e7eb', marginTop: 24 }}>
             5. How we share your information
           </Title>
-          <Paragraph style={{ color: '#cbd5e1' }}>
+          <Paragraph style={{ color: '#475569' }}>
             We do not sell your personal data. We may share information with:
           </Paragraph>
-          <ul style={{ color: '#cbd5e1', paddingLeft: 20 }}>
+          <ul style={{ color: '#475569', paddingLeft: 20 }}>
             <li>
               Trusted service providers who help us operate our infrastructure,
               such as cloud hosting, email and analytics platforms.
@@ -229,7 +229,7 @@ const PrivacyPolicy: React.FC = () => {
               to protect our legal rights, users or infrastructure.
             </li>
           </ul>
-          <Paragraph style={{ color: '#cbd5e1' }}>
+          <Paragraph style={{ color: '#475569' }}>
             Where data is transferred outside your country, we take reasonable
             steps to ensure that appropriate safeguards are in place.
           </Paragraph>
@@ -237,11 +237,11 @@ const PrivacyPolicy: React.FC = () => {
           <Title level={3} style={{ color: '#e5e7eb', marginTop: 24 }}>
             6. Data retention
           </Title>
-          <Paragraph style={{ color: '#cbd5e1' }}>
+          <Paragraph style={{ color: '#475569' }}>
             We keep your personal data only for as long as it is needed for the
             purposes described in this Policy, including:
           </Paragraph>
-          <ul style={{ color: '#cbd5e1', paddingLeft: 20 }}>
+          <ul style={{ color: '#475569', paddingLeft: 20 }}>
             <li>For the duration of an active service or contract with you</li>
             <li>
               For a reasonable period after service termination to handle
@@ -255,10 +255,10 @@ const PrivacyPolicy: React.FC = () => {
           <Title level={3} style={{ color: '#e5e7eb', marginTop: 24 }}>
             7. Your rights
           </Title>
-          <Paragraph style={{ color: '#cbd5e1' }}>
+          <Paragraph style={{ color: '#475569' }}>
             Depending on your jurisdiction, you may have the right to:
           </Paragraph>
-          <ul style={{ color: '#cbd5e1', paddingLeft: 20 }}>
+          <ul style={{ color: '#475569', paddingLeft: 20 }}>
             <li>Request access to the personal data we hold about you</li>
             <li>Request correction of inaccurate or incomplete data</li>
             <li>
@@ -273,7 +273,7 @@ const PrivacyPolicy: React.FC = () => {
               prior lawful processing)
             </li>
           </ul>
-          <Paragraph style={{ color: '#cbd5e1' }}>
+          <Paragraph style={{ color: '#475569' }}>
             To exercise any of these rights, please contact us using the details
             below.
           </Paragraph>
@@ -281,7 +281,7 @@ const PrivacyPolicy: React.FC = () => {
           <Title level={3} style={{ color: '#e5e7eb', marginTop: 24 }}>
             8. Security
           </Title>
-          <Paragraph style={{ color: '#cbd5e1' }}>
+          <Paragraph style={{ color: '#475569' }}>
             We use reasonable technical and organizational measures to protect
             your personal data, including secure hosting, access controls and
             encryption where appropriate. However, no system is completely
@@ -292,7 +292,7 @@ const PrivacyPolicy: React.FC = () => {
           <Title level={3} style={{ color: '#e5e7eb', marginTop: 24 }}>
             9. Third‑party websites
           </Title>
-          <Paragraph style={{ color: '#cbd5e1' }}>
+          <Paragraph style={{ color: '#475569' }}>
             Our website may contain links to third‑party sites or services that
             are not operated by Blackie Networks. This Privacy Policy does not
             cover those sites, and we are not responsible for their content or
@@ -303,7 +303,7 @@ const PrivacyPolicy: React.FC = () => {
           <Title level={3} style={{ color: '#e5e7eb', marginTop: 24 }}>
             10. Changes to this Policy
           </Title>
-          <Paragraph style={{ color: '#cbd5e1' }}>
+          <Paragraph style={{ color: '#475569' }}>
             We may update this Privacy Policy from time to time to reflect
             changes in our services, legal requirements or best practices. When
             we make material changes, we will update the &quot;Last updated&quot;
@@ -314,11 +314,11 @@ const PrivacyPolicy: React.FC = () => {
           <Title level={3} style={{ color: '#e5e7eb', marginTop: 24 }}>
             11. Contact us
           </Title>
-          <Paragraph style={{ color: '#cbd5e1' }}>
+          <Paragraph style={{ color: '#475569' }}>
             If you have any questions about this Privacy Policy or how we handle
             your personal data, you can contact us at:
           </Paragraph>
-          <ul style={{ color: '#cbd5e1', paddingLeft: 20 }}>
+          <ul style={{ color: '#475569', paddingLeft: 20 }}>
             <li>
               Email:{' '}
               <a

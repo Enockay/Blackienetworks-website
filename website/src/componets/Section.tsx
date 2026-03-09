@@ -115,7 +115,7 @@ export default function CompanySections() {
       padding: '80px 20px', 
       marginTop: '80px',
       minHeight: '100vh',
-      background: 'linear-gradient(135deg, rgba(5, 8, 16, 0.95) 0%, rgba(10, 14, 39, 0.95) 100%)',
+      background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.95) 100%)',
       position: 'relative',
     }}>
       <div className="max-w-7xl mx-auto" style={{ position: 'relative', zIndex: 1 }}>
@@ -163,7 +163,7 @@ export default function CompanySections() {
             Revolutionary IT Solutions
           </Title>
           <Paragraph style={{ 
-            color: '#cbd5e1', 
+            color: '#475569', 
             fontSize: '1.125rem',
             lineHeight: 1.8,
             maxWidth: '700px',
@@ -202,7 +202,7 @@ export default function CompanySections() {
                     borderRadius: '20px',
                     padding: '30px',
                     border: `1px solid ${service.color}40`,
-                    background: 'rgba(10, 14, 39, 0.6)',
+                    background: 'rgba(255, 255, 255, 0.9)',
                     textAlign: 'center',
                   }}
                 >
@@ -231,7 +231,7 @@ export default function CompanySections() {
                   </Title>
                   
                   <Paragraph style={{ 
-                    color: '#cbd5e1', 
+                    color: '#475569', 
                     fontSize: '0.95rem',
                     lineHeight: 1.7,
                     marginBottom: '20px',
@@ -290,7 +290,7 @@ export default function CompanySections() {
             >
               What Our Clients Say
             </Title>
-            <Paragraph style={{ color: '#cbd5e1', fontSize: '1.125rem' }}>
+            <Paragraph style={{ color: '#475569', fontSize: '1.125rem' }}>
               Trusted by students, faculty, and businesses across Kenya
             </Paragraph>
           </div>
@@ -312,7 +312,7 @@ export default function CompanySections() {
                     borderRadius: '20px',
                     padding: '24px',
                     border: '1px solid rgba(0, 240, 255, 0.2)',
-                    background: 'rgba(10, 14, 39, 0.6)',
+                    background: 'rgba(255, 255, 255, 0.9)',
                   }}
                   itemScope
                   itemType="https://schema.org/Review"
@@ -320,7 +320,7 @@ export default function CompanySections() {
                   <FaQuoteLeft style={{ fontSize: '32px', color: '#00f0ff', marginBottom: '16px' }} />
                   <Paragraph 
                     style={{ 
-                      color: '#cbd5e1', 
+                      color: '#475569', 
                       fontSize: '0.95rem',
                       lineHeight: 1.7,
                       fontStyle: 'italic',
@@ -343,7 +343,7 @@ export default function CompanySections() {
                     </cite>
                     <p style={{ 
                       fontSize: '0.8rem', 
-                      color: '#94a3b8',
+                      color: '#475569',
                       margin: 0,
                     }} itemProp="jobTitle">
                       {t.role}

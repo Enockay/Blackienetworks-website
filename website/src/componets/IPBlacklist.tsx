@@ -209,7 +209,7 @@ const IPBlacklist: React.FC = () => {
     <div>
       {/* Header with Add Button */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', flexWrap: 'wrap', gap: '16px' }}>
-        <h2 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#e2e8f0' }}>
+        <h2 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#1e293b' }}>
           IP Blacklist Management
         </h2>
         <motion.button
@@ -274,7 +274,7 @@ const IPBlacklist: React.FC = () => {
             animate={{ scale: 1, opacity: 1 }}
             onClick={(e) => e.stopPropagation()}
             style={{
-              background: 'rgba(10, 14, 39, 0.95)',
+              background: 'rgba(255, 255, 255, 0.95)',
               borderRadius: '16px',
               padding: '32px',
               maxWidth: '500px',
@@ -283,14 +283,14 @@ const IPBlacklist: React.FC = () => {
               boxShadow: '0 20px 60px rgba(0, 240, 255, 0.3)',
             }}
           >
-            <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '24px', color: '#e2e8f0' }}>
+            <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '24px', color: '#1e293b' }}>
               Add IP to Blacklist
             </h3>
 
             <form onSubmit={handleAddBlacklist}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                 <div>
-                  <label style={{ display: 'block', marginBottom: '6px', color: '#cbd5e1', fontSize: '0.875rem', fontWeight: 500 }}>
+                  <label style={{ display: 'block', marginBottom: '6px', color: '#475569', fontSize: '0.875rem', fontWeight: 500 }}>
                     IP Address *
                   </label>
                   <input
@@ -305,7 +305,7 @@ const IPBlacklist: React.FC = () => {
                       borderRadius: '8px',
                       border: '1px solid rgba(0, 240, 255, 0.3)',
                       background: 'rgba(0, 240, 255, 0.08)',
-                      color: '#e2e8f0',
+                      color: '#1e293b',
                       fontSize: '0.875rem',
                       outline: 'none',
                     }}
@@ -313,7 +313,7 @@ const IPBlacklist: React.FC = () => {
                 </div>
 
                 <div>
-                  <label style={{ display: 'block', marginBottom: '6px', color: '#cbd5e1', fontSize: '0.875rem', fontWeight: 500 }}>
+                  <label style={{ display: 'block', marginBottom: '6px', color: '#475569', fontSize: '0.875rem', fontWeight: 500 }}>
                     Token *
                   </label>
                   <select
@@ -326,16 +326,16 @@ const IPBlacklist: React.FC = () => {
                       borderRadius: '8px',
                       border: '1px solid rgba(0, 240, 255, 0.3)',
                       background: 'rgba(0, 240, 255, 0.08)',
-                      color: '#e2e8f0',
+                      color: '#1e293b',
                       fontSize: '0.875rem',
                       outline: 'none',
                     }}
                   >
-                    <option value="" style={{ background: '#0a0e27', color: '#e2e8f0' }}>
+                    <option value="" style={{ background: '#ffffff', color: '#1e293b' }}>
                       Select a token
                     </option>
                     {tokens.map((t) => (
-                      <option key={t.id} value={t.id} style={{ background: '#0a0e27', color: '#e2e8f0' }}>
+                      <option key={t.id} value={t.id} style={{ background: '#ffffff', color: '#1e293b' }}>
                         {t.name}
                       </option>
                     ))}
@@ -343,7 +343,7 @@ const IPBlacklist: React.FC = () => {
                 </div>
 
                 <div>
-                  <label style={{ display: 'block', marginBottom: '6px', color: '#cbd5e1', fontSize: '0.875rem', fontWeight: 500 }}>
+                  <label style={{ display: 'block', marginBottom: '6px', color: '#475569', fontSize: '0.875rem', fontWeight: 500 }}>
                     Reason (Optional)
                   </label>
                   <textarea
@@ -357,7 +357,7 @@ const IPBlacklist: React.FC = () => {
                       borderRadius: '8px',
                       border: '1px solid rgba(0, 240, 255, 0.3)',
                       background: 'rgba(0, 240, 255, 0.08)',
-                      color: '#e2e8f0',
+                      color: '#1e293b',
                       fontSize: '0.875rem',
                       outline: 'none',
                       resize: 'vertical',
@@ -382,7 +382,7 @@ const IPBlacklist: React.FC = () => {
                     background: 'rgba(148, 163, 184, 0.1)',
                     border: '1px solid rgba(148, 163, 184, 0.3)',
                     borderRadius: '8px',
-                    color: '#94a3b8',
+                    color: '#475569',
                     cursor: 'pointer',
                     fontWeight: 600,
                   }}
@@ -414,7 +414,7 @@ const IPBlacklist: React.FC = () => {
 
       {/* Blacklisted IPs List */}
       {loading ? (
-        <div style={{ textAlign: 'center', padding: '60px 20px', color: '#94a3b8' }}>
+        <div style={{ textAlign: 'center', padding: '60px 20px', color: '#475569' }}>
           <motion.div
             animate={{ rotate: 360 }}
             transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
@@ -429,10 +429,10 @@ const IPBlacklist: React.FC = () => {
           style={{
             padding: '60px 20px',
             textAlign: 'center',
-            background: 'rgba(10, 14, 39, 0.6)',
+            background: 'rgba(255, 255, 255, 0.9)',
             border: '1px solid rgba(0, 240, 255, 0.2)',
             borderRadius: '12px',
-            color: '#94a3b8',
+            color: '#475569',
           }}
         >
           <div style={{ fontSize: '48px', marginBottom: '16px' }}>🚫</div>
@@ -446,7 +446,7 @@ const IPBlacklist: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               style={{
-                background: 'rgba(10, 14, 39, 0.6)',
+                background: 'rgba(255, 255, 255, 0.9)',
                 border: '1px solid rgba(0, 240, 255, 0.2)',
                 borderRadius: '12px',
                 padding: '24px',
@@ -456,7 +456,7 @@ const IPBlacklist: React.FC = () => {
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '16px' }}>
                 <div style={{ flex: 1, minWidth: '200px' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
-                    <h3 style={{ fontSize: '1.125rem', fontWeight: 600, color: '#e2e8f0', fontFamily: 'monospace' }}>
+                    <h3 style={{ fontSize: '1.125rem', fontWeight: 600, color: '#1e293b', fontFamily: 'monospace' }}>
                       {blacklist.ip}
                     </h3>
                     <span
@@ -468,7 +468,7 @@ const IPBlacklist: React.FC = () => {
                         background: blacklist.isActive
                           ? 'rgba(239, 68, 68, 0.1)'
                           : 'rgba(148, 163, 184, 0.1)',
-                        color: blacklist.isActive ? '#ef4444' : '#94a3b8',
+                        color: blacklist.isActive ? '#ef4444' : '#475569',
                         border: `1px solid ${blacklist.isActive ? 'rgba(239, 68, 68, 0.3)' : 'rgba(148, 163, 184, 0.3)'}`,
                       }}
                     >
@@ -476,27 +476,27 @@ const IPBlacklist: React.FC = () => {
                     </span>
                   </div>
                   {blacklist.tokenName && (
-                    <p style={{ color: '#94a3b8', fontSize: '0.875rem', marginBottom: '8px' }}>
-                      <span style={{ color: '#cbd5e1' }}>Token:</span> {blacklist.tokenName}
+                    <p style={{ color: '#475569', fontSize: '0.875rem', marginBottom: '8px' }}>
+                      <span style={{ color: '#475569' }}>Token:</span> {blacklist.tokenName}
                     </p>
                   )}
                   {blacklist.reason && (
-                    <p style={{ color: '#94a3b8', fontSize: '0.875rem', marginBottom: '8px' }}>
-                      <span style={{ color: '#cbd5e1' }}>Reason:</span> {blacklist.reason}
+                    <p style={{ color: '#475569', fontSize: '0.875rem', marginBottom: '8px' }}>
+                      <span style={{ color: '#475569' }}>Reason:</span> {blacklist.reason}
                     </p>
                   )}
                   {blacklist.blockedBy && (
-                    <p style={{ color: '#94a3b8', fontSize: '0.875rem', marginBottom: '8px' }}>
-                      <span style={{ color: '#cbd5e1' }}>Blocked by:</span> {blacklist.blockedBy}
+                    <p style={{ color: '#475569', fontSize: '0.875rem', marginBottom: '8px' }}>
+                      <span style={{ color: '#475569' }}>Blocked by:</span> {blacklist.blockedBy}
                     </p>
                   )}
-                  <div style={{ fontSize: '0.875rem', color: '#94a3b8' }}>
+                  <div style={{ fontSize: '0.875rem', color: '#475569' }}>
                     <div>
-                      <span style={{ color: '#cbd5e1' }}>Created:</span> {formatDate(blacklist.createdAt)}
+                      <span style={{ color: '#475569' }}>Created:</span> {formatDate(blacklist.createdAt)}
                     </div>
                     {blacklist.updatedAt !== blacklist.createdAt && (
                       <div>
-                        <span style={{ color: '#cbd5e1' }}>Updated:</span> {formatDate(blacklist.updatedAt)}
+                        <span style={{ color: '#475569' }}>Updated:</span> {formatDate(blacklist.updatedAt)}
                       </div>
                     )}
                   </div>
@@ -513,7 +513,7 @@ const IPBlacklist: React.FC = () => {
                         : 'rgba(239, 68, 68, 0.1)',
                       border: `1px solid ${blacklist.isActive ? 'rgba(148, 163, 184, 0.3)' : 'rgba(239, 68, 68, 0.3)'}`,
                       borderRadius: '8px',
-                      color: blacklist.isActive ? '#94a3b8' : '#ef4444',
+                      color: blacklist.isActive ? '#475569' : '#ef4444',
                       cursor: 'pointer',
                       fontSize: '0.875rem',
                       fontWeight: 500,

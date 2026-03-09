@@ -116,7 +116,7 @@ const AboutUs: React.FC = () => {
         style={{
           minHeight: '100vh',
           padding: '100px 20px 80px',
-          background: 'linear-gradient(135deg, rgba(5, 8, 16, 0.95) 0%, rgba(10, 14, 39, 0.95) 100%)',
+          background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.95) 100%)',
           position: 'relative',
           overflow: 'hidden',
           marginTop: '80px',
@@ -194,7 +194,7 @@ const AboutUs: React.FC = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4, duration: 0.6 }}
               style={{
-                color: '#cbd5e1',
+                color: '#475569',
                 fontSize: '1.125rem',
                 lineHeight: '1.8',
                 maxWidth: '800px',
@@ -227,7 +227,7 @@ const AboutUs: React.FC = () => {
                 <h3 style={{ color: '#00f0ff', fontSize: '1.25rem', fontWeight: 700, marginBottom: '8px' }}>
                   Our Mission
                 </h3>
-                <p style={{ color: '#cbd5e1', margin: 0, fontSize: '0.95rem' }}>
+                <p style={{ color: '#475569', margin: 0, fontSize: '0.95rem' }}>
                   To democratize access to world-class IT infrastructure and empower every institution, business, and individual with reliable, affordable, and future-ready technology solutions.
                 </p>
               </div>
@@ -243,7 +243,7 @@ const AboutUs: React.FC = () => {
                 <h3 style={{ color: '#0066ff', fontSize: '1.25rem', fontWeight: 700, marginBottom: '8px' }}>
                   Our Vision
                 </h3>
-                <p style={{ color: '#cbd5e1', margin: 0, fontSize: '0.95rem' }}>
+                <p style={{ color: '#475569', margin: 0, fontSize: '0.95rem' }}>
                   To become East Africa's most trusted technology partner, known for innovation, reliability, and transforming how organizations connect, operate, and thrive in the digital age.
                 </p>
               </div>
@@ -263,7 +263,7 @@ const AboutUs: React.FC = () => {
                 borderRadius: '24px',
                 padding: '48px',
                 border: '1px solid rgba(0, 240, 255, 0.2)',
-                background: 'rgba(10, 14, 39, 0.6)',
+                background: 'rgba(255, 255, 255, 0.9)',
                 backdropFilter: 'blur(20px)',
                 boxShadow: '0 10px 40px rgba(0, 240, 255, 0.1)',
               }}
@@ -293,7 +293,7 @@ const AboutUs: React.FC = () => {
               <div style={{ maxWidth: '900px', margin: '0 auto' }}>
                 <p
                   style={{
-                    color: '#cbd5e1',
+                    color: '#475569',
                     fontSize: '1.125rem',
                     lineHeight: '1.9',
                     marginBottom: '24px',
@@ -304,7 +304,7 @@ const AboutUs: React.FC = () => {
                 </p>
                 <p
                   style={{
-                    color: '#cbd5e1',
+                    color: '#475569',
                     fontSize: '1.125rem',
                     lineHeight: '1.9',
                     textAlign: 'center',
@@ -390,7 +390,7 @@ const AboutUs: React.FC = () => {
                         padding: '32px 24px',
                         borderRadius: '20px',
                         border: `1px solid ${color}40`,
-                        background: 'rgba(10, 14, 39, 0.6)',
+                        background: 'rgba(255, 255, 255, 0.9)',
                         backdropFilter: 'blur(20px)',
                         height: '100%',
                         transition: 'all 0.3s ease',
@@ -426,7 +426,7 @@ const AboutUs: React.FC = () => {
                       >
                         {title}
                       </h3>
-                      <p style={{ color: '#cbd5e1', lineHeight: '1.8', margin: 0, fontSize: '0.95rem' }}>
+                      <p style={{ color: '#475569', lineHeight: '1.8', margin: 0, fontSize: '0.95rem' }}>
                         {description}
                       </p>
                     </motion.div>
@@ -448,7 +448,7 @@ const AboutUs: React.FC = () => {
                 borderRadius: '24px',
                 padding: '48px',
                 border: '1px solid rgba(0, 240, 255, 0.2)',
-                background: 'rgba(10, 14, 39, 0.6)',
+                background: 'rgba(255, 255, 255, 0.9)',
                 backdropFilter: 'blur(20px)',
                 boxShadow: '0 10px 40px rgba(0, 240, 255, 0.1)',
                 marginBottom: '80px',
@@ -473,7 +473,7 @@ const AboutUs: React.FC = () => {
                   textAlign: 'center',
                   maxWidth: '900px',
                   margin: '0 auto 48px',
-                  color: '#cbd5e1',
+                  color: '#475569',
                   fontSize: '1.125rem',
                   lineHeight: '1.8',
                 }}
@@ -485,7 +485,7 @@ const AboutUs: React.FC = () => {
                   textAlign: 'center',
                   maxWidth: '900px',
                   margin: '0 auto 48px',
-                  color: '#cbd5e1',
+                  color: '#475569',
                   fontSize: '1.125rem',
                   lineHeight: '1.8',
                 }}
@@ -531,7 +531,7 @@ const AboutUs: React.FC = () => {
                       >
                         Technical Mastery
                       </h3>
-                      <p style={{ color: '#cbd5e1', lineHeight: '1.8', margin: 0 }}>
+                      <p style={{ color: '#475569', lineHeight: '1.8', margin: 0 }}>
                         We're masters of network engineering—specializing in MikroTik routing, advanced VPN architectures, intelligent load balancing, seamless captive portals, precision bandwidth management, and enterprise-grade Wi-Fi deployments. Our team leverages industry-leading tools and methodologies to craft network environments that are not just stable, but blazingly fast and infinitely scalable.
                       </p>
                   </div>
@@ -575,7 +575,7 @@ const AboutUs: React.FC = () => {
                       >
                         Results-Oriented
                       </h3>
-                      <p style={{ color: '#cbd5e1', lineHeight: '1.8', margin: 0 }}>
+                      <p style={{ color: '#475569', lineHeight: '1.8', margin: 0 }}>
                         With a <span style={{ fontWeight: 700, color: '#00ff88' }}>95% client satisfaction rate</span>, we've consistently delivered measurable results: 40% average improvement in network speeds, 99.9% uptime guarantees, and zero security breaches across all deployments. Every project is backed by data-driven outcomes and real-world impact.
                       </p>
                   </div>
@@ -635,7 +635,7 @@ const AboutUs: React.FC = () => {
                           borderRadius: '24px',
                           overflow: 'hidden',
                           border: '1px solid rgba(0, 240, 255, 0.2)',
-                          background: 'rgba(10, 14, 39, 0.6)',
+                          background: 'rgba(255, 255, 255, 0.9)',
                           backdropFilter: 'blur(20px)',
                           boxShadow: '0 10px 40px rgba(0, 240, 255, 0.1)',
                           transition: 'all 0.3s ease',
@@ -677,7 +677,7 @@ const AboutUs: React.FC = () => {
                             style={{
                               fontSize: '1.5rem',
                               fontWeight: 700,
-                              color: '#e2e8f0',
+                              color: '#1e293b',
                               marginBottom: '8px',
                             }}
                           >
@@ -700,7 +700,7 @@ const AboutUs: React.FC = () => {
                               marginBottom: '20px',
                             }}
                           />
-                          <p style={{ color: '#cbd5e1', lineHeight: '1.8', margin: 0 }}>
+                          <p style={{ color: '#475569', lineHeight: '1.8', margin: 0 }}>
                             {bio}
                           </p>
                         </div>
@@ -725,7 +725,7 @@ const AboutUs: React.FC = () => {
                 borderRadius: '24px',
                 padding: '48px',
                 border: '1px solid rgba(0, 240, 255, 0.2)',
-                background: 'rgba(10, 14, 39, 0.6)',
+                background: 'rgba(255, 255, 255, 0.9)',
                 backdropFilter: 'blur(20px)',
                 boxShadow: '0 10px 40px rgba(0, 240, 255, 0.1)',
               }}
@@ -773,7 +773,7 @@ const AboutUs: React.FC = () => {
                       <h3 style={{ color: '#00f0ff', fontSize: '1.25rem', fontWeight: 700, marginBottom: '8px' }}>
                         Full-Stack Expertise
                       </h3>
-                      <p style={{ color: '#cbd5e1', lineHeight: '1.8', margin: 0 }}>
+                      <p style={{ color: '#475569', lineHeight: '1.8', margin: 0 }}>
                         Unlike traditional IT vendors, we're a one-stop solution. From network infrastructure to custom software, cloud deployment to cybersecurity—we handle it all. No vendor juggling, no communication gaps, just seamless integration.
                       </p>
                     </div>
@@ -799,7 +799,7 @@ const AboutUs: React.FC = () => {
                       <h3 style={{ color: '#00ff88', fontSize: '1.25rem', fontWeight: 700, marginBottom: '8px' }}>
                         Campus-First Approach
                       </h3>
-                      <p style={{ color: '#cbd5e1', lineHeight: '1.8', margin: 0 }}>
+                      <p style={{ color: '#475569', lineHeight: '1.8', margin: 0 }}>
                         Born from solving real campus challenges, we understand the unique needs of educational institutions. Our solutions are battle-tested in high-density environments with thousands of concurrent users, ensuring reliability when it matters most.
                       </p>
                     </div>
@@ -825,7 +825,7 @@ const AboutUs: React.FC = () => {
                       <h3 style={{ color: '#7c3aed', fontSize: '1.25rem', fontWeight: 700, marginBottom: '8px' }}>
                         Security by Design
                       </h3>
-                      <p style={{ color: '#cbd5e1', lineHeight: '1.8', margin: 0 }}>
+                      <p style={{ color: '#475569', lineHeight: '1.8', margin: 0 }}>
                         Every solution is architected with security as a foundational principle, not an afterthought. We implement zero-trust architectures, end-to-end encryption, and proactive threat monitoring to keep your digital assets bulletproof.
                       </p>
                     </div>
@@ -851,7 +851,7 @@ const AboutUs: React.FC = () => {
                       <h3 style={{ color: '#ffd700', fontSize: '1.25rem', fontWeight: 700, marginBottom: '8px' }}>
                         24/7 Proactive Support
                       </h3>
-                      <p style={{ color: '#cbd5e1', lineHeight: '1.8', margin: 0 }}>
+                      <p style={{ color: '#475569', lineHeight: '1.8', margin: 0 }}>
                         Our support doesn't wait for problems—we monitor, optimize, and prevent issues before they impact your operations. With round-the-clock availability and average response times under 15 minutes, we're always in your corner.
                       </p>
                     </div>
@@ -911,7 +911,7 @@ const AboutUs: React.FC = () => {
                           padding: '40px 32px',
                           borderRadius: '24px',
                           border: '1px solid rgba(0, 240, 255, 0.2)',
-                          background: 'rgba(10, 14, 39, 0.6)',
+                          background: 'rgba(255, 255, 255, 0.9)',
                           backdropFilter: 'blur(20px)',
                           boxShadow: '0 10px 40px rgba(0, 240, 255, 0.1)',
                           height: '100%',
@@ -946,13 +946,13 @@ const AboutUs: React.FC = () => {
                           style={{
                             fontSize: '1.375rem',
                             fontWeight: 700,
-                            color: '#e2e8f0',
+                            color: '#1e293b',
                             marginBottom: '16px',
                           }}
                         >
                           {title}
                         </h3>
-                        <p style={{ color: '#cbd5e1', lineHeight: '1.8', margin: 0 }}>
+                        <p style={{ color: '#475569', lineHeight: '1.8', margin: 0 }}>
                           {description}
                         </p>
                       </motion.div>
@@ -994,7 +994,7 @@ const AboutUs: React.FC = () => {
               >
                 Industries We Power
               </h2>
-              <p style={{ color: '#cbd5e1', fontSize: '1.125rem', maxWidth: '700px', margin: '16px auto 0' }}>
+              <p style={{ color: '#475569', fontSize: '1.125rem', maxWidth: '700px', margin: '16px auto 0' }}>
                 From education to enterprise, we deliver tailored solutions across diverse sectors
               </p>
             </motion.div>
@@ -1022,7 +1022,7 @@ const AboutUs: React.FC = () => {
                           padding: '32px 24px',
                           borderRadius: '20px',
                           border: '1px solid rgba(0, 240, 255, 0.2)',
-                          background: 'rgba(10, 14, 39, 0.6)',
+                          background: 'rgba(255, 255, 255, 0.9)',
                           backdropFilter: 'blur(20px)',
                           transition: 'all 0.3s ease',
                           height: '100%',
@@ -1047,7 +1047,7 @@ const AboutUs: React.FC = () => {
                         >
                           {name}
                         </h3>
-                        <p style={{ color: '#cbd5e1', fontSize: '0.9rem', margin: 0 }}>
+                        <p style={{ color: '#475569', fontSize: '0.9rem', margin: 0 }}>
                           {description}
                         </p>
                       </motion.div>
@@ -1099,7 +1099,7 @@ const AboutUs: React.FC = () => {
               </h2>
               <p
                 style={{
-                  color: '#cbd5e1',
+                  color: '#475569',
                   fontSize: '1.25rem',
                   lineHeight: '1.9',
                   maxWidth: '900px',

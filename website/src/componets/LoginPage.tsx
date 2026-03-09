@@ -73,7 +73,7 @@ const LoginPage: React.FC = () => {
         position: 'relative',
         minHeight: '100vh',
         padding: '100px 20px 80px',
-        background: 'linear-gradient(135deg, rgba(5, 8, 16, 0.95) 0%, rgba(10, 14, 39, 0.95) 100%)',
+        background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.95) 100%)',
         marginTop: '80px',
         display: 'flex',
         alignItems: 'center',
@@ -146,7 +146,7 @@ const LoginPage: React.FC = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4, duration: 0.6 }}
             style={{
-              color: '#94a3b8',
+              color: '#475569',
               fontSize: '1rem',
               lineHeight: 1.6,
             }}
@@ -163,7 +163,7 @@ const LoginPage: React.FC = () => {
             borderRadius: '16px',
             padding: '32px',
             border: '1px solid rgba(0, 240, 255, 0.2)',
-            background: 'rgba(10, 14, 39, 0.6)',
+                background: 'rgba(255, 255, 255, 0.9)',
             backdropFilter: 'blur(20px)',
             boxShadow: '0 20px 60px rgba(0, 240, 255, 0.1)',
             position: 'relative',
@@ -215,7 +215,7 @@ const LoginPage: React.FC = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.5 }}
               >
-                <label htmlFor="email" style={{ display: 'block', marginBottom: '8px', color: '#cbd5e1', fontWeight: 500, fontSize: '0.875rem' }}>
+                <label htmlFor="email" style={{ display: 'block', marginBottom: '8px', color: '#475569', fontWeight: 500, fontSize: '0.875rem' }}>
                   Email Address
                 </label>
                 <input
@@ -232,7 +232,7 @@ const LoginPage: React.FC = () => {
                     borderRadius: '8px',
                     border: '1px solid rgba(0, 240, 255, 0.3)',
                     background: 'rgba(0, 240, 255, 0.08)',
-                    color: '#e2e8f0',
+                    color: '#1e293b',
                     fontSize: '0.875rem',
                     outline: 'none',
                     transition: 'all 0.2s ease',
@@ -253,7 +253,7 @@ const LoginPage: React.FC = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.6 }}
               >
-                <label htmlFor="password" style={{ display: 'block', marginBottom: '8px', color: '#cbd5e1', fontWeight: 500, fontSize: '0.875rem' }}>
+                <label htmlFor="password" style={{ display: 'block', marginBottom: '8px', color: '#475569', fontWeight: 500, fontSize: '0.875rem' }}>
                   Password
                 </label>
                 <input
@@ -270,7 +270,7 @@ const LoginPage: React.FC = () => {
                     borderRadius: '8px',
                     border: '1px solid rgba(0, 240, 255, 0.3)',
                     background: 'rgba(0, 240, 255, 0.08)',
-                    color: '#e2e8f0',
+                    color: '#1e293b',
                     fontSize: '0.875rem',
                     outline: 'none',
                     transition: 'all 0.2s ease',

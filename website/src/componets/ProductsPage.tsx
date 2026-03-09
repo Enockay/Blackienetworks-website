@@ -133,7 +133,7 @@ const ProductsPage: React.FC = () => {
         minHeight: '100vh',
         padding: '110px 20px 80px',
         background:
-          'linear-gradient(135deg, rgba(5, 8, 16, 0.96) 0%, rgba(10, 14, 39, 0.96) 100%)',
+          'linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(248, 249, 250, 0.96) 100%)',
       }}
     >
       {/* Soft animated background */}
@@ -214,7 +214,7 @@ const ProductsPage: React.FC = () => {
             style={{
               maxWidth: 680,
               margin: '0 auto',
-              color: '#cbd5e1',
+              color: '#475569',
               fontSize: '1.02rem',
               lineHeight: 1.8,
             }}
@@ -247,7 +247,7 @@ const ProductsPage: React.FC = () => {
                 gap: 20,
                 borderRadius: 22,
                 border: '1px solid rgba(0, 240, 255, 0.22)',
-                background: 'rgba(10, 14, 39, 0.78)',
+                    background: 'rgba(255, 255, 255, 0.95)',
                 overflow: 'hidden',
                 position: 'relative',
               }}
@@ -286,7 +286,7 @@ const ProductsPage: React.FC = () => {
                       fontSize: 11,
                       textTransform: 'uppercase',
                       letterSpacing: '0.16em',
-                      color: '#94a3b8',
+                      color: '#475569',
                       fontWeight: 600,
                     }}
                   >
@@ -316,7 +316,7 @@ const ProductsPage: React.FC = () => {
                 </p>
                 <p
                   style={{
-                    color: '#cbd5e1',
+                    color: '#475569',
                     fontSize: '0.9rem',
                     lineHeight: 1.7,
                     marginBottom: 16,
@@ -342,7 +342,7 @@ const ProductsPage: React.FC = () => {
                         alignItems: 'flex-start',
                         gap: 8,
                         fontSize: '0.85rem',
-                        color: '#e2e8f0',
+                        color: '#1e293b',
                       }}
                     >
                       <span
@@ -521,7 +521,7 @@ const ProductsPage: React.FC = () => {
             </h2>
             <p
               style={{
-                color: '#cbd5e1',
+                color: '#475569',
                 fontSize: '0.98rem',
                 lineHeight: 1.8,
               }}
@@ -574,7 +574,7 @@ const ProductsPage: React.FC = () => {
                 <p
                   style={{
                     fontSize: '0.9rem',
-                    color: '#cbd5e1',
+                    color: '#475569',
                     lineHeight: 1.7,
                   }}
                 >

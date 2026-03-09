@@ -10,6 +10,7 @@ import {
   InstagramOutlined,
   MessageOutlined,
   SendOutlined,
+  ClockCircleOutlined,
 } from '@ant-design/icons';
 import { motion } from 'framer-motion';
 import { SEO } from './SEO';
@@ -84,7 +85,7 @@ const ContactUs: React.FC = () => {
         style={{
           minHeight: '100vh',
           padding: '100px 20px 80px',
-          background: 'linear-gradient(135deg, rgba(5, 8, 16, 0.95) 0%, rgba(10, 14, 39, 0.95) 100%)',
+          background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.95) 100%)',
           position: 'relative',
           overflow: 'hidden',
           marginTop: '80px',
@@ -99,8 +100,8 @@ const ContactUs: React.FC = () => {
             right: 0,
             bottom: 0,
             background: `
-              radial-gradient(circle at 20% 50%, rgba(0, 240, 255, 0.1) 0%, transparent 50%),
-              radial-gradient(circle at 80% 80%, rgba(0, 102, 255, 0.1) 0%, transparent 50%),
+              radial-gradient(circle at 20% 50%, rgba(37, 99, 235, 0.08) 0%, transparent 50%),
+              radial-gradient(circle at 80% 80%, rgba(37, 99, 235, 0.06) 0%, transparent 50%),
               radial-gradient(circle at 40% 20%, rgba(124, 58, 237, 0.05) 0%, transparent 50%)
             `,
             pointerEvents: 'none',
@@ -122,8 +123,8 @@ const ContactUs: React.FC = () => {
               style={{
                 display: 'inline-block',
                 padding: '16px 32px',
-                background: 'rgba(0, 240, 255, 0.1)',
-                border: '1px solid rgba(0, 240, 255, 0.3)',
+                background: 'rgba(37, 99, 235, 0.06)',
+                border: '1px solid rgba(37, 99, 235, 0.3)',
                 borderRadius: '50px',
                 marginBottom: '24px',
               }}
@@ -131,11 +132,11 @@ const ContactUs: React.FC = () => {
               <MessageOutlined
                 style={{
                   fontSize: '24px',
-                  color: '#00f0ff',
+                  color: '#2563eb',
                   marginRight: '12px',
                 }}
               />
-              <span style={{ color: '#00f0ff', fontSize: '14px', fontWeight: 600 }}>
+              <span style={{ color: '#2563eb', fontSize: '14px', fontWeight: 600 }}>
                 Get In Touch
               </span>
             </motion.div>
@@ -148,7 +149,7 @@ const ContactUs: React.FC = () => {
                 fontSize: 'clamp(2.5rem, 5vw, 4rem)',
                 fontWeight: 800,
                 marginBottom: '24px',
-                background: 'linear-gradient(135deg, #00f0ff 0%, #0066ff 50%, #7c3aed 100%)',
+                background: 'linear-gradient(135deg, #2563eb 0%, #0066ff 50%, #7c3aed 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
@@ -162,7 +163,7 @@ const ContactUs: React.FC = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4, duration: 0.6 }}
               style={{
-                color: '#cbd5e1',
+                color: '#475569',
                 fontSize: '1.125rem',
                 maxWidth: '700px',
                 margin: '0 auto',
@@ -233,19 +234,19 @@ const ContactUs: React.FC = () => {
                 style={{
                   borderRadius: '24px',
                   padding: '40px',
-                  border: '1px solid rgba(0, 240, 255, 0.2)',
-                  background: 'rgba(10, 14, 39, 0.6)',
+                  border: '1px solid rgba(37, 99, 235, 0.16)',
+                  background: 'rgba(255, 255, 255, 0.9)',
                   backdropFilter: 'blur(20px)',
-                  boxShadow: '0 10px 40px rgba(0, 240, 255, 0.1)',
+                  boxShadow: '0 10px 40px rgba(37, 99, 235, 0.12)',
                 }}
               >
                 <h2
                   style={{
                     fontSize: '1.75rem',
                     fontWeight: 700,
-                    color: '#e2e8f0',
+                    color: '#1e293b',
                     marginBottom: '32px',
-                    background: 'linear-gradient(135deg, #00f0ff 0%, #0066ff 100%)',
+                    background: 'linear-gradient(135deg, #2563eb 0%, #0066ff 100%)',
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
                     backgroundClip: 'text',
@@ -262,7 +263,7 @@ const ContactUs: React.FC = () => {
                 >
                   <Form.Item
                     label={
-                      <span style={{ color: '#cbd5e1', fontWeight: 600 }}>Full Name</span>
+                      <span style={{ color: '#475569', fontWeight: 600 }}>Full Name</span>
                     }
                     name="name"
                     rules={[{ required: true, message: 'Please enter your full name' }]}
@@ -271,10 +272,10 @@ const ContactUs: React.FC = () => {
                       placeholder="Your full name"
                       size="large"
                       style={{
-                        background: 'rgba(0, 240, 255, 0.1)',
-                        border: '1px solid rgba(0, 240, 255, 0.3)',
+                        background: 'rgba(37, 99, 235, 0.05)',
+                        border: '1px solid rgba(37, 99, 235, 0.25)',
                         borderRadius: '12px',
-                        color: '#e2e8f0',
+                        color: '#1e293b',
                         padding: '12px 16px',
                       }}
                       className="glass-input"
@@ -283,7 +284,7 @@ const ContactUs: React.FC = () => {
 
                   <Form.Item
                     label={
-                      <span style={{ color: '#cbd5e1', fontWeight: 600 }}>Email Address</span>
+                      <span style={{ color: '#475569', fontWeight: 600 }}>Email Address</span>
                     }
                     name="email"
                     rules={[
@@ -294,13 +295,13 @@ const ContactUs: React.FC = () => {
                     <Input
                       placeholder="you@example.com"
                       size="large"
-                      prefix={<MailOutlined style={{ color: '#00f0ff' }} />}
+                      prefix={<MailOutlined style={{ color: '#2563eb' }} />}
                       className="glass-input"
                       style={{
-                        background: 'rgba(0, 240, 255, 0.1)',
-                        border: '1px solid rgba(0, 240, 255, 0.3)',
+                        background: 'rgba(37, 99, 235, 0.05)',
+                        border: '1px solid rgba(37, 99, 235, 0.25)',
                         borderRadius: '12px',
-                        color: '#e2e8f0',
+                        color: '#1e293b',
                         padding: '12px 16px',
                       }}
                     />
@@ -308,7 +309,7 @@ const ContactUs: React.FC = () => {
 
                   <Form.Item
                     label={
-                      <span style={{ color: '#cbd5e1', fontWeight: 600 }}>Phone Number</span>
+                      <span style={{ color: '#475569', fontWeight: 600 }}>Phone Number</span>
                     }
                     name="phone"
                     rules={[
@@ -319,13 +320,13 @@ const ContactUs: React.FC = () => {
                     <Input
                       placeholder="+254796869402"
                       size="large"
-                      prefix={<PhoneOutlined style={{ color: '#00f0ff' }} />}
+                      prefix={<PhoneOutlined style={{ color: '#2563eb' }} />}
                       className="glass-input"
                       style={{
-                        background: 'rgba(0, 240, 255, 0.1)',
-                        border: '1px solid rgba(0, 240, 255, 0.3)',
+                        background: 'rgba(37, 99, 235, 0.05)',
+                        border: '1px solid rgba(37, 99, 235, 0.25)',
                         borderRadius: '12px',
-                        color: '#e2e8f0',
+                        color: '#1e293b',
                         padding: '12px 16px',
                       }}
                     />
@@ -333,7 +334,7 @@ const ContactUs: React.FC = () => {
 
                   <Form.Item
                     label={
-                      <span style={{ color: '#cbd5e1', fontWeight: 600 }}>Subject</span>
+                      <span style={{ color: '#475569', fontWeight: 600 }}>Subject</span>
                     }
                     name="subject"
                     rules={[{ required: true, message: 'Please enter a subject' }]}
@@ -343,10 +344,10 @@ const ContactUs: React.FC = () => {
                       size="large"
                       className="glass-input"
                       style={{
-                        background: 'rgba(0, 240, 255, 0.1)',
-                        border: '1px solid rgba(0, 240, 255, 0.3)',
+                        background: 'rgba(37, 99, 235, 0.05)',
+                        border: '1px solid rgba(37, 99, 235, 0.25)',
                         borderRadius: '12px',
-                        color: '#e2e8f0',
+                        color: '#1e293b',
                         padding: '12px 16px',
                       }}
                     />
@@ -354,7 +355,7 @@ const ContactUs: React.FC = () => {
 
                   <Form.Item
                     label={
-                      <span style={{ color: '#cbd5e1', fontWeight: 600 }}>Message</span>
+                      <span style={{ color: '#475569', fontWeight: 600 }}>Message</span>
                     }
                     name="message"
                     rules={[{ required: true, message: 'Please enter your message' }]}
@@ -370,7 +371,7 @@ const ContactUs: React.FC = () => {
                         background: 'rgba(0, 240, 255, 0.1)',
                         border: '1px solid rgba(0, 240, 255, 0.3)',
                         borderRadius: '12px',
-                        color: '#e2e8f0',
+                        color: '#1e293b',
                         padding: '12px 16px',
                       }}
                     />
@@ -385,17 +386,25 @@ const ContactUs: React.FC = () => {
                         disabled={loading}
                         style={{
                           height: '52px',
-                          background: 'linear-gradient(135deg, #00f0ff 0%, #0066ff 100%)',
+                          background: 'linear-gradient(135deg, #2563eb 0%, #0066ff 100%)',
                           border: 'none',
                           borderRadius: '12px',
                           fontSize: '1.125rem',
                           fontWeight: 700,
-                          color: '#0a0e27',
+                          color: '#ffffff',
                           marginTop: '8px',
                         }}
-                        icon={loading ? <Spin /> : <SendOutlined />}
+                        icon={
+                          loading ? (
+                            <Spin />
+                          ) : (
+                            <SendOutlined style={{ color: '#ffffff' }} />
+                          )
+                        }
                       >
-                        {loading ? 'Sending...' : 'Send Message'}
+                        <span style={{ color: '#ffffff' }}>
+                          {loading ? 'Sending...' : 'Send Message'}
+                        </span>
                       </Button>
                     </motion.div>
                   </Form.Item>
@@ -410,19 +419,19 @@ const ContactUs: React.FC = () => {
                 style={{
                   borderRadius: '24px',
                   padding: '40px',
-                  border: '1px solid rgba(0, 240, 255, 0.2)',
-                  background: 'rgba(10, 14, 39, 0.6)',
+                  border: '1px solid rgba(37, 99, 235, 0.16)',
+                  background: 'rgba(255, 255, 255, 0.9)',
                   backdropFilter: 'blur(20px)',
-                  boxShadow: '0 10px 40px rgba(0, 240, 255, 0.1)',
+                  boxShadow: '0 10px 40px rgba(37, 99, 235, 0.12)',
                 }}
               >
                 <h2
                   style={{
                     fontSize: '1.75rem',
                     fontWeight: 700,
-                    color: '#e2e8f0',
+                    color: '#1e293b',
                     marginBottom: '32px',
-                    background: 'linear-gradient(135deg, #00f0ff 0%, #0066ff 100%)',
+                    background: 'linear-gradient(135deg, #2563eb 0%, #0066ff 100%)',
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
                     backgroundClip: 'text',
@@ -439,8 +448,8 @@ const ContactUs: React.FC = () => {
                       alignItems: 'center',
                       padding: '20px',
                       borderRadius: '16px',
-                      background: 'rgba(0, 240, 255, 0.1)',
-                      border: '1px solid rgba(0, 240, 255, 0.2)',
+                      background: 'rgba(37, 99, 235, 0.05)',
+                      border: '1px solid rgba(37, 99, 235, 0.18)',
                       transition: 'all 0.3s ease',
                     }}
                   >
@@ -449,7 +458,7 @@ const ContactUs: React.FC = () => {
                         width: '50px',
                         height: '50px',
                         borderRadius: '12px',
-                        background: 'linear-gradient(135deg, rgba(0, 240, 255, 0.3) 0%, rgba(0, 102, 255, 0.3) 100%)',
+                        background: 'linear-gradient(135deg, rgba(37, 99, 235, 0.3) 0%, rgba(37, 99, 235, 0.16) 100%)',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
@@ -457,13 +466,13 @@ const ContactUs: React.FC = () => {
                         flexShrink: 0,
                       }}
                     >
-                      <EnvironmentOutlined style={{ fontSize: '24px', color: '#00f0ff' }} />
+                      <EnvironmentOutlined style={{ fontSize: '24px', color: '#2563eb' }} />
                     </div>
                     <div>
-                      <p style={{ fontWeight: 700, color: '#00f0ff', margin: 0, marginBottom: '4px' }}>
+                      <p style={{ fontWeight: 700, color: '#2563eb', margin: 0, marginBottom: '4px' }}>
                         Address
                       </p>
-                      <p style={{ color: '#cbd5e1', margin: 0 }}>Chuka University, Kenya</p>
+                      <p style={{ color: '#475569', margin: 0 }}>Chuka University, Kenya</p>
                     </div>
                   </motion.div>
 
@@ -475,8 +484,8 @@ const ContactUs: React.FC = () => {
                       alignItems: 'center',
                       padding: '20px',
                       borderRadius: '16px',
-                      background: 'rgba(0, 240, 255, 0.1)',
-                      border: '1px solid rgba(0, 240, 255, 0.2)',
+                      background: 'rgba(37, 99, 235, 0.05)',
+                      border: '1px solid rgba(37, 99, 235, 0.18)',
                       textDecoration: 'none',
                       transition: 'all 0.3s ease',
                     }}
@@ -486,7 +495,7 @@ const ContactUs: React.FC = () => {
                         width: '50px',
                         height: '50px',
                         borderRadius: '12px',
-                        background: 'linear-gradient(135deg, rgba(0, 240, 255, 0.3) 0%, rgba(0, 102, 255, 0.3) 100%)',
+                        background: 'linear-gradient(135deg, rgba(37, 99, 235, 0.3) 0%, rgba(37, 99, 235, 0.16) 100%)',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
@@ -494,13 +503,13 @@ const ContactUs: React.FC = () => {
                         flexShrink: 0,
                       }}
                     >
-                      <PhoneOutlined style={{ fontSize: '24px', color: '#00f0ff' }} />
+                      <PhoneOutlined style={{ fontSize: '24px', color: '#2563eb' }} />
                     </div>
                     <div>
-                      <p style={{ fontWeight: 700, color: '#00f0ff', margin: 0, marginBottom: '4px' }}>
+                      <p style={{ fontWeight: 700, color: '#2563eb', margin: 0, marginBottom: '4px' }}>
                         Phone
                       </p>
-                      <p style={{ color: '#cbd5e1', margin: 0 }}>+254 796 869 402</p>
+                      <p style={{ color: '#475569', margin: 0 }}>+254 796 869 402</p>
                     </div>
                   </motion.a>
 
@@ -512,8 +521,8 @@ const ContactUs: React.FC = () => {
                       alignItems: 'center',
                       padding: '20px',
                       borderRadius: '16px',
-                      background: 'rgba(0, 240, 255, 0.1)',
-                      border: '1px solid rgba(0, 240, 255, 0.2)',
+                      background: 'rgba(37, 99, 235, 0.05)',
+                      border: '1px solid rgba(37, 99, 235, 0.18)',
                       textDecoration: 'none',
                       transition: 'all 0.3s ease',
                     }}
@@ -523,7 +532,7 @@ const ContactUs: React.FC = () => {
                         width: '50px',
                         height: '50px',
                         borderRadius: '12px',
-                        background: 'linear-gradient(135deg, rgba(0, 240, 255, 0.3) 0%, rgba(0, 102, 255, 0.3) 100%)',
+                        background: 'linear-gradient(135deg, rgba(37, 99, 235, 0.3) 0%, rgba(37, 99, 235, 0.16) 100%)',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
@@ -531,19 +540,62 @@ const ContactUs: React.FC = () => {
                         flexShrink: 0,
                       }}
                     >
-                      <MailOutlined style={{ fontSize: '24px', color: '#00f0ff' }} />
+                      <MailOutlined style={{ fontSize: '24px', color: '#2563eb' }} />
                     </div>
                     <div>
-                      <p style={{ fontWeight: 700, color: '#00f0ff', margin: 0, marginBottom: '4px' }}>
+                      <p style={{ fontWeight: 700, color: '#2563eb', margin: 0, marginBottom: '4px' }}>
                         Email
                       </p>
-                      <p style={{ color: '#cbd5e1', margin: 0 }}>support@blackie-networks.com</p>
+                      <p style={{ color: '#475569', margin: 0 }}>support@blackie-networks.com</p>
                     </div>
                   </motion.a>
+
+                  <motion.div
+                    whileHover={{ x: 5 }}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      padding: '20px',
+                      borderRadius: '16px',
+                      background: 'rgba(37, 99, 235, 0.05)',
+                      border: '1px solid rgba(37, 99, 235, 0.18)',
+                      transition: 'all 0.3s ease',
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: '50px',
+                        height: '50px',
+                        borderRadius: '12px',
+                        background:
+                          'linear-gradient(135deg, rgba(37, 99, 235, 0.3) 0%, rgba(37, 99, 235, 0.16) 100%)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        marginRight: '16px',
+                        flexShrink: 0,
+                      }}
+                    >
+                      <ClockCircleOutlined style={{ fontSize: '24px', color: '#2563eb' }} />
+                    </div>
+                    <div>
+                      <p
+                        style={{
+                          fontWeight: 700,
+                          color: '#2563eb',
+                          margin: 0,
+                          marginBottom: '4px',
+                        }}
+                      >
+                        Working Hours
+                      </p>
+                      <p style={{ color: '#475569', margin: 0 }}>Mon – Fri, 8:00am – 6:00pm (EAT)</p>
+                    </div>
+                  </motion.div>
                 </div>
 
-                <div style={{ marginTop: '32px', paddingTop: '32px', borderTop: '1px solid rgba(0, 240, 255, 0.2)' }}>
-                  <p style={{ fontWeight: 700, color: '#00f0ff', marginBottom: '16px' }}>Follow Us</p>
+                <div style={{ marginTop: '32px', paddingTop: '32px', borderTop: '1px solid rgba(37, 99, 235, 0.18)' }}>
+                  <p style={{ fontWeight: 700, color: '#2563eb', marginBottom: '16px' }}>Follow Us</p>
                   <div style={{ display: 'flex', gap: '16px' }}>
                     {[
                       { icon: LinkedinOutlined, href: 'https://linkedin.com/company/blackienetworks', label: 'LinkedIn' },
@@ -563,22 +615,22 @@ const ContactUs: React.FC = () => {
                           width: '48px',
                           height: '48px',
                           borderRadius: '12px',
-                          background: 'rgba(0, 240, 255, 0.1)',
-                          border: '1px solid rgba(0, 240, 255, 0.3)',
+                          background: 'rgba(37, 99, 235, 0.05)',
+                          border: '1px solid rgba(37, 99, 235, 0.25)',
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
-                          color: '#00f0ff',
+                          color: '#2563eb',
                           fontSize: '20px',
                           textDecoration: 'none',
                           transition: 'all 0.3s ease',
                         }}
                         onMouseEnter={(e) => {
-                          e.currentTarget.style.background = 'rgba(0, 240, 255, 0.2)';
-                          e.currentTarget.style.boxShadow = '0 4px 20px rgba(0, 240, 255, 0.3)';
+                          e.currentTarget.style.background = 'rgba(37, 99, 235, 0.12)';
+                          e.currentTarget.style.boxShadow = '0 4px 20px rgba(37, 99, 235, 0.3)';
                         }}
                         onMouseLeave={(e) => {
-                          e.currentTarget.style.background = 'rgba(0, 240, 255, 0.1)';
+                          e.currentTarget.style.background = 'rgba(37, 99, 235, 0.05)';
                           e.currentTarget.style.boxShadow = 'none';
                         }}
                       >
@@ -596,8 +648,8 @@ const ContactUs: React.FC = () => {
                   overflow: 'hidden',
                   borderRadius: '24px',
                   height: '400px',
-                  border: '1px solid rgba(0, 240, 255, 0.2)',
-                  boxShadow: '0 10px 40px rgba(0, 240, 255, 0.1)',
+                  border: '1px solid rgba(37, 99, 235, 0.18)',
+                  boxShadow: '0 10px 40px rgba(37, 99, 235, 0.12)',
                 }}
               >
                 <iframe
@@ -617,12 +669,12 @@ const ContactUs: React.FC = () => {
       <style>{`
         .glass-input input::placeholder,
         .glass-input textarea::placeholder {
-          color: rgba(255, 255, 255, 0.8) !important;
+          color: rgba(148, 163, 184, 1) !important;
         }
         .glass-input input:focus,
         .glass-input textarea:focus {
-          border-color: rgba(0, 240, 255, 0.5) !important;
-          box-shadow: 0 0 0 2px rgba(0, 240, 255, 0.2) !important;
+          border-color: rgba(37, 99, 235, 0.6) !important;
+          box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.25) !important;
         }
       `}</style>
     </>

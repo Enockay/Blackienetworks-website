@@ -166,20 +166,20 @@ const APIDocs: React.FC = () => {
       case 'DELETE':
         return { bg: 'rgba(239, 68, 68, 0.1)', border: 'rgba(239, 68, 68, 0.3)', color: '#ef4444' };
       default:
-        return { bg: 'rgba(148, 163, 184, 0.1)', border: 'rgba(148, 163, 184, 0.3)', color: '#94a3b8' };
+        return { bg: 'rgba(148, 163, 184, 0.1)', border: 'rgba(148, 163, 184, 0.3)', color: '#475569' };
     }
   };
 
   return (
     <div>
       <div style={{ marginBottom: '24px' }}>
-        <h2 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#e2e8f0', marginBottom: '8px' }}>
+        <h2 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#1e293b', marginBottom: '8px' }}>
           API Documentation
         </h2>
-        <p style={{ color: '#94a3b8', fontSize: '0.875rem' }}>
+        <p style={{ color: '#475569', fontSize: '0.875rem' }}>
           Base URL: <code style={{ color: '#00f0ff', fontFamily: 'monospace' }}>{API_BASE_URL}</code>
         </p>
-        <p style={{ color: '#94a3b8', fontSize: '0.875rem', marginTop: '8px' }}>
+        <p style={{ color: '#475569', fontSize: '0.875rem', marginTop: '8px' }}>
           All authenticated endpoints require an Authorization header: <code style={{ color: '#00f0ff', fontFamily: 'monospace' }}>Authorization: Bearer {'<token>'}</code>
         </p>
       </div>
@@ -192,14 +192,14 @@ const APIDocs: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: sectionIndex * 0.1 }}
             style={{
-              background: 'rgba(10, 14, 39, 0.6)',
+              background: 'rgba(255, 255, 255, 0.9)',
               border: '1px solid rgba(0, 240, 255, 0.2)',
               borderRadius: '12px',
               padding: '24px',
               backdropFilter: 'blur(20px)',
             }}
           >
-            <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#e2e8f0', marginBottom: '20px' }}>
+            <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#1e293b', marginBottom: '20px' }}>
               {section.title}
             </h3>
 
@@ -232,7 +232,7 @@ const APIDocs: React.FC = () => {
                       </span>
                       <code
                         style={{
-                          color: '#e2e8f0',
+                          color: '#1e293b',
                           fontFamily: 'monospace',
                           fontSize: '0.875rem',
                           background: 'rgba(0, 240, 255, 0.1)',
@@ -259,13 +259,13 @@ const APIDocs: React.FC = () => {
                       )}
                     </div>
 
-                    <p style={{ color: '#94a3b8', fontSize: '0.875rem', marginBottom: '12px' }}>
+                    <p style={{ color: '#475569', fontSize: '0.875rem', marginBottom: '12px' }}>
                       {endpoint.description}
                     </p>
 
                     {'body' in endpoint && endpoint.body && (
                       <div style={{ marginBottom: '12px' }}>
-                        <div style={{ color: '#cbd5e1', fontSize: '0.875rem', fontWeight: 600, marginBottom: '8px' }}>
+                        <div style={{ color: '#475569', fontSize: '0.875rem', fontWeight: 600, marginBottom: '8px' }}>
                           Request Body:
                         </div>
                         <pre
@@ -274,7 +274,7 @@ const APIDocs: React.FC = () => {
                             padding: '12px',
                             borderRadius: '6px',
                             fontSize: '0.75rem',
-                            color: '#e2e8f0',
+                            color: '#1e293b',
                             overflowX: 'auto',
                             fontFamily: 'monospace',
                           }}
@@ -286,7 +286,7 @@ const APIDocs: React.FC = () => {
 
                     {endpoint.response && (
                       <div>
-                        <div style={{ color: '#cbd5e1', fontSize: '0.875rem', fontWeight: 600, marginBottom: '8px' }}>
+                        <div style={{ color: '#475569', fontSize: '0.875rem', fontWeight: 600, marginBottom: '8px' }}>
                           Response:
                         </div>
                         <pre
@@ -295,7 +295,7 @@ const APIDocs: React.FC = () => {
                             padding: '12px',
                             borderRadius: '6px',
                             fontSize: '0.75rem',
-                            color: '#e2e8f0',
+                            color: '#1e293b',
                             overflowX: 'auto',
                             fontFamily: 'monospace',
                           }}
@@ -322,7 +322,7 @@ const APIDocs: React.FC = () => {
           background: 'rgba(0, 240, 255, 0.05)',
           border: '1px solid rgba(0, 240, 255, 0.2)',
           borderRadius: '12px',
-          color: '#94a3b8',
+                  color: '#475569',
           fontSize: '0.875rem',
         }}
       >
