@@ -10,6 +10,7 @@ import {
   Input,
   Select,
   message,
+  Modal,
 } from 'antd';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -26,6 +27,7 @@ import timothyPhoto from '../assets/timothy .jpg';
 import firewallImg from '../assets/FireWall.jpg';
 import onPremiseVsCloudImg from '../assets/on-premise-vs-cloud.jpg';
 import criticalSignsImg from '../assets/5-Critical-Signs.jpg';
+import phronesisImg from '../assets/phronesis.png';
 
 const { Title, Paragraph } = Typography;
 const { Option } = Select;
@@ -358,7 +360,7 @@ export const TestimonialsSection: React.FC = () => {
 
 type ProjectCategory = 'All' | 'Networking' | 'Software' | 'Cloud' | 'Mobile';
 
-type Project = {
+export type Project = {
   id: string;
   name: string;
   client: string;
@@ -370,7 +372,7 @@ type Project = {
   liveUrl?: string;
 };
 
-const projects: Project[] = [
+export const projects: Project[] = [
   {
     id: 'blackiebilling',
     name: 'BlackieBilling ISP & Campus Billing Platform',
@@ -414,15 +416,28 @@ const projects: Project[] = [
     industry: 'Beauty & Lifestyle',
     category: 'Software',
     summary:
-      'AI‑powered booking, reminders, and customer insights system actively used by Glint Parlour clients.',
+      'AI‑powered hairstyle try‑on, booking and customer insights system for Glint Parlour – letting clients preview new looks, book stylists and receive smart reminders.',
     thumbnail: glintParlourImg,
     caseStudyUrl: '/case-studies/glint-ai-system',
     liveUrl: 'https://www.glintparlour.com',
+  },
+  {
+    id: 'phronesis-tours',
+    name: 'Phronesis Africa Safaris Platform (Ongoing)',
+    client: 'Phronesis Africa Safaris',
+    industry: 'Travel & Tourism',
+    category: 'Software',
+    summary:
+      'Modern safari booking and discovery website for bespoke East Africa experiences, currently in active development with Blackie Networks.',
+    thumbnail: phronesisImg,
+    caseStudyUrl: '/case-studies/phronesis-tours',
+    liveUrl: 'https://new.phronesistours.com/',
   },
 ];
 
 export const PortfolioSection: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState<ProjectCategory>('All');
+  const [previewProject, setPreviewProject] = useState<Project | null>(null);
 
   const filteredProjects =
     activeFilter === 'All' ? projects : projects.filter((p) => p.category === activeFilter);
@@ -495,7 +510,8 @@ export const PortfolioSection: React.FC = () => {
                     <img
                       alt={project.name}
                       src={project.thumbnail}
-                      style={{ height: 200, objectFit: 'cover' }}
+                      style={{ height: 200, objectFit: 'cover', cursor: 'zoom-in' }}
+                      onClick={() => setPreviewProject(project)}
                     />
                   }
                   style={{ borderRadius: 16, overflow: 'hidden' }}
@@ -551,6 +567,22 @@ export const PortfolioSection: React.FC = () => {
             </Col>
           ))}
         </Row>
+        <Modal
+          open={!!previewProject}
+          onCancel={() => setPreviewProject(null)}
+          footer={null}
+          centered
+          width="80vw"
+          bodyStyle={{ padding: 0, backgroundColor: '#000' }}
+        >
+          {previewProject && (
+            <img
+              src={previewProject.thumbnail}
+              alt={previewProject.name}
+              style={{ width: '100%', height: 'auto', display: 'block' }}
+            />
+          )}
+        </Modal>
       </div>
     </section>
   );
@@ -1394,7 +1426,7 @@ const homeServices: HomeServiceConfig[] = [
     description:
       'Android and iOS apps for customers or internal teams — fully integrated with your web systems, billing, and cloud infrastructure.',
     idealFor: 'Ideal for brands and service providers that need on‑the‑go access for users.',
-    href: '/services/web-development',
+  href: '/services/mobile-apps',
   },
   {
     id: 'vpn-blackieshield',
@@ -1404,7 +1436,7 @@ const homeServices: HomeServiceConfig[] = [
       'Always‑on VPN and secure remote access powered by our Blackie Shield platform, keeping your teams and branches safely connected.',
     idealFor:
       'Ideal for organizations with remote staff, multiple branches, or field teams that need secure access from anywhere.',
-    href: '/services/it-consulting',
+  href: '/services/vpn-blackieshield',
     liveUrl: 'https://www.blackieshield.com',
     liveLabel: 'www.blackieshield.com',
   },

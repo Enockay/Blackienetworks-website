@@ -13,6 +13,7 @@ import softwareCompany2Img from '../assets/softwareCompany2.jpg';
 import softwareCompany3Img from '../assets/softwareCompany3.jpg';
 import glintParlourImg from '../assets/glintparlour.png';
 import blackieShieldImg from '../assets/blackieshield.png';
+import cloudInfrastructureImg from '../assets/cloudinfrustructure.png';
 import backgroundImg from '../assets/background.jpg';
 
 const { Title, Paragraph } = Typography;
@@ -74,7 +75,7 @@ const services: Service[] = [
       'Monitoring and logging so issues are visible before users complain.',
       'Cost‑optimization reviews to keep your monthly cloud bill under control.',
     ],
-    image: backgroundImg,
+    image: cloudInfrastructureImg,
   },
   {
     title: 'AI Systems & Automation',
@@ -166,8 +167,8 @@ const ServicesPage: React.FC = () => {
   };
 
   const handleBookNow = (service: Service) => {
-    // Navigate to booking page with service pre-selected
-    navigate('/booking', { state: { selectedService: service.title } });
+    // Navigate to contactus page
+    navigate('/contactus');
   };
 
   if (loading) {

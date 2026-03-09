@@ -28,6 +28,9 @@ import WebDevelopmentPage from './componets/WebDevelopmentPage';
 import CloudInfrastructurePage from './componets/CloudInfrastructurePage';
 import AISystemsPage from './componets/AISystemsPage';
 import ITConsultingPage from './componets/ITConsultingPage';
+import MobileAppsPage from './componets/MobileAppsPage';
+import VPNShieldPage from './componets/VPNShieldPage';
+import ProjectCaseStudyPage from './componets/ProjectCaseStudyPage';
 
 const { Content } = Layout;
 
@@ -167,6 +170,32 @@ function MainContent() {
           }
         />
         <Route
+          path="/services/mobile-apps"
+          element={
+            <>
+              <SEO
+                title="Mobile App Development - Blackie Networks"
+                description="Android and iOS apps for customers and internal teams, integrated with your billing, VPN and cloud infrastructure."
+                url="/services/mobile-apps"
+              />
+              <MobileAppsPage />
+            </>
+          }
+        />
+        <Route
+          path="/services/vpn-blackieshield"
+          element={
+            <>
+              <SEO
+                title="VPN Solutions – Blackie Shield - Blackie Networks"
+                description="Always-on VPN and secure remote access for staff, branches and field teams, powered by the Blackie Shield platform."
+                url="/services/vpn-blackieshield"
+              />
+              <VPNShieldPage />
+            </>
+          }
+        />
+        <Route
           path="/services/it-consulting"
           element={
             <>
@@ -213,6 +242,10 @@ function MainContent() {
         <Route 
           path="/Products/:slug" 
           element={<ProductDetail />} 
+        />
+        <Route
+          path="/case-studies/:id"
+          element={<ProjectCaseStudyPage />}
         />
         <Route 
           path="/contactus" 

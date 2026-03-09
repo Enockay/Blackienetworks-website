@@ -762,7 +762,7 @@ const sendContactAcknowledgement = async (contactData) => {
           </p>
           <ul>
             <li><strong>Phone:</strong> +254 796 869 402</li>
-            <li><strong>Email:</strong> support@blackie-networks.com</li>
+            <li><strong>Email:</strong> enockaymwema@gmail.com</li>
           </ul>
           <p>We look forward to speaking with you.</p>
           <p>Best regards,<br /><strong>Blackie Networks Team</strong></p>

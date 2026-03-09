@@ -17,25 +17,60 @@ import { SEO } from './SEO';
 
 const { TextArea } = Input;
 
+// Use the same API base URL pattern as the rest of the app
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3002';
+
 const ContactUs: React.FC = () => {
   const [loading, setLoading] = useState(false);
+  const [form] = Form.useForm();
 
-  const onFinish = (values: any) => {
-    console.log('Form Values:', values);
+  const onFinish = async (values: any) => {
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
+
+    try {
+      // Map form values to backend's expected payload shape
+      const payload = {
+        fullName: values.name,
+        company: values.company || '',
+        email: values.email,
+        phone: values.phone,
+        service: values.subject || 'General enquiry via contact form',
+        budget: values.budget || '',
+        message: values.message,
+      };
+
+      const response = await fetch(`${API_BASE_URL}/api/contact`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to send message');
+      }
+
       notification.success({
         message: 'Message Sent',
         description:
-          'Thank you for contacting Blackie Networks. We will get back to you shortly.',
+          'Thank you for contacting Blackie Networks. We have received your message and will get back to you shortly.',
         placement: 'topRight',
       });
-      form.resetFields();
-    }, 2000);
-  };
 
-  const [form] = Form.useForm();
+      form.resetFields();
+    } catch (error) {
+      console.error('Error sending contact message:', error);
+      notification.error({
+        message: 'Message Not Sent',
+        description:
+          'We were unable to send your message. Please try again, or reach us via WhatsApp, phone or email.',
+        placement: 'topRight',
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
 
   // WhatsApp contact function
   const handleWhatsAppClick = () => {
@@ -84,11 +119,11 @@ const ContactUs: React.FC = () => {
       <div
         style={{
           minHeight: '100vh',
-          padding: '100px 20px 80px',
+          padding: '72px 16px 56px',
           background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.95) 100%)',
           position: 'relative',
           overflow: 'hidden',
-          marginTop: '80px',
+          marginTop: '72px',
         }}
       >
         {/* Animated Background Elements */}
@@ -179,14 +214,14 @@ const ContactUs: React.FC = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.5, type: 'spring' }}
-            style={{ marginBottom: '40px', display: 'flex', justifyContent: 'center' }}
+            style={{ marginBottom: '28px', display: 'flex', justifyContent: 'center' }}
           >
             <motion.button
               onClick={handleWhatsAppClick}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               style={{
-                padding: '20px 40px',
+                padding: '16px 32px',
                 background: 'linear-gradient(135deg, #25D366 0%, #128C7E 100%)',
                 border: 'none',
                 borderRadius: '16px',
@@ -232,12 +267,12 @@ const ContactUs: React.FC = () => {
               <div
                 className="glass"
                 style={{
-                  borderRadius: '24px',
-                  padding: '40px',
+                  borderRadius: '20px',
+                  padding: '32px',
                   border: '1px solid rgba(37, 99, 235, 0.16)',
                   background: 'rgba(255, 255, 255, 0.9)',
                   backdropFilter: 'blur(20px)',
-                  boxShadow: '0 10px 40px rgba(37, 99, 235, 0.12)',
+                  boxShadow: '0 8px 30px rgba(37, 99, 235, 0.12)',
                 }}
               >
                 <h2
@@ -417,12 +452,12 @@ const ContactUs: React.FC = () => {
               <div
                 className="glass"
                 style={{
-                  borderRadius: '24px',
-                  padding: '40px',
+                  borderRadius: '20px',
+                  padding: '32px',
                   border: '1px solid rgba(37, 99, 235, 0.16)',
                   background: 'rgba(255, 255, 255, 0.9)',
                   backdropFilter: 'blur(20px)',
-                  boxShadow: '0 10px 40px rgba(37, 99, 235, 0.12)',
+                  boxShadow: '0 8px 30px rgba(37, 99, 235, 0.12)',
                 }}
               >
                 <h2
@@ -446,8 +481,8 @@ const ContactUs: React.FC = () => {
                     style={{
                       display: 'flex',
                       alignItems: 'center',
-                      padding: '20px',
-                      borderRadius: '16px',
+                      padding: '16px',
+                      borderRadius: '14px',
                       background: 'rgba(37, 99, 235, 0.05)',
                       border: '1px solid rgba(37, 99, 235, 0.18)',
                       transition: 'all 0.3s ease',
@@ -482,8 +517,8 @@ const ContactUs: React.FC = () => {
                     style={{
                       display: 'flex',
                       alignItems: 'center',
-                      padding: '20px',
-                      borderRadius: '16px',
+                      padding: '16px',
+                      borderRadius: '14px',
                       background: 'rgba(37, 99, 235, 0.05)',
                       border: '1px solid rgba(37, 99, 235, 0.18)',
                       textDecoration: 'none',
@@ -519,8 +554,8 @@ const ContactUs: React.FC = () => {
                     style={{
                       display: 'flex',
                       alignItems: 'center',
-                      padding: '20px',
-                      borderRadius: '16px',
+                      padding: '16px',
+                      borderRadius: '14px',
                       background: 'rgba(37, 99, 235, 0.05)',
                       border: '1px solid rgba(37, 99, 235, 0.18)',
                       textDecoration: 'none',
@@ -555,8 +590,8 @@ const ContactUs: React.FC = () => {
                     style={{
                       display: 'flex',
                       alignItems: 'center',
-                      padding: '20px',
-                      borderRadius: '16px',
+                      padding: '16px',
+                      borderRadius: '14px',
                       background: 'rgba(37, 99, 235, 0.05)',
                       border: '1px solid rgba(37, 99, 235, 0.18)',
                       transition: 'all 0.3s ease',

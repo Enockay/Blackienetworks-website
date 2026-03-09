@@ -77,7 +77,6 @@ const Header: React.FC = () => {
               { path: '/', label: 'Home' },
               { path: '/services', label: 'Services' },
               { path: '/aboutus', label: 'About Us' },
-              { path: '/Products', label: 'Portfolio' },
               { path: '/blog', label: 'Blog' },
               { path: '/contactus', label: 'Contact' },
             ].map((item) => (
@@ -177,7 +176,7 @@ const Header: React.FC = () => {
             </a>
 
             {/* CTA Button */}
-            <Link to="/booking" className="hidden md:block">
+            <Link to="/contactus" className="hidden md:block">
               <Button
                 style={{
                   background: '#f97316',
@@ -272,7 +271,6 @@ const Header: React.FC = () => {
               { path: '/', label: 'Home', icon: FiHome },
               { path: '/services', label: 'Services', icon: FiSettings },
               { path: '/aboutus', label: 'About Us', icon: FiInfo },
-              { path: '/Products', label: 'Portfolio', icon: FiPackage },
               { path: '/blog', label: 'Blog', icon: FiBook },
               { path: '/contactus', label: 'Contact', icon: FiMessageCircle },
             ].map(({ path, label, icon: Icon }) => (
@@ -340,7 +338,7 @@ const Header: React.FC = () => {
               </div>
             </a>
             <Link
-              to="/booking"
+              to="/contactus"
               onClick={() => setDrawerVisible(false)}
               className="flex items-center justify-center gap-2 px-4 py-3 rounded-lg font-semibold transition-all mt-4"
               style={{ 
