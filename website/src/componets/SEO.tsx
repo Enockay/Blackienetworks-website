@@ -19,9 +19,9 @@ interface SEOProps {
   googleSiteVerification?: string;
 }
 
-const defaultTitle = 'Blackie Networks - IT Solutions & Network Infrastructure | Kenya';
-const defaultDescription = 'Affordable high-speed internet, network infrastructure, software development, and IT consulting services for campuses and businesses in Kenya. Expert MikroTik configuration and Wi-Fi solutions.';
-const defaultKeywords = 'Blackie Networks, network infrastructure, software development, IT consulting, MikroTik, Wi-Fi solutions, campus internet, affordable internet Kenya, network setup, VPN services, cloud services, custom software development, Chuka University';
+const defaultTitle = 'Network Infrastructure & Internet Services Kenya | Blackie Networks';
+const defaultDescription = 'Blackie Networks delivers affordable high-speed internet, network infrastructure, software development, and IT consulting for campuses and businesses across Kenya.';
+const defaultKeywords = 'internet service provider Kenya, campus internet Kenya, network infrastructure Kenya, affordable internet Nairobi, business internet Kenya, IT solutions Nairobi, IT consulting Kenya, software development Kenya, Blackie Networks';
 const siteUrl = 'https://www.blackie-networks.com';
 const defaultImage = `${siteUrl}/src/assets/logo.png`;
 
@@ -168,22 +168,19 @@ export const SEO: React.FC<SEOProps> = ({
       latitude: '-0.3322',
       longitude: '37.6373',
     },
-    openingHoursSpecification: {
-      '@type': 'OpeningHoursSpecification',
-      dayOfWeek: [
-        'Monday',
-        'Tuesday',
-        'Wednesday',
-        'Thursday',
-        'Friday',
-        'Saturday',
-        'Sunday',
-      ],
-      opens: '00:00',
-      closes: '23:59',
+    openingHoursSpecification: [
+      {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+        opens: '08:00',
+        closes: '18:00',
+      },
+    ],
+    priceRange: 'KES',
+    areaServed: {
+      '@type': 'Country',
+      name: 'Kenya',
     },
-    priceRange: '$$',
-    servesCuisine: false,
   };
 
   // BreadcrumbList Schema for better navigation SEO
