@@ -1395,7 +1395,7 @@ const homeServices: HomeServiceConfig[] = [
   {
     id: 'web-development',
     icon: '💻',
-    name: 'Web & App Development',
+    name: 'Web Development',
     description:
       'Modern websites, portals, and internal systems built for your workflows — from booking systems and dashboards to full business management tools.',
     idealFor: 'Best for businesses, schools, Saccos, and organizations that need custom software.',

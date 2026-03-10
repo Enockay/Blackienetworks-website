@@ -60,7 +60,7 @@ function MainContent() {
               <SEO 
                 title="Network Infrastructure & Internet Services Kenya | Blackie Networks"
                 description="Blackie Networks delivers affordable high-speed internet, network infrastructure, software development, and IT consulting for campuses and businesses across Kenya."
-                keywords="internet service provider Kenya, campus internet Kenya, network infrastructure Kenya, affordable internet Nairobi, business internet Kenya, IT solutions Nairobi"
+                // use the expanded default keyword set from SEO.tsx for the homepage
                 url="/"
                 googleSiteVerification={import.meta.env.VITE_GOOGLE_SITE_VERIFICATION}
               />
@@ -136,8 +136,9 @@ function MainContent() {
           element={
             <>
               <SEO
-                title="Web & Application Development - Blackie Networks"
-                description="Custom websites, portals, and internal systems built around your workflows, integrated with billing, SMS, and existing tools."
+                title="Web Development Kenya | Blackie Networks"
+                description="Modern websites, portals, and internal systems for businesses, schools, and Saccos in Kenya — integrated with billing, SMS, and existing tools."
+                keywords="web development Kenya, website design Kenya, custom web portals Kenya, business websites Nairobi"
                 url="/services/web-development"
               />
               <WebDevelopmentPage />
@@ -288,7 +289,16 @@ function MainContent() {
         />
         <Route 
           path="/faq" 
-          element={<FAQ />} 
+          element={
+            <>
+              <SEO 
+                title="FAQ - Frequently Asked Questions | Blackie Networks"
+                description="Answers to common questions about Blackie Networks internet services, network infrastructure projects, software development, and IT support in Kenya."
+                url="/faq"
+              />
+              <FAQ />
+            </>
+          } 
         />
         <Route 
           path="/terms" 
@@ -320,13 +330,31 @@ function MainContent() {
         />
         <Route 
           path="/login" 
-          element={<LoginPage />} 
+          element={
+            <>
+              <SEO 
+                title="Login - Blackie Networks Admin"
+                description="Secure login area for Blackie Networks administrators and staff."
+                url="/login"
+                noindex={true}
+              />
+              <LoginPage />
+            </>
+          } 
         />
         <Route 
           path="/admin/dashboard" 
           element={
             <ProtectedRoute>
-              <AdminDashboard />
+              <>
+                <SEO 
+                  title="Admin Dashboard - Blackie Networks"
+                  description="Internal dashboard for managing Blackie Networks notifications, tokens, and infrastructure monitoring."
+                  url="/admin/dashboard"
+                  noindex={true}
+                />
+                <AdminDashboard />
+              </>
             </ProtectedRoute>
           } 
         />

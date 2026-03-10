@@ -21,7 +21,127 @@ interface SEOProps {
 
 const defaultTitle = 'Network Infrastructure & Internet Services Kenya | Blackie Networks';
 const defaultDescription = 'Blackie Networks delivers affordable high-speed internet, network infrastructure, software development, and IT consulting for campuses and businesses across Kenya.';
-const defaultKeywords = 'internet service provider Kenya, campus internet Kenya, network infrastructure Kenya, affordable internet Nairobi, business internet Kenya, IT solutions Nairobi, IT consulting Kenya, software development Kenya, Blackie Networks';
+const defaultKeywords =
+  [
+    // Core services & brand
+    'Blackie Networks',
+    'Blackie Networks Kenya',
+    'IT solutions Kenya',
+    'IT company Kenya',
+    'IT consulting Kenya',
+    'managed IT services Kenya',
+    'IT support Kenya',
+    'IT solutions Nairobi',
+    'IT consulting Nairobi',
+
+    // Internet & networking
+    'internet service provider Kenya',
+    'business internet Kenya',
+    'affordable internet Nairobi',
+    'business internet Nairobi',
+    'campus internet Kenya',
+    'campus internet Nairobi',
+    'campus WiFi Kenya',
+    'campus WiFi installation Kenya',
+    'WiFi installation Kenya',
+    'office WiFi Nairobi',
+    'business WiFi solutions Kenya',
+    'SME internet Kenya',
+    'SME IT support Kenya',
+
+    // Network infrastructure & cabling
+    'network infrastructure Kenya',
+    'network infrastructure Nairobi',
+    'network setup Kenya',
+    'network design Kenya',
+    'structured cabling Kenya',
+    'LAN cabling Kenya',
+    'fiber optic installation Kenya',
+    'router configuration Kenya',
+    'switch configuration Kenya',
+
+    // MikroTik, VPN, security
+    'Mikrotik configuration Kenya',
+    'Mikrotik VPN Kenya',
+    'Mikrotik hotspot Kenya',
+    'Mikrotik firewall Kenya',
+    'VPN solutions Kenya',
+    'remote access VPN Kenya',
+    'site to site VPN Kenya',
+    'network security Kenya',
+    'firewall configuration Kenya',
+    'cyber security Kenya',
+
+    // Billing & ISP tools
+    'ISP billing system Kenya',
+    'radius billing Kenya',
+    'hotspot billing Kenya',
+    'voucher billing system Kenya',
+    'campus billing system Kenya',
+    'BlackieBilling ISP',
+
+    // Cloud & hosting
+    'cloud hosting Kenya',
+    'cloud infrastructure Kenya',
+    'cloud infrastructure management Kenya',
+    'AWS hosting Kenya',
+    'DigitalOcean hosting Kenya',
+    'VPS hosting Kenya',
+    'backup solutions Kenya',
+    'data backup solutions Kenya',
+    'disaster recovery Kenya',
+
+    // Software & web development
+    'software development Kenya',
+    'custom software development Kenya',
+    'business software Kenya',
+    'web development Kenya',
+    'website design Kenya',
+    'website design Nairobi',
+    'custom web portals Kenya',
+    'customer portal development Kenya',
+    'school portals Kenya',
+    'Sacco software Kenya',
+    'school management systems Kenya',
+    'dashboard development Kenya',
+    'admin panel development Kenya',
+
+    // Mobile & apps
+    'mobile app development Kenya',
+    'Android app development Kenya',
+    'iOS app development Kenya',
+    'field app development Kenya',
+    'business mobile apps Kenya',
+
+    // AI & automation
+    'AI systems Kenya',
+    'AI automation Kenya',
+    'AI chatbots Kenya',
+    'AI customer support Kenya',
+    'business automation Kenya',
+
+    // Locations & niches
+    'internet for campuses Kenya',
+    'internet for schools Kenya',
+    'internet for Saccos Kenya',
+    'internet for hotels Kenya',
+    'internet for estates Kenya',
+    'internet for NGOs Kenya',
+    'internet for churches Kenya',
+    'IT solutions Chuka',
+    'Chuka University internet',
+    'Tharaka Nithi IT services',
+    'Nairobi IT solutions',
+
+    // Misc high-intent phrases
+    'best IT company Kenya',
+    'best internet provider for campuses Kenya',
+    'network monitoring Kenya',
+    '24 7 network monitoring Kenya',
+    'remote network management Kenya',
+    'VPN for remote workers Kenya',
+    'secure remote access Kenya',
+  ].join(', ');
 const siteUrl = 'https://www.blackie-networks.com';
 const defaultImage = `${siteUrl}/src/assets/logo.png`;
 

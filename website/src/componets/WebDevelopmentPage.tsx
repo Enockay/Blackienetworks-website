@@ -26,8 +26,8 @@ const WebDevelopmentPage: React.FC = () => {
       <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 mt-10">
         <Row gutter={[40, 32]} align="top">
           <Col xs={24} md={14}>
-            <Title level={2} style={{ fontWeight: 800, color: '#0f172a', marginBottom: 16 }}>
-              Web & Application Development
+            <Title level={1} style={{ fontWeight: 800, color: '#0f172a', marginBottom: 16 }}>
+              Web Development
             </Title>
             <Paragraph style={{ fontSize: '1rem', color: '#475569', marginBottom: 16 }}>
               We design and build websites, portals, and internal systems that match how your

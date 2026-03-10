@@ -50,7 +50,7 @@ const services: Service[] = [
     image: mikrotikRemoteImg,
   },
   {
-    title: 'Web & App Development',
+    title: 'Web Development',
     description:
       'Modern websites, portals and internal systems that are fast, secure and designed around how your team actually works.',
     details: [
