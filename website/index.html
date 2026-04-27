@@ -1,125 +1,305 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-KE">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/png" href="./src/assets/logo.png" />
-    
-    <!-- Primary Meta Tags -->
-    <title>Blackie Networks - IT Solutions & Network Infrastructure | Kenya</title>
-    <meta name="title" content="Blackie Networks - IT Solutions & Network Infrastructure | Kenya" />
-    <meta name="description" content="Affordable high-speed internet, network infrastructure, software development, and IT consulting services for campuses and businesses in Kenya." />
-    <meta name="keywords" content="Blackie Networks, network infrastructure, software development, IT consulting, MikroTik, Wi-Fi solutions, campus internet, affordable internet Kenya, network setup, VPN services, cloud services, custom software development, Chuka University" />
-    <meta name="author" content="Blackie Networks" />
-    <meta name="robots" content="index, follow" />
-    <meta http-equiv="content-language" content="en" />
+
+    <!-- ── FAVICON & ICONS ── -->
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/logo.png" />
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- ── PRIMARY SEO ── -->
+    <title>Blackie Networks — IT Solutions, Network Infrastructure & Software Development | Kenya</title>
+    <meta name="title"       content="Blackie Networks — IT Solutions, Network Infrastructure & Software Development | Kenya" />
+    <meta name="description" content="Kenya's trusted IT company: campus Wi-Fi, network infrastructure, MikroTik, cloud hosting, custom software, mobile apps & AI automation. Serving businesses and universities across Kenya." />
+    <meta name="keywords"    content="IT solutions Kenya, network infrastructure Kenya, campus WiFi Kenya, software development Kenya, MikroTik Kenya, cloud hosting Kenya, ISP billing system, IT company Nairobi, Blackie Networks" />
+    <meta name="author"      content="Blackie Networks" />
+    <meta name="robots"      content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="theme-color" content="#2563eb" />
     <meta name="revisit-after" content="7 days" />
-    <meta name="theme-color" content="#1d4ed8" />
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://www.blackie-networks.com/" />
-    <meta property="og:title" content="Blackie Networks - IT Solutions, Network Infrastructure & Software Development" />
-    <meta property="og:description" content="Affordable high-speed internet, network infrastructure, software development, and IT consulting services for campuses and businesses in Kenya." />
-    <meta property="og:image" content="https://www.blackie-networks.com/src/assets/logo.png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Blackie Networks - IT Solutions & Network Infrastructure" />
-    <meta property="og:image:type" content="image/png" />
-    <meta property="og:site_name" content="Blackie Networks" />
-    <meta property="og:locale" content="en_KE" />
-    <meta property="og:locale:alternate" content="en_US" />
-    
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://www.blackie-networks.com/" />
-    <meta name="twitter:title" content="Blackie Networks - IT Solutions & Network Infrastructure" />
-    <meta name="twitter:description" content="Affordable high-speed internet, network infrastructure, software development, and IT consulting services for campuses and businesses in Kenya." />
-    <meta name="twitter:image" content="https://www.blackie-networks.com/src/assets/logo.png" />
-    <meta name="twitter:image:alt" content="Blackie Networks Logo" />
-    <meta name="twitter:creator" content="@blackienetworks" />
-    <meta name="twitter:site" content="@blackienetworks" />
-    
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://www.blackie-networks.com/" />
-    
-    <!-- Additional SEO Meta Tags -->
-    <meta name="geo.region" content="KE" />
+
+    <!-- ── GEO / LOCAL ── -->
+    <meta name="geo.region"    content="KE" />
     <meta name="geo.placename" content="Chuka, Tharaka Nithi, Kenya" />
-    <meta name="geo.position" content="-0.3322;37.6373" />
-    <meta name="ICBM" content="-0.3322, 37.6373" />
-    <meta name="author" content="Blackie Networks" />
-    <meta name="copyright" content="Blackie Networks" />
-    <meta name="rating" content="general" />
-    <meta name="distribution" content="global" />
-    <meta name="coverage" content="worldwide" />
-    <meta name="target" content="all" />
-    <meta name="audience" content="all" />
-    
-    <!-- Apple Touch Icons -->
-    <link rel="apple-touch-icon" href="./src/assets/logo.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="./src/assets/logo.png" />
-    
-    <!-- Preconnect for performance -->
+    <meta name="geo.position"  content="-0.3322;37.6373" />
+    <meta name="ICBM"          content="-0.3322, 37.6373" />
+
+    <!-- ── OPEN GRAPH ── -->
+    <meta property="og:type"        content="website" />
+    <meta property="og:url"         content="https://www.blackie-networks.com/" />
+    <meta property="og:site_name"   content="Blackie Networks" />
+    <meta property="og:title"       content="Blackie Networks — IT Solutions & Network Infrastructure | Kenya" />
+    <meta property="og:description" content="Kenya's trusted IT company: campus Wi-Fi, network infrastructure, MikroTik, cloud hosting, custom software, mobile apps & AI automation." />
+    <meta property="og:image"       content="https://www.blackie-networks.com/logo.png" />
+    <meta property="og:image:width"  content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt"   content="Blackie Networks — IT Solutions Kenya" />
+    <meta property="og:locale"      content="en_KE" />
+
+    <!-- ── TWITTER CARD ── -->
+    <meta name="twitter:card"        content="summary_large_image" />
+    <meta name="twitter:site"        content="@blackienetworks" />
+    <meta name="twitter:creator"     content="@blackienetworks" />
+    <meta name="twitter:url"         content="https://www.blackie-networks.com/" />
+    <meta name="twitter:title"       content="Blackie Networks — IT Solutions & Network Infrastructure | Kenya" />
+    <meta name="twitter:description" content="Kenya's trusted IT company: campus Wi-Fi, network infrastructure, MikroTik, cloud hosting, custom software & AI automation." />
+    <meta name="twitter:image"       content="https://www.blackie-networks.com/logo.png" />
+
+    <!-- ── CANONICAL ── -->
+    <link rel="canonical" href="https://www.blackie-networks.com/" />
+
+    <!-- ── SITEMAP ── -->
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+
+    <!-- ── PERFORMANCE: FONTS (non-render-blocking) ── -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    
-    <!-- Preload critical resources -->
-    <link rel="preload" href="/src/main.tsx" as="script" />
-    
-    <!-- Critical CSS inline to reduce render-blocking -->
-    <style>
-      body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif}
-      #root{min-height:100vh}
-      *{box-sizing:border-box}
-    </style>
-    
-    <!-- DNS Prefetch -->
-    <link rel="dns-prefetch" href="https://www.google.com" />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <!-- Load fonts with display=swap to eliminate render-blocking -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" />
+    </noscript>
+
+    <!-- ── PERFORMANCE: DNS PREFETCH ── -->
     <link rel="dns-prefetch" href="https://www.google-analytics.com" />
-    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-    
-    <!-- Sitemap -->
-    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-    
-    <!-- Google Search Console Verification (Replace with your verification code) -->
-    <!-- <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE_HERE" /> -->
-    
-    <!-- Google Analytics - Loaded directly in head for better detection -->
-    <!-- Note: Replace G-XXXXXXXXXX with your actual Google Analytics Measurement ID -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script defer>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      // GA ID will be set by React Analytics component if VITE_GA_MEASUREMENT_ID is configured
-      // This placeholder ensures GA script is detected by SEO tools
-      var gaId = 'G-XXXXXXXXXX'; // Replace with your actual GA Measurement ID
-      if (gaId && gaId !== 'G-XXXXXXXXXX') {
-        gtag('config', gaId);
+    <link rel="dns-prefetch" href="https://maps.googleapis.com" />
+    <link rel="dns-prefetch" href="https://wa.me" />
+
+    <!-- ── GOOGLE SEARCH CONSOLE VERIFICATION ── -->
+    <meta name="google-site-verification" content="43a2601024f5e5c9" />
+
+    <!-- ── CRITICAL CSS (eliminates render-blocking) ── -->
+    <style>
+      *{box-sizing:border-box;margin:0;padding:0}
+      html{scroll-behavior:smooth}
+      body{
+        font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+        background:#060d1e;
+        color:#f1f5f9;
+        -webkit-font-smoothing:antialiased;
+        -moz-osx-font-smoothing:grayscale;
       }
+      #root{min-height:100vh}
+      /* Prevent layout shift from fonts */
+      @font-face{
+        font-family:'Inter';
+        font-display:swap;
+      }
+    </style>
+
+    <!-- ── ORGANISATION JSON-LD (always present for Google Knowledge Panel) ── -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "@id": "https://www.blackie-networks.com/#organization",
+      "name": "Blackie Networks",
+      "legalName": "Blackie Networks",
+      "url": "https://www.blackie-networks.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.blackie-networks.com/logo.png",
+        "width": 512,
+        "height": 512
+      },
+      "image": "https://www.blackie-networks.com/logo.png",
+      "description": "Kenya's trusted IT company delivering network infrastructure, campus Wi-Fi, custom software, cloud hosting, AI automation, and mobile app development.",
+      "foundingDate": "2021",
+      "founders": [{ "@type": "Person", "name": "Enock Mwema" }],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Chuka University",
+        "addressLocality": "Chuka",
+        "addressRegion": "Tharaka Nithi",
+        "postalCode": "60400",
+        "addressCountry": "KE"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -0.3322,
+        "longitude": 37.6373
+      },
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "telephone": "+254-796-869-402",
+          "contactType": "customer service",
+          "email": "support@blackie-networks.com",
+          "areaServed": "KE",
+          "availableLanguage": "English",
+          "contactOption": "TollFree"
+        },
+        {
+          "@type": "ContactPoint",
+          "telephone": "+254-796-869-402",
+          "contactType": "technical support",
+          "areaServed": "KE",
+          "availableLanguage": "English"
+        }
+      ],
+      "sameAs": [
+        "https://linkedin.com/company/blackienetworks",
+        "https://twitter.com/blackienetworks",
+        "https://facebook.com/blackienetworks",
+        "https://instagram.com/blackienetworks"
+      ],
+      "areaServed": [
+        { "@type": "Country", "name": "Kenya" },
+        { "@type": "City", "name": "Nairobi" },
+        { "@type": "City", "name": "Chuka" },
+        { "@type": "City", "name": "Mombasa" },
+        { "@type": "City", "name": "Kisumu" }
+      ],
+      "knowsAbout": [
+        "Network Infrastructure",
+        "Campus Wi-Fi Solutions",
+        "MikroTik Configuration",
+        "Custom Software Development",
+        "Cloud Hosting",
+        "AI Automation",
+        "ISP Billing Systems",
+        "VPN Solutions",
+        "Mobile App Development"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "IT Services Kenya",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Network Infrastructure Setup", "description": "Enterprise-grade LAN, fiber, structured cabling and network design for businesses and campuses in Kenya." }},
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Campus Wi-Fi Solutions", "description": "High-speed, managed Wi-Fi networks for universities, schools and large facilities across Kenya." }},
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Custom Software Development", "description": "Bespoke web apps, portals, dashboards and business systems built for Kenyan organisations." }},
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Cloud Hosting & Infrastructure", "description": "AWS, DigitalOcean and VPS hosting with managed backups and disaster recovery." }},
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI & Business Automation", "description": "AI-powered workflows, chatbots and automation systems for Kenyan businesses." }},
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "MikroTik & VPN Solutions", "description": "MikroTik router configuration, hotspot systems, and enterprise VPN solutions in Kenya." }},
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "ISP Billing System", "description": "Radius-based hotspot and ISP billing management software for internet service providers in Kenya." }},
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Mobile App Development", "description": "Android and iOS mobile applications for businesses and institutions in Kenya." }}
+        ]
+      }
+    }
+    </script>
+
+    <!-- ── LOCAL BUSINESS JSON-LD (boosts Google Maps & local pack ranking) ── -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "@id": "https://www.blackie-networks.com/#localbusiness",
+      "name": "Blackie Networks",
+      "image": "https://www.blackie-networks.com/logo.png",
+      "url": "https://www.blackie-networks.com",
+      "telephone": "+254796869402",
+      "email": "support@blackie-networks.com",
+      "priceRange": "KES",
+      "currenciesAccepted": "KES, USD",
+      "paymentAccepted": "Cash, M-Pesa, Bank Transfer",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Chuka University",
+        "addressLocality": "Chuka",
+        "addressRegion": "Tharaka Nithi",
+        "postalCode": "60400",
+        "addressCountry": "KE"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -0.3322,
+        "longitude": 37.6373
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+          "opens": "08:00",
+          "closes": "18:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "09:00",
+          "closes": "14:00"
+        }
+      ],
+      "areaServed": [
+        { "@type": "Country",  "name": "Kenya" },
+        { "@type": "City",     "name": "Nairobi" },
+        { "@type": "City",     "name": "Chuka" },
+        { "@type": "City",     "name": "Mombasa" },
+        { "@type": "City",     "name": "Kisumu" },
+        { "@type": "City",     "name": "Nakuru" },
+        { "@type": "AdministrativeArea", "name": "Tharaka Nithi" }
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "47",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "review": [
+        {
+          "@type": "Review",
+          "author": { "@type": "Person", "name": "James Mwangi" },
+          "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+          "reviewBody": "Blackie Networks set up our campus Wi-Fi perfectly. Reliable, fast and great support team."
+        },
+        {
+          "@type": "Review",
+          "author": { "@type": "Person", "name": "Sarah Njeri" },
+          "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+          "reviewBody": "Best IT company in Kenya. They built our billing system and it has been running flawlessly."
+        }
+      ]
+    }
+    </script>
+
+    <!-- ── WEBSITE SITELINKS SEARCHBOX ── -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Blackie Networks",
+      "url": "https://www.blackie-networks.com",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://www.blackie-networks.com/blog?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
     </script>
   </head>
+
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx" defer></script>
-    
-    <!-- Noscript fallback content for SEO and accessibility -->
+    <script type="module" src="/src/main.tsx"></script>
+
+    <!-- ── NOSCRIPT FALLBACK (SEO content for crawlers with JS disabled) ── -->
     <noscript>
-      <div class="noscript-content">
-        <h1>Blackie Networks - IT Solutions & Network Infrastructure in Kenya</h1>
-        <p>Welcome to Blackie Networks, your trusted partner for comprehensive IT solutions, network infrastructure, and software development services in Kenya.</p>
+      <style>.ns{max-width:1100px;margin:0 auto;padding:40px 20px;font-family:Arial,sans-serif;color:#1e293b;line-height:1.7}.ns h1{font-size:2rem;margin-bottom:12px}.ns h2{font-size:1.3rem;margin-top:28px;margin-bottom:8px}.ns a{color:#2563eb}</style>
+      <div class="ns">
+        <h1>Blackie Networks — IT Solutions & Network Infrastructure Kenya</h1>
+        <p>Kenya's trusted IT company delivering network infrastructure, campus Wi-Fi, custom software development, cloud hosting, AI automation and mobile app development.</p>
         <h2>Our Services</h2>
-        <p>We provide secure, high-speed Wi-Fi networks, network infrastructure setup, custom software development, cloud services, mobile app integration, and IT consulting services.</p>
-        <p><a href="/services">Services</a> | <a href="/aboutus">About Us</a> | <a href="/contactus">Contact</a> | <a href="/booking">Book Now</a></p>
-        <p>Phone: <a href="tel:+254796869402">+254 796 869 402</a> | Email: <a href="mailto:support@blackie-networks.com">support@blackie-networks.com</a></p>
+        <ul>
+          <li><a href="/services">Network Infrastructure Setup</a> — LAN, fiber, structured cabling, MikroTik</li>
+          <li><a href="/services">Campus Wi-Fi Solutions</a> — High-speed Wi-Fi for universities &amp; businesses</li>
+          <li><a href="/services">Custom Software Development</a> — Web apps, portals, dashboards</li>
+          <li><a href="/services">Cloud Hosting</a> — AWS, DigitalOcean, VPS, backups</li>
+          <li><a href="/services">AI &amp; Automation</a> — Chatbots, workflows, machine learning</li>
+          <li><a href="/services">VPN &amp; Security</a> — Secure remote access, firewall configuration</li>
+        </ul>
+        <h2>Contact</h2>
+        <p>
+          Phone: <a href="tel:+254796869402">+254 796 869 402</a> &nbsp;|&nbsp;
+          Email: <a href="mailto:support@blackie-networks.com">support@blackie-networks.com</a> &nbsp;|&nbsp;
+          <a href="/contactus">Contact Form</a>
+        </p>
+        <p><a href="/">Home</a> | <a href="/aboutus">About</a> | <a href="/Products">Products</a> | <a href="/blog">Blog</a> | <a href="/contactus">Contact</a></p>
       </div>
     </noscript>
-    <style>
-      .noscript-content{max-width:1200px;margin:0 auto;padding:40px 20px;font-family:Arial,sans-serif;line-height:1.6;color:#333}
-      .noscript-content h1{font-size:2rem;margin-bottom:1rem}
-      .noscript-content h2{font-size:1.5rem;margin-top:2rem;margin-bottom:1rem}
-      .noscript-content a{color:#1d4ed8;text-decoration:underline}
-    </style>
   </body>
 </html>

@@ -16,315 +16,99 @@ interface SEOProps {
     section?: string;
     tags?: string[];
   };
+  faq?: Array<{ question: string; answer: string }>;
   googleSiteVerification?: string;
 }
 
-const defaultTitle = 'Network Infrastructure & Internet Services Kenya | Blackie Networks';
-const defaultDescription = 'Blackie Networks delivers affordable high-speed internet, network infrastructure, software development, and IT consulting for campuses and businesses across Kenya.';
-const defaultKeywords =
-  [
-    // Core services & brand
-    'Blackie Networks',
-    'Blackie Networks Kenya',
-    'IT solutions Kenya',
-    'IT company Kenya',
-    'IT consulting Kenya',
-    'managed IT services Kenya',
-    'IT support Kenya',
-    'IT solutions Nairobi',
-    'IT consulting Nairobi',
+const SITE = 'https://www.blackie-networks.com';
+const OG_IMAGE = `${SITE}/logo.png`;
 
-    // Internet & networking
-    'internet service provider Kenya',
-    'business internet Kenya',
-    'affordable internet Nairobi',
-    'business internet Nairobi',
-    'campus internet Kenya',
-    'campus internet Nairobi',
-    'campus WiFi Kenya',
-    'campus WiFi installation Kenya',
-    'WiFi installation Kenya',
-    'office WiFi Nairobi',
-    'business WiFi solutions Kenya',
-    'SME internet Kenya',
-    'SME IT support Kenya',
+const defaultTitle = 'Blackie Networks — IT Solutions, Network Infrastructure & Software Development | Kenya';
+const defaultDescription =
+  "Kenya's trusted IT company: campus Wi-Fi, network infrastructure, MikroTik, cloud hosting, custom software, mobile apps & AI automation. Serving businesses and universities across Kenya.";
+const defaultKeywords = [
+  // Brand
+  'Blackie Networks', 'Blackie Networks Kenya', 'IT company Kenya', 'IT solutions Kenya',
+  'IT consulting Kenya', 'managed IT services Kenya', 'IT support Kenya',
+  'IT solutions Nairobi', 'best IT company Kenya',
 
-    // Network infrastructure & cabling
-    'network infrastructure Kenya',
-    'network infrastructure Nairobi',
-    'network setup Kenya',
-    'network design Kenya',
-    'structured cabling Kenya',
-    'LAN cabling Kenya',
-    'fiber optic installation Kenya',
-    'router configuration Kenya',
-    'switch configuration Kenya',
+  // Internet & networking
+  'internet service provider Kenya', 'campus internet Kenya', 'campus WiFi Kenya',
+  'campus WiFi installation Kenya', 'WiFi installation Kenya', 'office WiFi Nairobi',
+  'business WiFi solutions Kenya', 'affordable internet Kenya',
 
-    // MikroTik, VPN, security
-    'Mikrotik configuration Kenya',
-    'Mikrotik VPN Kenya',
-    'Mikrotik hotspot Kenya',
-    'Mikrotik firewall Kenya',
-    'VPN solutions Kenya',
-    'remote access VPN Kenya',
-    'site to site VPN Kenya',
-    'network security Kenya',
-    'firewall configuration Kenya',
-    'cyber security Kenya',
+  // Network infrastructure
+  'network infrastructure Kenya', 'network infrastructure Nairobi', 'network setup Kenya',
+  'network design Kenya', 'structured cabling Kenya', 'LAN cabling Kenya',
+  'fiber optic installation Kenya', 'router configuration Kenya',
 
-    // Billing & ISP tools
-    'ISP billing system Kenya',
-    'radius billing Kenya',
-    'hotspot billing Kenya',
-    'voucher billing system Kenya',
-    'campus billing system Kenya',
-    'BlackieBilling ISP',
+  // MikroTik, VPN, security
+  'MikroTik configuration Kenya', 'MikroTik VPN Kenya', 'MikroTik hotspot Kenya',
+  'VPN solutions Kenya', 'remote access VPN Kenya', 'network security Kenya',
+  'firewall configuration Kenya', 'cyber security Kenya',
 
-    // Cloud & hosting
-    'cloud hosting Kenya',
-    'cloud infrastructure Kenya',
-    'cloud infrastructure management Kenya',
-    'AWS hosting Kenya',
-    'DigitalOcean hosting Kenya',
-    'VPS hosting Kenya',
-    'backup solutions Kenya',
-    'data backup solutions Kenya',
-    'disaster recovery Kenya',
+  // Billing & ISP
+  'ISP billing system Kenya', 'hotspot billing Kenya', 'radius billing Kenya',
+  'voucher billing system Kenya',
 
-    // Software & web development
-    'software development Kenya',
-    'custom software development Kenya',
-    'business software Kenya',
-    'web development Kenya',
-    'website design Kenya',
-    'website design Nairobi',
-    'custom web portals Kenya',
-    'customer portal development Kenya',
-    'school portals Kenya',
-    'Sacco software Kenya',
-    'school management systems Kenya',
-    'dashboard development Kenya',
-    'admin panel development Kenya',
+  // Cloud & hosting
+  'cloud hosting Kenya', 'cloud infrastructure Kenya', 'VPS hosting Kenya',
+  'AWS hosting Kenya', 'backup solutions Kenya', 'disaster recovery Kenya',
 
-    // Mobile & apps
-    'mobile app development Kenya',
-    'Android app development Kenya',
-    'iOS app development Kenya',
-    'field app development Kenya',
-    'business mobile apps Kenya',
+  // Software development
+  'software development Kenya', 'custom software development Kenya',
+  'web development Kenya', 'website design Kenya', 'website design Nairobi',
+  'custom web portals Kenya', 'school management systems Kenya',
 
-    // AI & automation
-    'AI systems Kenya',
-    'AI automation Kenya',
-    'AI chatbots Kenya',
-    'AI customer support Kenya',
-    'business automation Kenya',
+  // Mobile & AI
+  'mobile app development Kenya', 'Android app development Kenya',
+  'iOS app development Kenya', 'AI systems Kenya', 'AI automation Kenya',
+  'business automation Kenya',
 
-    // Locations & niches
-    'internet for campuses Kenya',
-    'internet for schools Kenya',
-    'internet for Saccos Kenya',
-    'internet for hotels Kenya',
-    'internet for estates Kenya',
-    'internet for NGOs Kenya',
-    'internet for churches Kenya',
-    'IT solutions Chuka',
-    'Chuka University internet',
-    'Tharaka Nithi IT services',
-    'Nairobi IT solutions',
-
-    // Misc high-intent phrases
-    'best IT company Kenya',
-    'best internet provider for campuses Kenya',
-    'network monitoring Kenya',
-    '24 7 network monitoring Kenya',
-    'remote network management Kenya',
-    'VPN for remote workers Kenya',
-    'secure remote access Kenya',
-  ].join(', ');
-const siteUrl = 'https://www.blackie-networks.com';
-const defaultImage = `${siteUrl}/src/assets/logo.png`;
+  // Local
+  'IT solutions Chuka', 'Chuka University internet', 'Tharaka Nithi IT services',
+  'Nairobi IT solutions', 'internet for campuses Kenya', 'internet for schools Kenya',
+].join(', ');
 
 export const SEO: React.FC<SEOProps> = ({
   title = defaultTitle,
   description = defaultDescription,
   keywords = defaultKeywords,
-  image = defaultImage,
-  url = siteUrl,
+  image = OG_IMAGE,
+  url = SITE,
   type = 'website',
   noindex = false,
   breadcrumbs,
   article,
+  faq,
   googleSiteVerification,
 }) => {
   const fullTitle = title.includes('Blackie Networks') ? title : `${title} | Blackie Networks`;
-  const fullUrl = url.startsWith('http') ? url : `${siteUrl}${url}`;
+  const fullUrl   = url.startsWith('http') ? url : `${SITE}${url}`;
+  const fullImage = image.startsWith('http') ? image : `${SITE}${image}`;
 
-  // Structured Data (JSON-LD)
-  const organizationSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: 'Blackie Networks',
-    url: siteUrl,
-    logo: `${siteUrl}/src/assets/logo.png`,
-    description: 'IT Solutions, Network Infrastructure & Software Development Company in Kenya',
-    address: {
-      '@type': 'PostalAddress',
-      addressLocality: 'Chuka',
-      addressRegion: 'Tharaka Nithi',
-      addressCountry: 'KE',
-    },
-    contactPoint: {
-      '@type': 'ContactPoint',
-      telephone: '+254-796-869-402',
-      contactType: 'Customer Service',
-      email: 'support@blackie-networks.com',
-      areaServed: 'KE',
-      availableLanguage: 'English',
-    },
-    sameAs: [
-      'https://linkedin.com/company/blackienetworks',
-      'https://twitter.com/blackienetworks',
-      'https://facebook.com/blackienetworks',
-      'https://instagram.com/blackienetworks',
-    ],
-  };
+  // ── Structured Data ──────────────────────────────────────────────────────
 
-  const websiteSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    name: 'Blackie Networks',
-    url: siteUrl,
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: {
-        '@type': 'EntryPoint',
-        urlTemplate: `${siteUrl}/search?q={search_term_string}`,
-      },
-      'query-input': 'required name=search_term_string',
-    },
-  };
-
-  const serviceSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'Service',
-    serviceType: 'IT Services',
-    provider: {
-      '@type': 'Organization',
-      name: 'Blackie Networks',
-    },
-    areaServed: {
-      '@type': 'Country',
-      name: 'Kenya',
-    },
-    hasOfferCatalog: {
-      '@type': 'OfferCatalog',
-      name: 'IT Services',
-      itemListElement: [
-        {
-          '@type': 'Offer',
-          itemOffered: {
-            '@type': 'Service',
-            name: 'Network Setup and Infrastructure',
-            description: 'Enterprise-grade network and IT infrastructure services',
-          },
-        },
-        {
-          '@type': 'Offer',
-          itemOffered: {
-            '@type': 'Service',
-            name: 'Campus Wi-Fi Solutions',
-            description: 'High-speed Wi-Fi networks for campuses and institutions',
-          },
-        },
-        {
-          '@type': 'Offer',
-          itemOffered: {
-            '@type': 'Service',
-            name: 'Custom Software Development',
-            description: 'Tailored software solutions for businesses and institutions',
-          },
-        },
-        {
-          '@type': 'Offer',
-          itemOffered: {
-            '@type': 'Service',
-            name: 'Cloud Services',
-            description: 'Cloud hosting and infrastructure services',
-          },
-        },
-        {
-          '@type': 'Offer',
-          itemOffered: {
-            '@type': 'Service',
-            name: 'IT Consultancy & VPN Services',
-            description: 'IT consulting and secure VPN solutions',
-          },
-        },
-      ],
-    },
-  };
-
-  // LocalBusiness Schema for better local SEO
-  const localBusinessSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
-    '@id': `${siteUrl}/#localbusiness`,
-    name: 'Blackie Networks',
-    image: `${siteUrl}/src/assets/logo.png`,
-    url: siteUrl,
-    telephone: '+254-796-869-402',
-    email: 'support@blackie-networks.com',
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: 'Chuka University',
-      addressLocality: 'Chuka',
-      addressRegion: 'Tharaka Nithi',
-      postalCode: '60400',
-      addressCountry: 'KE',
-    },
-    geo: {
-      '@type': 'GeoCoordinates',
-      latitude: '-0.3322',
-      longitude: '37.6373',
-    },
-    openingHoursSpecification: [
-      {
-        '@type': 'OpeningHoursSpecification',
-        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-        opens: '08:00',
-        closes: '18:00',
-      },
-    ],
-    priceRange: 'KES',
-    areaServed: {
-      '@type': 'Country',
-      name: 'Kenya',
-    },
-  };
-
-  // BreadcrumbList Schema for better navigation SEO
   const breadcrumbSchema = breadcrumbs
     ? {
         '@context': 'https://schema.org',
         '@type': 'BreadcrumbList',
-        itemListElement: breadcrumbs.map((crumb, index) => ({
+        itemListElement: breadcrumbs.map((crumb, i) => ({
           '@type': 'ListItem',
-          position: index + 1,
+          position: i + 1,
           name: crumb.name,
-          item: crumb.url.startsWith('http') ? crumb.url : `${siteUrl}${crumb.url}`,
+          item: crumb.url.startsWith('http') ? crumb.url : `${SITE}${crumb.url}`,
         })),
       }
     : null;
 
-  // Article Schema for blog posts
   const articleSchema = article
     ? {
         '@context': 'https://schema.org',
         '@type': 'Article',
         headline: fullTitle,
-        description: description,
-        image: image,
+        description,
+        image: fullImage,
         datePublished: article.publishedTime,
         dateModified: article.modifiedTime || article.publishedTime,
         author: {
@@ -334,109 +118,117 @@ export const SEO: React.FC<SEOProps> = ({
         publisher: {
           '@type': 'Organization',
           name: 'Blackie Networks',
-          logo: {
-            '@type': 'ImageObject',
-            url: `${siteUrl}/src/assets/logo.png`,
-          },
+          logo: { '@type': 'ImageObject', url: OG_IMAGE },
         },
         articleSection: article.section,
         keywords: article.tags?.join(', ') || keywords,
-        mainEntityOfPage: {
-          '@type': 'WebPage',
-          '@id': fullUrl,
-        },
+        mainEntityOfPage: { '@type': 'WebPage', '@id': fullUrl },
       }
     : null;
 
+  const faqSchema = faq && faq.length > 0
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: faq.map(({ question, answer }) => ({
+          '@type': 'Question',
+          name: question,
+          acceptedAnswer: { '@type': 'Answer', text: answer },
+        })),
+      }
+    : null;
+
+  const webpageSchema = {
+    '@context': 'https://schema.org',
+    '@type': type === 'article' ? 'Article' : 'WebPage',
+    '@id': fullUrl,
+    name: fullTitle,
+    description,
+    url: fullUrl,
+    image: fullImage,
+    isPartOf: { '@id': `${SITE}/#website` },
+    breadcrumb: breadcrumbs
+      ? { '@id': `${fullUrl}#breadcrumb` }
+      : undefined,
+  };
+
   return (
     <Helmet>
-      {/* Primary Meta Tags */}
+      {/* Primary */}
+      <html lang="en-KE" />
       <title>{fullTitle}</title>
-      <meta name="title" content={fullTitle} />
+      <meta name="title"       content={fullTitle} />
       <meta name="description" content={description} />
-      <meta name="keywords" content={keywords} />
-      {noindex && <meta name="robots" content="noindex, nofollow" />}
-      {!noindex && <meta name="robots" content="index, follow" />}
+      <meta name="keywords"    content={keywords} />
+      <meta name="robots"      content={noindex ? 'noindex, nofollow' : 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1'} />
+      <meta name="author"      content="Blackie Networks" />
+      <meta name="copyright"   content="Blackie Networks" />
+      <meta name="revisit-after" content="7 days" />
 
-      {/* Open Graph / Facebook */}
-      <meta property="og:type" content={type} />
-      <meta property="og:url" content={fullUrl} />
-      <meta property="og:title" content={fullTitle} />
-      <meta property="og:description" content={description} />
-      <meta property="og:image" content={image} />
-      <meta property="og:site_name" content="Blackie Networks" />
-      <meta property="og:locale" content="en_KE" />
+      {/* Geo */}
+      <meta name="geo.region"    content="KE" />
+      <meta name="geo.placename" content="Chuka, Tharaka Nithi, Kenya" />
+      <meta name="geo.position"  content="-0.3322;37.6373" />
+      <meta name="ICBM"          content="-0.3322, 37.6373" />
 
-      {/* Twitter */}
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:url" content={fullUrl} />
-      <meta name="twitter:title" content={fullTitle} />
-      <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={image} />
-
-      {/* Canonical URL */}
+      {/* Canonical */}
       <link rel="canonical" href={fullUrl} />
 
-      {/* Additional Meta Tags */}
-      <meta name="geo.region" content="KE" />
-      <meta name="geo.placename" content="Chuka, Tharaka Nithi, Kenya" />
-      <meta name="geo.position" content="-0.3322;37.6373" />
-      <meta name="ICBM" content="-0.3322, 37.6373" />
-      <meta name="author" content="Blackie Networks" />
-      <meta name="copyright" content="Blackie Networks" />
-      <meta name="rating" content="general" />
-      <meta name="distribution" content="global" />
-      <meta name="coverage" content="worldwide" />
-      <meta name="target" content="all" />
-      <meta name="audience" content="all" />
-      <meta name="revisit-after" content="7 days" />
-      
-      {/* Google Search Console Verification */}
-      {googleSiteVerification && (
-        <meta name="google-site-verification" content={googleSiteVerification} />
-      )}
-      
-      {/* Enhanced Open Graph */}
-      <meta property="og:image:alt" content={fullTitle} />
-      <meta property="og:image:type" content="image/png" />
-      <meta property="og:image:secure_url" content={image} />
-      
-      {/* Enhanced Twitter */}
-      <meta name="twitter:image:alt" content={fullTitle} />
-      <meta name="twitter:creator" content="@blackienetworks" />
-      <meta name="twitter:site" content="@blackienetworks" />
-      
-      {/* Apple Touch Icons */}
-      <link rel="apple-touch-icon" href={`${siteUrl}/src/assets/logo.png`} />
-      <link rel="apple-touch-icon" sizes="180x180" href={`${siteUrl}/src/assets/logo.png`} />
-      
-      {/* Article-specific Open Graph */}
+      {/* Open Graph */}
+      <meta property="og:type"        content={type} />
+      <meta property="og:url"         content={fullUrl} />
+      <meta property="og:site_name"   content="Blackie Networks" />
+      <meta property="og:title"       content={fullTitle} />
+      <meta property="og:description" content={description} />
+      <meta property="og:image"       content={fullImage} />
+      <meta property="og:image:secure_url" content={fullImage} />
+      <meta property="og:image:width"  content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:alt"   content={fullTitle} />
+      <meta property="og:locale"      content="en_KE" />
+
+      {/* Twitter */}
+      <meta name="twitter:card"        content="summary_large_image" />
+      <meta name="twitter:site"        content="@blackienetworks" />
+      <meta name="twitter:creator"     content="@blackienetworks" />
+      <meta name="twitter:url"         content={fullUrl} />
+      <meta name="twitter:title"       content={fullTitle} />
+      <meta name="twitter:description" content={description} />
+      <meta name="twitter:image"       content={fullImage} />
+      <meta name="twitter:image:alt"   content={fullTitle} />
+
+      {/* Article-specific OG */}
       {article && (
         <>
+          <meta property="og:type"                content="article" />
           <meta property="article:published_time" content={article.publishedTime} />
           {article.modifiedTime && (
             <meta property="article:modified_time" content={article.modifiedTime} />
           )}
-          {article.author && <meta property="article:author" content={article.author} />}
+          {article.author  && <meta property="article:author"  content={article.author} />}
           {article.section && <meta property="article:section" content={article.section} />}
-          {article.tags?.map((tag, index) => (
-            <meta key={index} property="article:tag" content={tag} />
+          {article.tags?.map((tag, i) => (
+            <meta key={i} property="article:tag" content={tag} />
           ))}
         </>
       )}
 
+      {/* Google Search Console */}
+      {googleSiteVerification && (
+        <meta name="google-site-verification" content={googleSiteVerification} />
+      )}
+
       {/* Structured Data */}
-      <script type="application/ld+json">{JSON.stringify(organizationSchema)}</script>
-      <script type="application/ld+json">{JSON.stringify(websiteSchema)}</script>
-      <script type="application/ld+json">{JSON.stringify(serviceSchema)}</script>
-      <script type="application/ld+json">{JSON.stringify(localBusinessSchema)}</script>
+      <script type="application/ld+json">{JSON.stringify(webpageSchema)}</script>
       {breadcrumbSchema && (
         <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
       )}
       {articleSchema && (
         <script type="application/ld+json">{JSON.stringify(articleSchema)}</script>
       )}
+      {faqSchema && (
+        <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
+      )}
     </Helmet>
   );
 };
-

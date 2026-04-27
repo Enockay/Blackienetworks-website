@@ -1,0 +1,20 @@
+{
+  "name": "Blackie Networks — IT Solutions Kenya",
+  "short_name": "Blackie Networks",
+  "description": "Affordable high-speed internet, network infrastructure, software development, and IT consulting for campuses and businesses across Kenya.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#060d1e",
+  "theme_color": "#2563eb",
+  "lang": "en-KE",
+  "icons": [
+    { "src": "/logo.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable any" },
+    { "src": "/logo.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable any" }
+  ],
+  "categories": ["business", "technology", "utilities"],
+  "shortcuts": [
+    { "name": "Our Services", "url": "/services", "description": "View all IT services" },
+    { "name": "Contact Us",   "url": "/contactus", "description": "Get in touch" },
+    { "name": "Blog",         "url": "/blog",       "description": "IT tips and guides" }
+  ]
+}

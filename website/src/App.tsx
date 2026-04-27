@@ -9,7 +9,6 @@ import AboutUs from './componets/AboutUs';
 import Footer from './componets/Footer';
 import ServicesPage from './componets/ServicePage';
 import BookingPage from './componets/BookingPage';
-import Section from './componets/Section';
 import ContactUs from './componets/ContactUs';
 import Blog from './componets/Blog';
 import FAQ from './componets/FAQ';

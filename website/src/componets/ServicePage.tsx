@@ -1,118 +1,155 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { Spin, Modal, Typography } from 'antd';
+import { Modal } from 'antd';
+import { SEO } from './SEO';
 import {
-  ThunderboltOutlined,
-  LoadingOutlined,
-  GlobalOutlined,
-} from '@ant-design/icons';
+  FiServer, FiCode, FiCloud, FiCpu, FiSmartphone, FiShield,
+  FiArrowRight, FiCheck, FiX, FiGlobe, FiZap,
+  FiSearch, FiLayers, FiTool, FiHeadphones,
+} from 'react-icons/fi';
 
-import mikrotikRemoteImg from '../assets/mikrotikremote.png';
-import softwareCompany2Img from '../assets/softwareCompany2.jpg';
-import softwareCompany3Img from '../assets/softwareCompany3.jpg';
-import glintParlourImg from '../assets/glintparlour.png';
-import blackieShieldImg from '../assets/blackieshield.png';
+import mikrotikRemoteImg    from '../assets/mikrotikremote.png';
+import softwareCompany2Img  from '../assets/softwareCompany2.jpg';
 import cloudInfrastructureImg from '../assets/cloudinfrustructure.png';
-import backgroundImg from '../assets/background.jpg';
+import glintParlourImg      from '../assets/glintparlour.png';
+import softwareCompany3Img  from '../assets/softwareCompany3.jpg';
+import blackieShieldImg     from '../assets/blackieshield.png';
+import backgroundImg        from '../assets/background.jpg';
 
-const { Title, Paragraph } = Typography;
-
+/* ── service definitions ── */
 interface Service {
+  id: string;
+  icon: React.ReactNode;
+  iconBg: string;
+  iconColor: string;
+  tag: string;
+  tagClass: string;
   title: string;
+  short: string;
   description: string;
+  bullets: string[];
   details: string[];
   mikrotikAddons?: string[];
   siteLink?: string;
-  image?: string;
+  image: string;
 }
 
-// Services aligned with the homepage “Services We Provide” section
 const services: Service[] = [
   {
-    title: 'Network Setup & Billing Systems',
-    description:
-      'End‑to‑end network design, cabling, MikroTik configuration and ISP / campus billing systems that keep your internet stable and revenue flowing.',
+    id: 'network',
+    icon: <FiServer size={22} />,
+    iconBg: 'rgba(59,130,246,0.12)', iconColor: '#3b82f6',
+    tag: 'Networking', tagClass: 'tag-blue',
+    title: 'Network Setup & Billing',
+    short: 'Campus, ISP & enterprise networks — designed, cabled, configured and billed.',
+    description: 'End-to-end network design, cabling, MikroTik configuration and ISP / campus billing systems that keep your internet stable and revenue flowing.',
+    bullets: ['MikroTik firewall, hotspot & QoS', 'Radius / voucher billing systems', 'Monitoring, alerting & NOC reports'],
     details: [
-      'Network assessment, structured cabling and router / switch design for campuses, Saccos and ISPs.',
+      'Network assessment, structured cabling and router/switch design for campuses, Saccos and ISPs.',
       'MikroTik configuration for firewalls, hotspots, QoS and secure remote access.',
-      'Radius, hotspot and voucher billing for shared networks and campus Wi‑Fi.',
+      'Radius, hotspot and voucher billing for shared networks and campus Wi-Fi.',
       'Custom ISP or campus billing setups tailored to your packages and policies.',
       'Monitoring, alerting and reporting so you can see usage, uptime and revenue in one place.',
       'Training and documentation for your internal IT or NOC teams.',
     ],
     mikrotikAddons: [
       'Advanced MikroTik firewall and security hardening',
-      'Load‑balancing and failover between multiple uplinks',
+      'Load-balancing and failover between multiple uplinks',
       'VPN and VLAN segmentation for staff, students and guests',
-      'Bandwidth management and application‑aware QoS',
+      'Bandwidth management and application-aware QoS',
     ],
     image: mikrotikRemoteImg,
   },
   {
+    id: 'web',
+    icon: <FiCode size={22} />,
+    iconBg: 'rgba(139,92,246,0.12)', iconColor: '#8b5cf6',
+    tag: 'Software', tagClass: 'tag-purple',
     title: 'Web Development',
-    description:
-      'Modern websites, portals and internal systems that are fast, secure and designed around how your team actually works.',
+    short: 'Modern websites, portals and business tools your team actually wants to use.',
+    description: 'Custom business websites, portals and internal systems that are fast, secure and designed around how your team actually works.',
+    bullets: ['Booking, billing & workflow systems', 'Responsive design — mobile first', 'Secure auth & audit-ready logs'],
     details: [
       'Custom business websites, school portals and customer dashboards.',
       'Booking, billing and workflow systems integrated with your existing tools.',
       'Responsive UI design that works smoothly on mobile, tablet and desktop.',
-      'Secure authentication, access control and audit‑ready activity logs.',
+      'Secure authentication, access control and audit-ready activity logs.',
       'Ongoing support, feature enhancements and performance tuning.',
       'Deployment pipelines so changes move safely from staging to production.',
     ],
     image: softwareCompany2Img,
   },
   {
-    title: 'Cloud Infrastructure & Hosting',
-    description:
-      'Cloud infrastructure on AWS, DigitalOcean and others – designed for uptime, backups and predictable performance.',
+    id: 'cloud',
+    icon: <FiCloud size={22} />,
+    iconBg: 'rgba(6,182,212,0.1)', iconColor: '#06b6d4',
+    tag: 'Cloud', tagClass: 'tag-blue',
+    title: 'Cloud Infrastructure',
+    short: 'AWS, DigitalOcean and beyond — designed for uptime, security and cost control.',
+    description: 'Cloud infrastructure on AWS, DigitalOcean and others — designed for uptime, backups and predictable performance.',
+    bullets: ['High-availability & auto-scaling', 'Automated backups & DR plans', 'Cost-optimisation reviews'],
     details: [
       'Infrastructure design for web apps, APIs, databases and background workers.',
-      'High‑availability setups with load balancers, auto‑scaling and health checks.',
-      'Automated backups, disaster‑recovery plans and documented runbooks.',
+      'High-availability setups with load balancers, auto-scaling and health checks.',
+      'Automated backups, disaster-recovery plans and documented runbooks.',
       'Security best practices for firewalls, secrets, SSL and access policies.',
       'Monitoring and logging so issues are visible before users complain.',
-      'Cost‑optimization reviews to keep your monthly cloud bill under control.',
+      'Cost-optimisation reviews to keep your monthly cloud bill under control.',
     ],
     image: cloudInfrastructureImg,
   },
   {
+    id: 'ai',
+    icon: <FiCpu size={22} />,
+    iconBg: 'rgba(16,185,129,0.1)', iconColor: '#10b981',
+    tag: 'AI & Automation', tagClass: 'tag-green',
     title: 'AI Systems & Automation',
-    description:
-      'Practical AI assistants and automations that plug into your existing tools to save your team hours every week.',
+    short: 'Practical AI tools that plug into your existing systems and save hours weekly.',
+    description: 'Practical AI assistants and automations that plug into your existing tools to save your team hours every week.',
+    bullets: ['AI chat trained on your docs', 'Automated reporting & dashboards', 'CRM, billing & ticketing integrations'],
     details: [
       'AI chat assistants trained on your company documents and FAQs.',
       'Automated reporting and dashboards that pull data from your systems.',
       'Email, WhatsApp or SMS workflows that respond and route requests automatically.',
-      'Document summarisation and knowledge‑base search for internal teams.',
+      'Document summarisation and knowledge-base search for internal teams.',
       'Custom integrations with CRMs, billing tools and ticketing systems.',
-      'Security and data‑privacy controls appropriate for Kenyan organizations.',
+      'Security and data-privacy controls appropriate for Kenyan organisations.',
     ],
     image: glintParlourImg,
   },
   {
+    id: 'mobile',
+    icon: <FiSmartphone size={22} />,
+    iconBg: 'rgba(249,115,22,0.1)', iconColor: '#f97316',
+    tag: 'Mobile', tagClass: 'tag-orange',
     title: 'Mobile App Development',
-    description:
-      'Android and iOS apps for customers or internal teams, fully integrated with your web, billing and cloud infrastructure.',
+    short: 'Android & iOS apps for customers or field teams, integrated with your backend.',
+    description: 'Android and iOS apps for customers or internal teams, fully integrated with your web, billing and cloud infrastructure.',
+    bullets: ['Customer-facing & field-team apps', 'Offline-first for low connectivity', 'App store publishing & maintenance'],
     details: [
-      'Customer‑facing apps for bookings, payments, loyalty and self‑service.',
-      'Field‑team apps for checklists, data collection and incident reporting.',
-      'Offline‑first experiences for low‑connectivity environments.',
+      'Customer-facing apps for bookings, payments, loyalty and self-service.',
+      'Field-team apps for checklists, data collection and incident reporting.',
+      'Offline-first experiences for low-connectivity environments.',
       'Secure APIs and authentication shared with your existing systems.',
-      'App store publishing, updates and long‑term maintenance.',
+      'App store publishing, updates and long-term maintenance.',
       'Analytics and event tracking so you know how people really use the app.',
     ],
     image: softwareCompany3Img,
   },
   {
-    title: 'VPN Solutions – Blackie Shield',
-    description:
-      'Always‑on VPN and secure remote access powered by our Blackie Shield platform, keeping your teams and branches safely connected.',
+    id: 'vpn',
+    icon: <FiShield size={22} />,
+    iconBg: 'rgba(239,68,68,0.1)', iconColor: '#ef4444',
+    tag: 'Security', tagClass: 'tag-orange',
+    title: 'VPN – Blackie Shield',
+    short: 'Always-on VPN and secure remote access for your teams, branches and devices.',
+    description: 'Always-on VPN and secure remote access powered by our Blackie Shield platform, keeping your teams and branches safely connected.',
+    bullets: ['Per-user & per-device access controls', 'Optimised routes, low-latency tunnels', '24/7 tunnel health monitoring'],
     details: [
       'Centralised VPN management for staff, branches and field teams.',
-      'Per‑user and per‑device access controls with detailed activity logs.',
-      'Optimised routes for low‑latency access to your internal systems.',
+      'Per-user and per-device access controls with detailed activity logs.',
+      'Optimised routes for low-latency access to your internal systems.',
       'Support for laptops, phones and routers across multiple platforms.',
       'Integration with your existing firewalls and identity providers.',
       '24/7 monitoring of tunnel health, usage and security events.',
@@ -122,472 +159,403 @@ const services: Service[] = [
   },
 ];
 
+const process = [
+  { icon: <FiSearch size={20} />, step: '01', title: 'Discover', desc: 'We audit your current setup and scope what you actually need.' },
+  { icon: <FiLayers size={20} />, step: '02', title: 'Design', desc: 'Architecture, timeline and cost breakdown — no surprises.' },
+  { icon: <FiTool size={20} />, step: '03', title: 'Build', desc: 'Delivered iteratively with your team in the loop throughout.' },
+  { icon: <FiHeadphones size={20} />, step: '04', title: 'Support', desc: '24/7 monitoring and a dedicated channel for your team.' },
+];
+
+const cardVariants = {
+  hidden:  { opacity: 0, y: 32 },
+  visible: (i: number) => ({ opacity: 1, y: 0, transition: { delay: i * 0.08, type: 'spring', stiffness: 100, damping: 15 } }),
+};
+
+/* ── component ── */
 const ServicesPage: React.FC = () => {
-  const [loading, setLoading] = useState(true);
-  const [selectedService, setSelectedService] = useState<Service | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selected, setSelected] = useState<Service | null>(null);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    // Simulate loading to prevent empty pages
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 300);
-    return () => clearTimeout(timer);
-  }, []);
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 50, scale: 0.9 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        type: 'spring',
-        stiffness: 100,
-        damping: 15,
-      },
-    },
-  };
-
-  const openServiceModal = (service: Service) => {
-    setSelectedService(service);
-    setIsModalOpen(true);
-  };
-
-  const handleBookNow = (service: Service) => {
-    // Navigate to contactus page
-    navigate('/contactus');
-  };
-
-  if (loading) {
-    return (
-      <div
-        style={{
-        minHeight: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-          background:
-            'linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(241, 245, 249, 0.98) 100%)',
-        marginTop: '80px',
-        }}
-      >
-        <Spin
-          size="large"
-          indicator={<LoadingOutlined style={{ fontSize: 48, color: '#0ea5e9' }} spin />}
-        />
-      </div>
-    );
-  }
-
   return (
-    <div
-      style={{
-        position: 'relative',
-        minHeight: '100vh',
-        padding: '100px 20px 80px',
-        background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.95) 100%)',
-        marginTop: '80px',
-      }}
-    >
-      {/* Animated Background Elements */}
-      <div
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          background: `
-            radial-gradient(circle at 20% 50%, rgba(0, 240, 255, 0.1) 0%, transparent 50%),
-            radial-gradient(circle at 80% 80%, rgba(0, 102, 255, 0.1) 0%, transparent 50%),
-            radial-gradient(circle at 40% 20%, rgba(124, 58, 237, 0.05) 0%, transparent 50%)
-          `,
-          pointerEvents: 'none',
-        }}
+    <>
+      <SEO
+        title="IT Services Kenya — Network, Cloud, Software, AI & Mobile | Blackie Networks"
+        description="Professional IT services in Kenya: network infrastructure setup, campus Wi-Fi, MikroTik configuration, custom software development, cloud hosting, AI automation, mobile apps & VPN solutions."
+        keywords="IT services Kenya, network infrastructure Kenya, campus WiFi Kenya, MikroTik Kenya, software development Kenya, cloud hosting Kenya, AI automation Kenya, VPN Kenya, mobile app development Kenya"
+        url="/services"
+        breadcrumbs={[{ name: 'Home', url: '/' }, { name: 'Services', url: '/services' }]}
+        faq={[
+          { question: 'What IT services does Blackie Networks offer in Kenya?', answer: 'Blackie Networks offers network infrastructure setup, campus and business Wi-Fi solutions, MikroTik configuration, custom software development, cloud hosting, AI & automation systems, mobile app development, and VPN & security solutions across Kenya.' },
+          { question: 'Does Blackie Networks set up campus Wi-Fi?', answer: 'Yes. We design and install high-speed managed Wi-Fi networks for universities, schools, hotels, hospitals, and large facilities anywhere in Kenya, including MikroTik hotspot systems and ISP billing integration.' },
+          { question: 'Can Blackie Networks build custom software for my business?', answer: 'Absolutely. We build bespoke web applications, school portals, Sacco systems, admin dashboards, ISP billing platforms, and any custom business software tailored to your requirements.' },
+          { question: 'How much do your IT services cost in Kenya?', answer: 'Pricing depends on the scope of your project. We offer free initial consultations to assess your needs and provide a transparent quote. Contact us via WhatsApp or our contact form to get started.' },
+          { question: 'Do you offer 24/7 network monitoring and support?', answer: 'Yes. We provide remote network monitoring, managed IT support, and proactive maintenance to keep your infrastructure running around the clock.' },
+        ]}
       />
+      {/* ════ DARK HERO BAND ════ */}
+      <div style={{
+        background: 'linear-gradient(160deg, #060d1e 0%, #0a1628 55%, #0f1e38 100%)',
+        paddingTop: 120, paddingBottom: 72,
+        paddingLeft: 24, paddingRight: 24,
+        borderBottom: '1px solid rgba(59,130,246,0.12)',
+        position: 'relative', overflow: 'hidden',
+      }}>
+        {/* blue accent line */}
+        <div style={{
+          position: 'absolute', top: 0, left: 0, right: 0, height: 2,
+          background: 'linear-gradient(90deg, transparent, #2563eb 30%, #3b82f6 50%, #2563eb 70%, transparent)',
+        }} />
+        {/* soft radial glow */}
+        <div style={{
+          position: 'absolute', inset: 0, pointerEvents: 'none',
+          background: 'radial-gradient(ellipse 60% 50% at 50% 0%, rgba(59,130,246,0.12) 0%, transparent 70%)',
+        }} />
 
-      <div className="container mx-auto max-w-7xl" style={{ position: 'relative', zIndex: 1 }}>
-        <motion.div
-          initial={{ opacity: 0, y: -30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, type: 'spring' }}
-          style={{ textAlign: 'center', marginBottom: '60px' }}
-        >
+        <div style={{ maxWidth: 900, margin: '0 auto', textAlign: 'center', position: 'relative', zIndex: 1 }}>
           <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
-            style={{
-              display: 'inline-block',
-              padding: '16px 32px',
-              background: 'rgba(0, 240, 255, 0.1)',
-              border: '1px solid rgba(0, 240, 255, 0.3)',
-              borderRadius: '50px',
-              marginBottom: '24px',
-            }}
+            initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
+            className="section-eyebrow" style={{ margin: '0 auto 24px', display: 'inline-flex' }}
           >
-            <ThunderboltOutlined
-              style={{ fontSize: '24px', color: '#0ea5e9', marginRight: '12px' }}
-            />
-            <span style={{ color: '#0ea5e9', fontSize: '14px', fontWeight: 600 }}>
-              Blackie Networks Service Catalogue
-            </span>
+            <FiZap size={11} /> Service Catalogue · Blackie Networks
           </motion.div>
 
           <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.6 }}
+            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15, duration: 0.6 }}
             style={{
-              fontSize: 'clamp(2.5rem, 5vw, 4rem)',
-              fontWeight: 800,
-              marginBottom: '24px',
-              background: 'linear-gradient(135deg, #0ea5e9 0%, #2563eb 60%, #0f172a 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
+              fontSize: 'clamp(2.2rem, 5vw, 3.6rem)', fontWeight: 900, lineHeight: 1.1,
+              letterSpacing: '-0.03em', marginBottom: 20,
+              color: '#f1f5f9',
             }}
           >
-            Our Services
+            Everything your business needs{' '}
+            <span style={{
+              background: 'linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #8b5cf6 100%)',
+              WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
+            }}>
+              to scale
+            </span>
           </motion.h1>
+
           <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
-            style={{
-              color: '#475569',
-              fontSize: '1.05rem',
-              maxWidth: '760px',
-              margin: '0 auto',
-              lineHeight: 1.9,
-            }}
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}
+            style={{ fontSize: '1.05rem', color: '#94a3b8', lineHeight: 1.8, maxWidth: 680, margin: '0 auto 36px' }}
           >
-            Blackie Networks combines networking, software, cloud and security services into one
-            reliable partner. Each engagement is scoped, documented and delivered with a clear
-            outcome, so your team gets stable infrastructure and tools that support day‑to‑day
-            operations and long‑term growth.
+            Networking, software, cloud and security from one team — scoped, delivered and supported end-to-end so your infrastructure never becomes a blocker.
           </motion.p>
-        </motion.div>
 
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-        >
-          {services.map((service, index) => (
-            <motion.div
-              key={index}
-              variants={itemVariants}
-              whileHover={{ scale: 1.03, y: -10 }}
-              transition={{ type: 'spring', stiffness: 300 }}
-              style={{
-                borderRadius: '24px',
-                padding: '40px',
-                border: '1px solid rgba(148, 163, 184, 0.35)',
-                background: 'rgba(255, 255, 255, 0.96)',
-                backdropFilter: 'blur(20px)',
-                boxShadow: '0 18px 45px rgba(15, 23, 42, 0.12)',
-                position: 'relative',
-                overflow: 'hidden',
-                transition: 'all 0.3s ease',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = 'rgba(37, 99, 235, 0.7)';
-                e.currentTarget.style.boxShadow = '0 20px 55px rgba(15, 23, 42, 0.22)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = 'rgba(148, 163, 184, 0.35)';
-                e.currentTarget.style.boxShadow = '0 18px 45px rgba(15, 23, 42, 0.12)';
-              }}
-            >
-              {/* Animated gradient background */}
-              <motion.div
-                animate={{
-                  background: [
-                    'linear-gradient(135deg, rgba(0, 240, 255, 0.1) 0%, rgba(0, 102, 255, 0.1) 100%)',
-                    'linear-gradient(135deg, rgba(0, 102, 255, 0.1) 0%, rgba(124, 58, 237, 0.1) 100%)',
-                    'linear-gradient(135deg, rgba(0, 240, 255, 0.1) 0%, rgba(0, 102, 255, 0.1) 100%)',
-                  ],
-                }}
-                transition={{ duration: 5, repeat: Infinity }}
-                style={{
-                  position: 'absolute',
-                  inset: 0,
-                  opacity: 0.3,
-                  zIndex: 0,
-                }}
-              />
+          <motion.div
+            initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}
+            style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}
+          >
+            <button className="btn-cta" style={{ height: 46, padding: '0 28px', fontSize: 14 }}
+              onClick={() => navigate('/contactus')}>
+              Get a Free IT Audit <FiArrowRight size={14} />
+            </button>
+            <a href="#services-grid" className="btn-outline"
+              style={{ height: 46, padding: '0 24px', fontSize: 14, color: '#94a3b8', borderColor: 'rgba(255,255,255,0.12)' }}>
+              Browse Services
+            </a>
+          </motion.div>
 
-              <div style={{ position: 'relative', zIndex: 1 }}>
-                <motion.h2
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  style={{
-                    fontSize: '1.75rem',
-                    fontWeight: 700,
-                    color: '#0f172a',
-                    marginBottom: '16px',
-                    background: 'linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text',
-                  }}
-                >
-                  {service.title}
-                </motion.h2>
-                <motion.p
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: index * 0.1 + 0.1 }}
-                  style={{ color: '#475569', marginBottom: '24px', fontSize: '1rem', lineHeight: 1.8 }}
-                >
-                  {service.description}
-                </motion.p>
-                <motion.button
-                  whileHover={{ scale: 1.05, x: 5 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => openServiceModal(service)}
-                  style={{
-                    background: 'transparent',
-                    border: '1px solid rgba(148, 163, 184, 0.6)',
-                    color: '#1d4ed8',
-                    padding: '10px 20px',
-                    borderRadius: '8px',
-                    cursor: 'pointer',
-                    fontWeight: 600,
-                    marginBottom: '24px',
-                    transition: 'all 0.3s ease',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = 'rgba(219, 234, 254, 0.6)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = 'transparent';
-                  }}
-                >
-                  View Service Details
-                </motion.button>
-
-                <motion.button
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => handleBookNow(service)}
-                  style={{
-                    background: 'linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%)',
-                    border: 'none',
-                    color: '#f9fafb',
-                    padding: '14px 32px',
-                    borderRadius: '12px',
-                    cursor: 'pointer',
-                    fontWeight: 700,
-                    fontSize: '1rem',
-                    boxShadow: '0 18px 40px rgba(37, 99, 235, 0.45)',
-                    width: '100%',
-                  }}
-                >
-                  Request Consultation
-                </motion.button>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
+          {/* trust chips */}
+          <motion.div
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.55 }}
+            style={{ display: 'flex', gap: '8px 24px', justifyContent: 'center', flexWrap: 'wrap', marginTop: 32, fontSize: 13, color: '#64748b' }}
+          >
+            {['7 Core Services', '200+ Projects Delivered', '24/7 Support'].map(l => (
+              <span key={l} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                <FiCheck size={12} style={{ color: '#10b981' }} />
+                <strong style={{ color: '#cbd5e1' }}>{l}</strong>
+              </span>
+            ))}
+          </motion.div>
+        </div>
       </div>
-      {/* Service detail modal */}
-      <Modal
-        open={isModalOpen}
-        onCancel={() => setIsModalOpen(false)}
-        footer={null}
-        width={1120}
-        centered
-        bodyStyle={{
-          padding: 20,
-          borderRadius: 0,
-          overflow: 'visible',
-          background: '#f3f4f6',
-        }}
-      >
-        {selectedService && (
-          <div
-            style={{
-              maxWidth: 1040,
-              margin: '0 auto',
-              borderRadius: 26,
-              overflow: 'hidden',
-              display: 'grid',
-              gridTemplateColumns: 'minmax(0, 3.1fr) minmax(0, 4fr)',
-              gap: 0,
-              minHeight: 560,
-              backgroundColor: '#ffffff',
+
+      {/* ════ SERVICES GRID ════ */}
+      <div id="services-grid" style={{ background: 'var(--bg-surface)', borderBottom: '1px solid rgba(37,99,235,0.08)', padding: '80px 24px' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+          <motion.div
+            initial="hidden" animate="visible"
+            style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: 24 }}
+          >
+            {services.map((svc, i) => (
+              <motion.div
+                key={svc.id} custom={i} variants={cardVariants}
+                className="card-dark"
+                style={{ padding: '32px', display: 'flex', flexDirection: 'column', gap: 0, cursor: 'default' }}
+              >
+                {/* header row */}
+                <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 18 }}>
+                  <div style={{
+                    width: 48, height: 48, borderRadius: 12, flexShrink: 0,
+                    background: svc.iconBg,
+                    border: `1px solid ${svc.iconColor}30`,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    color: svc.iconColor,
+                  }}>
+                    {svc.icon}
+                  </div>
+                  <span className={`tag ${svc.tagClass}`}>{svc.tag}</span>
+                </div>
+
+                {/* title + short desc */}
+                <h2 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#0f172a', letterSpacing: '-0.01em', marginBottom: 8, lineHeight: 1.3 }}>
+                  {svc.title}
+                </h2>
+                <p style={{ fontSize: '0.9rem', color: '#64748b', lineHeight: 1.7, marginBottom: 20, flexGrow: 1 }}>
+                  {svc.short}
+                </p>
+
+                {/* 3 key deliverables */}
+                <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 24px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+                  {svc.bullets.map(b => (
+                    <li key={b} style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.82rem', color: '#475569' }}>
+                      <span style={{
+                        width: 18, height: 18, borderRadius: 5, flexShrink: 0,
+                        background: `${svc.iconColor}18`,
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        color: svc.iconColor,
+                      }}>
+                        <FiCheck size={10} />
+                      </span>
+                      {b}
+                    </li>
+                  ))}
+                </ul>
+
+                {/* actions */}
+                <div style={{ display: 'flex', gap: 10 }}>
+                  <button
+                    onClick={() => setSelected(svc)}
+                    style={{
+                      flex: 1, padding: '9px 0', borderRadius: 8, border: '1.5px solid rgba(37,99,235,0.2)',
+                      background: 'transparent', color: '#2563eb', fontWeight: 600, fontSize: 13, cursor: 'pointer',
+                      transition: 'all 0.2s',
+                    }}
+                    onMouseEnter={e => { e.currentTarget.style.background = 'rgba(37,99,235,0.06)'; e.currentTarget.style.borderColor = 'rgba(37,99,235,0.4)'; }}
+                    onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.borderColor = 'rgba(37,99,235,0.2)'; }}
+                  >
+                    Details
+                  </button>
+                  <button
+                    onClick={() => navigate('/contactus')}
+                    style={{
+                      flex: 2, padding: '9px 0', borderRadius: 8, border: 'none',
+                      background: 'linear-gradient(135deg, #2563eb, #3b82f6)',
+                      color: '#fff', fontWeight: 700, fontSize: 13, cursor: 'pointer',
+                      boxShadow: '0 4px 14px rgba(37,99,235,0.25)',
+                      transition: 'all 0.2s',
+                    }}
+                    onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 6px 20px rgba(37,99,235,0.4)'; e.currentTarget.style.transform = 'translateY(-1px)'; }}
+                    onMouseLeave={e => { e.currentTarget.style.boxShadow = '0 4px 14px rgba(37,99,235,0.25)'; e.currentTarget.style.transform = 'none'; }}
+                  >
+                    Get a Quote
+                  </button>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </div>
+
+      {/* ════ HOW WE WORK ════ */}
+      <div style={{ background: 'var(--bg-base)', padding: '80px 24px', borderBottom: '1px solid rgba(37,99,235,0.06)' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: 52 }}>
+            <div className="section-eyebrow" style={{ display: 'inline-flex', marginBottom: 14 }}>
+              <FiZap size={11} /> How We Work
+            </div>
+            <h2 style={{ fontSize: 'clamp(1.6rem, 3vw, 2.4rem)', fontWeight: 800, color: '#0f172a', letterSpacing: '-0.02em' }}>
+              From first call to go-live
+            </h2>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 24 }}>
+            {process.map(({ icon, step, title, desc }, i) => (
+              <motion.div
+                key={step}
+                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }} transition={{ delay: i * 0.1 }}
+                className="card-dark"
+                style={{ padding: '28px 24px' }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
+                  <div style={{
+                    width: 40, height: 40, borderRadius: 10,
+                    background: 'rgba(37,99,235,0.08)', border: '1px solid rgba(37,99,235,0.15)',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#2563eb',
+                  }}>
+                    {icon}
+                  </div>
+                  <span style={{ fontSize: 11, fontWeight: 800, color: '#cbd5e1', letterSpacing: '0.08em', fontFamily: 'JetBrains Mono, monospace' }}>
+                    STEP {step}
+                  </span>
+                </div>
+                <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#0f172a', marginBottom: 6 }}>{title}</h3>
+                <p style={{ fontSize: '0.875rem', color: '#64748b', lineHeight: 1.65, margin: 0 }}>{desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* ════ CTA BAND ════ */}
+      <div style={{
+        background: 'linear-gradient(160deg, #060d1e 0%, #0a1628 100%)',
+        padding: '72px 24px',
+        borderTop: '1px solid rgba(59,130,246,0.12)',
+        textAlign: 'center',
+      }}>
+        <div style={{ maxWidth: 640, margin: '0 auto' }}>
+          <div className="section-eyebrow" style={{ display: 'inline-flex', marginBottom: 20 }}>
+            <FiZap size={11} /> Ready to get started?
+          </div>
+          <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', fontWeight: 800, color: '#f1f5f9', letterSpacing: '-0.02em', marginBottom: 16 }}>
+            Let's build something great together
+          </h2>
+          <p style={{ color: '#64748b', fontSize: '1rem', lineHeight: 1.8, marginBottom: 32 }}>
+            Book a free IT audit and we'll map out exactly what your business needs and what it will cost.
+          </p>
+          <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
+            <button className="btn-cta" style={{ height: 48, padding: '0 32px', fontSize: 15 }}
+              onClick={() => navigate('/contactus')}>
+              Book Free IT Audit <FiArrowRight size={15} />
+            </button>
+            <a
+              href="https://wa.me/254796869402" target="_blank" rel="noreferrer"
+              style={{
+                height: 48, padding: '0 24px', borderRadius: 8, display: 'inline-flex', alignItems: 'center', gap: 8,
+                background: 'rgba(34,197,94,0.1)', border: '1px solid rgba(34,197,94,0.25)',
+                color: '#22c55e', fontWeight: 600, fontSize: 15, textDecoration: 'none',
+                transition: 'background 0.2s',
+              }}
+              onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.background = 'rgba(34,197,94,0.18)'; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.background = 'rgba(34,197,94,0.1)'; }}
+            >
+              💬 WhatsApp us
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* ════ SERVICE DETAIL MODAL ════ */}
+      <AnimatePresence>
+        {selected && (
+          <Modal
+            open={!!selected}
+            onCancel={() => setSelected(null)}
+            footer={null}
+            width={960}
+            centered
+            closeIcon={<FiX size={16} style={{ color: '#64748b' }} />}
+            styles={{
+              content: { padding: 0, borderRadius: 16, overflow: 'hidden', background: '#fff' },
+              body: { padding: 0 },
             }}
           >
-            <div
-              style={{
-                position: 'relative',
-                background:
-                  'radial-gradient(circle at 0% 0%, rgba(37, 99, 235, 0.65), transparent 55%), radial-gradient(circle at 100% 100%, #020617, #020617)',
-              }}
-            >
-              <img
-                src={selectedService.image || backgroundImg}
-                alt={selectedService.title}
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                  display: 'block',
-                  opacity: 0.32,
-                }}
-              />
-              <div
-                style={{
-                  position: 'absolute',
-                  inset: 0,
-                  background:
-                    'radial-gradient(circle at 0% 0%, rgba(59, 130, 246, 0.5), transparent 55%), radial-gradient(circle at 100% 100%, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.98))',
-                }}
-              />
-              <div
-                style={{
-                  position: 'absolute',
-                  left: 32,
-                  right: 32,
-                  bottom: 32,
-                  color: '#e5e7eb',
-                }}
-              >
-                <Title
-                  level={3}
-                  style={{
-                    color: '#f9fafb',
-                    marginBottom: 6,
-                    fontWeight: 800,
-                    letterSpacing: '0.01em',
-                  }}
-                >
-                  {selectedService.title}
-                </Title>
-                <Paragraph
-                  style={{
-                    margin: 0,
-                    color: '#e5e7eb',
-                    fontSize: 13,
-                    maxWidth: 360,
-                  }}
-                >
-                  High‑level view of how this service fits into your network and systems.
-                </Paragraph>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.6fr', minHeight: 500 }}>
+              {/* left — dark panel with image */}
+              <div style={{
+                position: 'relative', overflow: 'hidden',
+                background: 'linear-gradient(160deg, #0a1628 0%, #060d1e 100%)',
+              }}>
+                <img
+                  src={selected.image || backgroundImg}
+                  alt={selected.title}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.25, display: 'block' }}
+                />
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(160deg, rgba(37,99,235,0.35) 0%, rgba(6,13,30,0.9) 100%)' }} />
+                <div style={{ position: 'absolute', inset: 0, padding: '32px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}>
+                  <div style={{
+                    width: 48, height: 48, borderRadius: 12, marginBottom: 16,
+                    background: selected.iconBg, border: `1px solid ${selected.iconColor}40`,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    color: selected.iconColor,
+                  }}>
+                    {selected.icon}
+                  </div>
+                  <span className={`tag ${selected.tagClass}`} style={{ width: 'fit-content', marginBottom: 10 }}>
+                    {selected.tag}
+                  </span>
+                  <h3 style={{ color: '#f1f5f9', fontSize: '1.4rem', fontWeight: 800, letterSpacing: '-0.01em', marginBottom: 8 }}>
+                    {selected.title}
+                  </h3>
+                  <p style={{ color: '#94a3b8', fontSize: '0.875rem', lineHeight: 1.7, margin: 0 }}>
+                    {selected.description}
+                  </p>
+                  {selected.siteLink && (
+                    <a href={selected.siteLink} target="_blank" rel="noreferrer"
+                      style={{ display: 'inline-flex', alignItems: 'center', gap: 6, marginTop: 16, color: '#60a5fa', fontSize: 13, textDecoration: 'none' }}>
+                      <FiGlobe size={12} /> Visit live project
+                    </a>
+                  )}
+                </div>
               </div>
-            </div>
-            <div
-              style={{
-                padding: '20px 24px 18px',
-                backgroundColor: '#ffffff',
-              }}
-            >
-              <Title
-                level={4}
-                style={{
-                  marginBottom: 6,
-                  color: '#0f172a',
-                  fontWeight: 800,
-                  letterSpacing: '0.01em',
-                }}
-              >
-                What you get with {selectedService.title}
-              </Title>
-              <Paragraph style={{ color: '#4b5563', marginBottom: 18, fontSize: 13 }}>
-                {selectedService.description}
-              </Paragraph>
-              <ul
-                style={{
-                  listStyle: 'none',
-                  padding: 0,
-                  margin: 0,
-                  maxHeight: 360,
-                  overflowY: 'auto',
-                }}
-              >
-                {selectedService.details.map((detail, idx) => (
-                  <li
-                    key={idx}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'flex-start',
-                      gap: 8,
-                      marginBottom: 10,
-                      fontSize: 13,
-                      color: '#4b5563',
-                    }}
-                  >
-                    <span style={{ color: '#22c55e', marginTop: 2 }}>●</span>
-                    <span>{detail}</span>
-                  </li>
-                ))}
-              </ul>
-              <div
-                style={{
-                  marginTop: 22,
-                  display: 'flex',
-                  gap: 12,
-                  flexWrap: 'wrap',
-                  alignItems: 'center',
-                }}
-              >
-                {selectedService.siteLink && (
-                  <a
-                    href={selectedService.siteLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      fontSize: 13,
-                      color: '#93c5fd',
-                    }}
-                  >
-                    <GlobalOutlined style={{ marginRight: 6 }} />
-                    Visit live project
-                  </a>
+
+              {/* right — white content */}
+              <div style={{ padding: '36px 32px', overflowY: 'auto' }}>
+                <h4 style={{ fontSize: '1rem', fontWeight: 700, color: '#0f172a', marginBottom: 6 }}>
+                  What's included
+                </h4>
+                <p style={{ fontSize: '0.875rem', color: '#64748b', marginBottom: 20, lineHeight: 1.7 }}>
+                  Every engagement is scoped, documented and delivered with a clear outcome.
+                </p>
+                <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 24px', display: 'flex', flexDirection: 'column', gap: 10 }}>
+                  {selected.details.map((d, i) => (
+                    <li key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: '0.875rem', color: '#334155' }}>
+                      <span style={{
+                        width: 20, height: 20, borderRadius: 6, flexShrink: 0, marginTop: 1,
+                        background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.2)',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#10b981',
+                      }}>
+                        <FiCheck size={11} />
+                      </span>
+                      {d}
+                    </li>
+                  ))}
+                </ul>
+
+                {selected.mikrotikAddons && (
+                  <>
+                    <div style={{ height: 1, background: 'rgba(37,99,235,0.08)', margin: '0 0 20px' }} />
+                    <h4 style={{ fontSize: '0.875rem', fontWeight: 700, color: '#0f172a', marginBottom: 12 }}>
+                      MikroTik add-ons available
+                    </h4>
+                    <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 20px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+                      {selected.mikrotikAddons.map((a, i) => (
+                        <li key={i} style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.82rem', color: '#475569' }}>
+                          <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#3b82f6', flexShrink: 0 }} />
+                          {a}
+                        </li>
+                      ))}
+                    </ul>
+                  </>
                 )}
-                <button
-                  onClick={() => {
-                    handleBookNow(selectedService);
-                    setIsModalOpen(false);
-                  }}
-                  style={{
-                    marginLeft: 'auto',
-                    background: 'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)',
-                    border: 'none',
-                    color: '#ecfdf5',
-                    padding: '10px 24px',
-                    borderRadius: 999,
-                    cursor: 'pointer',
-                    fontWeight: 600,
-                    fontSize: 13,
-                    boxShadow: '0 14px 34px rgba(22, 163, 74, 0.45)',
-                  }}
-                >
-                  Talk to our team
-                </button>
+
+                <div style={{ display: 'flex', gap: 10 }}>
+                  <button
+                    onClick={() => { setSelected(null); navigate('/contactus'); }}
+                    className="btn-primary"
+                    style={{ flex: 1, height: 44, fontSize: 14 }}
+                  >
+                    Get a Quote <FiArrowRight size={13} />
+                  </button>
+                  <button
+                    onClick={() => setSelected(null)}
+                    style={{
+                      height: 44, padding: '0 20px', borderRadius: 8, border: '1.5px solid rgba(0,0,0,0.1)',
+                      background: 'transparent', color: '#475569', fontSize: 14, cursor: 'pointer',
+                    }}
+                  >
+                    Close
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
+          </Modal>
         )}
-      </Modal>
-    </div>
+      </AnimatePresence>
+    </>
   );
 };
 

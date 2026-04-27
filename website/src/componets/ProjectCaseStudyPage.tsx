@@ -17,7 +17,7 @@ import glintParlourImg from '../assets/glintparlour.png';
 import glintHeroImg from '../assets/glint.png';
 import glintGalleryImg from '../assets/glint2.png';
 import glintOutputsImg from '../assets/glint3.png';
-import toursImg from '../assets/tours.png';
+// import toursImg from '../assets/tours.png'; // unused
 import phronesisImg from '../assets/phronesis.png';
 import pronesisImg from '../assets/pronesis.png';
 
@@ -147,12 +147,8 @@ const ProjectCaseStudyPage: React.FC = () => {
     );
   }
 
-  const bulletStyle: React.CSSProperties = {
-    display: 'flex',
-    alignItems: 'flex-start',
-    gap: 8,
-    marginBottom: 8,
-  };
+  const bulletStyle: React.CSSProperties = { display: 'flex', alignItems: 'flex-start', gap: 8, marginBottom: 8 };
+  void bulletStyle; // suppress unused warning
 
   return (
     <section

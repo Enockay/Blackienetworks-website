@@ -1,6 +1,8 @@
-# Netlify redirects file for www/non-www redirects
-# Redirect non-www to www
-http://blackie-networks.com/*
-https://blackie-networks.com/*
-  https://www.blackie-networks.com/:splat 301!
+# Netlify redirects
 
+# Non-www → www (301 permanent)
+http://blackie-networks.com/*    https://www.blackie-networks.com/:splat  301!
+https://blackie-networks.com/*   https://www.blackie-networks.com/:splat  301!
+
+# SPA fallback — CRITICAL: without this Googlebot gets 404 on every page
+/*    /index.html   200

@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Drawer, Button, Divider } from 'antd';
-import { FiPhone, FiMenu, FiMail, FiX, FiHome, FiInfo, FiSettings, FiPackage, FiBook, FiHelpCircle, FiMessageCircle, FiCalendar, FiMessageSquare } from 'react-icons/fi';
+import { Drawer } from 'antd';
+import {
+  FiPhone, FiMenu, FiX, FiHome, FiInfo, FiSettings,
+  FiPackage, FiBook, FiMessageCircle, FiMessageSquare,
+} from 'react-icons/fi';
 import logo from '../assets/logo.png';
 
 const Header: React.FC = () => {
@@ -10,341 +13,307 @@ const Header: React.FC = () => {
   const location = useLocation();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
-
 
   const isActive = (path: string) => location.pathname === path;
 
+  const navLinks = [
+    { path: '/',          label: 'Home' },
+    { path: '/services',  label: 'Services' },
+    { path: '/Products',  label: 'Products' },
+    { path: '/aboutus',   label: 'About' },
+    { path: '/blog',      label: 'Blog' },
+    { path: '/contactus', label: 'Contact' },
+  ];
+
+  const drawerLinks = [
+    { path: '/',          label: 'Home',     Icon: FiHome },
+    { path: '/services',  label: 'Services', Icon: FiSettings },
+    { path: '/Products',  label: 'Products', Icon: FiPackage },
+    { path: '/aboutus',   label: 'About Us', Icon: FiInfo },
+    { path: '/blog',      label: 'Blog',     Icon: FiBook },
+    { path: '/contactus', label: 'Contact',  Icon: FiMessageCircle },
+  ];
+
   return (
     <header
-      className="fixed top-0 w-full z-50 transition-all duration-500"
       style={{
-        background: '#ffffff',
-        borderBottom: scrolled 
-          ? '1px solid rgba(0, 0, 0, 0.1)' 
-          : '1px solid transparent',
-        boxShadow: scrolled 
-          ? '0 2px 10px rgba(0, 0, 0, 0.1)' 
-          : 'none',
+        position: 'fixed', top: 0, width: '100%', zIndex: 1000,
+        background: scrolled ? 'rgba(4,9,20,0.98)' : '#060d1e',
+        backdropFilter: scrolled ? 'blur(20px)' : 'none',
+        WebkitBackdropFilter: scrolled ? 'blur(20px)' : 'none',
+        borderBottom: '1px solid rgba(59,130,246,0.12)',
+        boxShadow: scrolled ? '0 4px 30px rgba(0,0,0,0.7)' : 'none',
+        transition: 'all 0.35s ease',
       }}
     >
-      <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <Link
-            to="/"
-            className="flex items-center gap-3 group"
-            style={{ textDecoration: 'none' }}
-          >
-            <div
-              className="relative p-2.5 rounded-xl transition-all duration-500 group-hover:scale-105"
-              style={{
-                background: 'transparent',
-              }}
-            >
-              <img
-                src={logo}
-                alt="Blackie Networks Logo"
-                className="h-10 w-auto sm:h-12 transition-all duration-500"
-                width="48"
-                height="48"
-                loading="eager"
-              />
+      <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 20px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 64 }}>
+
+          {/* ── Logo ── */}
+          <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0 }}>
+            <div style={{
+              width: 38, height: 38, borderRadius: 9, overflow: 'hidden',
+              border: '1px solid rgba(59,130,246,0.25)',
+              background: 'rgba(59,130,246,0.08)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              flexShrink: 0,
+            }}>
+              <img src={logo} alt="Blackie Networks" style={{ width: 28, height: 28, objectFit: 'contain' }} loading="eager" />
             </div>
-            <div className="flex flex-col">
-              <span
-                className="text-xl sm:text-2xl font-extrabold tracking-tight"
-                style={{
-                  color: '#1e293b',
-                }}
-              >
-                Blackie<span style={{ color: '#2563eb' }}>Networks</span>
-              </span>
-              <span className="text-xs font-medium hidden sm:block tracking-wide" style={{ color: '#64748b' }}>
-                IT Solutions · Kenya
-              </span>
+            <div>
+              <div style={{ fontSize: 16, fontWeight: 800, color: '#f1f5f9', lineHeight: 1.1, letterSpacing: '-0.02em', whiteSpace: 'nowrap' }}>
+                Blackie<span style={{ color: '#3b82f6' }}>Networks</span>
+              </div>
+              <div style={{ fontSize: 9, color: '#475569', fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.06em', lineHeight: 1 }}>
+                IT SOLUTIONS · KENYA
+              </div>
             </div>
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-1">
-            {[
-              { path: '/', label: 'Home' },
-              { path: '/services', label: 'Services' },
-              { path: '/aboutus', label: 'About Us' },
-              { path: '/blog', label: 'Blog' },
-              { path: '/contactus', label: 'Contact' },
-            ].map((item) => (
-            <Link
-                key={item.path}
-                to={item.path}
-                className="px-4 py-2.5 rounded-lg font-medium text-sm transition-all duration-300"
-                style={{
-                  textDecoration: 'none',
-                  color: isActive(item.path) ? '#2563eb' : '#475569',
-                  background: isActive(item.path) 
-                    ? 'rgba(37, 99, 235, 0.08)'
-                    : 'transparent',
-                }}
-                onMouseEnter={(e) => {
-                  if (!isActive(item.path)) {
-                    e.currentTarget.style.color = '#2563eb';
-                    e.currentTarget.style.background = 'rgba(37, 99, 235, 0.06)';
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (!isActive(item.path)) {
-                    e.currentTarget.style.color = '#475569';
-                    e.currentTarget.style.background = 'transparent';
-                  }
-                }}
-              >
-                {item.label}
-              </Link>
-            ))}
+          {/* ── Desktop Nav (lg+) ── */}
+          <nav
+            className="hidden lg:flex"
+            style={{ alignItems: 'center', gap: 2, flex: 1, justifyContent: 'center' }}
+          >
+            {navLinks.map(({ path, label }) => {
+              const active = isActive(path);
+              return (
+                <Link
+                  key={path}
+                  to={path}
+                  style={{
+                    padding: '7px 13px', borderRadius: 7,
+                    fontSize: 14, fontWeight: 500, textDecoration: 'none',
+                    color: active ? '#60a5fa' : '#94a3b8',
+                    background: active ? 'rgba(59,130,246,0.1)' : 'transparent',
+                    border: `1px solid ${active ? 'rgba(59,130,246,0.2)' : 'transparent'}`,
+                    transition: 'all 0.2s ease', whiteSpace: 'nowrap',
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!active) {
+                      e.currentTarget.style.color = '#e2e8f0';
+                      e.currentTarget.style.background = 'rgba(255,255,255,0.04)';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!active) {
+                      e.currentTarget.style.color = '#94a3b8';
+                      e.currentTarget.style.background = 'transparent';
+                    }
+                  }}
+                >
+                  {label}
+                </Link>
+              );
+            })}
           </nav>
 
-          {/* Right Controls */}
-          <div className="flex items-center gap-3">
-            {/* Contact Info - Phone & Email */}
-            <div className="hidden md:flex flex-col items-end gap-1">
-              {/* Phone Number */}
+          {/* ── Right actions ── */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
+
+            {/* WhatsApp — hidden on mobile, visible md+ */}
+            <div className="hidden md:block">
               <a
-                href="tel:+254796869402"
-                className="flex items-center gap-2 px-2 py-1 rounded-lg font-medium transition-all duration-300"
+                href="https://wa.me/254796869402"
+                target="_blank"
+                rel="noopener noreferrer"
                 style={{
-                  textDecoration: 'none',
-                  color: '#475569',
-                  fontSize: '13px',
+                  width: 36, height: 36,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  background: 'rgba(34,197,94,0.1)',
+                  border: '1px solid rgba(34,197,94,0.2)',
+                  borderRadius: 8, color: '#22c55e',
+                  transition: 'all 0.2s ease', textDecoration: 'none',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.color = '#2563eb';
+                  e.currentTarget.style.background = 'rgba(34,197,94,0.18)';
+                  e.currentTarget.style.transform = 'translateY(-1px)';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.color = '#475569';
+                  e.currentTarget.style.background = 'rgba(34,197,94,0.1)';
+                  e.currentTarget.style.transform = 'none';
                 }}
               >
-                <FiPhone size={16} />
-                <span>+254 796 869 402</span>
-              </a>
-              {/* Email */}
-              <a
-                href="mailto:support@blackie-networks.com"
-                className="flex items-center gap-2 px-2 py-1 rounded-lg font-medium transition-all duration-300"
-                style={{
-                  textDecoration: 'none',
-                  color: '#475569',
-                  fontSize: '13px',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.color = '#2563eb';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.color = '#475569';
-                }}
-              >
-                <FiMail size={16} />
-                <span>support@blackie-networks.com</span>
+                <FiMessageSquare size={15} />
               </a>
             </div>
 
-            {/* WhatsApp Icon */}
-            <a
-              href="https://wa.me/254796869402"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden md:flex items-center justify-center w-10 h-10 rounded-lg transition-all duration-300"
-              style={{
-                background: '#25D366',
-                color: '#ffffff',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = '#20BA5A';
-                e.currentTarget.style.transform = 'scale(1.05)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = '#25D366';
-                e.currentTarget.style.transform = 'scale(1)';
-              }}
-            >
-              <FiMessageSquare size={20} />
-            </a>
-
-            {/* CTA Button */}
-            <Link to="/contactus" className="hidden md:block">
-              <Button
+            {/* Phone — hidden below xl */}
+            <div className="hidden xl:block">
+              <a
+                href="tel:+254796869402"
                 style={{
-                  background: '#f97316',
-                  border: 'none',
-                  color: '#ffffff',
-                  fontWeight: 700,
-                  height: '44px',
-                  padding: '0 24px',
-                  fontSize: '14px',
-                  letterSpacing: '0.5px',
-                  borderRadius: '8px',
-                  boxShadow: '0 4px 12px rgba(249, 115, 22, 0.3)',
+                  display: 'flex', alignItems: 'center', gap: 6,
+                  padding: '6px 11px', borderRadius: 7,
+                  background: 'rgba(59,130,246,0.07)',
+                  border: '1px solid rgba(59,130,246,0.15)',
+                  color: '#94a3b8', fontSize: 13, textDecoration: 'none',
+                  transition: 'color 0.2s', whiteSpace: 'nowrap',
+                }}
+                onMouseEnter={(e) => { e.currentTarget.style.color = '#60a5fa'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.color = '#94a3b8'; }}
+              >
+                <FiPhone size={12} style={{ color: '#3b82f6' }} />
+                +254 796 869 402
+              </a>
+            </div>
+
+            {/* CTA — hidden on mobile */}
+            <div className="hidden md:block">
+              <Link
+                to="/contactus"
+                style={{
+                  display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                  background: 'var(--orange)',
+                  color: '#fff', fontWeight: 700, fontSize: 13,
+                  padding: '0 16px', height: 36, borderRadius: 8,
+                  textDecoration: 'none', whiteSpace: 'nowrap',
+                  boxShadow: '0 4px 14px rgba(249,115,22,0.25)',
+                  transition: 'all 0.2s ease',
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.background = '#ea580c';
-                  e.currentTarget.style.boxShadow = '0 6px 16px rgba(249, 115, 22, 0.4)';
-                  e.currentTarget.style.transform = 'translateY(-2px)';
+                  e.currentTarget.style.transform = 'translateY(-1px)';
+                  e.currentTarget.style.boxShadow = '0 6px 20px rgba(249,115,22,0.4)';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = '#f97316';
-                  e.currentTarget.style.boxShadow = '0 4px 12px rgba(249, 115, 22, 0.3)';
-                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.background = 'var(--orange)';
+                  e.currentTarget.style.transform = 'none';
+                  e.currentTarget.style.boxShadow = '0 4px 14px rgba(249,115,22,0.25)';
                 }}
               >
-                Get Free Consultation
-              </Button>
-            </Link>
+                Free Consultation
+              </Link>
+            </div>
 
-            <Button
-              type="text"
-              icon={<FiMenu size={24} />}
-              onClick={() => setDrawerVisible(true)}
-              className="lg:hidden flex items-center justify-center"
-              style={{
-                background: 'transparent',
-                border: '1px solid rgba(0, 0, 0, 0.1)',
-                borderRadius: '8px',
-                height: '44px',
-                width: '44px',
-                color: '#1e293b',
-              }}
-            />
+            {/* Hamburger — visible below lg */}
+            <div className="lg:hidden">
+              <button
+                onClick={() => setDrawerVisible(true)}
+                style={{
+                  background: 'rgba(255,255,255,0.04)',
+                  border: '1px solid rgba(255,255,255,0.08)',
+                  borderRadius: 8, width: 38, height: 38,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  color: '#94a3b8', cursor: 'pointer',
+                }}
+              >
+                <FiMenu size={18} />
+              </button>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Mobile Drawer */}
+      {/* ── Mobile Drawer ── */}
       <Drawer
         placement="right"
         open={drawerVisible}
         onClose={() => setDrawerVisible(false)}
-        width={320}
+        width={280}
         closable={false}
-        bodyStyle={{
-          background: '#ffffff',
-          padding: 0,
+        styles={{
+          body: { background: '#0a1628', padding: 0 },
+          mask: { background: 'rgba(0,0,0,0.75)' },
         }}
-        headerStyle={{
-          background: '#ffffff',
-          border: 'none',
-          borderBottom: '1px solid rgba(0, 0, 0, 0.1)',
-          padding: '20px',
-        }}
-        title={
-          <div className="flex items-center justify-between w-full">
-            <div className="flex items-center gap-3">
-              <img
-                src={logo}
-                alt="Blackie Networks Logo"
-                className="h-10 w-auto rounded-lg"
-                width="40"
-                height="40"
-                loading="eager"
-              />
+      >
+        <div style={{ padding: '18px' }}>
+          {/* Top row */}
+          <div style={{
+            display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+            paddingBottom: 14, marginBottom: 18,
+            borderBottom: '1px solid rgba(255,255,255,0.06)',
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+              <img src={logo} alt="Logo" style={{ height: 28 }} />
               <div>
-                <span className="text-lg font-bold block" style={{ color: '#1e293b' }}>Blackie Networks</span>
-                <span className="text-xs" style={{ color: '#64748b' }}>IT Solutions · Kenya</span>
+                <div style={{ color: '#f1f5f9', fontWeight: 700, fontSize: 13 }}>Blackie Networks</div>
+                <div style={{ color: '#475569', fontSize: 9, fontFamily: 'monospace' }}>IT SOLUTIONS · KENYA</div>
               </div>
             </div>
-            <Button
-              type="text"
-              icon={<FiX size={20} />}
+            <button
               onClick={() => setDrawerVisible(false)}
-              style={{ color: '#1e293b', border: 'none' }}
-            />
-          </div>
-        }
-      >
-        <div style={{ padding: '24px' }}>
-          <nav className="flex flex-col space-y-2">
-            {[
-              { path: '/', label: 'Home', icon: FiHome },
-              { path: '/services', label: 'Services', icon: FiSettings },
-              { path: '/aboutus', label: 'About Us', icon: FiInfo },
-              { path: '/blog', label: 'Blog', icon: FiBook },
-              { path: '/contactus', label: 'Contact', icon: FiMessageCircle },
-            ].map(({ path, label, icon: Icon }) => (
-              <Link
-                key={path}
-                to={path}
-                onClick={() => setDrawerVisible(false)}
-                className="px-4 py-3 rounded-lg font-medium transition-all flex items-center gap-3"
-                style={{ 
-                  textDecoration: 'none',
-                  color: isActive(path) ? '#2563eb' : '#475569',
-                  background: isActive(path)
-                    ? 'rgba(37, 99, 235, 0.08)'
-                    : 'transparent',
-                }}
-              >
-                <Icon size={18} style={{ flexShrink: 0 }} />
-                <span>{label}</span>
-              </Link>
-            ))}
-          </nav>
-
-          <Divider style={{ margin: '16px 0', borderColor: 'rgba(0, 0, 0, 0.1)' }} />
-
-          <div className="space-y-2">
-            <p className="px-2 text-[10px] uppercase font-semibold tracking-wider" style={{ color: '#64748b' }}>
-              Contact
-            </p>
-            <a
-              href="tel:+254796869402"
-              className="flex items-center gap-2 px-3 py-2 rounded-lg transition-all"
-              style={{ 
-                textDecoration: 'none',
-                background: 'rgba(0, 0, 0, 0.02)',
-                border: '1px solid rgba(0, 0, 0, 0.1)',
-                color: '#475569',
+              style={{
+                background: 'rgba(255,255,255,0.04)',
+                border: '1px solid rgba(255,255,255,0.08)',
+                borderRadius: 6, width: 30, height: 30,
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                color: '#64748b', cursor: 'pointer',
               }}
             >
-              <div className="p-1.5 rounded-lg" style={{ background: 'rgba(37, 99, 235, 0.08)', color: '#2563eb' }}>
-                <FiPhone size={14} />
-              </div>
-              <div>
-                <p className="text-[10px] font-medium" style={{ color: '#64748b' }}>Phone</p>
-                <p className="text-xs font-semibold">+254 796 869 402</p>
-              </div>
+              <FiX size={14} />
+            </button>
+          </div>
+
+          {/* Nav links */}
+          <nav style={{ display: 'flex', flexDirection: 'column', gap: 3, marginBottom: 18 }}>
+            {drawerLinks.map(({ path, label, Icon }) => {
+              const active = isActive(path);
+              return (
+                <Link
+                  key={path}
+                  to={path}
+                  onClick={() => setDrawerVisible(false)}
+                  style={{
+                    display: 'flex', alignItems: 'center', gap: 10,
+                    padding: '10px 12px', borderRadius: 8,
+                    textDecoration: 'none',
+                    color: active ? '#60a5fa' : '#94a3b8',
+                    background: active ? 'rgba(59,130,246,0.1)' : 'transparent',
+                    fontWeight: 500, fontSize: 14,
+                  }}
+                >
+                  <Icon size={15} />
+                  {label}
+                </Link>
+              );
+            })}
+          </nav>
+
+          <div style={{ height: 1, background: 'rgba(255,255,255,0.06)', marginBottom: 16 }} />
+
+          {/* Contact quick links */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+            <a
+              href="tel:+254796869402"
+              style={{
+                display: 'flex', alignItems: 'center', gap: 8,
+                padding: '10px 12px', borderRadius: 8,
+                background: 'rgba(59,130,246,0.06)',
+                border: '1px solid rgba(59,130,246,0.12)',
+                textDecoration: 'none', color: '#94a3b8', fontSize: 13,
+              }}
+            >
+              <FiPhone size={13} style={{ color: '#3b82f6' }} />
+              +254 796 869 402
             </a>
             <a
               href="https://wa.me/254796869402"
               target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-3 py-2 rounded-lg transition-all"
-              style={{ 
-                textDecoration: 'none',
-                background: 'rgba(37, 211, 102, 0.1)',
-                border: '1px solid rgba(37, 211, 102, 0.2)',
-                color: '#475569',
+              rel="noreferrer"
+              style={{
+                display: 'flex', alignItems: 'center', gap: 8,
+                padding: '10px 12px', borderRadius: 8,
+                background: 'rgba(34,197,94,0.08)',
+                border: '1px solid rgba(34,197,94,0.2)',
+                textDecoration: 'none', color: '#22c55e', fontSize: 13, fontWeight: 500,
               }}
             >
-              <div className="p-1.5 rounded-lg" style={{ background: '#25D366', color: '#ffffff' }}>
-                <FiMessageSquare size={14} />
-              </div>
-              <div>
-                <p className="text-[10px] font-medium" style={{ color: '#64748b' }}>WhatsApp</p>
-                <p className="text-xs font-semibold">Chat with us</p>
-              </div>
+              <FiMessageSquare size={13} />
+              WhatsApp Chat
             </a>
             <Link
               to="/contactus"
               onClick={() => setDrawerVisible(false)}
-              className="flex items-center justify-center gap-2 px-4 py-3 rounded-lg font-semibold transition-all mt-4"
-              style={{ 
-                textDecoration: 'none',
-                background: '#f97316',
-                color: '#ffffff',
+              style={{
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                padding: '11px', borderRadius: 8, marginTop: 4,
+                background: 'linear-gradient(135deg, #2563eb, #3b82f6)',
+                textDecoration: 'none', color: '#fff', fontSize: 14, fontWeight: 700,
               }}
             >
               Get Free Consultation
