@@ -13,8 +13,8 @@
     <priority>1.0</priority>
     <image:image>
       <image:loc>https://www.blackie-networks.com/logo.png</image:loc>
-      <image:title>Blackie Networks — IT Solutions & Network Infrastructure Kenya</image:title>
-      <image:caption>Kenya's trusted IT company: network infrastructure, campus Wi-Fi, software development &amp; AI automation.</image:caption>
+      <image:title>Blackie Networks - IT Solutions and Network Infrastructure Kenya</image:title>
+      <image:caption>Kenya trusted IT company: network infrastructure, campus Wi-Fi, software development and AI automation.</image:caption>
     </image:image>
   </url>
 
@@ -50,7 +50,7 @@
     <priority>0.85</priority>
   </url>
 
-  <!-- Blog Posts -->
+  <!-- Blog category filters -->
   <url>
     <loc>https://www.blackie-networks.com/blog?q=network+security</loc>
     <lastmod>2026-04-27</lastmod>
